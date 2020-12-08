@@ -1,0 +1,2878 @@
+{
+    "Objects": [
+        {
+            "Type": "nap::BinauralSampleSetResource",
+            "mID": "binauralSampleSet",
+            "Path": "binaural"
+        },
+        {
+            "Type": "nap::Entity",
+            "mID": "AxesHelper",
+            "Components": [
+                {
+                    "Type": "nap::spatial::AxesHelperComponent",
+                    "mID": "nap::spatial::AxesHelperComponent_3f37b540",
+                    "Mesh": "",
+                    "MaterialInstance": {
+                        "Material": "LineMaterial",
+                        "Uniforms": [],
+                        "BlendMode": "NotSet",
+                        "DepthMode": "NotSet"
+                    },
+                    "ClipRect": {
+                        "Min": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Max": {
+                            "x": 0.0,
+                            "y": 0.0
+                        }
+                    }
+                },
+                {
+                    "Type": "nap::TransformComponent",
+                    "mID": "nap::TransformComponent_8190479e",
+                    "Properties": {
+                        "Translate": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Rotate": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "UniformScale": 5.0
+                    }
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Type": "nap::Entity",
+            "mID": "DefaultInputRouterEntity",
+            "Components": [
+                {
+                    "Type": "nap::DefaultInputRouterComponent",
+                    "mID": "nap::DefaultInputRouterComponent"
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Type": "nap::Entity",
+            "mID": "LevelMeter",
+            "Components": [
+                {
+                    "Type": "nap::TransformComponent",
+                    "mID": "nap::TransformComponent_6",
+                    "Properties": {
+                        "Translate": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Rotate": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "UniformScale": 1.0
+                    }
+                },
+                {
+                    "Type": "nap::spatial::LevelMeterViewComponent",
+                    "mID": "nap::spatial::LevelMeterViewComponent",
+                    "MaterialInstance": {
+                        "Material": "BillboardMaterial",
+                        "Uniforms": [],
+                        "BlendMode": "NotSet",
+                        "DepthMode": "NotSet"
+                    },
+                    "Mesh": "LevelMeterMesh",
+                    "VerticalOffset": 0.20000000298023225
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Type": "nap::Entity",
+            "mID": "SoundObject",
+            "Components": [
+                {
+                    "Type": "nap::spatial::IdentificationComponent",
+                    "mID": "IdentificationComponent"
+                },
+                {
+                    "Type": "nap::spatial::SpatializationComponent",
+                    "mID": "SpatializationComponent"
+                },
+                {
+                    "Type": "nap::spatial::MixdownComponent",
+                    "mID": "MixdownComponent",
+                    "ChannelCount": 1
+                },
+                {
+                    "Type": "nap::spatial::GridSettingsComponent",
+                    "mID": "GridSettingsComponent",
+                    "MultiSpeakerSetup": "multiSetup"
+                },
+                {
+                    "Type": "nap::ParameterComponent",
+                    "mID": "ParameterComponent",
+                    "Name": ""
+                },
+                {
+                    "Type": "nap::spatial::OSCParameterControlComponent",
+                    "mID": "OSCParameterControlComponent"
+                },
+                {
+                    "Type": "nap::spatial::SpatialAudioComponent",
+                    "mID": "SpatialAudioComponent",
+                    "Sources": [],
+                    "Receives": [],
+                    "InputEffects": [
+                        {
+                            "Type": "nap::spatial::GranulatorEffect",
+                            "mID": "GranulatorEffect",
+                            "Name": "granulator",
+                            "CircularBufferSize": 524288,
+                            "InternalBufferSize": 32,
+                            "VoiceCount": 50
+                        },
+                        {
+                            "Type": "nap::spatial::InputDistanceIntensityEffect",
+                            "mID": "InputDistanceIntensityEffect",
+                            "Name": "inputDistanceAttenuation"
+                        },
+                        {
+                            "Type": "nap::spatial::InputDistanceDampingEffect",
+                            "mID": "InputDistanceDampingEffect",
+                            "Name": "inputDistanceDamping"
+                        },
+                        {
+                            "Type": "nap::spatial::SpatialDelayEffect",
+                            "mID": "SpatialDelayEffect",
+                            "Name": "spatialDelay"
+                        }
+                    ],
+                    "Effects": [
+                        {
+                            "Type": "nap::spatial::DopplerEffect",
+                            "mID": "DopplerEffect",
+                            "Name": "doppler"
+                        },
+                        {
+                            "Type": "nap::spatial::SpatialPhaserEffect",
+                            "mID": "SpatialPhaserEffect",
+                            "Name": "spatialPhaser",
+                            "DelayLineSize": 16384,
+                            "ParallelDelayCount": 8
+                        },
+                        {
+                            "Type": "nap::spatial::GainScalingEffect",
+                            "mID": "GainScalingEffect",
+                            "Name": "gainScaling"
+                        },
+                        {
+                            "Type": "nap::spatial::ReverbEffect",
+                            "mID": "ReverbEffect",
+                            "Name": "reverb",
+                            "PredelayBufferSize": 32768,
+                            "LPFType": "LowPass6dB",
+                            "HPFType": "HighPass6dB"
+                        },
+                        {
+                            "Type": "nap::spatial::ResonanceEffect",
+                            "mID": "ResonanceEffect",
+                            "Name": "resonance",
+                            "ResonanceModels": [
+                                {
+                                    "Type": "nap::spatial::ResonanceModel",
+                                    "mID": "ResonanceModel_cube",
+                                    "ShapeType": "cube",
+                                    "ModelPath": "crsd/Cube.crsd"
+                                },
+                                {
+                                    "Type": "nap::spatial::ResonanceModel",
+                                    "mID": "ResonanceModel_dodecahedron",
+                                    "ShapeType": "dodecahedron",
+                                    "ModelPath": "crsd/Dodecahedron.crsd"
+                                },
+                                {
+                                    "Type": "nap::spatial::ResonanceModel",
+                                    "mID": "ResonanceModel_icosahedron",
+                                    "ShapeType": "icosahedron",
+                                    "ModelPath": "crsd/Icosahedron.crsd"
+                                },
+                                {
+                                    "Type": "nap::spatial::ResonanceModel",
+                                    "mID": "ResonanceModel_octahedron",
+                                    "ShapeType": "octahedron",
+                                    "ModelPath": "crsd/Octahedron.crsd"
+                                },
+                                {
+                                    "Type": "nap::spatial::ResonanceModel",
+                                    "mID": "ResonanceModel_tetrahedron",
+                                    "ShapeType": "tetrahedron",
+                                    "ModelPath": "crsd/Tetrahedron.crsd"
+                                }
+                            ],
+                            "SimpleResonanceModels": [
+                                {
+                                    "Type": "nap::spatial::SimpleResonanceModel",
+                                    "mID": "SimpleResonanceModel",
+                                    "Name": "circle",
+                                    "Vertices": [],
+                                    "Edges": [],
+                                    "ResonanceGain": 1.0,
+                                    "ResonanceLineSegment": {
+                                        "Type": "nap::spatial::ShapeResonanceLineSegment",
+                                        "mID": "EFFECTnap::spatial::ShapeResonanceLineSegment",
+                                        "Points": [
+                                            {
+                                                "Type": "nap::spatial::ShapeResonancePoint",
+                                                "mID": "EFFECTnap::spatial::ShapeResonancePoint",
+                                                "CenterFrequencies": [
+                                                    440.0,
+                                                    880.0,
+                                                    1320.0,
+                                                    1760.0,
+                                                    2200.0,
+                                                    2640.0,
+                                                    3080.0,
+                                                    3520.0
+                                                ],
+                                                "Bandwidths": [
+                                                    20.0,
+                                                    23.0,
+                                                    43.0,
+                                                    35.0,
+                                                    41.0,
+                                                    35.0,
+                                                    33.0,
+                                                    32.0
+                                                ],
+                                                "Gains": [
+                                                    1.100000023841858,
+                                                    1.0,
+                                                    0.699999988079071,
+                                                    0.5,
+                                                    0.4000000059604645,
+                                                    0.20000000298023225,
+                                                    0.20000000298023225,
+                                                    0.10000000149011612
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "ResonanceAttenuationPoint": {
+                                        "Type": "nap::spatial::ShapeResonancePoint",
+                                        "mID": "EFFECTnap::spatial::ShapeResonancePoint_2",
+                                        "CenterFrequencies": [
+                                            440.0,
+                                            880.0,
+                                            1320.0,
+                                            1760.0,
+                                            2200.0,
+                                            2640.0,
+                                            3080.0,
+                                            3520.0
+                                        ],
+                                        "Bandwidths": [
+                                            20.0,
+                                            23.0,
+                                            43.0,
+                                            35.0,
+                                            41.0,
+                                            35.0,
+                                            33.0,
+                                            32.0
+                                        ],
+                                        "Gains": [
+                                            1.100000023841858,
+                                            0.800000011920929,
+                                            0.30000001192092898,
+                                            0.20000000298023225,
+                                            0.20000000298023225,
+                                            0.10000000149011612,
+                                            0.10000000149011612,
+                                            0.05000000074505806
+                                        ]
+                                    },
+                                    "ResonanceAttenuationCurve": "",
+                                    "ResonanceAttenuationFactor": "DistanceFromCenter"
+                                },
+                                {
+                                    "Type": "nap::spatial::SimpleResonanceModel",
+                                    "mID": "SimpleResonanceModel_point",
+                                    "Name": "point",
+                                    "Vertices": [],
+                                    "Edges": [],
+                                    "ResonanceGain": 1.0,
+                                    "ResonanceLineSegment": {
+                                        "Type": "nap::spatial::ShapeResonanceLineSegment",
+                                        "mID": "EFFECTnap::spatial::ShapeResonanceLineSegment_2",
+                                        "Points": [
+                                            {
+                                                "Type": "nap::spatial::ShapeResonancePoint",
+                                                "mID": "EFFECTnap::spatial::ShapeResonancePoint_3",
+                                                "CenterFrequencies": [
+                                                    440.0
+                                                ],
+                                                "Bandwidths": [
+                                                    40.0
+                                                ],
+                                                "Gains": [
+                                                    2.0
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "ResonanceAttenuationPoint": "",
+                                    "ResonanceAttenuationCurve": "",
+                                    "ResonanceAttenuationFactor": "None"
+                                },
+                                {
+                                    "Type": "nap::spatial::SimpleResonanceModel",
+                                    "mID": "SimpleResonanceModel_line",
+                                    "Name": "line",
+                                    "Vertices": [
+                                        {
+                                            "x": -0.5,
+                                            "y": 0.0,
+                                            "z": 0.0
+                                        },
+                                        {
+                                            "x": 0.5,
+                                            "y": 0.0,
+                                            "z": 0.0
+                                        }
+                                    ],
+                                    "Edges": [
+                                        {
+                                            "first": 0,
+                                            "second": 1
+                                        }
+                                    ],
+                                    "ResonanceGain": 1.0,
+                                    "ResonanceLineSegment": {
+                                        "Type": "nap::spatial::ShapeResonanceLineSegment",
+                                        "mID": "EFFECTnap::spatial::ShapeResonanceLineSegment_3",
+                                        "Points": [
+                                            {
+                                                "Type": "nap::spatial::ShapeResonancePoint",
+                                                "mID": "EFFECTnap::spatial::ShapeResonancePoint_4",
+                                                "CenterFrequencies": [
+                                                    440.0,
+                                                    880.0,
+                                                    1320.0,
+                                                    1760.0,
+                                                    2200.0,
+                                                    2640.0,
+                                                    3080.0,
+                                                    3520.0
+                                                ],
+                                                "Bandwidths": [
+                                                    44.0,
+                                                    88.0,
+                                                    132.0,
+                                                    176.0,
+                                                    220.0,
+                                                    264.0,
+                                                    308.0,
+                                                    352.0
+                                                ],
+                                                "Gains": [
+                                                    0.800000011920929,
+                                                    0.800000011920929,
+                                                    0.699999988079071,
+                                                    0.6000000238418579,
+                                                    0.5,
+                                                    0.4000000059604645,
+                                                    0.30000001192092898,
+                                                    0.20000000298023225
+                                                ]
+                                            },
+                                            {
+                                                "Type": "nap::spatial::ShapeResonancePoint",
+                                                "mID": "EFFECTnap::spatial::ShapeResonancePoint_5",
+                                                "CenterFrequencies": [
+                                                    440.0,
+                                                    880.0,
+                                                    1320.0,
+                                                    1760.0,
+                                                    2200.0,
+                                                    2640.0,
+                                                    3080.0,
+                                                    3520.0
+                                                ],
+                                                "Bandwidths": [
+                                                    44.0,
+                                                    88.0,
+                                                    132.0,
+                                                    176.0,
+                                                    220.0,
+                                                    264.0,
+                                                    308.0,
+                                                    352.0
+                                                ],
+                                                "Gains": [
+                                                    1.100000023841858,
+                                                    0.800000011920929,
+                                                    0.699999988079071,
+                                                    0.5,
+                                                    0.4000000059604645,
+                                                    0.20000000298023225,
+                                                    0.10000000149011612,
+                                                    0.10000000149011612
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "ResonanceAttenuationPoint": "",
+                                    "ResonanceAttenuationCurve": "",
+                                    "ResonanceAttenuationFactor": "None"
+                                },
+                                {
+                                    "Type": "nap::spatial::SimpleResonanceModel",
+                                    "mID": "SimpleResonanceModel_triangle",
+                                    "Name": "triangle",
+                                    "Vertices": [
+                                        {
+                                            "x": 0.0,
+                                            "y": 0.0,
+                                            "z": 0.5
+                                        },
+                                        {
+                                            "x": -0.433012992143631,
+                                            "y": 0.0,
+                                            "z": -0.25
+                                        },
+                                        {
+                                            "x": 0.433012992143631,
+                                            "y": 0.0,
+                                            "z": -0.25
+                                        }
+                                    ],
+                                    "Edges": [
+                                        {
+                                            "first": 0,
+                                            "second": 1
+                                        },
+                                        {
+                                            "first": 1,
+                                            "second": 2
+                                        },
+                                        {
+                                            "first": 2,
+                                            "second": 0
+                                        }
+                                    ],
+                                    "ResonanceGain": 1.0,
+                                    "ResonanceLineSegment": {
+                                        "Type": "nap::spatial::ShapeResonanceLineSegment",
+                                        "mID": "EFFECTnap::spatial::ShapeResonanceLineSegment_4",
+                                        "Points": [
+                                            {
+                                                "Type": "nap::spatial::ShapeResonancePoint",
+                                                "mID": "EFFECTnap::spatial::ShapeResonancePoint_6",
+                                                "CenterFrequencies": [
+                                                    440.0,
+                                                    880.0,
+                                                    1760.0,
+                                                    2640.0,
+                                                    3520.0,
+                                                    4400.0,
+                                                    5280.0,
+                                                    6160.0
+                                                ],
+                                                "Bandwidths": [
+                                                    5.0,
+                                                    5.0,
+                                                    10.0,
+                                                    10.0,
+                                                    20.0,
+                                                    20.0,
+                                                    30.0,
+                                                    30.0
+                                                ],
+                                                "Gains": [
+                                                    1.0,
+                                                    0.8999999761581421,
+                                                    0.699999988079071,
+                                                    0.5,
+                                                    0.30000001192092898,
+                                                    0.20000000298023225,
+                                                    0.20000000298023225,
+                                                    0.10000000149011612
+                                                ]
+                                            },
+                                            {
+                                                "Type": "nap::spatial::ShapeResonancePoint",
+                                                "mID": "EFFECTnap::spatial::ShapeResonancePoint_7",
+                                                "CenterFrequencies": [
+                                                    440.0,
+                                                    880.0,
+                                                    1760.0,
+                                                    2640.0,
+                                                    3520.0,
+                                                    4400.0,
+                                                    5280.0,
+                                                    6160.0
+                                                ],
+                                                "Bandwidths": [
+                                                    5.0,
+                                                    5.0,
+                                                    10.0,
+                                                    10.0,
+                                                    20.0,
+                                                    20.0,
+                                                    30.0,
+                                                    30.0
+                                                ],
+                                                "Gains": [
+                                                    0.800000011920929,
+                                                    0.800000011920929,
+                                                    0.6000000238418579,
+                                                    0.699999988079071,
+                                                    0.800000011920929,
+                                                    0.699999988079071,
+                                                    0.6000000238418579,
+                                                    0.5
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "ResonanceAttenuationPoint": {
+                                        "Type": "nap::spatial::ShapeResonancePoint",
+                                        "mID": "EFFECTnap::spatial::ShapeResonancePoint_8",
+                                        "CenterFrequencies": [
+                                            440.0,
+                                            880.0,
+                                            1320.0,
+                                            1760.0,
+                                            2200.0,
+                                            2640.0,
+                                            3080.0,
+                                            3520.0
+                                        ],
+                                        "Bandwidths": [
+                                            5.0,
+                                            5.0,
+                                            5.0,
+                                            5.0,
+                                            5.0,
+                                            5.0,
+                                            5.0,
+                                            5.0
+                                        ],
+                                        "Gains": [
+                                            0.5,
+                                            0.5,
+                                            0.699999988079071,
+                                            0.8999999761581421,
+                                            0.30000001192092898,
+                                            0.20000000298023225,
+                                            0.10000000149011612,
+                                            0.10000000149011612
+                                        ]
+                                    },
+                                    "ResonanceAttenuationCurve": "",
+                                    "ResonanceAttenuationFactor": "DistanceFromCenter"
+                                },
+                                {
+                                    "Type": "nap::spatial::SimpleResonanceModel",
+                                    "mID": "SimpleResonanceModel_square",
+                                    "Name": "square",
+                                    "Vertices": [
+                                        {
+                                            "x": 0.35355299711227419,
+                                            "y": 0.0,
+                                            "z": 0.35355299711227419
+                                        },
+                                        {
+                                            "x": -0.35355299711227419,
+                                            "y": 0.0,
+                                            "z": 0.35355299711227419
+                                        },
+                                        {
+                                            "x": -0.35355299711227419,
+                                            "y": 0.0,
+                                            "z": -0.35355299711227419
+                                        },
+                                        {
+                                            "x": 0.35355299711227419,
+                                            "y": 0.0,
+                                            "z": -0.35355299711227419
+                                        }
+                                    ],
+                                    "Edges": [
+                                        {
+                                            "first": 0,
+                                            "second": 1
+                                        },
+                                        {
+                                            "first": 1,
+                                            "second": 2
+                                        },
+                                        {
+                                            "first": 2,
+                                            "second": 3
+                                        },
+                                        {
+                                            "first": 3,
+                                            "second": 0
+                                        }
+                                    ],
+                                    "ResonanceGain": 1.0,
+                                    "ResonanceLineSegment": {
+                                        "Type": "nap::spatial::ShapeResonanceLineSegment",
+                                        "mID": "EFFECTnap::spatial::ShapeResonanceLineSegment_5",
+                                        "Points": [
+                                            {
+                                                "Type": "nap::spatial::ShapeResonancePoint",
+                                                "mID": "EFFECTnap::spatial::ShapeResonancePoint_9",
+                                                "CenterFrequencies": [
+                                                    440.0,
+                                                    1320.0,
+                                                    2200.0,
+                                                    3080.0,
+                                                    3960.0,
+                                                    4840.0,
+                                                    5720.0,
+                                                    6600.0
+                                                ],
+                                                "Bandwidths": [
+                                                    10.0,
+                                                    10.0,
+                                                    10.0,
+                                                    10.0,
+                                                    10.0,
+                                                    10.0,
+                                                    10.0,
+                                                    10.0
+                                                ],
+                                                "Gains": [
+                                                    0.8999999761581421,
+                                                    0.800000011920929,
+                                                    0.800000011920929,
+                                                    0.800000011920929,
+                                                    0.699999988079071,
+                                                    0.699999988079071,
+                                                    0.6000000238418579,
+                                                    0.6000000238418579
+                                                ]
+                                            },
+                                            {
+                                                "Type": "nap::spatial::ShapeResonancePoint",
+                                                "mID": "EFFECTnap::spatial::ShapeResonancePoint_10",
+                                                "CenterFrequencies": [
+                                                    440.0,
+                                                    1320.0,
+                                                    2200.0,
+                                                    3080.0,
+                                                    3960.0,
+                                                    4840.0,
+                                                    5720.0,
+                                                    6600.0
+                                                ],
+                                                "Bandwidths": [
+                                                    10.0,
+                                                    10.0,
+                                                    10.0,
+                                                    10.0,
+                                                    10.0,
+                                                    10.0,
+                                                    10.0,
+                                                    10.0
+                                                ],
+                                                "Gains": [
+                                                    0.8999999761581421,
+                                                    0.800000011920929,
+                                                    0.699999988079071,
+                                                    0.6000000238418579,
+                                                    0.5,
+                                                    0.4000000059604645,
+                                                    0.30000001192092898,
+                                                    0.20000000298023225
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "ResonanceAttenuationPoint": {
+                                        "Type": "nap::spatial::ShapeResonancePoint",
+                                        "mID": "EFFECTnap::spatial::ShapeResonancePoint_11",
+                                        "CenterFrequencies": [
+                                            440.0,
+                                            1320.0,
+                                            2200.0,
+                                            3080.0,
+                                            3960.0,
+                                            4840.0,
+                                            5720.0,
+                                            6600.0
+                                        ],
+                                        "Bandwidths": [
+                                            10.0,
+                                            10.0,
+                                            10.0,
+                                            10.0,
+                                            10.0,
+                                            10.0,
+                                            10.0,
+                                            10.0
+                                        ],
+                                        "Gains": [
+                                            0.20000000298023225,
+                                            0.30000001192092898,
+                                            0.4000000059604645,
+                                            0.5,
+                                            0.6000000238418579,
+                                            0.699999988079071,
+                                            0.800000011920929,
+                                            0.8999999761581421
+                                        ]
+                                    },
+                                    "ResonanceAttenuationCurve": "",
+                                    "ResonanceAttenuationFactor": "DistanceFromCenter"
+                                },
+                                {
+                                    "Type": "nap::spatial::SimpleResonanceModel",
+                                    "mID": "SimpleResonanceModel_pentagon",
+                                    "Name": "pentagon",
+                                    "Vertices": [
+                                        {
+                                            "x": 0.0,
+                                            "y": 0.0,
+                                            "z": 0.5
+                                        },
+                                        {
+                                            "x": -0.433012992143631,
+                                            "y": 0.0,
+                                            "z": 0.15450799465179444
+                                        },
+                                        {
+                                            "x": -0.2938930094242096,
+                                            "y": 0.0,
+                                            "z": -0.4045090079307556
+                                        },
+                                        {
+                                            "x": 0.2938930094242096,
+                                            "y": 0.0,
+                                            "z": -0.40450799465179446
+                                        },
+                                        {
+                                            "x": 0.4755280017852783,
+                                            "y": 0.0,
+                                            "z": 0.15450899302959443
+                                        }
+                                    ],
+                                    "Edges": [
+                                        {
+                                            "first": 0,
+                                            "second": 1
+                                        },
+                                        {
+                                            "first": 1,
+                                            "second": 2
+                                        },
+                                        {
+                                            "first": 2,
+                                            "second": 3
+                                        },
+                                        {
+                                            "first": 3,
+                                            "second": 4
+                                        },
+                                        {
+                                            "first": 4,
+                                            "second": 0
+                                        }
+                                    ],
+                                    "ResonanceGain": 1.0,
+                                    "ResonanceLineSegment": {
+                                        "Type": "nap::spatial::ShapeResonanceLineSegment",
+                                        "mID": "EFFECTnap::spatial::ShapeResonanceLineSegment_6",
+                                        "Points": [
+                                            {
+                                                "Type": "nap::spatial::ShapeResonancePoint",
+                                                "mID": "EFFECTnap::spatial::ShapeResonancePoint_12",
+                                                "CenterFrequencies": [
+                                                    440.0,
+                                                    550.0,
+                                                    688.0,
+                                                    859.0,
+                                                    1074.0,
+                                                    1678.0,
+                                                    2623.0,
+                                                    5122.0
+                                                ],
+                                                "Bandwidths": [
+                                                    7.0,
+                                                    8.0,
+                                                    9.0,
+                                                    12.0,
+                                                    17.0,
+                                                    21.0,
+                                                    28.0,
+                                                    30.0
+                                                ],
+                                                "Gains": [
+                                                    1.0,
+                                                    1.0,
+                                                    0.8999999761581421,
+                                                    0.8999999761581421,
+                                                    0.800000011920929,
+                                                    0.800000011920929,
+                                                    0.699999988079071,
+                                                    0.699999988079071
+                                                ]
+                                            },
+                                            {
+                                                "Type": "nap::spatial::ShapeResonancePoint",
+                                                "mID": "EFFECTnap::spatial::ShapeResonancePoint_13",
+                                                "CenterFrequencies": [
+                                                    440.0,
+                                                    550.0,
+                                                    688.0,
+                                                    859.0,
+                                                    1074.0,
+                                                    1678.0,
+                                                    2623.0,
+                                                    5122.0
+                                                ],
+                                                "Bandwidths": [
+                                                    7.0,
+                                                    8.0,
+                                                    9.0,
+                                                    12.0,
+                                                    17.0,
+                                                    21.0,
+                                                    28.0,
+                                                    30.0
+                                                ],
+                                                "Gains": [
+                                                    1.2000000476837159,
+                                                    1.100000023841858,
+                                                    0.800000011920929,
+                                                    0.6000000238418579,
+                                                    0.699999988079071,
+                                                    0.699999988079071,
+                                                    0.4000000059604645,
+                                                    0.4000000059604645
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "ResonanceAttenuationPoint": {
+                                        "Type": "nap::spatial::ShapeResonancePoint",
+                                        "mID": "EFFECTnap::spatial::ShapeResonancePoint_14",
+                                        "CenterFrequencies": [
+                                            440.0,
+                                            550.0,
+                                            688.0,
+                                            859.0,
+                                            1074.0,
+                                            1678.0,
+                                            2623.0,
+                                            5122.0
+                                        ],
+                                        "Bandwidths": [
+                                            7.0,
+                                            8.0,
+                                            9.0,
+                                            12.0,
+                                            17.0,
+                                            21.0,
+                                            28.0,
+                                            30.0
+                                        ],
+                                        "Gains": [
+                                            1.2000000476837159,
+                                            1.2000000476837159,
+                                            0.6000000238418579,
+                                            0.4000000059604645,
+                                            0.4000000059604645,
+                                            0.30000001192092898,
+                                            0.20000000298023225,
+                                            0.10000000149011612
+                                        ]
+                                    },
+                                    "ResonanceAttenuationCurve": "",
+                                    "ResonanceAttenuationFactor": "DistanceFromCenter"
+                                },
+                                {
+                                    "Type": "nap::spatial::SimpleResonanceModel",
+                                    "mID": "SimpleResonanceModel_hexagon",
+                                    "Name": "hexagon",
+                                    "Vertices": [
+                                        {
+                                            "x": 0.0,
+                                            "y": 0.0,
+                                            "z": 0.5
+                                        },
+                                        {
+                                            "x": -0.433012992143631,
+                                            "y": 0.0,
+                                            "z": 0.25
+                                        },
+                                        {
+                                            "x": -0.433012992143631,
+                                            "y": 0.0,
+                                            "z": -0.25
+                                        },
+                                        {
+                                            "x": 0.0,
+                                            "y": 0.0,
+                                            "z": -0.5
+                                        },
+                                        {
+                                            "x": 0.433012992143631,
+                                            "y": 0.0,
+                                            "z": -0.25
+                                        },
+                                        {
+                                            "x": 0.433012992143631,
+                                            "y": 0.0,
+                                            "z": 0.25
+                                        }
+                                    ],
+                                    "Edges": [
+                                        {
+                                            "first": 0,
+                                            "second": 1
+                                        },
+                                        {
+                                            "first": 1,
+                                            "second": 2
+                                        },
+                                        {
+                                            "first": 2,
+                                            "second": 3
+                                        },
+                                        {
+                                            "first": 3,
+                                            "second": 4
+                                        },
+                                        {
+                                            "first": 4,
+                                            "second": 5
+                                        },
+                                        {
+                                            "first": 5,
+                                            "second": 0
+                                        }
+                                    ],
+                                    "ResonanceGain": 0.5,
+                                    "ResonanceLineSegment": {
+                                        "Type": "nap::spatial::ShapeResonanceLineSegment",
+                                        "mID": "EFFECTnap::spatial::ShapeResonanceLineSegment_7",
+                                        "Points": [
+                                            {
+                                                "Type": "nap::spatial::ShapeResonancePoint",
+                                                "mID": "EFFECTnap::spatial::ShapeResonancePoint_15",
+                                                "CenterFrequencies": [
+                                                    440.0,
+                                                    660.0,
+                                                    990.0,
+                                                    1485.0,
+                                                    2228.0,
+                                                    3341.0,
+                                                    5012.0,
+                                                    7518.0
+                                                ],
+                                                "Bandwidths": [
+                                                    7.0,
+                                                    8.0,
+                                                    9.0,
+                                                    12.0,
+                                                    17.0,
+                                                    21.0,
+                                                    28.0,
+                                                    30.0
+                                                ],
+                                                "Gains": [
+                                                    1.2000000476837159,
+                                                    1.100000023841858,
+                                                    0.800000011920929,
+                                                    0.6000000238418579,
+                                                    0.699999988079071,
+                                                    0.699999988079071,
+                                                    0.4000000059604645,
+                                                    0.4000000059604645
+                                                ]
+                                            },
+                                            {
+                                                "Type": "nap::spatial::ShapeResonancePoint",
+                                                "mID": "EFFECTnap::spatial::ShapeResonancePoint_16",
+                                                "CenterFrequencies": [
+                                                    440.0,
+                                                    660.0,
+                                                    990.0,
+                                                    1485.0,
+                                                    2228.0,
+                                                    3341.0,
+                                                    5012.0,
+                                                    7518.0
+                                                ],
+                                                "Bandwidths": [
+                                                    7.0,
+                                                    8.0,
+                                                    9.0,
+                                                    12.0,
+                                                    10.0,
+                                                    8.0,
+                                                    10.0,
+                                                    17.0
+                                                ],
+                                                "Gains": [
+                                                    1.2000000476837159,
+                                                    1.100000023841858,
+                                                    0.800000011920929,
+                                                    0.6000000238418579,
+                                                    0.699999988079071,
+                                                    0.699999988079071,
+                                                    0.4000000059604645,
+                                                    0.4000000059604645
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "ResonanceAttenuationPoint": {
+                                        "Type": "nap::spatial::ShapeResonancePoint",
+                                        "mID": "EFFECTnap::spatial::ShapeResonancePoint_17",
+                                        "CenterFrequencies": [
+                                            440.0,
+                                            660.0,
+                                            990.0,
+                                            1485.0,
+                                            2228.0,
+                                            3341.0,
+                                            5012.0,
+                                            7518.0
+                                        ],
+                                        "Bandwidths": [
+                                            7.0,
+                                            8.0,
+                                            9.0,
+                                            12.0,
+                                            17.0,
+                                            21.0,
+                                            28.0,
+                                            30.0
+                                        ],
+                                        "Gains": [
+                                            1.600000023841858,
+                                            1.399999976158142,
+                                            0.5,
+                                            0.30000001192092898,
+                                            0.20000000298023225,
+                                            0.20000000298023225,
+                                            0.10000000149011612,
+                                            0.10000000149011612
+                                        ]
+                                    },
+                                    "ResonanceAttenuationCurve": "",
+                                    "ResonanceAttenuationFactor": "DistanceFromCenter"
+                                },
+                                {
+                                    "Type": "nap::spatial::SimpleResonanceModel",
+                                    "mID": "SimpleResonanceModel_tetrahedron",
+                                    "Name": "tetrahedron",
+                                    "Vertices": [],
+                                    "Edges": [],
+                                    "ResonanceGain": 1.0,
+                                    "ResonanceLineSegment": "",
+                                    "ResonanceAttenuationPoint": "",
+                                    "ResonanceAttenuationCurve": {
+                                        "Type": "nap::spatial::ShapeResonanceAttenuationCurve",
+                                        "mID": "EFFECTnap::spatial::ShapeResonanceAttenuationCurve",
+                                        "BeginFrequency": 440.0,
+                                        "EndFrequency": 2000.0,
+                                        "CurveExponential": 2.0
+                                    },
+                                    "ResonanceAttenuationFactor": "DistanceFromCenter"
+                                },
+                                {
+                                    "Type": "nap::spatial::SimpleResonanceModel",
+                                    "mID": "SimpleResonanceModel_octahedron",
+                                    "Name": "octahedron",
+                                    "Vertices": [],
+                                    "Edges": [],
+                                    "ResonanceGain": 1.0,
+                                    "ResonanceLineSegment": "",
+                                    "ResonanceAttenuationPoint": "",
+                                    "ResonanceAttenuationCurve": {
+                                        "Type": "nap::spatial::ShapeResonanceAttenuationCurve",
+                                        "mID": "EFFECTnap::spatial::ShapeResonanceAttenuationCurve_2",
+                                        "BeginFrequency": 440.0,
+                                        "EndFrequency": 2000.0,
+                                        "CurveExponential": 2.0
+                                    },
+                                    "ResonanceAttenuationFactor": "DistanceFromCenter"
+                                },
+                                {
+                                    "Type": "nap::spatial::SimpleResonanceModel",
+                                    "mID": "SimpleResonanceModel_cube",
+                                    "Name": "cube",
+                                    "Vertices": [],
+                                    "Edges": [],
+                                    "ResonanceGain": 1.0,
+                                    "ResonanceLineSegment": "",
+                                    "ResonanceAttenuationPoint": "",
+                                    "ResonanceAttenuationCurve": {
+                                        "Type": "nap::spatial::ShapeResonanceAttenuationCurve",
+                                        "mID": "EFFECTnap::spatial::ShapeResonanceAttenuationCurve_3",
+                                        "BeginFrequency": 440.0,
+                                        "EndFrequency": 2000.0,
+                                        "CurveExponential": 2.0
+                                    },
+                                    "ResonanceAttenuationFactor": "DistanceFromCenter"
+                                },
+                                {
+                                    "Type": "nap::spatial::SimpleResonanceModel",
+                                    "mID": "SimpleResonanceModel_icosahedron",
+                                    "Name": "icosahedron",
+                                    "Vertices": [],
+                                    "Edges": [],
+                                    "ResonanceGain": 1.0,
+                                    "ResonanceLineSegment": "",
+                                    "ResonanceAttenuationPoint": "",
+                                    "ResonanceAttenuationCurve": {
+                                        "Type": "nap::spatial::ShapeResonanceAttenuationCurve",
+                                        "mID": "EFFECTnap::spatial::ShapeResonanceAttenuationCurve_4",
+                                        "BeginFrequency": 440.0,
+                                        "EndFrequency": 2000.0,
+                                        "CurveExponential": 2.0
+                                    },
+                                    "ResonanceAttenuationFactor": "DistanceFromCenter"
+                                },
+                                {
+                                    "Type": "nap::spatial::SimpleResonanceModel",
+                                    "mID": "SimpleResonanceModel_dodecahedron",
+                                    "Name": "dodecahedron",
+                                    "Vertices": [],
+                                    "Edges": [],
+                                    "ResonanceGain": 1.0,
+                                    "ResonanceLineSegment": "",
+                                    "ResonanceAttenuationPoint": "",
+                                    "ResonanceAttenuationCurve": {
+                                        "Type": "nap::spatial::ShapeResonanceAttenuationCurve",
+                                        "mID": "EFFECTnap::spatial::ShapeResonanceAttenuationCurve_5",
+                                        "BeginFrequency": 440.0,
+                                        "EndFrequency": 2000.0,
+                                        "CurveExponential": 2.0
+                                    },
+                                    "ResonanceAttenuationFactor": "DistanceFromCenter"
+                                },
+                                {
+                                    "Type": "nap::spatial::SimpleResonanceModel",
+                                    "mID": "SimpleResonanceModel_sphere",
+                                    "Name": "sphere",
+                                    "Vertices": [],
+                                    "Edges": [],
+                                    "ResonanceGain": 1.0,
+                                    "ResonanceLineSegment": {
+                                        "Type": "nap::spatial::ShapeResonanceLineSegment",
+                                        "mID": "EFFECTnap::spatial::ShapeResonanceLineSegment_8",
+                                        "Points": [
+                                            {
+                                                "Type": "nap::spatial::ShapeResonancePoint",
+                                                "mID": "EFFECTnap::spatial::ShapeResonancePoint_18",
+                                                "CenterFrequencies": [
+                                                    440.0,
+                                                    880.0,
+                                                    1320.0,
+                                                    1760.0,
+                                                    2200.0,
+                                                    2640.0,
+                                                    3080.0,
+                                                    3520.0
+                                                ],
+                                                "Bandwidths": [
+                                                    20.0,
+                                                    23.0,
+                                                    43.0,
+                                                    35.0,
+                                                    41.0,
+                                                    35.0,
+                                                    33.0,
+                                                    32.0
+                                                ],
+                                                "Gains": [
+                                                    1.100000023841858,
+                                                    0.800000011920929,
+                                                    0.30000001192092898,
+                                                    0.20000000298023225,
+                                                    0.20000000298023225,
+                                                    0.10000000149011612,
+                                                    0.10000000149011612,
+                                                    0.05000000074505806
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "ResonanceAttenuationPoint": {
+                                        "Type": "nap::spatial::ShapeResonancePoint",
+                                        "mID": "EFFECTnap::spatial::ShapeResonancePoint_19",
+                                        "CenterFrequencies": [
+                                            440.0,
+                                            880.0,
+                                            1320.0,
+                                            1760.0,
+                                            2200.0,
+                                            2640.0,
+                                            3080.0,
+                                            3520.0
+                                        ],
+                                        "Bandwidths": [
+                                            20.0,
+                                            23.0,
+                                            43.0,
+                                            35.0,
+                                            41.0,
+                                            35.0,
+                                            33.0,
+                                            32.0
+                                        ],
+                                        "Gains": [
+                                            1.899999976158142,
+                                            0.800000011920929,
+                                            0.20000000298023225,
+                                            0.20000000298023225,
+                                            0.10000000149011612,
+                                            0.10000000149011612,
+                                            0.05000000074505806,
+                                            0.019999999552965165
+                                        ]
+                                    },
+                                    "ResonanceAttenuationCurve": "",
+                                    "ResonanceAttenuationFactor": "DistanceFromCenter"
+                                }
+                            ]
+                        }
+                    ],
+                    "PerceptionEffects": [
+                        {
+                            "Type": "nap::spatial::DistanceIntensityEffect",
+                            "mID": "DistanceIntensityEffect",
+                            "Name": "distanceAttenuation"
+                        },
+                        {
+                            "Type": "nap::spatial::DistanceDampingEffect",
+                            "mID": "DistanceDampingEffect",
+                            "Name": "distanceDamping"
+                        },
+                        {
+                            "Type": "nap::spatial::ElevationFilterUpEffect",
+                            "mID": "ElevationFilterUpEffect",
+                            "Name": "elevationFilterAbove"
+                        },
+                        {
+                            "Type": "nap::spatial::ElevationFilterDownEffect",
+                            "mID": "ElevationFilterDownEffect",
+                            "Name": "elevationFilterBelow"
+                        },
+                        {
+                            "Type": "nap::spatial::DistanceDiffusionEffect",
+                            "mID": "DistanceDiffusionEffect",
+                            "Name": "distanceDiffusion"
+                        }
+                    ],
+                    "MaxParticleCount": 128
+                },
+                {
+                    "Type": "nap::spatial::MeasurementComponent",
+                    "mID": "MeasurementComponent"
+                },
+                {
+                    "Type": "nap::spatial::ParticleVisualizationComponent",
+                    "mID": "ParticleVisualizationComponent",
+                    "ParticleSphereMesh": "ParticleSphereMesh",
+                    "ParticleCubeMesh": "ParticleCubeMesh",
+                    "MaterialInstance": {
+                        "Material": "ParticleMaterial",
+                        "Uniforms": [],
+                        "BlendMode": "AlphaBlend",
+                        "DepthMode": "InheritFromBlendMode"
+                    }
+                },
+                {
+                    "Type": "nap::TransformComponent",
+                    "mID": "TransformComponent",
+                    "Properties": {
+                        "Translate": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Rotate": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "UniformScale": 1.0
+                    }
+                },
+                {
+                    "Type": "nap::spatial::ShapeComponent",
+                    "mID": "ShapeComponent",
+                    "Shapes": [
+                        {
+                            "Type": "nap::spatial::PointShape",
+                            "mID": "PointShape",
+                            "Name": "point"
+                        },
+                        {
+                            "Type": "nap::spatial::CircleShape",
+                            "mID": "CircleShape",
+                            "Name": "circle"
+                        },
+                        {
+                            "Type": "nap::spatial::LineShape",
+                            "mID": "LineShape",
+                            "Name": "line"
+                        },
+                        {
+                            "Type": "nap::spatial::TriangleShape",
+                            "mID": "TriangleShape",
+                            "Name": "triangle"
+                        },
+                        {
+                            "Type": "nap::spatial::SquareShape",
+                            "mID": "SquareShape",
+                            "Name": "square"
+                        },
+                        {
+                            "Type": "nap::spatial::PentagonShape",
+                            "mID": "PentagonShape",
+                            "Name": "pentagon"
+                        },
+                        {
+                            "Type": "nap::spatial::HexagonShape",
+                            "mID": "HexagonShape",
+                            "Name": "hexagon"
+                        },
+                        {
+                            "Type": "nap::spatial::TetrahedronShape",
+                            "mID": "TetrahedronShape",
+                            "Name": "tetrahedron"
+                        },
+                        {
+                            "Type": "nap::spatial::OctahedronShape",
+                            "mID": "OctahedronShape",
+                            "Name": "octahedron"
+                        },
+                        {
+                            "Type": "nap::spatial::CubeShape",
+                            "mID": "CubeShape",
+                            "Name": "cube"
+                        },
+                        {
+                            "Type": "nap::spatial::IcosahedronShape",
+                            "mID": "IcosahedronShape",
+                            "Name": "icosahedron"
+                        },
+                        {
+                            "Type": "nap::spatial::DodecahedronShape",
+                            "mID": "DodecahedronShape",
+                            "Name": "dodecahedron"
+                        },
+                        {
+                            "Type": "nap::spatial::CircleTorusShape",
+                            "mID": "CircleTorusShape",
+                            "Name": "circleTorus"
+                        },
+                        {
+                            "Type": "nap::spatial::SpiralTorusShape",
+                            "mID": "SpiralTorusShape",
+                            "Name": "spiralTorus"
+                        },
+                        {
+                            "Type": "nap::spatial::ArchimedeanSpiralShape",
+                            "mID": "ArchimedeanSpiralShape",
+                            "Name": "archimedeanSpiral"
+                        },
+                        {
+                            "Type": "nap::spatial::DoubleSpiralShape",
+                            "mID": "DoubleSpiralShape",
+                            "Name": "doubleSpiral"
+                        },
+                        {
+                            "Type": "nap::spatial::TripleSpiralShape",
+                            "mID": "TripleSpiralShape",
+                            "Name": "tripleSpiral"
+                        },
+                        {
+                            "Type": "nap::spatial::InfiniteSpiralShape",
+                            "mID": "InfiniteSpiralShape",
+                            "Name": "infiniteSpiral"
+                        },
+                        {
+                            "Type": "nap::spatial::HelixShape",
+                            "mID": "HelixShape",
+                            "Name": "helix"
+                        },
+                        {
+                            "Type": "nap::spatial::PrecalculatedPythonTheWorksShape",
+                            "mID": "PrecalculatedPythonTheWorksShape_2",
+                            "Name": "sphere",
+                            "PythonScript": "ShapeGoldbergSphere",
+                            "Sort": true
+                        },
+                        {
+                            "Type": "nap::spatial::PrecalculatedPythonTheWorksShape",
+                            "mID": "PrecalculatedPythonTheWorksShape_3",
+                            "Name": "pyramid",
+                            "PythonScript": "ShapePyramid",
+                            "Sort": true
+                        },
+                        {
+                            "Type": "nap::spatial::WallsShape",
+                            "mID": "WallsShape",
+                            "Name": "walls"
+                        },
+                        {
+                            "Type": "nap::spatial::StereoShape",
+                            "mID": "StereoShape",
+                            "Name": "stereo"
+                        },
+                        {
+                            "Type": "nap::spatial::MonoShape",
+                            "mID": "MonoShape",
+                            "Name": "mono"
+                        },
+                        {
+                            "Type": "nap::spatial::SolidCubeShape",
+                            "mID": "SolidCubeShape",
+                            "Name": "solidCube"
+                        },
+                        {
+                            "Type": "nap::spatial::AdaptiveCubeShape",
+                            "mID": "AdaptiveCubeShape",
+                            "Name": "adaptiveCube"
+                        },
+                        {
+                            "Type": "nap::spatial::PythonShape",
+                            "mID": "TestLineShape",
+                            "Name": "testline",
+                            "PythonScript": "ShapeTestLine",
+                            "Class": "Shape"
+                        },
+                        {
+                            "Type": "nap::spatial::FibonacciSphereShape",
+                            "mID": "FibonacciSphereShape",
+                            "Name": "fibonacciSphere"
+                        }
+                    ],
+                    "ShapeTransformations": [
+                        {
+                            "Type": "nap::spatial::WaveShapeTransformation",
+                            "mID": "Wave",
+                            "Name": "wave"
+                        },
+                        {
+                            "Type": "nap::spatial::VibrateShapeTransformation",
+                            "mID": "Vibrate",
+                            "Name": "vibrate"
+                        },
+                        {
+                            "Type": "nap::spatial::BuzzShapeTransformation",
+                            "mID": "Buzz",
+                            "Name": "buzz"
+                        },
+                        {
+                            "Type": "nap::spatial::ShakeShapeTransformation",
+                            "mID": "Shake",
+                            "Name": "shake"
+                        },
+                        {
+                            "Type": "nap::spatial::AttractShapeTransformation",
+                            "mID": "Attract",
+                            "Name": "bend"
+                        },
+                        {
+                            "Type": "nap::spatial::ParallelShapeTransformation",
+                            "mID": "ParticleDimensionsShapeTransformation",
+                            "Name": "particleDimensions",
+                            "Transformation": {
+                                "Type": "nap::spatial::InputDimensionsTransformation",
+                                "mID": "InputDimensionsTransformation_5fe94920",
+                                "Name": "",
+                                "DefaultValue": 1.0
+                            }
+                        },
+                        {
+                            "Type": "nap::spatial::ParallelShapeTransformation",
+                            "mID": "ParticleScaleShapeTransformation",
+                            "Name": "particleScale",
+                            "Transformation": {
+                                "Type": "nap::spatial::InputScaleTransformation",
+                                "mID": "InputScaleTransformation_91c91f26",
+                                "Name": "",
+                                "DefaultValue": 1.0
+                            }
+                        },
+                        {
+                            "Type": "nap::spatial::ParallelShapeTransformation",
+                            "mID": "ParallelShapeTransformation_5f7e4363",
+                            "Name": "particleSpatialDynamics",
+                            "Transformation": {
+                                "Type": "nap::spatial::SpatialDynamicsTransformation",
+                                "mID": "SpatialDynamicsTransformation_436556fa",
+                                "Name": ""
+                            }
+                        }
+                    ]
+                },
+                {
+                    "Type": "nap::OSCInputComponent",
+                    "mID": "OSCInputComponent",
+                    "Addresses": []
+                },
+                {
+                    "Type": "nap::spatial::TransformationChainComponent",
+                    "mID": "SoundObjectTransformationChainComponent",
+                    "Transformations": [
+                        {
+                            "Type": "nap::spatial::InputPositionTransformation",
+                            "mID": "InputPositionTransformation",
+                            "Name": "position"
+                        },
+                        {
+                            "Type": "nap::spatial::InputPositionTransformation",
+                            "mID": "InputPositionTransformation_3",
+                            "Name": "positionOffset"
+                        },
+                        {
+                            "Type": "nap::spatial::InputDimensionsTransformation",
+                            "mID": "InputDimensionsTransformation",
+                            "Name": "dimensions",
+                            "DefaultValue": 1.0
+                        },
+                        {
+                            "Type": "nap::spatial::InputScaleTransformation",
+                            "mID": "InputScaleTransformation",
+                            "Name": "scale",
+                            "DefaultValue": 1.0
+                        },
+                        {
+                            "Type": "nap::spatial::PositionRotationTransformation",
+                            "mID": "PositionRotationTransformation",
+                            "Name": "positionRotation"
+                        },
+                        {
+                            "Type": "nap::spatial::InvertTransformation",
+                            "mID": "InvertTransformation",
+                            "Name": "invert"
+                        },
+                        {
+                            "Type": "nap::spatial::PathTransformation",
+                            "mID": "PathTransformation",
+                            "Name": "path"
+                        },
+                        {
+                            "Type": "nap::spatial::ModulationTransformation",
+                            "mID": "ModulationTransformation",
+                            "Name": "modulation"
+                        },
+                        {
+                            "Type": "nap::spatial::ShakeTransformation",
+                            "mID": "ShakeTransformation",
+                            "Name": "shake"
+                        },
+                        {
+                            "Type": "nap::spatial::SpasmTransformation",
+                            "mID": "SpasmTransformation",
+                            "Name": "spasm"
+                        },
+                        {
+                            "Type": "nap::spatial::PlasmaTransformation",
+                            "mID": "PlasmaTransformation",
+                            "Name": "plasma"
+                        },
+                        {
+                            "Type": "nap::spatial::OrientationTransformation",
+                            "mID": "OrientationTransformation",
+                            "Name": "orientation"
+                        },
+                        {
+                            "Type": "nap::spatial::SpatialDynamicsTransformation",
+                            "mID": "SpatialDynamicsTransformation",
+                            "Name": "spatialDynamics"
+                        }
+                    ],
+                    "Name": "transformation"
+                },
+                {
+                    "Type": "nap::spatial::TransformationChainComponent",
+                    "mID": "FollowTransformationChainComponent",
+                    "Transformations": [
+                        {
+                            "Type": "nap::spatial::FollowTransformation",
+                            "mID": "FollowTransformation",
+                            "Name": ""
+                        }
+                    ],
+                    "Name": "followTransformation"
+                },
+                {
+                    "Type": "nap::spatial::SpatialTransformationComponent",
+                    "mID": "SpatialTransformationComponent",
+                    "SoundObjectTransformationChain": "./SoundObjectTransformationChainComponent",
+                    "ShapeComponent": "./ShapeComponent"
+                },
+                {
+                    "Type": "nap::spatial::PathVisualizationComponent",
+                    "mID": "PathVisualizationComponent",
+                    "Mesh": "",
+                    "MaterialInstance": {
+                        "Material": "LineMaterial",
+                        "Uniforms": [],
+                        "BlendMode": "Opaque",
+                        "DepthMode": "InheritFromBlendMode"
+                    },
+                    "ClipRect": {
+                        "Min": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Max": {
+                            "x": 0.0,
+                            "y": 0.0
+                        }
+                    }
+                },
+                {
+                    "Type": "nap::spatial::ShapeVisualizationComponent",
+                    "mID": "ShapeVisualizationComponent",
+                    "Mesh": "",
+                    "MaterialInstance": {
+                        "Material": "LineMaterial",
+                        "Uniforms": [],
+                        "BlendMode": "Opaque",
+                        "DepthMode": "InheritFromBlendMode"
+                    },
+                    "ClipRect": {
+                        "Min": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Max": {
+                            "x": 0.0,
+                            "y": 0.0
+                        }
+                    }
+                },
+                {
+                    "Type": "nap::spatial::ExposedDataComponent",
+                    "mID": "ExposedDataComponent",
+                    "OscSender": "OSCSender"
+                },
+                {
+                    "Type": "nap::spatial::SpatialTransformTrailModulationComponent",
+                    "mID": "nap::spatial::SpatialTransformTrailModulationComponent"
+                },
+                {
+                    "Type": "nap::spatial::TrailVisualizationComponent",
+                    "mID": "nap::spatial::TrailVisualizationComponent_2",
+                    "CopyMesh": "TrailMesh",
+                    "MaterialInstance": {
+                        "Material": "LineMaterial",
+                        "Uniforms": [
+                            {
+                                "Type": "nap::UniformVec4",
+                                "mID": "UniformVec4_3",
+                                "Name": "color",
+                                "Value": {
+                                    "x": 1.0,
+                                    "y": 0.0,
+                                    "z": 0.0,
+                                    "w": 1.0,
+                                    "a": 1.0
+                                }
+                            },
+                            {
+                                "Type": "nap::UniformFloat",
+                                "mID": "UniformFloat_8",
+                                "Name": "useColorFromUniform",
+                                "Value": 1.0
+                            }
+                        ],
+                        "BlendMode": "NotSet",
+                        "DepthMode": "NotSet"
+                    },
+                    "ColorUniform": "color",
+                    "Scaling": 0.05000000074505806,
+                    "Length": 30
+                },
+                {
+                    "Type": "nap::spatial::ShapeDisplacementComponent",
+                    "mID": "nap::spatial::ShapeDisplacementComponent",
+                    "Mesh": "",
+                    "MaterialInstance": {
+                        "Material": "LineMaterial",
+                        "Uniforms": [
+                            {
+                                "Type": "nap::UniformFloat",
+                                "mID": "UniformFloat_9",
+                                "Name": "useColorFromUniform",
+                                "Value": 1.0
+                            },
+                            {
+                                "Type": "nap::UniformVec4",
+                                "mID": "UniformVec4_5",
+                                "Name": "color",
+                                "Value": {
+                                    "x": 1.0,
+                                    "y": 0.0,
+                                    "z": 0.0,
+                                    "w": 1.0,
+                                    "a": 1.0
+                                }
+                            }
+                        ],
+                        "BlendMode": "NotSet",
+                        "DepthMode": "NotSet"
+                    },
+                    "ClipRect": {
+                        "Min": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Max": {
+                            "x": 0.0,
+                            "y": 0.0
+                        }
+                    },
+                    "ShapeComponent": "./ShapeVisualizationComponent",
+                    "SplitVertexLength": 0.05000000074505806
+                },
+                {
+                    "Type": "nap::spatial::SoundObjectVisualizationComponent",
+                    "mID": "nap::spatial::SoundObjectVisualizationComponent",
+                    "Order": 0,
+                    "Category": 0
+                },
+                {
+                    "Type": "nap::spatial::MixdownOutputComponent",
+                    "mID": "nap::spatial::MixdownOutputComponent",
+                    "MixdownComponent": "./MixdownComponent"
+                },
+                {
+                    "Type": "nap::spatial::SpatialDelayVisualizationComponent",
+                    "mID": "nap::spatial::SpatialDelayVisualizationComponent_9fb7c119",
+                    "ShapeDisplacementComponent": "./nap::spatial::ShapeDisplacementComponent"
+                },
+                {
+                    "Type": "nap::spatial::HeadphonesSettingsComponent",
+                    "mID": "nap::spatial::HeadphonesSettingsComponent_3a8b380b",
+                    "HeadphonesSetup": "headphonesSetup"
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Type": "nap::Entity",
+            "mID": "binauralListener",
+            "Components": [
+                {
+                    "Type": "nap::ParameterComponent",
+                    "mID": "ParameterComponent_5",
+                    "Name": "listener1"
+                },
+                {
+                    "Type": "nap::spatial::BinauralListenerComponent",
+                    "mID": "nap::spatial::BinauralListenerComponent"
+                },
+                {
+                    "Type": "nap::TransformComponent",
+                    "mID": "transformComponent_5",
+                    "Properties": {
+                        "Translate": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Rotate": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "UniformScale": 1.0
+                    }
+                },
+                {
+                    "Type": "nap::spatial::ExposedDataComponent",
+                    "mID": "binauralExposedDataComponent",
+                    "OscSender": ""
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Type": "nap::Entity",
+            "mID": "camera",
+            "Components": [
+                {
+                    "Type": "nap::ParameterComponent",
+                    "mID": "nap::spatial::ParameterComponent_camera",
+                    "Name": "camera"
+                },
+                {
+                    "Type": "nap::spatial::MonitorCameraComponent",
+                    "mID": "nap::spatial::MonitorCameraComponent",
+                    "Properties": {
+                        "FieldOfView": 50.0,
+                        "NearClippingPlane": 0.10000000149011612,
+                        "FarClippingPlane": 2000.0,
+                        "DefaultOrbitElevation": -45.0,
+                        "DefaultOrbitAzimuth": 0.0,
+                        "DefaultOrbitDistance": 20.0,
+                        "DefaultOrthoZoom": 10.0
+                    }
+                },
+                {
+                    "Type": "nap::KeyInputComponent",
+                    "mID": "nap::KeyInputComponent"
+                },
+                {
+                    "Type": "nap::PointerInputComponent",
+                    "mID": "nap::PointerInputComponent"
+                },
+                {
+                    "Type": "nap::TransformComponent",
+                    "mID": "nap::TransformComponent",
+                    "Properties": {
+                        "Translate": {
+                            "x": 0.0,
+                            "y": 1.5,
+                            "z": 10.0
+                        },
+                        "Rotate": {
+                            "x": -15.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "UniformScale": 1.0
+                    }
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Type": "nap::Entity",
+            "mID": "global",
+            "Components": [
+                {
+                    "Type": "nap::spatial::EnvironmentComponent",
+                    "mID": "nap::spatial::EnvironmentComponent",
+                    "ScriptPath": "scripts/environment.py",
+                    "Entities": []
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Type": "nap::Entity",
+            "mID": "groupTransformationObject",
+            "Components": [
+                {
+                    "Type": "nap::ParameterComponent",
+                    "mID": "groupParameterComponent",
+                    "Name": ""
+                },
+                {
+                    "Type": "nap::OSCInputComponent",
+                    "mID": "groupOSCInputComponent",
+                    "Addresses": []
+                },
+                {
+                    "Type": "nap::spatial::TransformationChainComponent",
+                    "mID": "shapeTransformationChain",
+                    "Transformations": [
+                        {
+                            "Type": "nap::spatial::InputPositionTransformation",
+                            "mID": "InputPositionTransformation_2",
+                            "Name": "position"
+                        },
+                        {
+                            "Type": "nap::spatial::StretchTransformation",
+                            "mID": "StretchTransformation",
+                            "Name": "stretch"
+                        },
+                        {
+                            "Type": "nap::spatial::StretchScaleTransformation",
+                            "mID": "StretchScaleTransformation",
+                            "Name": "stretchScale"
+                        },
+                        {
+                            "Type": "nap::spatial::PlodeTransformation",
+                            "mID": "PlodeTransformation",
+                            "Name": "plode"
+                        },
+                        {
+                            "Type": "nap::spatial::PlodeScaleTransformation",
+                            "mID": "PlodeScaleTransformation",
+                            "Name": "plodeScale"
+                        },
+                        {
+                            "Type": "nap::spatial::InputDimensionsTransformation",
+                            "mID": "InputDimensionsTransformation_3",
+                            "Name": "dimensions",
+                            "DefaultValue": 1.0
+                        },
+                        {
+                            "Type": "nap::spatial::InputScaleTransformation",
+                            "mID": "InputScaleTransformation_3",
+                            "Name": "dimensionsScale",
+                            "DefaultValue": 1.0
+                        },
+                        {
+                            "Type": "nap::spatial::RotationTransformation",
+                            "mID": "RotationTransformation",
+                            "Name": "rotation"
+                        },
+                        {
+                            "Type": "nap::spatial::InvertTransformation",
+                            "mID": "InvertTransformation_75687438",
+                            "Name": "invert"
+                        }
+                    ],
+                    "Name": "transformation"
+                },
+                {
+                    "Type": "nap::spatial::ExposedDataComponent",
+                    "mID": "groupExposedDataComponent",
+                    "OscSender": ""
+                },
+                {
+                    "Type": "nap::spatial::OSCParameterControlComponent",
+                    "mID": "nap::spatial::OSCParameterControlComponent_bcfa0d0f"
+                },
+                {
+                    "Type": "nap::spatial::TransformationChainComponent",
+                    "mID": "particleTransformationChain",
+                    "Transformations": [
+                        {
+                            "Type": "nap::spatial::InputDimensionsTransformation",
+                            "mID": "InputDimensionsTransformation_56950158",
+                            "Name": "dimensions",
+                            "DefaultValue": 1.0
+                        },
+                        {
+                            "Type": "nap::spatial::InputScaleTransformation",
+                            "mID": "InputScaleTransformation_7edf27e6",
+                            "Name": "scale",
+                            "DefaultValue": 1.0
+                        }
+                    ],
+                    "Name": "particleTransformation"
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Type": "nap::Entity",
+            "mID": "monitor",
+            "Components": [
+                {
+                    "Type": "nap::ParameterComponent",
+                    "mID": "nap::spatial::ParameterComponent_monitor",
+                    "Name": "monitor"
+                },
+                {
+                    "Type": "nap::KeyInputComponent",
+                    "mID": "nap::KeyInputComponent_2"
+                },
+                {
+                    "Type": "nap::spatial::MonitorGuiComponent",
+                    "mID": "nap::spatial::MonitorGuiComponent"
+                },
+                {
+                    "Type": "nap::Renderable2DTextComponent",
+                    "mID": "nap::RenderableTextComponent",
+                    "Text": "Hi There! Welcome to NAP",
+                    "Font": "Font",
+                    "GlyphUniform": "glyph",
+                    "MaterialInstance": {
+                        "Material": "FontMaterial",
+                        "Uniforms": [],
+                        "BlendMode": "NotSet",
+                        "DepthMode": "NotSet"
+                    },
+                    "Location": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "Orientation": "Center"
+                },
+                {
+                    "Type": "nap::Renderable2DTextComponent",
+                    "mID": "monitorTextOverlayComponent",
+                    "Text": "Hi There! Welcome to NAP",
+                    "Font": "Font",
+                    "GlyphUniform": "glyph",
+                    "MaterialInstance": {
+                        "Material": "FontMaterial",
+                        "Uniforms": [],
+                        "BlendMode": "NotSet",
+                        "DepthMode": "NotSet"
+                    },
+                    "Location": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "Orientation": "Center"
+                },
+                {
+                    "Type": "nap::spatial::SpeakerVisualizationComponent",
+                    "mID": "nap::spatial::SpeakerVisualizationComponent",
+                    "Mesh": "",
+                    "MaterialInstance": {
+                        "Material": "SpeakerMaterial",
+                        "Uniforms": [],
+                        "BlendMode": "NotSet",
+                        "DepthMode": "NotSet"
+                    },
+                    "ClipRect": {
+                        "Min": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Max": {
+                            "x": 0.0,
+                            "y": 0.0
+                        }
+                    },
+                    "SpeakerSetups": [
+                        "headphonesSetup",
+                        "multiSetup"
+                    ],
+                    "SpeakerTypes": [
+                        {
+                            "Type": "nap::spatial::SpeakerVisualization_SpeakerType",
+                            "mID": "nap::spatial::SpeakerVisualization_SpeakerType",
+                            "Name": "satellite",
+                            "Entity": "monitorSpeakerOmni"
+                        },
+                        {
+                            "Type": "nap::spatial::SpeakerVisualization_SpeakerType",
+                            "mID": "nap::spatial::SpeakerVisualization_SpeakerType_2",
+                            "Name": "sub",
+                            "Entity": "monitorSpeakerOmni"
+                        },
+                        {
+                            "Type": "nap::spatial::SpeakerVisualization_SpeakerType",
+                            "mID": "nap::spatial::SpeakerVisualization_SpeakerType_3",
+                            "Name": "sidefill",
+                            "Entity": "monitorSpeakerOmni"
+                        }
+                    ],
+                    "LevelMeter": ""
+                },
+                {
+                    "Type": "nap::TransformComponent",
+                    "mID": "nap::TransformComponent_2",
+                    "Properties": {
+                        "Translate": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Rotate": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "UniformScale": 1.0
+                    }
+                },
+                {
+                    "Type": "nap::OSCInputComponent",
+                    "mID": "nap::OSCInputComponent_monitor",
+                    "Addresses": [
+                        "/monitor/"
+                    ]
+                },
+                {
+                    "Type": "nap::spatial::ExposedDataComponent",
+                    "mID": "monitorExposedDataComponent",
+                    "OscSender": ""
+                },
+                {
+                    "Type": "nap::spatial::OSCParameterControlComponent",
+                    "mID": "nap::spatial::OSCParameterControlComponent_7d7de345"
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Type": "nap::Entity",
+            "mID": "monitorGrid",
+            "Components": [
+                {
+                    "Type": "nap::RenderableMeshComponent",
+                    "mID": "nap::RenderableMeshComponent",
+                    "Mesh": "MonitorPlaneMesh",
+                    "MaterialInstance": {
+                        "Material": "MonitorGridMaterial",
+                        "Uniforms": [],
+                        "BlendMode": "NotSet",
+                        "DepthMode": "NotSet"
+                    },
+                    "ClipRect": {
+                        "Min": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Max": {
+                            "x": 0.0,
+                            "y": 0.0
+                        }
+                    }
+                },
+                {
+                    "Type": "nap::TransformComponent",
+                    "mID": "nap::TransformComponent_3",
+                    "Properties": {
+                        "Translate": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Rotate": {
+                            "x": 90.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "UniformScale": 10.0
+                    }
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Type": "nap::Entity",
+            "mID": "monitorSpeakerOmni",
+            "Components": [
+                {
+                    "Type": "nap::RenderableMeshComponent",
+                    "mID": "nap::RenderableMeshComponent_2",
+                    "Mesh": "MonitorSpeakerOmniMesh",
+                    "MaterialInstance": {
+                        "Material": "MonitorSpeakerLitMaterial",
+                        "Uniforms": [],
+                        "BlendMode": "NotSet",
+                        "DepthMode": "NotSet"
+                    },
+                    "ClipRect": {
+                        "Min": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Max": {
+                            "x": 0.0,
+                            "y": 0.0
+                        }
+                    }
+                },
+                {
+                    "Type": "nap::TransformComponent",
+                    "mID": "nap::TransformComponent_4",
+                    "Properties": {
+                        "Translate": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Rotate": {
+                            "x": -90.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "UniformScale": 0.0010000000474974514
+                    }
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Type": "nap::Font",
+            "mID": "Font",
+            "Properties": {
+                "Size": 14,
+                "DPI": 96
+            },
+            "Font": "fonts/Montserrat-Light.otf"
+        },
+        {
+            "Type": "nap::Font",
+            "mID": "GuiFont",
+            "Properties": {
+                "Size": 12,
+                "DPI": 96
+            },
+            "Font": "fonts/MuseoSans_500.otf"
+        },
+        {
+            "Type": "nap::ImageFromFile",
+            "mID": "Logo",
+            "Parameters": {
+                "MinFilter": "LinearMipmapLinear",
+                "MaxFilter": "Linear",
+                "WrapVertical": "ClampToEdge",
+                "WrapHorizontal": "ClampToEdge",
+                "MaxLodLevel": 20
+            },
+            "Usage": "Static",
+            "ImagePath": "img/logo-transparent.png",
+            "Compressed": false
+        },
+        {
+            "Type": "nap::ImageFromFile",
+            "mID": "Logo-4DSOUND",
+            "Parameters": {
+                "MinFilter": "LinearMipmapLinear",
+                "MaxFilter": "Linear",
+                "WrapVertical": "ClampToEdge",
+                "WrapHorizontal": "ClampToEdge",
+                "MaxLodLevel": 20
+            },
+            "Usage": "Static",
+            "ImagePath": "img/logo-4DSOUND.png",
+            "Compressed": false
+        },
+        {
+            "Type": "nap::ImageFromFile",
+            "mID": "Logo-theworks",
+            "Parameters": {
+                "MinFilter": "LinearMipmapLinear",
+                "MaxFilter": "Linear",
+                "WrapVertical": "ClampToEdge",
+                "WrapHorizontal": "ClampToEdge",
+                "MaxLodLevel": 20
+            },
+            "Usage": "Static",
+            "ImagePath": "img/logo-theworks.png",
+            "Compressed": false
+        },
+        {
+            "Type": "nap::ImageFromFile",
+            "mID": "LogoSmall",
+            "Parameters": {
+                "MinFilter": "LinearMipmapLinear",
+                "MaxFilter": "Linear",
+                "WrapVertical": "ClampToEdge",
+                "WrapHorizontal": "ClampToEdge",
+                "MaxLodLevel": 20
+            },
+            "Usage": "Static",
+            "ImagePath": "img/logo-4d-small.png",
+            "Compressed": false
+        },
+        {
+            "Type": "nap::ImageFromFile",
+            "mID": "Watermark",
+            "Parameters": {
+                "MinFilter": "LinearMipmapLinear",
+                "MaxFilter": "Linear",
+                "WrapVertical": "ClampToEdge",
+                "WrapHorizontal": "ClampToEdge",
+                "MaxLodLevel": 20
+            },
+            "Usage": "Static",
+            "ImagePath": "img/watermark.png",
+            "Compressed": false
+        },
+        {
+            "Type": "nap::Material",
+            "mID": "AxesHelperMaterial",
+            "Uniforms": [],
+            "Shader": "ParticleShader",
+            "VertexAttributeBindings": [
+                {
+                    "MeshAttributeID": "Position",
+                    "ShaderAttributeID": "in_Position"
+                },
+                {
+                    "MeshAttributeID": "Color0",
+                    "ShaderAttributeID": "in_Color0"
+                }
+            ],
+            "BlendMode": "Opaque",
+            "DepthMode": "InheritFromBlendMode"
+        },
+        {
+            "Type": "nap::Material",
+            "mID": "BillboardMaterial",
+            "Uniforms": [
+                {
+                    "Type": "nap::UniformFloat",
+                    "mID": "UniformFloat",
+                    "Name": "value",
+                    "Value": 1.0
+                },
+                {
+                    "Type": "nap::UniformFloat",
+                    "mID": "UniformFloat_2",
+                    "Name": "scaleX",
+                    "Value": 0.029999999329447748
+                }
+            ],
+            "Shader": "BillboardShader",
+            "VertexAttributeBindings": [],
+            "BlendMode": "Opaque",
+            "DepthMode": "InheritFromBlendMode"
+        },
+        {
+            "Type": "nap::Material",
+            "mID": "FontMaterial",
+            "Uniforms": [
+                {
+                    "Type": "nap::UniformVec4",
+                    "mID": "UniformVec4",
+                    "Name": "textColor",
+                    "Value": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0,
+                        "w": 0.8587999939918518,
+                        "a": 0.8587999939918518
+                    }
+                }
+            ],
+            "Shader": "FontShader",
+            "VertexAttributeBindings": [],
+            "BlendMode": "AlphaBlend",
+            "DepthMode": "InheritFromBlendMode"
+        },
+        {
+            "Type": "nap::Material",
+            "mID": "LineMaterial",
+            "Uniforms": [
+                {
+                    "Type": "nap::UniformVec4",
+                    "mID": "UniformVec4_4",
+                    "Name": "color",
+                    "Value": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0,
+                        "w": 1.0,
+                        "a": 1.0
+                    }
+                }
+            ],
+            "Shader": "LineShader",
+            "VertexAttributeBindings": [
+                {
+                    "MeshAttributeID": "Position",
+                    "ShaderAttributeID": "in_Position"
+                },
+                {
+                    "MeshAttributeID": "Color0",
+                    "ShaderAttributeID": "in_Color0"
+                }
+            ],
+            "BlendMode": "Opaque",
+            "DepthMode": "InheritFromBlendMode"
+        },
+        {
+            "Type": "nap::Material",
+            "mID": "MonitorGridMaterial",
+            "Uniforms": [],
+            "Shader": "GridShader",
+            "VertexAttributeBindings": [
+                {
+                    "MeshAttributeID": "Position",
+                    "ShaderAttributeID": "in_Position"
+                }
+            ],
+            "BlendMode": "AlphaBlend",
+            "DepthMode": "InheritFromBlendMode"
+        },
+        {
+            "Type": "nap::Material",
+            "mID": "MonitorSpeakerLitMaterial",
+            "Uniforms": [],
+            "Shader": "MonitorSpeakerLitShader",
+            "VertexAttributeBindings": [
+                {
+                    "MeshAttributeID": "Position",
+                    "ShaderAttributeID": "in_Position"
+                },
+                {
+                    "MeshAttributeID": "Normal",
+                    "ShaderAttributeID": "in_Normal"
+                }
+            ],
+            "BlendMode": "Opaque",
+            "DepthMode": "InheritFromBlendMode"
+        },
+        {
+            "Type": "nap::Material",
+            "mID": "ParticleMaterial",
+            "Uniforms": [
+                {
+                    "Type": "nap::UniformVec3",
+                    "mID": "UniformVec3_2",
+                    "Name": "inCameraPosition",
+                    "Value": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 4.0
+                    }
+                },
+                {
+                    "Type": "nap::UniformFloat",
+                    "mID": "UniformFloat_7",
+                    "Name": "intensity",
+                    "Value": 0.0
+                }
+            ],
+            "Shader": "ParticleShader",
+            "VertexAttributeBindings": [
+                {
+                    "MeshAttributeID": "Position",
+                    "ShaderAttributeID": "in_Position"
+                },
+                {
+                    "MeshAttributeID": "Color0",
+                    "ShaderAttributeID": "in_Color0"
+                },
+                {
+                    "MeshAttributeID": "Normal",
+                    "ShaderAttributeID": "in_Normal"
+                }
+            ],
+            "BlendMode": "Opaque",
+            "DepthMode": "InheritFromBlendMode"
+        },
+        {
+            "Type": "nap::Material",
+            "mID": "SpeakerMaterial",
+            "Uniforms": [],
+            "Shader": "SpeakerShader",
+            "VertexAttributeBindings": [
+                {
+                    "MeshAttributeID": "Position",
+                    "ShaderAttributeID": "in_Position"
+                },
+                {
+                    "MeshAttributeID": "Color0",
+                    "ShaderAttributeID": "in_Color0"
+                }
+            ],
+            "BlendMode": "Opaque",
+            "DepthMode": "InheritFromBlendMode"
+        },
+        {
+            "Type": "nap::OSCReceiver",
+            "mID": "OSCReceiver",
+            "Port": 7000,
+            "EnableDebugOutput": false,
+            "AllowPortReuse": true
+        },
+        {
+            "Type": "nap::OSCSender",
+            "mID": "OSCSender",
+            "IpAddress": "127.0.0.1",
+            "Port": 8000,
+            "BufferScale": 1024
+        },
+        {
+            "Type": "nap::ParameterGroup",
+            "mID": "MultiSpeakerMasterParameters",
+            "Parameters": [
+                {
+                    "Type": "nap::ParameterFloat",
+                    "mID": "masterLimiterRatio",
+                    "Name": "Limiter Ratio",
+                    "Value": 4.0,
+                    "Minimum": 1.0,
+                    "Maximum": 20.0
+                },
+                {
+                    "Type": "nap::ParameterFloat",
+                    "mID": "masterLimiterAttack",
+                    "Name": "Limiter Attack",
+                    "Value": 0.0007999999797903001,
+                    "Minimum": 0.0,
+                    "Maximum": 0.20000000298023225
+                },
+                {
+                    "Type": "nap::ParameterFloat",
+                    "mID": "masterLimiterRelease",
+                    "Name": "Limiter Release",
+                    "Value": 0.5,
+                    "Minimum": 0.0,
+                    "Maximum": 1.0
+                },
+                {
+                    "Type": "nap::ParameterFloat",
+                    "mID": "masterLimiterThreshold",
+                    "Name": "Limiter Threshold",
+                    "Value": -6.0,
+                    "Minimum": -90.0,
+                    "Maximum": 0.0
+                },
+                {
+                    "Type": "nap::ParameterFloat",
+                    "mID": "masterSubCutoff",
+                    "Name": "Sub Cutoff",
+                    "Value": 80.0,
+                    "Minimum": 20.0,
+                    "Maximum": 20000.0
+                }
+            ],
+            "Groups": []
+        },
+        {
+            "Type": "nap::PlaneMesh",
+            "mID": "LevelMeterMesh",
+            "Size": {
+                "x": 1.0,
+                "y": 1.0
+            },
+            "Position": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "Rows": 1,
+            "Columns": 1
+        },
+        {
+            "Type": "nap::PlaneMesh",
+            "mID": "MonitorPlaneMesh",
+            "Size": {
+                "x": 1.0,
+                "y": 1.0
+            },
+            "Position": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "Rows": 256,
+            "Columns": 256
+        },
+        {
+            "Type": "nap::PlaneMesh",
+            "mID": "MonitorSpeakerOmniMesh",
+            "Size": {
+                "x": 0.4000000059604645,
+                "y": 0.4000000059604645
+            },
+            "Position": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "Rows": 1,
+            "Columns": 1
+        },
+        {
+            "Type": "nap::PythonScript",
+            "mID": "MultispeakerMasterScript",
+            "Path": "scripts/master.py"
+        },
+        {
+            "Type": "nap::PythonScript",
+            "mID": "ShapeGoldbergSphere",
+            "Path": "scripts/shapes/precalculatedGoldbergSphere.py"
+        },
+        {
+            "Type": "nap::PythonScript",
+            "mID": "ShapePyramid",
+            "Path": "scripts/shapes/precalculatedPyramid.py"
+        },
+        {
+            "Type": "nap::PythonScript",
+            "mID": "ShapeTestLine",
+            "Path": "scripts/shapes/testLineShape.py"
+        },
+        {
+            "Type": "nap::PythonScript",
+            "mID": "ShapeVesicaEye2D",
+            "Path": "scripts/shapes/precalculatedVesicaEye2D.py"
+        },
+        {
+            "Type": "nap::RenderServiceConfiguration",
+            "mID": "RenderConfiguration",
+            "Settings": {
+                "DoubleBuffer": true,
+                "EnableMultiSampling": false,
+                "MultiSamples": 4,
+                "HighDPIMode": false
+            }
+        },
+        {
+            "Type": "nap::RenderWindow",
+            "mID": "GuiWindow",
+            "Width": 820,
+            "Height": 720,
+            "Borderless": false,
+            "Resizable": true,
+            "Title": "4DSOUND Engine 2.0.b7",
+            "Sync": true,
+            "ClearColor": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0,
+                "a": 1.0
+            }
+        },
+        {
+            "Type": "nap::RenderWindow",
+            "mID": "Window",
+            "Width": 1280,
+            "Height": 720,
+            "Borderless": false,
+            "Resizable": true,
+            "Title": "4DSOUND Engine 2.0.b7",
+            "Sync": true,
+            "ClearColor": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0,
+                "a": 1.0
+            }
+        },
+        {
+            "Type": "nap::Scene",
+            "mID": "Scene",
+            "Entities": [
+                {
+                    "Entity": "DefaultInputRouterEntity",
+                    "InstanceProperties": []
+                },
+                {
+                    "Entity": "camera",
+                    "InstanceProperties": []
+                },
+                {
+                    "Entity": "binauralListener",
+                    "InstanceProperties": []
+                },
+                {
+                    "Entity": "monitor",
+                    "InstanceProperties": []
+                },
+                {
+                    "Entity": "monitorGrid",
+                    "InstanceProperties": []
+                },
+                {
+                    "Entity": "global",
+                    "InstanceProperties": []
+                },
+                {
+                    "Entity": "AxesHelper",
+                    "InstanceProperties": []
+                }
+            ]
+        },
+        {
+            "Type": "nap::Shader",
+            "mID": "BillboardShader",
+            "mVertShader": "shaders/monitor/billboard.vert",
+            "mFragShader": "shaders/monitor/billboard.frag"
+        },
+        {
+            "Type": "nap::Shader",
+            "mID": "FontShader",
+            "mVertShader": "shaders/font.vert",
+            "mFragShader": "shaders/font.frag"
+        },
+        {
+            "Type": "nap::Shader",
+            "mID": "GridShader",
+            "mVertShader": "shaders/monitor/grid.vert",
+            "mFragShader": "shaders/monitor/grid.frag"
+        },
+        {
+            "Type": "nap::Shader",
+            "mID": "LineShader",
+            "mVertShader": "shaders/monitor/line.vert",
+            "mFragShader": "shaders/monitor/line.frag"
+        },
+        {
+            "Type": "nap::Shader",
+            "mID": "MonitorSpeakerLitShader",
+            "mVertShader": "shaders/monitor/speaker-lit.vert",
+            "mFragShader": "shaders/monitor/speaker-lit.frag"
+        },
+        {
+            "Type": "nap::Shader",
+            "mID": "ParticleShader",
+            "mVertShader": "shaders/monitor/particle.vert",
+            "mFragShader": "shaders/monitor/particle.frag"
+        },
+        {
+            "Type": "nap::Shader",
+            "mID": "SpeakerShader",
+            "mVertShader": "shaders/monitor/speaker.vert",
+            "mFragShader": "shaders/monitor/speaker.frag"
+        },
+        {
+            "Type": "nap::SphereMesh",
+            "mID": "DisplacementSphere",
+            "Radius": 1.0,
+            "Rings": 50.0,
+            "Sectors": 50.0
+        },
+        {
+            "Type": "nap::SphereMesh",
+            "mID": "ParticleSphereMesh",
+            "Radius": 1.0,
+            "Rings": 40.0,
+            "Sectors": 40.0
+        },
+        {
+            "Type": "nap::SphereMesh",
+            "mID": "TrailMesh",
+            "Radius": 1.0,
+            "Rings": 10.0,
+            "Sectors": 10.0
+        },
+        {
+            "Type": "nap::audio::Graph",
+            "mID": "satelliteGraph",
+            "Objects": [
+                {
+                    "Type": "nap::audio::Compressor",
+                    "mID": "SatelliteCompressor",
+                    "ChannelCount": 1,
+                    "Input": ""
+                }
+            ],
+            "Output": "SatelliteCompressor",
+            "Input": "SatelliteCompressor"
+        },
+        {
+            "Type": "nap::audio::Graph",
+            "mID": "subGraph",
+            "Objects": [
+                {
+                    "Type": "nap::audio::FilterChain",
+                    "mID": "SubFilter",
+                    "Input": "",
+                    "FilterChainType": "LowPass24dB"
+                },
+                {
+                    "Type": "nap::audio::Compressor",
+                    "mID": "SubCompressor",
+                    "ChannelCount": 1,
+                    "Input": "SubFilter"
+                }
+            ],
+            "Output": "SubCompressor",
+            "Input": "SubFilter"
+        },
+        {
+            "Type": "nap::spatial::HeadphonesSpeakerSetup",
+            "mID": "headphonesSetup",
+            "SampleSetResource": "binauralSampleSet",
+            "MasterChain": {
+                "AudioObject": {
+                    "Type": "nap::audio::GraphObject",
+                    "mID": "headphonesGraphObject",
+                    "Graph": "satelliteGraph"
+                }
+            }
+        },
+        {
+            "Type": "nap::spatial::MultiSpeakerSetup",
+            "mID": "multiSetup",
+            "SpeakerTypeMasters": [
+                {
+                    "SpeakerTypeName": "satellite",
+                    "AudioUnit": {
+                      "AudioObject": {
+                          "Type": "nap::audio::GraphObject",
+                          "mID": "satelliteGraphObject",
+                          "Graph": "satelliteGraph"
+                      },
+                      "Parameters": "MultiSpeakerMasterParameters",
+                      "Script": "MultispeakerMasterScript",
+                      "Class": "SatelliteMaster"
+                    }
+                },
+                {
+                    "SpeakerTypeName": "sub",
+                    "AudioUnit": {
+                      "AudioObject": {
+                          "Type": "nap::audio::GraphObject",
+                          "mID": "subGraphObject",
+                          "Graph": "subGraph"
+                      },
+                      "Parameters": "MultiSpeakerMasterParameters",
+                      "Script": "MultispeakerMasterScript",
+                      "Class": "SubMaster"
+                    }
+                }
+            ]
+        },
+        {
+            "Type": "nap::spatial::SpatialBoxMesh",
+            "mID": "ParticleCubeMesh"
+        },
+        {
+            "Type": "nap::spatial::SphereWireframeMesh",
+            "mID": "SphereWireframeMesh",
+            "Radius": 1.0,
+            "Rings": 10.0,
+            "Sectors": 10.0
+        },
+        {
+            "Type": "nap::turboactivate::Licensing",
+            "mID": "Licensing",
+            "GUID": "szbdapptdjsbu7nhhn77oidwka6qhii",
+            ".dat File Path": "licensing/TurboActivate.dat"
+        }
+    ]
+}

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup version="2.1">
+    
+	<speaker id="A" ch="0" x="0" y="8.165" z="0" speakerType="satellite" /> 
+	<speaker id="B" ch="1" x="-5" y="4" z="2.887" speakerType="satellite" /> 
+	<speaker id="C" ch="2" x="5" y="4" z="2.887" speakerType="satellite" />
+	<speaker id="D" ch="3" x="0" y="4" z="-5.774" speakerType="satellite" />  
+	<speaker id="E" ch="4" x="0" y="0" z="5.774" speakerType="satellite" />	
+	<speaker id="F" ch="5" x="5" y="0" z="-2.887" speakerType="satellite" />
+	<speaker id="G" ch="6" x="-5" y="0" z="-2.887" speakerType="satellite" />
+    <speaker id="H" ch="7" x="0" y="-4.165" z="0" speakerType="satellite" />
+
+
+    <grid name="Merkabah">
+        
+        <!-- Top Layer -->
+        <shape type="projectionTriangle" speakers="D B A" />
+        <shape type="projectionTriangle" speakers="B C A" />
+        <shape type="projectionTriangle" speakers="C D A" />
+        
+        <!-- Mid Layer -->
+        <shape type="projectionTriangle" speakers="E C B" />
+        <shape type="projectionTriangle" speakers="E F C" />
+        <shape type="projectionTriangle" speakers="F D C" />
+        <shape type="projectionTriangle" speakers="F G D" />
+        <shape type="projectionTriangle" speakers="G B D" />
+        <shape type="projectionTriangle" speakers="G E B" />
+
+        <!-- Bottom Layer -->
+        <shape type="projectionTriangle" speakers="H E G" />
+        <shape type="projectionTriangle" speakers="H F E" />
+        <shape type="projectionTriangle" speakers="H G F" />
+        
+        <!-- Six Tetrahedrons filling the inside -->
+        <shape type="tetrahedron" speakers="F E C D" />
+        <shape type="tetrahedron" speakers="G E D B" />
+        <shape type="tetrahedron" speakers="B D C E" />
+        <shape type="tetrahedron" speakers="F G E D" />
+        
+        <shape type="tetrahedron" speakers="G F E H" />
+        <shape type="tetrahedron" speakers="C D B A" />
+
+
+
+        <projectionPoint x="0" y="2" z="0" />
+
+    </grid>
+    
+    <routing value="0 1 2 3 4 5 6 7" />
+    <center x="0" y="2" z="0" />
+</setup>

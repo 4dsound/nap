@@ -1,0 +1,21 @@
+{
+  "Type": "nap::ProjectInfo",
+  "mID": "ProjectInfo",
+  "Title": "4DSOUND Engine",
+  "Version": "2.0.b7",
+  "RequiredModules": [
+    "mod_napapp",
+    "mod_napaudio",
+    "mod_napaudioadvanced",
+    "mod_spatialgui",
+    "mod_nappython",
+    "mod_naposc",
+    "mod_naprender",
+    "mod_napimgui",
+    "mod_napnativefiledialog",
+    "mod_napparameter"
+  ],
+  "Data": "data/app_structure.json",
+  "ServiceConfig": "config.json",
+  "PathMapping": "cache/path_mapping.json"
+}
