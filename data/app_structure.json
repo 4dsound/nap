@@ -1688,43 +1688,6 @@
                     "OscSender": "OSCSender"
                 },
                 {
-                    "Type": "nap::spatial::SpatialTransformTrailModulationComponent",
-                    "mID": "nap::spatial::SpatialTransformTrailModulationComponent"
-                },
-                {
-                    "Type": "nap::spatial::TrailVisualizationComponent",
-                    "mID": "nap::spatial::TrailVisualizationComponent_2",
-                    "CopyMesh": "TrailMesh",
-                    "MaterialInstance": {
-                        "Material": "LineMaterial",
-                        "Uniforms": [
-                            {
-                                "Type": "nap::UniformVec4",
-                                "mID": "UniformVec4_3",
-                                "Name": "color",
-                                "Value": {
-                                    "x": 1.0,
-                                    "y": 0.0,
-                                    "z": 0.0,
-                                    "w": 1.0,
-                                    "a": 1.0
-                                }
-                            },
-                            {
-                                "Type": "nap::UniformFloat",
-                                "mID": "UniformFloat_8",
-                                "Name": "useColorFromUniform",
-                                "Value": 1.0
-                            }
-                        ],
-                        "BlendMode": "NotSet",
-                        "DepthMode": "NotSet"
-                    },
-                    "ColorUniform": "color",
-                    "Scaling": 0.05000000074505806,
-                    "Length": 30
-                },
-                {
                     "Type": "nap::spatial::ShapeDisplacementComponent",
                     "mID": "nap::spatial::ShapeDisplacementComponent",
                     "Mesh": "",
@@ -1843,7 +1806,7 @@
                     "Name": "camera"
                 },
                 {
-                    "Type": "nap::spatial::MonitorCameraComponent",
+                    "Type": "nap::PerspCameraComponent",
                     "mID": "nap::spatial::MonitorCameraComponent",
                     "Properties": {
                         "FieldOfView": 50.0,
@@ -2858,8 +2821,28 @@
             ]
         },
         {
-            "Type": "nap::spatial::SpatialBoxMesh",
-            "mID": "ParticleCubeMesh"
+            "Type": "nap::BoxMesh",
+            "mID": "ParticleCubeMesh",
+            "Usage": "Static",
+            "CullMode": "None",
+            "Size": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "Position": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Color": {
+                "Values": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
         },
         {
             "Type": "nap::spatial::SphereWireframeMesh",

@@ -9,13 +9,10 @@
 #include <renderable2dtextcomponent.h>
 #include <rendercomponent.h>
 
-#include <imgui/imgui.h>
-#include <nsdlgl.h>
-
 // Spatial includes.
 #include <Spatial/MultiSpeaker/MultiSpeakerSetup.h>
 #include <Spatial/Core/SpatialTypes.h>
-#include <Spatial/Monitor/MonitorCameraComponent.h>
+//#include <Spatial/Monitor/MonitorCameraComponent.h>
 #include <Spatial/Core/EnvironmentComponent.h>
 
 RTTI_BEGIN_CLASS_NO_DEFAULT_CONSTRUCTOR(nap::TheWorksApp)
@@ -34,7 +31,7 @@ namespace nap
         mRenderService	= getCore().getService<nap::RenderService>();
         mSceneService	= getCore().getService<nap::SceneService>();
         mInputService	= getCore().getService<nap::InputService>();
-        mGuiService		= getCore().getService<nap::IMGui2Service>();
+        mGuiService		= getCore().getService<nap::IMGuiService>();
         mSpatialService = getCore().getService<spatial::SpatialService>();
         mParameterService = getCore().getService<nap::ParameterService>();
         
@@ -62,18 +59,6 @@ namespace nap
 		
         mGuiWindow->setPosition(glm::vec2(10, mGuiWindow->getPosition()[1]));
 
-		// Fixing window height when they don't fit the primary screen
-		// This has been fixed in NAP 0.3
-		{
-			SDL_Rect rect;
-			SDL_GetDisplayUsableBounds(0, &rect);
-			const int max_window_height = rect.h - 50.0f;
-			if (mGuiWindow->getHeight() > max_window_height)
-				mGuiWindow->setHeight(max_window_height);
-			if (mRenderWindow->getHeight() > max_window_height)
-				mRenderWindow->setHeight(max_window_height);
-		}
-
         // Get the scene that contains our entities and components
         mScene = mResourceManager->findObject<Scene>("Scene");
         if (!error.check(mScene != nullptr, "unable to find scene with name: %s", "Scene"))
@@ -81,29 +66,28 @@ namespace nap
         
         // Get the default input router
         mDefaultInputRouter = mScene->findEntity("DefaultInputRouterEntity");
-		
-		
-		// Setup ImGui render windows
-		mGuiService->registerWindowForRendering(mGuiWindow);
-		mGuiService->registerWindowForRendering(mRenderWindow);
 
-		// Setup ImGui appearance
-		ImGui2RenderTarget * gui_render_target = mGuiService->getRenderTargetForWindow(mGuiWindow);
-		if (!error.check(gui_render_target != nullptr, "unable to find ImGui2RenderTarget for Gui window"))
-			return false;
-
-		ImGui2RenderTarget * monitor_render_target = mGuiService->getRenderTargetForWindow(mRenderWindow);
-		if (!error.check(monitor_render_target != nullptr, "unable to find ImGui2RenderTarget for render window"))
-			return false;
-
-		mMonitorStyle.setupAppearance(&gui_render_target->getStyle());
-		mMonitorStyle.setupAppearance(&monitor_render_target->getStyle());
-
-		auto gui_font = mResourceManager->findObject<Font>("GuiFont");
-		if (gui_font != nullptr) {
-			gui_render_target->setFont(gui_font);
-			monitor_render_target->setFont(gui_font);
-		}
+//		// Setup ImGui render windows
+//		mGuiService->registerWindowForRendering(mGuiWindow);
+//		mGuiService->registerWindowForRendering(mRenderWindow);
+//
+//		// Setup ImGui appearance
+//		ImGui2RenderTarget * gui_render_target = mGuiService->getRenderTargetForWindow(mGuiWindow);
+//		if (!error.check(gui_render_target != nullptr, "unable to find ImGui2RenderTarget for Gui window"))
+//			return false;
+//
+//		ImGui2RenderTarget * monitor_render_target = mGuiService->getRenderTargetForWindow(mRenderWindow);
+//		if (!error.check(monitor_render_target != nullptr, "unable to find ImGui2RenderTarget for render window"))
+//			return false;
+//
+//		mMonitorStyle.setupAppearance(&gui_render_target->getStyle());
+//		mMonitorStyle.setupAppearance(&monitor_render_target->getStyle());
+//
+//		auto gui_font = mResourceManager->findObject<Font>("GuiFont");
+//		if (gui_font != nullptr) {
+//			gui_render_target->setFont(gui_font);
+//			monitor_render_target->setFont(gui_font);
+//		}
 
         // init monitor gui to load logo resource
         mMonitorGui = std::make_unique<spatial::MonitorGui>();
@@ -129,100 +113,135 @@ namespace nap
         nap::DefaultInputRouter input_router(true);
         mInputService->processWindowEvents(*mRenderWindow, input_router, { &mScene->getRootEntity() });
 
+		mGuiService->selectWindow(mRenderWindow);
 		mMonitorOverlayGui->update(*mSpatialService, *mScene);
-        mMonitorGui->updateBlinking(deltaTime); // Updates the phase for the blinking of selected entity.
+
+		mGuiService->selectWindow(mGuiWindow);
+		mMonitorGui->update(*mSpatialService, *mScene, glm::vec2(mGuiWindow->getWidth(), mGuiWindow->getHeight()));
+		mMonitorGui->updateBlinking(deltaTime); // Updates the phase for the blinking of selected entity.
     }
+
+
+	void TheWorksApp::render()
+	{
+		mRenderService->beginFrame();
+		if (mRenderService->beginRecording(*mRenderWindow))
+		{
+			// Begin render pass
+			mRenderWindow->beginRendering();
+
+	        // Find the camera
+	        auto cameraEntity = mScene->findEntity("camera");
+	        nap::CameraComponentInstance* camera = nullptr;
+			camera = &cameraEntity->getComponent<nap::PerspCameraComponentInstance>();
+
+			if (mMonitorGui->getVisibility().showMonitor)
+			{
+				// Render the world with the right camera directly to screen
+				std::vector<RenderableComponentInstance*> renderableComponents;
+				mScene->getRootEntity().getComponentsOfTypeRecursive(renderableComponents);
+
+				// Fetch 2d renderable components, and subtract them from the list of 3d components, to avoid errors.
+				{
+					std::vector<Renderable2DTextComponentInstance*> renderable2DTextComponents;
+					mScene->getRootEntity().getComponentsOfTypeRecursive(renderable2DTextComponents);
+					for (auto comp : renderable2DTextComponents)
+					{
+						auto i = std::find(renderableComponents.begin(), renderableComponents.end(), comp);
+						if (i != renderableComponents.end())
+							renderableComponents.erase(i);
+					}
+				}
+
+				// Draw the remaining 3d components.
+				mRenderService->renderObjects(*mRenderWindow, *camera, renderableComponents);
+			}
+
+			// Render GUI elements
+			mGuiService->draw();
+
+			// Stop render pass
+			mRenderWindow->endRendering();
+
+			// End recording
+			mRenderService->endRecording();
+		}
+
+		// Proceed to next frame
+		mRenderService->endFrame();
+	}
     
     
     // Called when the window is going to render
-    void TheWorksApp::render()
-    {
-        
-        
-
-        
-        // Destroy old GL context related resources scheduled for destruction
-        mRenderService->destroyGLContextResources({ mRenderWindow.get() });
-        
-        // Prep render window for drawing
-        mRenderWindow->makeActive();
-        
-        // Clear back-buffer
-        mRenderService->clearRenderTarget(mRenderWindow->getBackbuffer());
-        
-        // Find the camera
-        auto cameraEntity = mScene->findEntity("camera");
-        nap::CameraComponentInstance* camera = nullptr;
-        if (cameraEntity->hasComponent<nap::PerspCameraComponentInstance>())
-            camera = &cameraEntity->getComponent<nap::PerspCameraComponentInstance>();
-        else
-            camera = &cameraEntity->getComponent<nap::spatial::MonitorCameraComponentInstance>();
-		
-		
-		// Render monitor
-		if (mMonitorGui->getVisibility().showMonitor)
-		{
-			// Render the world with the right camera directly to screen
-			std::vector<RenderableComponentInstance*> renderableComponents;
-			mScene->getRootEntity().getComponentsOfTypeRecursive(renderableComponents);
-			
-			// Fetch 2d renderable components, and subtract them from the list of 3d components, to avoid errors.
-			{
-				std::vector<Renderable2DTextComponentInstance*> renderable2DTextComponents;
-				mScene->getRootEntity().getComponentsOfTypeRecursive(renderable2DTextComponents);
-				for (auto comp : renderable2DTextComponents)
-				{
-					auto i = std::find(renderableComponents.begin(), renderableComponents.end(), comp);
-					if (i != renderableComponents.end())
-						renderableComponents.erase(i);
-				}
-			}
-			
-			// Draw the remaining 3d components.
-			mRenderService->renderObjects(mRenderWindow->getBackbuffer(), *camera, renderableComponents);
-		}
-		
-        //////////////// For Marcel's text rendering ////////////////
-        // todo : ask Coen how to access these in a less hacky way
-        spatial::g_windowSx = mRenderWindow->getWidth();
-        spatial::g_windowSy = mRenderWindow->getHeight();
-        spatial::g_cameraProjectionMatrix = camera->getProjectionMatrix();
-        spatial::g_cameraViewMatrix = camera->getViewMatrix();
-		
-		//auto orthoCameraEntity = mScene->findEntity("orthoCamera");
-        //auto orthoCamera = &orthoCameraEntity->getComponent<nap::OrthoCameraComponentInstance>();
-		
-		// Draw text overlay.
-		auto monitorEntity = mScene->findEntity("monitor");
-		if (monitorEntity != nullptr && mMonitorGui->getVisibility().showMonitor)
-		{
-			Renderable2DTextComponentInstance * textComp = monitorEntity->findComponentByID<Renderable2DTextComponentInstance>("monitorTextOverlayComponent");
-			mMonitorGui->drawTextOverlay(*mSpatialService, mRenderWindow.get(), textComp);
-		}
-		
-		{
-			mGuiService->makeWindowActive(mRenderWindow);
-			mMonitorOverlayGui->draw(*mSpatialService, *mScene, *mMonitorGui, ImVec2(mRenderWindow->getWidth(), mRenderWindow->getHeight()));
-			mGuiService->renderWindow(mRenderWindow);
-		}
-		
-        // Swap screen buffers
-        mRenderWindow->swap();
-		
-		
-        // Draw our gui
-		mRenderService->destroyGLContextResources({ mGuiWindow.get() });
-		mGuiWindow->makeActive();
-		mRenderService->clearRenderTarget(mGuiWindow->getBackbuffer());
-		
-		{
-			mGuiService->makeWindowActive(mGuiWindow);
-			mMonitorGui->update(*mSpatialService, *mScene, glm::vec2(mGuiWindow->getWidth(), mGuiWindow->getHeight()));
-			mGuiService->renderWindow(mGuiWindow);
-		}
-		mGuiWindow->swap();
-    }
-    
+//    void TheWorksApp::render()
+//    {
+//        // Destroy old GL context related resources scheduled for destruction
+//        mRenderService->destroyGLContextResources({ mRenderWindow.get() });
+//
+//        // Prep render window for drawing
+//        mRenderWindow->makeActive();
+//
+//        // Clear back-buffer
+//        mRenderService->clearRenderTarget(mRenderWindow->getBackbuffer());
+//
+//        // Find the camera
+//        auto cameraEntity = mScene->findEntity("camera");
+//        nap::CameraComponentInstance* camera = nullptr;
+//        if (cameraEntity->hasComponent<nap::PerspCameraComponentInstance>())
+//            camera = &cameraEntity->getComponent<nap::PerspCameraComponentInstance>();
+//        else
+//            camera = &cameraEntity->getComponent<nap::spatial::MonitorCameraComponentInstance>();
+//
+//
+//		// Render monitor
+//		if (mMonitorGui->getVisibility().showMonitor)
+//		{
+//			// Render the world with the right camera directly to screen
+//			std::vector<RenderableComponentInstance*> renderableComponents;
+//			mScene->getRootEntity().getComponentsOfTypeRecursive(renderableComponents);
+//
+//			// Fetch 2d renderable components, and subtract them from the list of 3d components, to avoid errors.
+//			{
+//				std::vector<Renderable2DTextComponentInstance*> renderable2DTextComponents;
+//				mScene->getRootEntity().getComponentsOfTypeRecursive(renderable2DTextComponents);
+//				for (auto comp : renderable2DTextComponents)
+//				{
+//					auto i = std::find(renderableComponents.begin(), renderableComponents.end(), comp);
+//					if (i != renderableComponents.end())
+//						renderableComponents.erase(i);
+//				}
+//			}
+//
+//			// Draw the remaining 3d components.
+//			mRenderService->renderObjects(mRenderWindow->getBackbuffer(), *camera, renderableComponents);
+//		}
+//
+//		// Draw text overlay.
+//		auto monitorEntity = mScene->findEntity("monitor");
+//		if (monitorEntity != nullptr && mMonitorGui->getVisibility().showMonitor)
+//		{
+//			Renderable2DTextComponentInstance * textComp = monitorEntity->findComponentByID<Renderable2DTextComponentInstance>("monitorTextOverlayComponent");
+//			mMonitorGui->drawTextOverlay(*mSpatialService, mRenderWindow.get(), textComp);
+//		}
+//
+//		{
+//			mGuiService->makeWindowActive(mRenderWindow);
+//			mMonitorOverlayGui->draw(*mSpatialService, *mScene, *mMonitorGui, ImVec2(mRenderWindow->getWidth(), mRenderWindow->getHeight()));
+//			mGuiService->renderWindow(mRenderWindow);
+//		}
+//
+//        // Swap screen buffers
+//        mRenderWindow->swap();
+//
+//
+//        // Draw our gui
+//		mRenderService->destroyGLContextResources({ mGuiWindow.get() });
+//		mGuiWindow->makeActive();
+//		mRenderService->clearRenderTarget(mGuiWindow->getBackbuffer());
+//
+//		mGuiWindow->swap();
+//    }
+//
     
     void TheWorksApp::windowMessageReceived(WindowEventPtr windowEvent)
     {
@@ -242,14 +261,11 @@ namespace nap
 				if (mGuiWindowIsVisible)
 				{
 					mGuiWindow->show();
-					mGuiWindow->makeActive();
 				}
 				else
 				{
 					mGuiWindow->hide();
-					
 					mRenderWindow->show();
-					mRenderWindow->makeActive();
 				}
 			}
 

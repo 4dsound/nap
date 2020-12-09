@@ -84,7 +84,7 @@ namespace nap
 		RenderService*			mRenderService = nullptr;		///< Render Service that handles render calls
 		SceneService*			mSceneService = nullptr;		///< Manages all the objects in the scene
 		InputService*			mInputService = nullptr;		///< Input service for processing input
-		IMGui2Service*			mGuiService = nullptr;			///< Manages GUI related update / draw calls
+		IMGuiService*			mGuiService = nullptr;			///< Manages GUI related update / draw calls
 		ParameterService*       mParameterService = nullptr;
 		ObjectPtr<RenderWindow> mGuiWindow;						///< Pointer to the gui window
 		bool                    mGuiWindowIsVisible = true;     ///< Is the GUI window visible?
