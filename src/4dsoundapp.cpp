@@ -80,6 +80,8 @@ namespace nap
 //		if (!error.check(monitor_render_target != nullptr, "unable to find ImGui2RenderTarget for render window"))
 //			return false;
 //
+
+		mMonitorStyle.setupAppearance(&ImGui::GetStyle());
 //		mMonitorStyle.setupAppearance(&gui_render_target->getStyle());
 //		mMonitorStyle.setupAppearance(&monitor_render_target->getStyle());
 //
@@ -114,10 +116,8 @@ namespace nap
         mInputService->processWindowEvents(*mRenderWindow, input_router, { &mScene->getRootEntity() });
 
 		mGuiService->selectWindow(mRenderWindow);
-//		ImGui::Begin("TEst");
-//		ImGui::Text("yo");
-//		ImGui::End();
 		mMonitorOverlayGui->update(*mSpatialService, *mScene);
+		mMonitorOverlayGui->draw(*mSpatialService, *mScene, *mMonitorGui, ImVec2(mRenderWindow->getWidth(), mRenderWindow->getHeight()));
 
 		mGuiService->selectWindow(mGuiWindow);
 		mMonitorGui->update(*mSpatialService, *mScene, glm::vec2(mGuiWindow->getWidth(), mGuiWindow->getHeight()));
