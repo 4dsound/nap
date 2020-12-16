@@ -1,10 +1,16 @@
 #version 150 core
 
-uniform mat4 projectionMatrix;
-uniform mat4 viewMatrix;
-uniform mat4 modelMatrix;
+// NAP uniform buffer objects, contains all the matrices
+uniform nap
+{
+	uniform mat4 projectionMatrix;
+	uniform mat4 viewMatrix;
+	uniform mat4 modelMatrix;
+} mvp;
 
-uniform float u_scale;
+uniform UBOVert {
+	uniform float u_scale;
+} ubovert;
 
 in vec3	in_Position;
 in vec3	in_Normal;
@@ -14,8 +20,8 @@ out vec3 pass_Normal;
 
 void main(void)
 {
-	pass_Position = (modelMatrix * vec4(in_Position * u_scale, 1.0)).xyz;
-	pass_Normal = normalize(modelMatrix * vec4(in_Normal, 0.0)).xyz;
+	pass_Position = (mvp.modelMatrix * vec4(in_Position * ubovert.u_scale, 1.0)).xyz;
+	pass_Normal = normalize(mvp.modelMatrix * vec4(in_Normal, 0.0)).xyz;
 	
-    gl_Position = projectionMatrix * viewMatrix * vec4(pass_Position, 1.0);
+    gl_Position = mvp.projectionMatrix * mvp.viewMatrix * vec4(pass_Position, 1.0);
 }

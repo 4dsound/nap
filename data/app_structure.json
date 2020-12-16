@@ -91,18 +91,6 @@
                         },
                         "UniformScale": 1.0
                     }
-                },
-                {
-                    "Type": "nap::spatial::LevelMeterViewComponent",
-                    "mID": "nap::spatial::LevelMeterViewComponent",
-                    "MaterialInstance": {
-                        "Material": "BillboardMaterial",
-                        "Uniforms": [],
-                        "BlendMode": "NotSet",
-                        "DepthMode": "NotSet"
-                    },
-                    "Mesh": "LevelMeterMesh",
-                    "VerticalOffset": 0.20000000298023225
                 }
             ],
             "Children": []
@@ -1695,22 +1683,29 @@
                         "Material": "LineMaterial",
                         "Uniforms": [
                             {
-                                "Type": "nap::UniformFloat",
-                                "mID": "UniformFloat_9",
-                                "Name": "useColorFromUniform",
-                                "Value": 1.0
-                            },
-                            {
-                                "Type": "nap::UniformVec4",
-                                "mID": "UniformVec4_5",
-                                "Name": "color",
-                                "Value": {
-                                    "x": 1.0,
-                                    "y": 0.0,
-                                    "z": 0.0,
-                                    "w": 1.0,
-                                    "a": 1.0
-                                }
+                                "Type": "nap::UniformStruct",
+                                "mID": "UBO_ShapeDisplacement",
+                                "Name": "UBO",
+                                "Uniforms": [
+                                    {
+                                        "Type": "nap::UniformFloat",
+                                        "mID": "UniformFloat_9",
+                                        "Name": "useColorFromUniform",
+                                        "Value": 1.0
+                                    },
+                                    {
+                                        "Type": "nap::UniformVec4",
+                                        "mID": "UniformVec4_5",
+                                        "Name": "color",
+                                        "Value": {
+                                            "x": 1.0,
+                                            "y": 0.0,
+                                            "z": 0.0,
+                                            "w": 1.0,
+                                            "a": 1.0
+                                        }
+                                    }
+                                ]
                             }
                         ],
                         "BlendMode": "NotSet",
@@ -2017,52 +2012,6 @@
                     "Orientation": "Center"
                 },
                 {
-                    "Type": "nap::spatial::SpeakerVisualizationComponent",
-                    "mID": "nap::spatial::SpeakerVisualizationComponent",
-                    "Mesh": "",
-                    "MaterialInstance": {
-                        "Material": "SpeakerMaterial",
-                        "Uniforms": [],
-                        "BlendMode": "NotSet",
-                        "DepthMode": "NotSet"
-                    },
-                    "ClipRect": {
-                        "Min": {
-                            "x": 0.0,
-                            "y": 0.0
-                        },
-                        "Max": {
-                            "x": 0.0,
-                            "y": 0.0
-                        }
-                    },
-                    "SpeakerSetups": [
-                        "headphonesSetup",
-                        "multiSetup"
-                    ],
-                    "SpeakerTypes": [
-                        {
-                            "Type": "nap::spatial::SpeakerVisualization_SpeakerType",
-                            "mID": "nap::spatial::SpeakerVisualization_SpeakerType",
-                            "Name": "satellite",
-                            "Entity": "monitorSpeakerOmni"
-                        },
-                        {
-                            "Type": "nap::spatial::SpeakerVisualization_SpeakerType",
-                            "mID": "nap::spatial::SpeakerVisualization_SpeakerType_2",
-                            "Name": "sub",
-                            "Entity": "monitorSpeakerOmni"
-                        },
-                        {
-                            "Type": "nap::spatial::SpeakerVisualization_SpeakerType",
-                            "mID": "nap::spatial::SpeakerVisualization_SpeakerType_3",
-                            "Name": "sidefill",
-                            "Entity": "monitorSpeakerOmni"
-                        }
-                    ],
-                    "LevelMeter": ""
-                },
-                {
                     "Type": "nap::TransformComponent",
                     "mID": "nap::TransformComponent_2",
                     "Properties": {
@@ -2311,41 +2260,26 @@
         },
         {
             "Type": "nap::Material",
-            "mID": "BillboardMaterial",
-            "Uniforms": [
-                {
-                    "Type": "nap::UniformFloat",
-                    "mID": "UniformFloat",
-                    "Name": "value",
-                    "Value": 1.0
-                },
-                {
-                    "Type": "nap::UniformFloat",
-                    "mID": "UniformFloat_2",
-                    "Name": "scaleX",
-                    "Value": 0.029999999329447748
-                }
-            ],
-            "Shader": "BillboardShader",
-            "VertexAttributeBindings": [],
-            "BlendMode": "Opaque",
-            "DepthMode": "InheritFromBlendMode"
-        },
-        {
-            "Type": "nap::Material",
             "mID": "FontMaterial",
             "Uniforms": [
                 {
-                    "Type": "nap::UniformVec4",
-                    "mID": "UniformVec4",
-                    "Name": "textColor",
-                    "Value": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0,
-                        "w": 0.8587999939918518,
-                        "a": 0.8587999939918518
-                    }
+                    "Type": "nap::UniformStruct",
+                    "mID": "FontMaterialUBO",
+                    "Name": "UBO",
+                    "Uniforms": [
+                        {
+                            "Type": "nap::UniformVec4",
+                            "mID": "UniformVec4",
+                            "Name": "textColor",
+                            "Value": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0,
+                                "w": 0.8587999939918518,
+                                "a": 0.8587999939918518
+                            }
+                        }
+                    ]
                 }
             ],
             "Shader": "FontShader",
@@ -2358,16 +2292,23 @@
             "mID": "LineMaterial",
             "Uniforms": [
                 {
-                    "Type": "nap::UniformVec4",
-                    "mID": "UniformVec4_4",
-                    "Name": "color",
-                    "Value": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0,
-                        "w": 1.0,
-                        "a": 1.0
-                    }
+                    "Type": "nap::UniformStruct",
+                    "mID": "LineMaterialUBO",
+                    "Name": "UBO",
+                    "Uniforms": [
+                        {
+                            "Type": "nap::UniformVec4",
+                            "mID": "UniformVec4_4",
+                            "Name": "color",
+                            "Value": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0,
+                                "w": 1.0,
+                                "a": 1.0
+                            }
+                        }
+                    ]
                 }
             ],
             "Shader": "LineShader",
@@ -2401,7 +2342,16 @@
         {
             "Type": "nap::Material",
             "mID": "MonitorSpeakerLitMaterial",
-            "Uniforms": [],
+            "Uniforms": [
+                {
+                    "Type": "nap::UniformStruct",
+                    "mID": "MonitorSpeakerLitMaterialUBO",
+                    "Name": "UBO",
+                    "Uniforms": [
+
+                    ]
+                }
+            ],
             "Shader": "MonitorSpeakerLitShader",
             "VertexAttributeBindings": [
                 {
@@ -2421,20 +2371,27 @@
             "mID": "ParticleMaterial",
             "Uniforms": [
                 {
-                    "Type": "nap::UniformVec3",
-                    "mID": "UniformVec3_2",
-                    "Name": "inCameraPosition",
-                    "Value": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 4.0
-                    }
-                },
-                {
-                    "Type": "nap::UniformFloat",
-                    "mID": "UniformFloat_7",
-                    "Name": "intensity",
-                    "Value": 0.0
+                    "Type": "nap::UniformStruct",
+                    "mID": "ParticleMaterialUBO",
+                    "Name": "UBO",
+                    "Uniforms": [
+                        {
+                            "Type": "nap::UniformVec3",
+                            "mID": "UniformVec3_2",
+                            "Name": "inCameraPosition",
+                            "Value": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 4.0
+                            }
+                        },
+                        {
+                            "Type": "nap::UniformFloat",
+                            "mID": "UniformFloat_7",
+                            "Name": "intensity",
+                            "Value": 0.0
+                        }
+                    ]
                 }
             ],
             "Shader": "ParticleShader",
@@ -2680,46 +2637,40 @@
             ]
         },
         {
-            "Type": "nap::Shader",
-            "mID": "BillboardShader",
-            "mVertShader": "shaders/monitor/billboard.vert",
-            "mFragShader": "shaders/monitor/billboard.frag"
-        },
-        {
-            "Type": "nap::Shader",
+            "Type": "nap::ShaderFromFile",
             "mID": "FontShader",
-            "mVertShader": "shaders/font.vert",
-            "mFragShader": "shaders/font.frag"
+            "VertShader": "shaders/font.vert",
+            "FragShader": "shaders/font.frag"
         },
         {
-            "Type": "nap::Shader",
+            "Type": "nap::ShaderFromFile",
             "mID": "GridShader",
-            "mVertShader": "shaders/monitor/grid.vert",
-            "mFragShader": "shaders/monitor/grid.frag"
+            "VertShader": "shaders/monitor/grid.vert",
+            "FragShader": "shaders/monitor/grid.frag"
         },
         {
-            "Type": "nap::Shader",
+            "Type": "nap::ShaderFromFile",
             "mID": "LineShader",
-            "mVertShader": "shaders/monitor/line.vert",
-            "mFragShader": "shaders/monitor/line.frag"
+            "VertShader": "shaders/monitor/line.vert",
+            "FragShader": "shaders/monitor/line.frag"
         },
         {
-            "Type": "nap::Shader",
+            "Type": "nap::ShaderFromFile",
             "mID": "MonitorSpeakerLitShader",
-            "mVertShader": "shaders/monitor/speaker-lit.vert",
-            "mFragShader": "shaders/monitor/speaker-lit.frag"
+            "VertShader": "shaders/monitor/speaker-lit.vert",
+            "FragShader": "shaders/monitor/speaker-lit.frag"
         },
         {
-            "Type": "nap::Shader",
+            "Type": "nap::ShaderFromFile",
             "mID": "ParticleShader",
-            "mVertShader": "shaders/monitor/particle.vert",
-            "mFragShader": "shaders/monitor/particle.frag"
+            "VertShader": "shaders/monitor/particle.vert",
+            "FragShader": "shaders/monitor/particle.frag"
         },
         {
-            "Type": "nap::Shader",
+            "Type": "nap::ShaderFromFile",
             "mID": "SpeakerShader",
-            "mVertShader": "shaders/monitor/speaker.vert",
-            "mFragShader": "shaders/monitor/speaker.frag"
+            "VertShader": "shaders/monitor/speaker.vert",
+            "FragShader": "shaders/monitor/speaker.frag"
         },
         {
             "Type": "nap::SphereMesh",

@@ -114,6 +114,9 @@ namespace nap
         mInputService->processWindowEvents(*mRenderWindow, input_router, { &mScene->getRootEntity() });
 
 		mGuiService->selectWindow(mRenderWindow);
+//		ImGui::Begin("TEst");
+//		ImGui::Text("yo");
+//		ImGui::End();
 		mMonitorOverlayGui->update(*mSpatialService, *mScene);
 
 		mGuiService->selectWindow(mGuiWindow);
@@ -125,6 +128,15 @@ namespace nap
 	void TheWorksApp::render()
 	{
 		mRenderService->beginFrame();
+
+		if (mRenderService->beginRecording(*mGuiWindow))
+		{
+			mGuiWindow->beginRendering();
+			mGuiService->draw();
+			mGuiWindow->endRendering();
+			mRenderService->endRecording();
+		}
+
 		if (mRenderService->beginRecording(*mRenderWindow))
 		{
 			// Begin render pass

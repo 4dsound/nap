@@ -1,6 +1,11 @@
 #version 330
 
-uniform vec4 textColor;
+// uniform buffer inputs
+uniform UBO
+{
+	uniform vec4 textColor;
+} ubo;
+
 uniform sampler2D glyph;
 
 in vec2 pass_uv;
@@ -11,5 +16,5 @@ void main()
 {
 	float alpha = texture(glyph, pass_uv.xy).r;
 
-	out_Color = vec4(textColor.rgb, textColor.a * alpha);
+	out_Color = vec4(ubo.textColor.rgb, ubo.textColor.a * alpha);
 }

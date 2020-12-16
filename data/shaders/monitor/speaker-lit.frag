@@ -1,9 +1,11 @@
 #version 150 core
 
-uniform vec4 u_color;
-
 in vec3 pass_Position;
 in vec3 pass_Normal;
+
+uniform UBO {
+	uniform vec4 u_color;
+} ubo;
 
 out vec4 out_Color;
 
@@ -43,7 +45,7 @@ void main()
 	// go from linear to gamma space
 	vec3 color = pow(totalLightIntensity, vec3(1.0 / 2.2));
 
-	color *= u_color.rgb;
+	color *= ubo.u_color.rgb;
 
 	out_Color = vec4(color, 1.0);
 }
