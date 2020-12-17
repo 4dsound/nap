@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 	nap::Core core;
 
 	// Create app runner
-	nap::AppRunner<nap::TheWorksApp, nap::GUIAppEventHandler> app_runner(core);
+	nap::AppRunner<nap::SpatialSoundApp, nap::GUIAppEventHandler> app_runner(core);
 	app_runner.getApp().setCommandLineArguments(argc, argv);
 
 	// Start

@@ -9,13 +9,12 @@
 #include <imguiservice.h>
 #include <sceneservice.h>
 #include <inputservice.h>
+#include <parameter.h>
 #include <parameterservice.h>
 #include <Spatial/Core/SpatialService.h>
-#include <Spatial/Monitor/MonitorGui.h>
-#include <Spatial/Monitor/MonitorOverlayGui.h>
-#include <Spatial/Monitor/MonitorStyle.h>
 #include <scene.h>
 #include <renderwindow.h>
+#include <perspcameracomponent.h>
 #include <entity.h>
 #include <app.h>
 
@@ -26,7 +25,7 @@ namespace nap
 	/**
 	 * Main application that is called from within the main loop
 	 */
-	class TheWorksApp : public App
+	class SpatialSoundApp : public App
 	{
 		RTTI_ENABLE(App)
 	public:
@@ -34,7 +33,7 @@ namespace nap
 		 * Constructor
 		 * @param core instance of the NAP core system
 		 */
-		TheWorksApp(nap::Core& core) : App(core) { }
+		SpatialSoundApp(nap::Core& core) : App(core) { }
 		
 		/**
 		 * Initialize all the services and app specific data structures
@@ -72,6 +71,11 @@ namespace nap
 		 */
 		virtual int shutdown() override;
 
+		/**
+		 * USed by the main function to pass the command line arguments.
+		 * @param count number of arguments
+		 * @param args arguments
+		 */
 		void setCommandLineArguments(int count, char* args[])
 		{
 		    for (auto i = 1; i < count; ++i)
@@ -90,12 +94,10 @@ namespace nap
 		bool                    mGuiWindowIsVisible = true;     ///< Is the GUI window visible?
 		ObjectPtr<RenderWindow> mRenderWindow;					///< Pointer to the render window
 		ObjectPtr<Scene>		mScene = nullptr;				///< Pointer to the main scene
-        ObjectPtr<EntityInstance>	mDefaultInputRouter;			//< Routes input events to the input component
-        spatial::SpatialService*	mSpatialService = nullptr;		///< Manages spatial sound objects and speaker outputs
-        std::unique_ptr<spatial::MonitorGui>        mMonitorGui = nullptr;
-		std::unique_ptr<spatial::MonitorOverlayGui>	mMonitorOverlayGui = nullptr;
-		spatial::MonitorStyle		mMonitorStyle;
-        std::vector<std::string> mCommandLineArgs;
+        ObjectPtr<EntityInstance> mDefaultInputRouter;			///< Routes input events to the input component
+		ObjectPtr<PerspCameraComponentInstance> mCamera = nullptr; ///< The monitor camera
+        spatial::SpatialService*	mSpatialService = nullptr;  ///< Spatial sound service
+        std::vector<std::string> mCommandLineArgs;				///< List with command line arguments
 
 		bool mCtrlKeyPressed = false; // Indicates wether the ctrl key is pressed
 	};

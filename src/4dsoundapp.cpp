@@ -4,7 +4,6 @@
 #include <utility/fileutils.h>
 #include <nap/logger.h>
 #include <inputrouter.h>
-#include <orthocameracomponent.h>
 #include <perspcameracomponent.h>
 #include <renderable2dtextcomponent.h>
 #include <rendercomponent.h>
@@ -12,10 +11,9 @@
 // Spatial includes.
 #include <Spatial/MultiSpeaker/MultiSpeakerSetup.h>
 #include <Spatial/Core/SpatialTypes.h>
-//#include <Spatial/Monitor/MonitorCameraComponent.h>
 #include <Spatial/Core/EnvironmentComponent.h>
 
-RTTI_BEGIN_CLASS_NO_DEFAULT_CONSTRUCTOR(nap::TheWorksApp)
+RTTI_BEGIN_CLASS_NO_DEFAULT_CONSTRUCTOR(nap::SpatialSoundApp)
 RTTI_CONSTRUCTOR(nap::Core&)
 RTTI_END_CLASS
 
@@ -25,7 +23,7 @@ namespace nap
      * Initialize all the resources and instances used for drawing
      * slowly migrating all functionality to NAP
      */
-    bool TheWorksApp::init(utility::ErrorState& error)
+    bool SpatialSoundApp::init(utility::ErrorState& error)
     {
         // Retrieve services
         mRenderService	= getCore().getService<nap::RenderService>();
@@ -63,39 +61,13 @@ namespace nap
         mScene = mResourceManager->findObject<Scene>("Scene");
         if (!error.check(mScene != nullptr, "unable to find scene with name: %s", "Scene"))
             return false;
-        
-        // Get the default input router
+
+		// Find the camera
+		auto cameraEntity = mScene->findEntity("camera");
+		mCamera = cameraEntity->findComponent<nap::PerspCameraComponentInstance>();
+
+		// Get the default input router
         mDefaultInputRouter = mScene->findEntity("DefaultInputRouterEntity");
-
-//		// Setup ImGui render windows
-//		mGuiService->registerWindowForRendering(mGuiWindow);
-//		mGuiService->registerWindowForRendering(mRenderWindow);
-//
-//		// Setup ImGui appearance
-//		ImGui2RenderTarget * gui_render_target = mGuiService->getRenderTargetForWindow(mGuiWindow);
-//		if (!error.check(gui_render_target != nullptr, "unable to find ImGui2RenderTarget for Gui window"))
-//			return false;
-//
-//		ImGui2RenderTarget * monitor_render_target = mGuiService->getRenderTargetForWindow(mRenderWindow);
-//		if (!error.check(monitor_render_target != nullptr, "unable to find ImGui2RenderTarget for render window"))
-//			return false;
-//
-
-		mMonitorStyle.setupAppearance(&ImGui::GetStyle());
-//		mMonitorStyle.setupAppearance(&gui_render_target->getStyle());
-//		mMonitorStyle.setupAppearance(&monitor_render_target->getStyle());
-//
-//		auto gui_font = mResourceManager->findObject<Font>("GuiFont");
-//		if (gui_font != nullptr) {
-//			gui_render_target->setFont(gui_font);
-//			monitor_render_target->setFont(gui_font);
-//		}
-
-        // init monitor gui to load logo resource
-        mMonitorGui = std::make_unique<spatial::MonitorGui>();
-        mMonitorGui->init(mResourceManager, mSpatialService);
-        mMonitorOverlayGui = std::make_unique<spatial::MonitorOverlayGui>();
-        mMonitorOverlayGui->init(mResourceManager, *mParameterService);
 
         // Set the environment script to the command line argument (if any)
         auto globalEntity = mScene->findEntity("global");
@@ -109,23 +81,19 @@ namespace nap
     
     
     // Called when the window is updating
-    void TheWorksApp::update(double deltaTime)
+    void SpatialSoundApp::update(double deltaTime)
     {
         // Use a default input router to forward input events (recursively) to all input components in the default scene
         nap::DefaultInputRouter input_router(true);
         mInputService->processWindowEvents(*mRenderWindow, input_router, { &mScene->getRootEntity() });
 
 		mGuiService->selectWindow(mRenderWindow);
-		mMonitorOverlayGui->update(*mSpatialService, *mScene);
-		mMonitorOverlayGui->draw(*mSpatialService, *mScene, *mMonitorGui, ImVec2(mRenderWindow->getWidth(), mRenderWindow->getHeight()));
 
 		mGuiService->selectWindow(mGuiWindow);
-		mMonitorGui->update(*mSpatialService, *mScene, glm::vec2(mGuiWindow->getWidth(), mGuiWindow->getHeight()));
-		mMonitorGui->updateBlinking(deltaTime); // Updates the phase for the blinking of selected entity.
     }
 
 
-	void TheWorksApp::render()
+	void SpatialSoundApp::render()
 	{
 		mRenderService->beginFrame();
 
@@ -142,33 +110,6 @@ namespace nap
 			// Begin render pass
 			mRenderWindow->beginRendering();
 
-	        // Find the camera
-	        auto cameraEntity = mScene->findEntity("camera");
-	        nap::CameraComponentInstance* camera = nullptr;
-			camera = &cameraEntity->getComponent<nap::PerspCameraComponentInstance>();
-
-			if (mMonitorGui->getVisibility().showMonitor)
-			{
-				// Render the world with the right camera directly to screen
-				std::vector<RenderableComponentInstance*> renderableComponents;
-				mScene->getRootEntity().getComponentsOfTypeRecursive(renderableComponents);
-
-				// Fetch 2d renderable components, and subtract them from the list of 3d components, to avoid errors.
-				{
-					std::vector<Renderable2DTextComponentInstance*> renderable2DTextComponents;
-					mScene->getRootEntity().getComponentsOfTypeRecursive(renderable2DTextComponents);
-					for (auto comp : renderable2DTextComponents)
-					{
-						auto i = std::find(renderableComponents.begin(), renderableComponents.end(), comp);
-						if (i != renderableComponents.end())
-							renderableComponents.erase(i);
-					}
-				}
-
-				// Draw the remaining 3d components.
-				mRenderService->renderObjects(*mRenderWindow, *camera, renderableComponents);
-			}
-
 			// Render GUI elements
 			mGuiService->draw();
 
@@ -183,85 +124,14 @@ namespace nap
 		mRenderService->endFrame();
 	}
     
-    
-    // Called when the window is going to render
-//    void TheWorksApp::render()
-//    {
-//        // Destroy old GL context related resources scheduled for destruction
-//        mRenderService->destroyGLContextResources({ mRenderWindow.get() });
-//
-//        // Prep render window for drawing
-//        mRenderWindow->makeActive();
-//
-//        // Clear back-buffer
-//        mRenderService->clearRenderTarget(mRenderWindow->getBackbuffer());
-//
-//        // Find the camera
-//        auto cameraEntity = mScene->findEntity("camera");
-//        nap::CameraComponentInstance* camera = nullptr;
-//        if (cameraEntity->hasComponent<nap::PerspCameraComponentInstance>())
-//            camera = &cameraEntity->getComponent<nap::PerspCameraComponentInstance>();
-//        else
-//            camera = &cameraEntity->getComponent<nap::spatial::MonitorCameraComponentInstance>();
-//
-//
-//		// Render monitor
-//		if (mMonitorGui->getVisibility().showMonitor)
-//		{
-//			// Render the world with the right camera directly to screen
-//			std::vector<RenderableComponentInstance*> renderableComponents;
-//			mScene->getRootEntity().getComponentsOfTypeRecursive(renderableComponents);
-//
-//			// Fetch 2d renderable components, and subtract them from the list of 3d components, to avoid errors.
-//			{
-//				std::vector<Renderable2DTextComponentInstance*> renderable2DTextComponents;
-//				mScene->getRootEntity().getComponentsOfTypeRecursive(renderable2DTextComponents);
-//				for (auto comp : renderable2DTextComponents)
-//				{
-//					auto i = std::find(renderableComponents.begin(), renderableComponents.end(), comp);
-//					if (i != renderableComponents.end())
-//						renderableComponents.erase(i);
-//				}
-//			}
-//
-//			// Draw the remaining 3d components.
-//			mRenderService->renderObjects(mRenderWindow->getBackbuffer(), *camera, renderableComponents);
-//		}
-//
-//		// Draw text overlay.
-//		auto monitorEntity = mScene->findEntity("monitor");
-//		if (monitorEntity != nullptr && mMonitorGui->getVisibility().showMonitor)
-//		{
-//			Renderable2DTextComponentInstance * textComp = monitorEntity->findComponentByID<Renderable2DTextComponentInstance>("monitorTextOverlayComponent");
-//			mMonitorGui->drawTextOverlay(*mSpatialService, mRenderWindow.get(), textComp);
-//		}
-//
-//		{
-//			mGuiService->makeWindowActive(mRenderWindow);
-//			mMonitorOverlayGui->draw(*mSpatialService, *mScene, *mMonitorGui, ImVec2(mRenderWindow->getWidth(), mRenderWindow->getHeight()));
-//			mGuiService->renderWindow(mRenderWindow);
-//		}
-//
-//        // Swap screen buffers
-//        mRenderWindow->swap();
-//
-//
-//        // Draw our gui
-//		mRenderService->destroyGLContextResources({ mGuiWindow.get() });
-//		mGuiWindow->makeActive();
-//		mRenderService->clearRenderTarget(mGuiWindow->getBackbuffer());
-//
-//		mGuiWindow->swap();
-//    }
-//
-    
-    void TheWorksApp::windowMessageReceived(WindowEventPtr windowEvent)
+
+    void SpatialSoundApp::windowMessageReceived(WindowEventPtr windowEvent)
     {
         mRenderService->addEvent(std::move(windowEvent));
     }
     
     
-    void TheWorksApp::inputMessageReceived(InputEventPtr inputEvent)
+    void SpatialSoundApp::inputMessageReceived(InputEventPtr inputEvent)
     {
 		if (inputEvent->get_type().is_derived_from(RTTI_OF(nap::KeyPressEvent)))
 		{
@@ -302,7 +172,7 @@ namespace nap
     }
     
     
-    int TheWorksApp::shutdown()
+    int SpatialSoundApp::shutdown()
     {
         utility::ErrorState errorState;
         if (!getCore().writeConfigFile(errorState))
