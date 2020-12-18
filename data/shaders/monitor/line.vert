@@ -23,5 +23,6 @@ void main(void)
 {
     gl_Position = mvp.projectionMatrix * mvp.viewMatrix * mvp.modelMatrix * vec4(in_Position, 1.0);
 
-    pass_Color = ubovert.useColorFromUniform != 0.0 ? ubovert.color : in_Color0;
+//    pass_Color = ubovert.useColorFromUniform != 0.0 ? ubovert.color : in_Color0;
+    pass_Color = in_Color0;
 }

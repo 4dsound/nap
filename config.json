@@ -104,11 +104,6 @@
             "Active": false,
             "MasterVolume": -48.0,
             "MasterSettings": []
-        },
-        {
-            "Type": "nap::spatial::SpatialGuiServiceConfiguration",
-            "mID": "nap::spatial::SpatialGuiServiceConfiguration",
-            "RenderMonitor": true
         }
     ]
 }

@@ -39,11 +39,9 @@ namespace nap
         // Fetch the scene
         mScene = mResourceManager->findObject<Scene>("Scene");
         
-        // Convert our path and load resources from file
-        auto abspath = utility::getAbsolutePath("app_structure.json");
-        if (!mResourceManager->loadFile(abspath, error))
+        // load resources from file
+        if (!mResourceManager->loadFile(mFileName, error))
             return false;
-		
 		
 		// Get the gui window and make sure it's visible by moving it to the left of the screen
 		mGuiWindow = mResourceManager->findObject<nap::RenderWindow>("GuiWindow");
@@ -66,8 +64,11 @@ namespace nap
 		auto cameraEntity = mScene->findEntity("camera");
 		mCamera = cameraEntity->findComponent<nap::PerspCameraComponentInstance>();
 
-		// Get the default input router
-        mDefaultInputRouter = mScene->findEntity("DefaultInputRouterEntity");
+		auto monitorGridEntity = mScene->findEntity("monitorGrid");
+		mMonitorGrid = monitorGridEntity->findComponent<RenderableComponentInstance>();
+
+		auto axesHelperEntity = mScene->findEntity("AxesHelper");
+		mAxesHelper = axesHelperEntity->findComponent<RenderableComponentInstance>();
 
         // Set the environment script to the command line argument (if any)
         auto globalEntity = mScene->findEntity("global");
@@ -109,6 +110,17 @@ namespace nap
 		{
 			// Begin render pass
 			mRenderWindow->beginRendering();
+
+			std::vector<nap::RenderableComponentInstance*> components_to_render;
+			for (auto& entity : mScene->getRootEntity().getChildren())
+			{
+				auto comp = entity->findComponent<RenderableComponentInstance>();
+				if (comp != nullptr)
+					components_to_render.emplace_back(comp);
+			}
+
+			// Render the world with the right camera directly to screen
+			mRenderService->renderObjects(*mRenderWindow, *mCamera, components_to_render);
 
 			// Render GUI elements
 			mGuiService->draw();

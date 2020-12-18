@@ -16,6 +16,7 @@
 #include <renderwindow.h>
 #include <perspcameracomponent.h>
 #include <entity.h>
+#include <rendercomponent.h>
 #include <app.h>
 
 namespace nap
@@ -84,7 +85,7 @@ namespace nap
 
 	private:
 		ResourceManager*		mResourceManager = nullptr;		///< Manages all the loaded data
-		std::string				mFilename = "";					///< The JSON file that is loaded on initialization
+		std::string				mFileName = "app_structure.json"; ///< The JSON file that is loaded on initialization
 		RenderService*			mRenderService = nullptr;		///< Render Service that handles render calls
 		SceneService*			mSceneService = nullptr;		///< Manages all the objects in the scene
 		InputService*			mInputService = nullptr;		///< Input service for processing input
@@ -94,10 +95,12 @@ namespace nap
 		bool                    mGuiWindowIsVisible = true;     ///< Is the GUI window visible?
 		ObjectPtr<RenderWindow> mRenderWindow;					///< Pointer to the render window
 		ObjectPtr<Scene>		mScene = nullptr;				///< Pointer to the main scene
-        ObjectPtr<EntityInstance> mDefaultInputRouter;			///< Routes input events to the input component
 		ObjectPtr<PerspCameraComponentInstance> mCamera = nullptr; ///< The monitor camera
-        spatial::SpatialService*	mSpatialService = nullptr;  ///< Spatial sound service
+        spatial::SpatialService* mSpatialService = nullptr;  ///< Spatial sound service
         std::vector<std::string> mCommandLineArgs;				///< List with command line arguments
+
+		ObjectPtr<RenderableComponentInstance> mMonitorGrid = nullptr;
+		ObjectPtr<RenderableComponentInstance> mAxesHelper = nullptr;
 
 		bool mCtrlKeyPressed = false; // Indicates wether the ctrl key is pressed
 	};
