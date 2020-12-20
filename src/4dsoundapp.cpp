@@ -19,6 +19,15 @@ RTTI_END_CLASS
 
 namespace nap
 {
+
+	static void getRenderableComponentsRecursive(EntityInstance& entity, std::vector<RenderableComponentInstance*>& components)
+	{
+		entity.getComponentsOfType<RenderableComponentInstance>(components);
+		for (auto& entity : entity.getChildren())
+			getRenderableComponentsRecursive(*entity, components);
+	}
+
+
     /**
      * Initialize all the resources and instances used for drawing
      * slowly migrating all functionality to NAP
@@ -111,16 +120,11 @@ namespace nap
 			// Begin render pass
 			mRenderWindow->beginRendering();
 
-			std::vector<nap::RenderableComponentInstance*> components_to_render;
-			for (auto& entity : mScene->getRootEntity().getChildren())
-			{
-				auto comp = entity->findComponent<RenderableComponentInstance>();
-				if (comp != nullptr)
-					components_to_render.emplace_back(comp);
-			}
+			std::vector<nap::RenderableComponentInstance*> renderableComponents;
+			getRenderableComponentsRecursive(mScene->getRootEntity(), renderableComponents);
 
 			// Render the world with the right camera directly to screen
-			mRenderService->renderObjects(*mRenderWindow, *mCamera, components_to_render);
+			mRenderService->renderObjects(*mRenderWindow, *mCamera, renderableComponents);
 
 			// Render GUI elements
 			mGuiService->draw();
