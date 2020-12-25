@@ -326,7 +326,17 @@
                 {
                     "Type": "nap::spatial::SpatialAudioComponent",
                     "mID": "SpatialAudioComponent",
-                    "Sources": [],
+                    "Sources": [
+                        {
+                            "Type": "nap::spatial::ExternalInputSource",
+                            "mID": "ExternalInputSource_356ef5a2",
+                            "EnableParameterName": "enable",
+                            "Enabled": true,
+                            "Prefix": "",
+                            "StartChannel": 0,
+                            "InputChannelCount": 1
+                        }
+                    ],
                     "Receives": [],
                     "InputEffects": [
                         {
