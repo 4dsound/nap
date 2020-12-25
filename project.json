@@ -8,6 +8,7 @@
     "mod_napaudio",
     "mod_napaudioadvanced",
     "mod_spatialmonitor",
+    "mod_spatialgui",
     "mod_nappython",
     "mod_naposc",
     "mod_naprender",

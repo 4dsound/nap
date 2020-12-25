@@ -1,5 +1,10 @@
 #pragma once
 
+// Spatial includes
+#include <Spatial/Monitor/TextOverlayController.h>
+#include <Spatial/Gui/AudioDeviceSettingsGui.h>
+#include <Spatial/Gui/MultiSpeakerSetupGui.h>
+
 // Core includes
 #include <nap/resourcemanager.h>
 #include <nap/resourceptr.h>
@@ -95,13 +100,15 @@ namespace nap
 		bool                    mGuiWindowIsVisible = true;     ///< Is the GUI window visible?
 		ObjectPtr<RenderWindow> mRenderWindow;					///< Pointer to the render window
 		ObjectPtr<Scene>		mScene = nullptr;				///< Pointer to the main scene
+		ObjectPtr<spatial::TextOverlayControllerInstance> mTextOverlayController = nullptr;
 		ObjectPtr<PerspCameraComponentInstance> mCamera = nullptr; ///< The monitor camera
+
         spatial::SpatialService* mSpatialService = nullptr;  ///< Spatial sound service
         std::vector<std::string> mCommandLineArgs;				///< List with command line arguments
 
-		ObjectPtr<RenderableComponentInstance> mMonitorGrid = nullptr;
-		ObjectPtr<RenderableComponentInstance> mAxesHelper = nullptr;
-
 		bool mCtrlKeyPressed = false; // Indicates wether the ctrl key is pressed
+
+		std::unique_ptr<audio::AudioDeviceSettingsGui> mAudioDeviceSettingsGui = nullptr;
+		std::unique_ptr<spatial::MultiSpeakerSetupGui> mMultiSpeakerSetupGui = nullptr;
 	};
 }

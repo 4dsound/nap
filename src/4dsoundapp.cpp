@@ -12,6 +12,8 @@
 #include <Spatial/MultiSpeaker/MultiSpeakerSetup.h>
 #include <Spatial/Core/SpatialTypes.h>
 #include <Spatial/Core/EnvironmentComponent.h>
+#include <Spatial/Gui/ImGuiExtensions.h>
+#include <audio/utility/audiofunctions.h>
 
 RTTI_BEGIN_CLASS_NO_DEFAULT_CONSTRUCTOR(nap::SpatialSoundApp)
 RTTI_CONSTRUCTOR(nap::Core&)
@@ -22,7 +24,11 @@ namespace nap
 
 	static void getRenderableComponentsRecursive(EntityInstance& entity, std::vector<RenderableComponentInstance*>& components)
 	{
-		entity.getComponentsOfType<RenderableComponentInstance>(components);
+		std::vector<RenderableComponentInstance*> locals;
+		entity.getComponentsOfType<RenderableComponentInstance>(locals);
+		for (auto& comp : locals)
+			if (comp->get_type() != RTTI_OF(Renderable2DTextComponentInstance))
+				components.emplace_back(comp);
 		for (auto& entity : entity.getChildren())
 			getRenderableComponentsRecursive(*entity, components);
 	}
@@ -71,20 +77,33 @@ namespace nap
 
 		// Find the camera
 		auto cameraEntity = mScene->findEntity("camera");
+		if (!error.check(cameraEntity != nullptr, "unable to find camera"))
+			return false;
 		mCamera = cameraEntity->findComponent<nap::PerspCameraComponentInstance>();
+		if (!error.check(mCamera != nullptr, "unable to find camera"))
+			return false;
 
-		auto monitorGridEntity = mScene->findEntity("monitorGrid");
-		mMonitorGrid = monitorGridEntity->findComponent<RenderableComponentInstance>();
+		auto textOverlayEntity = mScene->findEntity("MonitorTextOverlay");
+		if (!error.check(textOverlayEntity != nullptr, "unable to find monitor text overlay"))
+			return false;
+		mTextOverlayController = textOverlayEntity->findComponent<nap::spatial::TextOverlayControllerInstance>();
+		if (!error.check(mTextOverlayController != nullptr, "unable to find text overlay"))
+			return false;
 
-		auto axesHelperEntity = mScene->findEntity("AxesHelper");
-		mAxesHelper = axesHelperEntity->findComponent<RenderableComponentInstance>();
+		auto renderableTextComponent = textOverlayEntity->findComponent<Renderable2DTextComponentInstance>();
+		if (!error.check(renderableTextComponent != nullptr, "unable to find text overlay"))
+			return false;
 
         // Set the environment script to the command line argument (if any)
         auto globalEntity = mScene->findEntity("global");
         auto environmentComponent = globalEntity->findComponent<spatial::EnvironmentComponentInstance>();
         if (!mCommandLineArgs.empty())
             environmentComponent->setScriptPath(mCommandLineArgs[0]);
-        
+
+		auto multiSpeakerSetup = mResourceManager->findObject<spatial::MultiSpeakerSetup>("multiSetup");
+		mAudioDeviceSettingsGui = std::make_unique<audio::AudioDeviceSettingsGui>(mSpatialService->getAudioService());
+		mMultiSpeakerSetupGui = std::make_unique<spatial::MultiSpeakerSetupGui>(multiSpeakerSetup.get());
+
         // All done!
         return true;
     }
@@ -98,8 +117,37 @@ namespace nap
         mInputService->processWindowEvents(*mRenderWindow, input_router, { &mScene->getRootEntity() });
 
 		mGuiService->selectWindow(mRenderWindow);
+		ImGui::Begin("Info");
+		ImGui::Text(utility::stringFormat("Framerate: %.02f", getCore().getFramerate()).c_str());
+		ImGui::End();
 
 		mGuiService->selectWindow(mGuiWindow);
+		mAudioDeviceSettingsGui->drawGui();
+
+		ImGui::NewLine();
+
+		// Input VU meters.
+		if (mSpatialService->getAudioService().isOpened())
+		{
+			int fullRowCount = int(mSpatialService->getInputChannelCount() / 16);
+			int channelOffset = 0;
+			for (auto row = 0; row <= fullRowCount; ++row)
+			{
+				for (auto channel = 0; channel < (row == fullRowCount ? mSpatialService->getInputChannelCount() % 16 : 16); ++channel)
+				{
+					auto label = std::to_string(channelOffset + channel + 1);
+					// draw level meter
+					auto dbLevel = audio::toDB(mSpatialService->getInputLevel(channelOffset + channel));
+					if (channel > 0) ImGui::SameLine();
+					ImGui::VUMeter(ImVec2(15.f, 50.f), dbLevel, -48.f, 0.f, false, false, 0.f, label);
+				}
+				channelOffset += 16;
+			}
+		}
+
+		ImGui::NewLine();
+
+		mMultiSpeakerSetupGui->draw();
     }
 
 
@@ -125,6 +173,9 @@ namespace nap
 
 			// Render the world with the right camera directly to screen
 			mRenderService->renderObjects(*mRenderWindow, *mCamera, renderableComponents);
+
+			// Render the text overlay
+			mTextOverlayController->draw(*mRenderWindow, *mCamera);
 
 			// Render GUI elements
 			mGuiService->draw();

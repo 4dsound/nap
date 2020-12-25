@@ -62,7 +62,7 @@
                 {
                     "Type": "nap::RenderableMeshComponent",
                     "mID": "nap::RenderableMeshComponent_c804222e",
-                    "Visible": true,
+                    "Visible": false,
                     "Mesh": "AxesHelperMesh",
                     "MaterialInstance": {
                         "Material": "LineMaterial",
@@ -82,6 +82,216 @@
                             "y": 0.0
                         }
                     }
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Type": "nap::Entity",
+            "mID": "MonitorFloorGrid",
+            "Components": [
+                {
+                    "Type": "nap::TransformComponent",
+                    "mID": "nap::TransformComponent_9c7b7e4d",
+                    "Properties": {
+                        "Translate": {
+                            "x": 0.0,
+                            "y": -0.0010000000474974514,
+                            "z": 0.0
+                        },
+                        "Rotate": {
+                            "x": 90.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "UniformScale": 10.0
+                    }
+                },
+                {
+                    "Type": "nap::RenderableMeshComponent",
+                    "mID": "nap::RenderableMeshComponent_6ee64499",
+                    "Visible": true,
+                    "Mesh": "LinePlaneMesh_2baa8e75",
+                    "MaterialInstance": {
+                        "Material": "ConstantMaterial",
+                        "Uniforms": [
+                            {
+                                "Type": "nap::UniformStruct",
+                                "mID": "UniformStruct_7af06cfc",
+                                "Name": "UBO",
+                                "Uniforms": [
+                                    {
+                                        "Type": "nap::UniformVec3",
+                                        "mID": "UniformVec3_ff0132d3",
+                                        "Name": "color",
+                                        "Value": {
+                                            "x": 0.30000001192092898,
+                                            "y": 0.30000001192092898,
+                                            "z": 0.30000001192092898
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "Samplers": [],
+                        "BlendMode": "NotSet",
+                        "DepthMode": "NotSet"
+                    },
+                    "LineWidth": 1.0,
+                    "ClipRect": {
+                        "Min": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Max": {
+                            "x": 0.0,
+                            "y": 0.0
+                        }
+                    }
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Type": "nap::Entity",
+            "mID": "MonitorTextOverlay",
+            "Components": [
+                {
+                    "Type": "nap::TransformComponent",
+                    "mID": "nap::TransformComponent_4f14ec7d",
+                    "Properties": {
+                        "Translate": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Rotate": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "UniformScale": 1.0
+                    }
+                },
+                {
+                    "Type": "nap::Renderable2DTextComponent",
+                    "mID": "nap::Renderable2DTextComponent_050a1e55",
+                    "Visible": true,
+                    "Text": "",
+                    "Font": "Font",
+                    "TextColor": {
+                        "Values": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "Location": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "Orientation": "Left",
+                    "DepthMode": "NoReadWrite",
+                    "IgnoreTransform": true
+                },
+                {
+                    "Type": "nap::spatial::TextOverlayController",
+                    "mID": "nap::spatial::TextOverlayController_01e4425f",
+                    "Renderable2DTextComponent": "./nap::Renderable2DTextComponent_050a1e55"
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Type": "nap::Entity",
+            "mID": "SatellitesVisualization",
+            "Components": [
+                {
+                    "Type": "nap::TransformComponent",
+                    "mID": "nap::TransformComponent_5de52abf",
+                    "Properties": {
+                        "Translate": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Rotate": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "UniformScale": 1.0
+                    }
+                },
+                {
+                    "Type": "nap::spatial::RenderableMeshCopyComponent",
+                    "mID": "nap::spatial::RenderableMeshCopyComponent_22059036",
+                    "Visible": true,
+                    "MaterialInstance": {
+                        "Material": "SolidMaterial",
+                        "Uniforms": [
+                            {
+                                "Type": "nap::UniformStruct",
+                                "mID": "UniformStruct_b8ec31ad",
+                                "Name": "UBO",
+                                "Uniforms": [
+                                    {
+                                        "Type": "nap::UniformVec3",
+                                        "mID": "UniformVec3_fbd9f72c",
+                                        "Name": "color",
+                                        "Value": {
+                                            "x": 0.699999988079071,
+                                            "y": 0.699999988079071,
+                                            "z": 0.699999988079071
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "Samplers": [],
+                        "BlendMode": "NotSet",
+                        "DepthMode": "NotSet"
+                    },
+                    "Mesh": "BoxMesh",
+                    "UBO": "UBO",
+                    "UBOVert": "UBOVert",
+                    "TranformComponent": "./nap::TransformComponent_5de52abf",
+                    "Positions": [],
+                    "Scales": [
+                        {
+                            "x": 0.05000000074505806,
+                            "y": 0.15000000596046449,
+                            "z": 0.05000000074505806
+                        }
+                    ],
+                    "Rotations": [],
+                    "UniformFloatValues": [],
+                    "UniformVec3Values": []
+                },
+                {
+                    "Type": "nap::spatial::SpeakerGridVisualizationController",
+                    "mID": "nap::spatial::SpeakerGridVisualizationController_086322b7",
+                    "RenderableMeshCopyComponent": "./nap::spatial::RenderableMeshCopyComponent_22059036",
+                    "TextOverlayController": "../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
+                    "MultiSpeakerSetup": "multiSetup",
+                    "SpeakerType": "satellite",
+                    "ShowTextLabels": true,
+                    "LabelPrefix": ""
                 }
             ],
             "Children": []
@@ -1269,7 +1479,7 @@
                         }
                     ],
                     "MaxParticleCount": 64,
-                    "EnableEffects": false
+                    "EnableEffects": true
                 },
                 {
                     "Type": "nap::spatial::MeasurementComponent",
@@ -1610,37 +1820,81 @@
                 {
                     "Type": "nap::spatial::DisplaySettingsComponent",
                     "mID": "DisplaySettingsComponent",
-                    "ParameterComponent": "../ParameterComponent"
+                    "ParameterComponent": "../ParameterComponent",
+                    "Dimmed": false,
+                    "Selected": false
                 },
                 {
                     "Type": "nap::spatial::RenderableMeshCopyComponent",
                     "mID": "ParticleVisualization",
                     "Visible": true,
                     "MaterialInstance": {
-                        "Material": "ParticleMaterial",
-                        "Uniforms": [],
+                        "Material": "SolidMaterial",
+                        "Uniforms": [
+                            {
+                                "Type": "nap::UniformStruct",
+                                "mID": "UniformStruct_c7715f91",
+                                "Name": "UBO",
+                                "Uniforms": [
+                                    {
+                                        "Type": "nap::UniformFloat",
+                                        "mID": "UniformFloat_d7d414c6",
+                                        "Name": "alpha",
+                                        "Value": 1.0
+                                    }
+                                ]
+                            }
+                        ],
                         "Samplers": [],
-                        "BlendMode": "NotSet",
-                        "DepthMode": "NotSet"
+                        "BlendMode": "Opaque",
+                        "DepthMode": "InheritFromBlendMode"
                     },
                     "Mesh": "SphereMesh",
                     "UBO": "UBO",
-                    "TranformComponent": "./SoundObjectVisualizationTransform"
+                    "UBOVert": "UBOVert",
+                    "TranformComponent": "./SoundObjectVisualizationTransform",
+                    "Positions": [],
+                    "Scales": [
+                        {
+                            "x": 0.029999999329447748,
+                            "y": 0.029999999329447748,
+                            "z": 0.029999999329447748
+                        }
+                    ],
+                    "Rotations": [],
+                    "UniformFloatValues": [],
+                    "UniformVec3Values": []
                 },
                 {
                     "Type": "nap::spatial::ParticleVisualizationController",
                     "mID": "ParticleVisualizationController",
                     "RenderableMeshCopyComponent": "./ParticleVisualization",
+                    "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
                     "ExposedDataComponent": "../ExposedDataComponent",
                     "DataDependencies": [
                         "../MeasurementComponent",
                         "./DisplaySettingsComponent"
                     ],
                     "PositionData": "particlePositions",
-                    "ScaleData": "particleDimensions",
+                    "ScaleData": "",
                     "RotationData": "particleRotations",
                     "ColorData": "color",
-                    "ColorUniform": "color"
+                    "SelectedData": "selected",
+                    "DimmedData": "dimmed",
+                    "ColorUniform": "color",
+                    "ScaleUniform": "",
+                    "DimmedColor": {
+                        "x": 0.20000000298023225,
+                        "y": 0.20000000298023225,
+                        "z": 0.20000000298023225
+                    },
+                    "SelectedColor": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "BlinkFrequency": 1.0,
+                    "ShowLabels": false
                 },
                 {
                     "Type": "nap::TransformComponent",
@@ -1693,13 +1947,167 @@
                     "mID": "ShapeVisualizationController",
                     "RenderableMeshComponent": "./ShapeVisualization",
                     "SpatialTransformationComponent": "../SpatialTransformationComponent",
+                    "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
                     "ShapeComponent": "../ShapeComponent",
                     "TranfsormComponent": "./SoundObjectVisualizationTransform",
                     "ExposedDataComponent": "../ExposedDataComponent",
                     "DataDependencies": [
                         "./DisplaySettingsComponent"
                     ],
-                    "ReservedVertexCount": 16
+                    "ColorData": "color",
+                    "NameData": "displayName",
+                    "SelectedData": "selected",
+                    "DimmedData": "dimmed",
+                    "ColorUniform": "color",
+                    "DimmedColor": {
+                        "x": 0.20000000298023225,
+                        "y": 0.20000000298023225,
+                        "z": 0.20000000298023225
+                    },
+                    "SelectedColor": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "BlinkFrequency": 1.0,
+                    "ReservedVertexCount": 16,
+                    "ShowTextLabel": true
+                },
+                {
+                    "Type": "nap::spatial::RenderableMeshCopyComponent",
+                    "mID": "CloudVisualization",
+                    "Visible": true,
+                    "MaterialInstance": {
+                        "Material": "PointCloudMaterial",
+                        "Uniforms": [],
+                        "Samplers": [],
+                        "BlendMode": "NotSet",
+                        "DepthMode": "NotSet"
+                    },
+                    "Mesh": "PointCloudMesh",
+                    "UBO": "UBO",
+                    "UBOVert": "UBOVert",
+                    "TranformComponent": "./SoundObjectVisualizationTransform",
+                    "Positions": [],
+                    "Scales": [],
+                    "Rotations": [],
+                    "UniformFloatValues": [],
+                    "UniformVec3Values": []
+                },
+                {
+                    "Type": "nap::spatial::ParticleVisualizationController",
+                    "mID": "CloudVisualizationController",
+                    "RenderableMeshCopyComponent": "./CloudVisualization",
+                    "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
+                    "ExposedDataComponent": "../ExposedDataComponent",
+                    "DataDependencies": [
+                        "../MeasurementComponent",
+                        "./DisplaySettingsComponent"
+                    ],
+                    "PositionData": "particlePositions",
+                    "ScaleData": "particleDimensions",
+                    "RotationData": "particleRotations",
+                    "ColorData": "color",
+                    "SelectedData": "selected",
+                    "DimmedData": "dimmed",
+                    "ColorUniform": "color",
+                    "ScaleUniform": "scale",
+                    "DimmedColor": {
+                        "x": 0.20000000298023225,
+                        "y": 0.20000000298023225,
+                        "z": 0.20000000298023225
+                    },
+                    "SelectedColor": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "BlinkFrequency": 1.0,
+                    "ShowLabels": false
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Type": "nap::Entity",
+            "mID": "SubsVisualization",
+            "Components": [
+                {
+                    "Type": "nap::TransformComponent",
+                    "mID": "nap::TransformComponent_b10bc591",
+                    "Properties": {
+                        "Translate": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Rotate": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "UniformScale": 1.0
+                    }
+                },
+                {
+                    "Type": "nap::spatial::RenderableMeshCopyComponent",
+                    "mID": "nap::spatial::RenderableMeshCopyComponent_1a32303f",
+                    "Visible": true,
+                    "MaterialInstance": {
+                        "Material": "SolidMaterial",
+                        "Uniforms": [
+                            {
+                                "Type": "nap::UniformStruct",
+                                "mID": "UniformStruct_9487090b",
+                                "Name": "UBO",
+                                "Uniforms": [
+                                    {
+                                        "Type": "nap::UniformVec3",
+                                        "mID": "UniformVec3_8d6e0af4",
+                                        "Name": "color",
+                                        "Value": {
+                                            "x": 0.5,
+                                            "y": 0.5,
+                                            "z": 0.5
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "Samplers": [],
+                        "BlendMode": "NotSet",
+                        "DepthMode": "NotSet"
+                    },
+                    "Mesh": "BoxMesh",
+                    "UBO": "UBO",
+                    "UBOVert": "UBOVert",
+                    "TranformComponent": "./nap::TransformComponent_b10bc591",
+                    "Positions": [],
+                    "Scales": [
+                        {
+                            "x": 0.5,
+                            "y": 0.10000000149011612,
+                            "z": 0.5
+                        }
+                    ],
+                    "Rotations": [],
+                    "UniformFloatValues": [],
+                    "UniformVec3Values": []
+                },
+                {
+                    "Type": "nap::spatial::SpeakerGridVisualizationController",
+                    "mID": "nap::spatial::SpeakerGridVisualizationController_d03f6ef4",
+                    "RenderableMeshCopyComponent": "./nap::spatial::RenderableMeshCopyComponent_1a32303f",
+                    "TextOverlayController": "../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
+                    "MultiSpeakerSetup": "multiSetup",
+                    "SpeakerType": "sub",
+                    "ShowTextLabels": true,
+                    "LabelPrefix": "sub"
                 }
             ],
             "Children": []
@@ -1782,7 +2190,7 @@
                     "Properties": {
                         "Translate": {
                             "x": 0.0,
-                            "y": 1.5,
+                            "y": 4.0,
                             "z": 10.0
                         },
                         "Rotate": {
@@ -1921,112 +2329,6 @@
             "Children": []
         },
         {
-            "Type": "nap::Entity",
-            "mID": "monitorGrid",
-            "Components": [
-                {
-                    "Type": "nap::RenderableMeshComponent",
-                    "mID": "nap::RenderableMeshComponent",
-                    "Visible": true,
-                    "Mesh": "MonitorPlaneMesh",
-                    "MaterialInstance": {
-                        "Material": "MonitorGridMaterial",
-                        "Uniforms": [],
-                        "Samplers": [],
-                        "BlendMode": "AlphaBlend",
-                        "DepthMode": "InheritFromBlendMode"
-                    },
-                    "LineWidth": 1.0,
-                    "ClipRect": {
-                        "Min": {
-                            "x": 0.0,
-                            "y": 0.0
-                        },
-                        "Max": {
-                            "x": 0.0,
-                            "y": 0.0
-                        }
-                    }
-                },
-                {
-                    "Type": "nap::TransformComponent",
-                    "mID": "nap::TransformComponent_3",
-                    "Properties": {
-                        "Translate": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "Rotate": {
-                            "x": 90.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "Scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        },
-                        "UniformScale": 10.0
-                    }
-                }
-            ],
-            "Children": []
-        },
-        {
-            "Type": "nap::Entity",
-            "mID": "monitorSpeakerOmni",
-            "Components": [
-                {
-                    "Type": "nap::RenderableMeshComponent",
-                    "mID": "nap::RenderableMeshComponent_2",
-                    "Visible": true,
-                    "Mesh": "MonitorSpeakerOmniMesh",
-                    "MaterialInstance": {
-                        "Material": "MonitorSpeakerLitMaterial",
-                        "Uniforms": [],
-                        "Samplers": [],
-                        "BlendMode": "NotSet",
-                        "DepthMode": "NotSet"
-                    },
-                    "LineWidth": 1.0,
-                    "ClipRect": {
-                        "Min": {
-                            "x": 0.0,
-                            "y": 0.0
-                        },
-                        "Max": {
-                            "x": 0.0,
-                            "y": 0.0
-                        }
-                    }
-                },
-                {
-                    "Type": "nap::TransformComponent",
-                    "mID": "nap::TransformComponent_4",
-                    "Properties": {
-                        "Translate": {
-                            "x": 0.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "Rotate": {
-                            "x": -90.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "Scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        },
-                        "UniformScale": 0.0010000000474974514
-                    }
-                }
-            ],
-            "Children": []
-        },
-        {
             "Type": "nap::Font",
             "mID": "Font",
             "Properties": {
@@ -2078,25 +2380,6 @@
             "Usage": "Static",
             "ImagePath": "img/watermark.png",
             "GenerateLods": true
-        },
-        {
-            "Type": "nap::Material",
-            "mID": "AxesHelperMaterial",
-            "Uniforms": [],
-            "Samplers": [],
-            "Shader": "ParticleShader",
-            "VertexAttributeBindings": [
-                {
-                    "MeshAttributeID": "Position",
-                    "ShaderAttributeID": "in_Position"
-                },
-                {
-                    "MeshAttributeID": "Color0",
-                    "ShaderAttributeID": "in_Color0"
-                }
-            ],
-            "BlendMode": "Opaque",
-            "DepthMode": "InheritFromBlendMode"
         },
         {
             "Type": "nap::Material",
@@ -2177,52 +2460,65 @@
         },
         {
             "Type": "nap::Material",
-            "mID": "MonitorGridMaterial",
-            "Uniforms": [],
-            "Samplers": [],
-            "Shader": "GridShader",
-            "VertexAttributeBindings": [
-                {
-                    "MeshAttributeID": "Position",
-                    "ShaderAttributeID": "in_Position"
-                }
-            ],
-            "BlendMode": "NotSet",
-            "DepthMode": "NotSet"
-        },
-        {
-            "Type": "nap::Material",
-            "mID": "MonitorSpeakerLitMaterial",
+            "mID": "PointCloudMaterial",
             "Uniforms": [
                 {
                     "Type": "nap::UniformStruct",
-                    "mID": "MonitorSpeakerLitMaterialUBO",
+                    "mID": "UniformStruct_74f6b0c7",
                     "Name": "UBO",
-                    "Uniforms": []
+                    "Uniforms": [
+                        {
+                            "Type": "nap::UniformVec3",
+                            "mID": "UniformVec3_65c5da15",
+                            "Name": "color",
+                            "Value": {
+                                "x": 1.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        }
+                    ]
+                },
+                {
+                    "Type": "nap::UniformStruct",
+                    "mID": "UniformStruct_b4f2b081",
+                    "Name": "UBOVert",
+                    "Uniforms": [
+                        {
+                            "Type": "nap::UniformVec3",
+                            "mID": "UniformVec3_be22bfe8",
+                            "Name": "scale",
+                            "Value": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            }
+                        }
+                    ]
                 }
             ],
             "Samplers": [],
-            "Shader": "MonitorSpeakerLitShader",
+            "Shader": "PointCloudShader",
             "VertexAttributeBindings": [
+                {
+                    "MeshAttributeID": "Index",
+                    "ShaderAttributeID": "in_Index"
+                },
                 {
                     "MeshAttributeID": "Position",
                     "ShaderAttributeID": "in_Position"
-                },
-                {
-                    "MeshAttributeID": "Normal",
-                    "ShaderAttributeID": "in_Normal"
                 }
             ],
-            "BlendMode": "Opaque",
+            "BlendMode": "AlphaBlend",
             "DepthMode": "InheritFromBlendMode"
         },
         {
             "Type": "nap::Material",
-            "mID": "ParticleMaterial",
+            "mID": "SolidMaterial",
             "Uniforms": [
                 {
                     "Type": "nap::UniformStruct",
-                    "mID": "ParticleMaterialUBO",
+                    "mID": "SolidMaterialUBO",
                     "Name": "UBO",
                     "Uniforms": [
                         {
@@ -2255,7 +2551,7 @@
                 }
             ],
             "Samplers": [],
-            "Shader": "ParticleShader",
+            "Shader": "SolidShader",
             "VertexAttributeBindings": [
                 {
                     "MeshAttributeID": "Position",
@@ -2268,25 +2564,6 @@
                 {
                     "MeshAttributeID": "Normal",
                     "ShaderAttributeID": "in_Normal"
-                }
-            ],
-            "BlendMode": "Opaque",
-            "DepthMode": "InheritFromBlendMode"
-        },
-        {
-            "Type": "nap::Material",
-            "mID": "SpeakerMaterial",
-            "Uniforms": [],
-            "Samplers": [],
-            "Shader": "SpeakerShader",
-            "VertexAttributeBindings": [
-                {
-                    "MeshAttributeID": "Position",
-                    "ShaderAttributeID": "in_Position"
-                },
-                {
-                    "MeshAttributeID": "Color0",
-                    "ShaderAttributeID": "in_Color0"
                 }
             ],
             "BlendMode": "Opaque",
@@ -2355,30 +2632,6 @@
         },
         {
             "Type": "nap::PlaneMesh",
-            "mID": "MonitorPlaneMesh",
-            "Usage": "Static",
-            "CullMode": "None",
-            "Size": {
-                "x": 1.0,
-                "y": 1.0
-            },
-            "Position": {
-                "x": 0.0,
-                "y": 0.0
-            },
-            "Color": {
-                "Values": [
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "Rows": 256,
-            "Columns": 256
-        },
-        {
-            "Type": "nap::PlaneMesh",
             "mID": "MonitorSpeakerOmniMesh",
             "Usage": "Static",
             "CullMode": "None",
@@ -2400,6 +2653,12 @@
             },
             "Rows": 1,
             "Columns": 1
+        },
+        {
+            "Type": "nap::PointCloudMesh",
+            "mID": "PointCloudMesh",
+            "Usage": "Static",
+            "PointCount": 5000
         },
         {
             "Type": "nap::PythonScript",
@@ -2489,30 +2748,24 @@
                     "InstanceProperties": []
                 },
                 {
-                    "Entity": "monitorGrid",
+                    "Entity": "SatellitesVisualization",
+                    "InstanceProperties": []
+                },
+                {
+                    "Entity": "MonitorFloorGrid",
+                    "InstanceProperties": []
+                },
+                {
+                    "Entity": "SubsVisualization",
+                    "InstanceProperties": []
+                },
+                {
+                    "Entity": "MonitorTextOverlay",
                     "InstanceProperties": []
                 },
                 {
                     "Entity": "SoundObject",
                     "InstanceProperties": []
-                },
-                {
-                    "Entity": "SoundObject",
-                    "InstanceProperties": [
-                        {
-                            "TargetComponent": "./ParameterComponent",
-                            "TargetAttributes": [
-                                {
-                                    "Path": "Name",
-                                    "Value": {
-                                        "Type": "nap::StringInstancePropertyValue",
-                                        "mID": "instanceProp_std::string_ef4099d0",
-                                        "Value": "space2"
-                                    }
-                                }
-                            ]
-                        }
-                    ]
                 }
             ]
         },
@@ -2524,33 +2777,21 @@
         },
         {
             "Type": "nap::ShaderFromFile",
-            "mID": "GridShader",
-            "VertShader": "shaders/monitor/grid.vert",
-            "FragShader": "shaders/monitor/grid.frag"
-        },
-        {
-            "Type": "nap::ShaderFromFile",
             "mID": "LineShader",
             "VertShader": "shaders/monitor/line.vert",
             "FragShader": "shaders/monitor/line.frag"
         },
         {
             "Type": "nap::ShaderFromFile",
-            "mID": "MonitorSpeakerLitShader",
-            "VertShader": "shaders/monitor/speaker-lit.vert",
-            "FragShader": "shaders/monitor/speaker-lit.frag"
+            "mID": "PointCloudShader",
+            "VertShader": "shaders/monitor/pointcloud.vert",
+            "FragShader": "shaders/monitor/pointcloud.frag"
         },
         {
             "Type": "nap::ShaderFromFile",
-            "mID": "ParticleShader",
-            "VertShader": "shaders/monitor/particle.vert",
-            "FragShader": "shaders/monitor/particle.frag"
-        },
-        {
-            "Type": "nap::ShaderFromFile",
-            "mID": "SpeakerShader",
-            "VertShader": "shaders/monitor/speaker.vert",
-            "FragShader": "shaders/monitor/speaker.frag"
+            "mID": "SolidShader",
+            "VertShader": "shaders/monitor/solid.vert",
+            "FragShader": "shaders/monitor/solid.frag"
         },
         {
             "Type": "nap::SphereMesh",
@@ -2618,6 +2859,12 @@
                     "Graph": "satelliteGraph"
                 }
             }
+        },
+        {
+            "Type": "nap::spatial::LinePlaneMesh",
+            "mID": "LinePlaneMesh_2baa8e75",
+            "Columns": 10,
+            "Rows": 10
         },
         {
             "Type": "nap::spatial::MultiSpeakerSetup",
