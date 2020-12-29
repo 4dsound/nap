@@ -2855,6 +2855,212 @@
             "Input": "SubFilter"
         },
         {
+            "Type": "nap::gui::GuiWindow",
+            "mID": "Gui",
+            "Title": "Main Window",
+            "Style": "",
+            "Position": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "Size": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "Flags": {
+                "NoTitleBar": true,
+                "NoResize": true,
+                "NoMove": true,
+                "NoScrollBar": true,
+                "NoScrollWithMouse": true,
+                "NoCollapse": true,
+                "AlwaysAutoResize": true,
+                "NoSavedSettings": true,
+                "MenuBar": false,
+                "HorizontalScrollBar": false
+            },
+            "Alpha": 1.0,
+            "Open": true,
+            "Border": false,
+            "RenderWindow": "GuiWindow",
+            "Content": {
+                "Type": "nap::gui::Layout",
+                "mID": "MainWindowLayout",
+                "Title": "Main Window Layout",
+                "Style": "MainGuiStyle",
+                "Separators": false,
+                "Content": [
+                    {
+                        "Type": "nap::gui::Panel",
+                        "mID": "HeaderPanel",
+                        "Title": "HeaderPanel",
+                        "Style": "HeaderFooterGuiStyle",
+                        "Position": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "Size": {
+                            "x": -1.0,
+                            "y": 30.0
+                        },
+                        "Flags": {
+                            "NoScrollBar": true,
+                            "NoScrollWithMouse": true,
+                            "HorizontalScrollBar": false
+                        },
+                        "Alpha": 1.0,
+                        "Border": true,
+                        "Content": {
+                            "Type": "nap::spatial::AudioDeviceSettingsHeader",
+                            "mID": "AudioDeviceSettingsHeader_5b40683d",
+                            "Title": "AudioDeviceSettingsHeader",
+                            "Style": ""
+                        }
+                    },
+                    {
+                        "Type": "nap::gui::Panel",
+                        "mID": "FooterPanel",
+                        "Title": "FooterPanel",
+                        "Style": "HeaderFooterGuiStyle",
+                        "Position": {
+                            "x": 1.0,
+                            "y": -30.0
+                        },
+                        "Size": {
+                            "x": -1.0,
+                            "y": 30.0
+                        },
+                        "Flags": {
+                            "NoScrollBar": true,
+                            "NoScrollWithMouse": true,
+                            "HorizontalScrollBar": false
+                        },
+                        "Alpha": 1.0,
+                        "Border": true,
+                        "Content": {
+                            "Type": "nap::gui::Gui",
+                            "mID": "Gui_a71fbcd4",
+                            "Title": "Footer",
+                            "Style": ""
+                        }
+                    },
+                    {
+                        "Type": "nap::gui::Panel",
+                        "mID": "Panel_3ee99caa",
+                        "Title": "Main Panel",
+                        "Style": "",
+                        "Position": {
+                            "x": 1.0,
+                            "y": 30.0
+                        },
+                        "Size": {
+                            "x": -1.0,
+                            "y": -60.0
+                        },
+                        "Flags": {
+                            "NoScrollBar": false,
+                            "NoScrollWithMouse": false,
+                            "HorizontalScrollBar": false
+                        },
+                        "Alpha": 1.0,
+                        "Border": true,
+                        "Content": {
+                            "Type": "nap::gui::HorizontalLayout",
+                            "mID": "HorizontalLayout_3d54472e",
+                            "Title": "Horizontal Layout",
+                            "Style": "",
+                            "ColumnWidths": [],
+                            "Borders": false,
+                            "Content": [
+                                {
+                                    "Type": "nap::gui::Layout",
+                                    "mID": "Layout_cd9559acLeft",
+                                    "Title": "Left Column",
+                                    "Style": "",
+                                    "Separators": false,
+                                    "Content": [
+                                        {
+                                            "Type": "nap::audio::AudioDeviceSettingsGui",
+                                            "mID": "AudioDeviceSettingsGui_22050e4f",
+                                            "Title": "Audio Device Settings",
+                                            "Style": "",
+                                            "ShowInputs": true
+                                        },
+                                        {
+                                            "Type": "nap::spatial::InputVUMeters",
+                                            "mID": "InputVUMeters_14fb00d1",
+                                            "Title": "Input VU Meters",
+                                            "Style": "",
+                                            "HorizontalWrapCount": 16,
+                                            "VUMeterSize": {
+                                                "x": 15.0,
+                                                "y": 50.0
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Type": "nap::gui::Layout",
+                                    "mID": "Layout_33fae542Right",
+                                    "Title": "Right Column",
+                                    "Style": "",
+                                    "Separators": false,
+                                    "Content": [
+                                        {
+                                            "Type": "nap::spatial::MultiSpeakerSetupGui",
+                                            "mID": "MultiSpeakerSetupGui_d0fcf6d2",
+                                            "Title": "Multi Speaker Setup",
+                                            "Style": "",
+                                            "MultiSpeakerSetup": "multiSetup"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "Type": "nap::gui::Style",
+            "mID": "HeaderFooterGuiStyle",
+            "FloatSettings": [],
+            "SizeSettings": [
+                {
+                    "Variable": "WindowPadding (size)",
+                    "Value": {
+                        "x": 10.0,
+                        "y": 5.0
+                    }
+                },
+                {
+                    "Variable": "ItemSpacing (size)",
+                    "Value": {
+                        "x": 5.0,
+                        "y": 0.0
+                    }
+                }
+            ],
+            "ColorSettings": [],
+            "FontScaling": 0.8999999761581421
+        },
+        {
+            "Type": "nap::gui::Style",
+            "mID": "MainGuiStyle",
+            "FloatSettings": [],
+            "SizeSettings": [
+                {
+                    "Variable": "WindowPadding (size)",
+                    "Value": {
+                        "x": 20.0,
+                        "y": 20.0
+                    }
+                }
+            ],
+            "ColorSettings": [],
+            "FontScaling": 0.8999999761581421
+        },
+        {
             "Type": "nap::spatial::AxesHelperMesh",
             "mID": "AxesHelperMesh"
         },

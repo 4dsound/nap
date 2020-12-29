@@ -5,6 +5,9 @@
 #include <Spatial/Gui/AudioDeviceSettingsGui.h>
 #include <Spatial/Gui/MultiSpeakerSetupGui.h>
 
+// Gui Layout includes
+#include <Gui/Gui.h>
+
 // Core includes
 #include <nap/resourcemanager.h>
 #include <nap/resourceptr.h>
@@ -102,13 +105,11 @@ namespace nap
 		ObjectPtr<Scene>		mScene = nullptr;				///< Pointer to the main scene
 		ObjectPtr<spatial::TextOverlayControllerInstance> mTextOverlayController = nullptr;
 		ObjectPtr<PerspCameraComponentInstance> mCamera = nullptr; ///< The monitor camera
+		ObjectPtr<gui::Gui> mGui = nullptr;
 
         spatial::SpatialService* mSpatialService = nullptr;  ///< Spatial sound service
         std::vector<std::string> mCommandLineArgs;				///< List with command line arguments
 
 		bool mCtrlKeyPressed = false; // Indicates wether the ctrl key is pressed
-
-		std::unique_ptr<audio::AudioDeviceSettingsGui> mAudioDeviceSettingsGui = nullptr;
-		std::unique_ptr<spatial::MultiSpeakerSetupGui> mMultiSpeakerSetupGui = nullptr;
 	};
 }

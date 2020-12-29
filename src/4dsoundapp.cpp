@@ -7,16 +7,18 @@
 #include <perspcameracomponent.h>
 #include <renderable2dtextcomponent.h>
 #include <rendercomponent.h>
+#include <audio/utility/audiofunctions.h>
+#include <Gui/GuiFunctions.h>
 
 // Spatial includes.
 #include <Spatial/MultiSpeaker/MultiSpeakerSetup.h>
 #include <Spatial/Core/SpatialTypes.h>
 #include <Spatial/Core/EnvironmentComponent.h>
 #include <Spatial/Gui/ImGuiExtensions.h>
-#include <audio/utility/audiofunctions.h>
+#include <Spatial/Gui/GuiStyle.h>
 
 RTTI_BEGIN_CLASS_NO_DEFAULT_CONSTRUCTOR(nap::SpatialSoundApp)
-RTTI_CONSTRUCTOR(nap::Core&)
+	RTTI_CONSTRUCTOR(nap::Core&)
 RTTI_END_CLASS
 
 namespace nap
@@ -100,15 +102,19 @@ namespace nap
         if (!mCommandLineArgs.empty())
             environmentComponent->setScriptPath(mCommandLineArgs[0]);
 
-		auto multiSpeakerSetup = mResourceManager->findObject<spatial::MultiSpeakerSetup>("multiSetup");
-		mAudioDeviceSettingsGui = std::make_unique<audio::AudioDeviceSettingsGui>(mSpatialService->getAudioService());
-		mMultiSpeakerSetupGui = std::make_unique<spatial::MultiSpeakerSetupGui>(multiSpeakerSetup.get());
+		mGui = mResourceManager->findObject<gui::Gui>("Gui");
+		if (!error.check(mGui != nullptr, "Gui not found"))
+			return false;
+
+		spatial::GuiStyle guiStyle;
+		guiStyle.apply(&ImGui::GetStyle());
 
         // All done!
         return true;
     }
-    
-    
+
+
+
     // Called when the window is updating
     void SpatialSoundApp::update(double deltaTime)
     {
@@ -121,33 +127,24 @@ namespace nap
 		ImGui::Text(utility::stringFormat("Framerate: %.02f", getCore().getFramerate()).c_str());
 		ImGui::End();
 
-		mGuiService->selectWindow(mGuiWindow);
-		mAudioDeviceSettingsGui->drawGui();
+		mGui->show();
 
-		ImGui::NewLine();
-
-		// Input VU meters.
-		if (mSpatialService->getAudioService().isOpened())
-		{
-			int fullRowCount = int(mSpatialService->getInputChannelCount() / 16);
-			int channelOffset = 0;
-			for (auto row = 0; row <= fullRowCount; ++row)
-			{
-				for (auto channel = 0; channel < (row == fullRowCount ? mSpatialService->getInputChannelCount() % 16 : 16); ++channel)
-				{
-					auto label = std::to_string(channelOffset + channel + 1);
-					// draw level meter
-					auto dbLevel = audio::toDB(mSpatialService->getInputLevel(channelOffset + channel));
-					if (channel > 0) ImGui::SameLine();
-					ImGui::VUMeter(ImVec2(15.f, 50.f), dbLevel, -48.f, 0.f, false, false, 0.f, label);
-				}
-				channelOffset += 16;
-			}
-		}
-
-		ImGui::NewLine();
-
-		mMultiSpeakerSetupGui->draw();
+//		mGuiService->selectWindow(mGuiWindow);
+//		mAudioDeviceSettingsGui->drawGui();
+//
+//		ImGui::NewLine();
+//
+//		// Input VU meters.
+//		if (mSpatialService->getAudioService().isOpened())
+//			gui::wrapHorizontal(mSpatialService->getInputChannelCount(), 16, [&](int item){
+//				auto label = std::to_string(item + 1);
+//				auto dbLevel = audio::toDB(mSpatialService->getInputLevel(item));
+//				ImGui::VUMeter(ImVec2(15.f, 50.f), dbLevel, -48.f, 0.f, false, false, 0.f, label);
+//			});
+//
+//		ImGui::NewLine();
+//
+//		mMultiSpeakerSetupGui->draw();
     }
 
 
