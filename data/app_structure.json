@@ -259,6 +259,12 @@
                                             "y": 0.699999988079071,
                                             "z": 0.699999988079071
                                         }
+                                    },
+                                    {
+                                        "Type": "nap::UniformFloat",
+                                        "mID": "UniformFloat_2ec815b0",
+                                        "Name": "intensity",
+                                        "Value": -1.0
                                     }
                                 ]
                             }
@@ -2085,6 +2091,12 @@
                                             "y": 0.5,
                                             "z": 0.5
                                         }
+                                    },
+                                    {
+                                        "Type": "nap::UniformFloat",
+                                        "mID": "UniformFloat_3dbd7b01",
+                                        "Name": "intensity",
+                                        "Value": 0.0
                                     }
                                 ]
                             }
@@ -2938,10 +2950,12 @@
                         "Alpha": 1.0,
                         "Border": true,
                         "Content": {
-                            "Type": "nap::gui::Gui",
-                            "mID": "Gui_a71fbcd4",
+                            "Type": "nap::spatial::Footer",
+                            "mID": "Footer_406a78b6",
                             "Title": "Footer",
-                            "Style": ""
+                            "Style": "",
+                            "License": "Licensing",
+                            "BasicAdvancedSelector": "BasicAdvancedSelector"
                         }
                     },
                     {
@@ -2962,64 +2976,144 @@
                             "NoScrollWithMouse": false,
                             "HorizontalScrollBar": false
                         },
-                        "Alpha": 1.0,
+                        "Alpha": 0.5,
                         "Border": true,
                         "Content": {
-                            "Type": "nap::gui::HorizontalLayout",
-                            "mID": "HorizontalLayout_3d54472e",
-                            "Title": "Horizontal Layout",
+                            "Type": "nap::gui::Selector",
+                            "mID": "BasicAdvancedSelector",
+                            "Title": "BasicAdvancedSelector",
                             "Style": "",
-                            "ColumnWidths": [],
-                            "Borders": false,
+                            "Index": 0,
                             "Content": [
                                 {
-                                    "Type": "nap::gui::Layout",
-                                    "mID": "Layout_cd9559acLeft",
-                                    "Title": "Left Column",
+                                    "Type": "nap::gui::GuiLink",
+                                    "mID": "GuiLink_9313a643",
+                                    "Title": "BasicGui Link",
                                     "Style": "",
-                                    "Separators": false,
-                                    "Content": [
-                                        {
-                                            "Type": "nap::audio::AudioDeviceSettingsGui",
-                                            "mID": "AudioDeviceSettingsGui_22050e4f",
-                                            "Title": "Audio Device Settings",
-                                            "Style": "",
-                                            "ShowInputs": true
-                                        },
-                                        {
-                                            "Type": "nap::spatial::InputVUMeters",
-                                            "mID": "InputVUMeters_14fb00d1",
-                                            "Title": "Input VU Meters",
-                                            "Style": "",
-                                            "HorizontalWrapCount": 16,
-                                            "VUMeterSize": {
-                                                "x": 15.0,
-                                                "y": 50.0
-                                            }
-                                        }
-                                    ]
+                                    "Link": "BasicGui"
                                 },
                                 {
-                                    "Type": "nap::gui::Layout",
-                                    "mID": "Layout_33fae542Right",
-                                    "Title": "Right Column",
+                                    "Type": "nap::gui::GuiLink",
+                                    "mID": "GuiLink_0e6ec7d7",
+                                    "Title": "Advanced Gui Link",
                                     "Style": "",
-                                    "Separators": false,
-                                    "Content": [
-                                        {
-                                            "Type": "nap::spatial::MultiSpeakerSetupGui",
-                                            "mID": "MultiSpeakerSetupGui_d0fcf6d2",
-                                            "Title": "Multi Speaker Setup",
-                                            "Style": "",
-                                            "MultiSpeakerSetup": "multiSetup"
-                                        }
-                                    ]
+                                    "Link": "AdvancedGui"
                                 }
                             ]
                         }
                     }
                 ]
             }
+        },
+        {
+            "Type": "nap::gui::HorizontalLayout",
+            "mID": "BasicGui",
+            "Title": "Basic Gui",
+            "Style": "",
+            "ColumnWidths": [],
+            "Borders": false,
+            "Content": [
+                {
+                    "Type": "nap::gui::Layout",
+                    "mID": "Layout_cd9559acLeft",
+                    "Title": "Left Column",
+                    "Style": "",
+                    "Separators": false,
+                    "Content": [
+                        {
+                            "Type": "nap::audio::AudioDeviceSettingsGui",
+                            "mID": "AudioDeviceSettingsGui_22050e4f",
+                            "Title": "Audio Device Settings",
+                            "Style": "",
+                            "ShowInputs": true
+                        },
+                        {
+                            "Type": "nap::spatial::InputVUMeters",
+                            "mID": "InputVUMeters_14fb00d1",
+                            "Title": "Input VU Meters",
+                            "Style": "",
+                            "HorizontalWrapCount": 16,
+                            "VUMeterSize": {
+                                "x": 15.0,
+                                "y": 50.0
+                            }
+                        }
+                    ]
+                },
+                {
+                    "Type": "nap::gui::Layout",
+                    "mID": "Layout_33fae542Right",
+                    "Title": "Right Column",
+                    "Style": "",
+                    "Separators": false,
+                    "Content": [
+                        {
+                            "Type": "nap::spatial::MultiSpeakerSetupGui",
+                            "mID": "MultiSpeakerSetupGui_d0fcf6d2",
+                            "Title": "Multi Speaker Setup",
+                            "Style": "",
+                            "MultiSpeakerSetup": "multiSetup"
+                        },
+                        {
+                            "Type": "nap::spatial::HeadphoneSetupGui",
+                            "mID": "HeadphoneSetupGui_99d2ef03",
+                            "Title": "HeadphonesSetup",
+                            "Style": "",
+                            "HeadphonesSetup": "headphonesSetup"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Type": "nap::gui::Layout",
+            "mID": "AudioDeviceSetupTabLayout",
+            "Title": "AudioDeviceSetupTabLayout",
+            "Style": "",
+            "Separators": false,
+            "Content": [
+                {
+                    "Type": "nap::audio::AudioDeviceSettingsGui",
+                    "mID": "AudioDeviceSettingsGui_5aae1d6e",
+                    "Title": "Audio Device Settings",
+                    "Style": "",
+                    "ShowInputs": true
+                },
+                {
+                    "Type": "nap::spatial::InputVUMeters",
+                    "mID": "InputVUMeters_fdfa7ca8",
+                    "Title": "Input VU Meters",
+                    "Style": "",
+                    "HorizontalWrapCount": 16,
+                    "VUMeterSize": {
+                        "x": 15.0,
+                        "y": 50.0
+                    }
+                }
+            ]
+        },
+        {
+            "Type": "nap::gui::Layout",
+            "mID": "SpeakerSetupLayout",
+            "Title": "",
+            "Style": "",
+            "Separators": false,
+            "Content": [
+                {
+                    "Type": "nap::spatial::MultiSpeakerSetupGui",
+                    "mID": "MultiSpeakerSetupGui_b0625815",
+                    "Title": "MultiSpeaker Setup Gui",
+                    "Style": "",
+                    "MultiSpeakerSetup": "multiSetup"
+                },
+                {
+                    "Type": "nap::spatial::HeadphoneSetupGui",
+                    "mID": "HeadphoneSetupGui_b429982b",
+                    "Title": "Headphones Setup Gui",
+                    "Style": "",
+                    "HeadphonesSetup": "headphonesSetup"
+                }
+            ]
         },
         {
             "Type": "nap::gui::Style",
@@ -3059,6 +3153,78 @@
             ],
             "ColorSettings": [],
             "FontScaling": 0.8999999761581421
+        },
+        {
+            "Type": "nap::gui::TabbedLayout",
+            "mID": "AdvancedGui",
+            "Title": "Advanced",
+            "Style": "",
+            "Tabs": [
+                {
+                    "Title": "Setup",
+                    "Content": {
+                        "Type": "nap::gui::Panel",
+                        "mID": "BasicGuiPanel",
+                        "Title": "BasicGuiPanel",
+                        "Style": "",
+                        "Position": {
+                            "x": 15.0,
+                            "y": 80.0
+                        },
+                        "Size": {
+                            "x": -25.0,
+                            "y": -70.0
+                        },
+                        "Flags": {
+                            "NoScrollBar": false,
+                            "NoScrollWithMouse": false,
+                            "HorizontalScrollBar": false
+                        },
+                        "Alpha": 1.0,
+                        "Border": false,
+                        "Content": {
+                            "Type": "nap::gui::GuiLink",
+                            "mID": "GuiLink_afa57f80",
+                            "Title": "BasicGuiLink",
+                            "Style": "",
+                            "Link": "BasicGui"
+                        }
+                    }
+                },
+                {
+                    "Title": "Parameters",
+                    "Content": {
+                        "Type": "nap::gui::Panel",
+                        "mID": "Panel_aa521aa3",
+                        "Title": "Parameters Panel",
+                        "Style": "",
+                        "Position": {
+                            "x": 15.0,
+                            "y": 80.0
+                        },
+                        "Size": {
+                            "x": -25.0,
+                            "y": -70.0
+                        },
+                        "Flags": {
+                            "NoScrollBar": false,
+                            "NoScrollWithMouse": false,
+                            "HorizontalScrollBar": false
+                        },
+                        "Alpha": 1.0,
+                        "Border": false,
+                        "Content": {
+                            "Type": "nap::spatial::SpatialParameterGUI",
+                            "mID": "SpatialParameterGUI_49ce80de",
+                            "Title": "SpatialParameterGui",
+                            "Style": "",
+                            "Scene": "Scene",
+                            "ParameterGroup": "",
+                            "ReadOnly": false
+                        }
+                    }
+                }
+            ]
         },
         {
             "Type": "nap::spatial::AxesHelperMesh",
