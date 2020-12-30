@@ -2,8 +2,6 @@
 
 // Spatial includes
 #include <Spatial/Monitor/TextOverlayController.h>
-#include <Spatial/Gui/AudioDeviceSettingsGui.h>
-#include <Spatial/Gui/MultiSpeakerSetupGui.h>
 
 // Gui Layout includes
 #include <Gui/Gui.h>

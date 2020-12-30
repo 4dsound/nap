@@ -11,7 +11,6 @@
 #include <Gui/GuiFunctions.h>
 
 // Spatial includes.
-#include <Spatial/MultiSpeaker/MultiSpeakerSetup.h>
 #include <Spatial/Core/SpatialTypes.h>
 #include <Spatial/Core/EnvironmentComponent.h>
 #include <Spatial/Gui/ImGuiExtensions.h>
@@ -122,29 +121,7 @@ namespace nap
         nap::DefaultInputRouter input_router(true);
         mInputService->processWindowEvents(*mRenderWindow, input_router, { &mScene->getRootEntity() });
 
-		mGuiService->selectWindow(mRenderWindow);
-		ImGui::Begin("Info");
-		ImGui::Text(utility::stringFormat("Framerate: %.02f", getCore().getFramerate()).c_str());
-		ImGui::End();
-
 		mGui->show();
-
-//		mGuiService->selectWindow(mGuiWindow);
-//		mAudioDeviceSettingsGui->drawGui();
-//
-//		ImGui::NewLine();
-//
-//		// Input VU meters.
-//		if (mSpatialService->getAudioService().isOpened())
-//			gui::wrapHorizontal(mSpatialService->getInputChannelCount(), 16, [&](int item){
-//				auto label = std::to_string(item + 1);
-//				auto dbLevel = audio::toDB(mSpatialService->getInputLevel(item));
-//				ImGui::VUMeter(ImVec2(15.f, 50.f), dbLevel, -48.f, 0.f, false, false, 0.f, label);
-//			});
-//
-//		ImGui::NewLine();
-//
-//		mMultiSpeakerSetupGui->draw();
     }
 
 
