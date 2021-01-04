@@ -2954,6 +2954,7 @@
                             "mID": "Footer_406a78b6",
                             "Title": "Footer",
                             "Style": "",
+                            "OSCLogger": "OSCLogger",
                             "License": "Licensing",
                             "BasicAdvancedSelector": "BasicAdvancedSelector"
                         }
@@ -3168,11 +3169,11 @@
                         "Title": "BasicGuiPanel",
                         "Style": "",
                         "Position": {
-                            "x": 15.0,
+                            "x": 11.0,
                             "y": 80.0
                         },
                         "Size": {
-                            "x": -25.0,
+                            "x": -20.0,
                             "y": -70.0
                         },
                         "Flags": {
@@ -3181,7 +3182,7 @@
                             "HorizontalScrollBar": false
                         },
                         "Alpha": 1.0,
-                        "Border": false,
+                        "Border": true,
                         "Content": {
                             "Type": "nap::gui::GuiLink",
                             "mID": "GuiLink_afa57f80",
@@ -3199,11 +3200,11 @@
                         "Title": "Parameters Panel",
                         "Style": "",
                         "Position": {
-                            "x": 15.0,
+                            "x": 11.0,
                             "y": 80.0
                         },
                         "Size": {
-                            "x": -25.0,
+                            "x": -20.0,
                             "y": -70.0
                         },
                         "Flags": {
@@ -3212,7 +3213,7 @@
                             "HorizontalScrollBar": false
                         },
                         "Alpha": 1.0,
-                        "Border": false,
+                        "Border": true,
                         "Content": {
                             "Type": "nap::spatial::SpatialParameterGUI",
                             "mID": "SpatialParameterGUI_49ce80de",
@@ -3221,6 +3222,130 @@
                             "Scene": "Scene",
                             "ParameterGroup": "",
                             "ReadOnly": false
+                        }
+                    }
+                },
+                {
+                    "Title": "Exposed Data",
+                    "Content": {
+                        "Type": "nap::gui::Panel",
+                        "mID": "Panel_a36473de",
+                        "Title": "Exposed Data Panel",
+                        "Style": "",
+                        "Position": {
+                            "x": 11.0,
+                            "y": 80.0
+                        },
+                        "Size": {
+                            "x": -20.0,
+                            "y": -70.0
+                        },
+                        "Flags": {
+                            "NoScrollBar": false,
+                            "NoScrollWithMouse": false,
+                            "HorizontalScrollBar": false
+                        },
+                        "Alpha": 1.0,
+                        "Border": true,
+                        "Content": {
+                            "Type": "nap::spatial::ExposedDataGui",
+                            "mID": "ExposedDataGui_8b723989",
+                            "Title": "Exposed Data",
+                            "Style": "",
+                            "Scene": "Scene"
+                        }
+                    }
+                },
+                {
+                    "Title": "OSC Log",
+                    "Content": {
+                        "Type": "nap::gui::Panel",
+                        "mID": "Panel_a933d332",
+                        "Title": "OSC Log Panel",
+                        "Style": "",
+                        "Position": {
+                            "x": 11.0,
+                            "y": 80.0
+                        },
+                        "Size": {
+                            "x": -20.0,
+                            "y": -70.0
+                        },
+                        "Flags": {
+                            "NoScrollBar": false,
+                            "NoScrollWithMouse": false,
+                            "HorizontalScrollBar": false
+                        },
+                        "Alpha": 1.0,
+                        "Border": true,
+                        "Content": {
+                            "Type": "nap::spatial::OSCLogGui",
+                            "mID": "OSCLogGui_759f2ca0",
+                            "Title": "OSC Log Gui",
+                            "Style": "",
+                            "OSCLogger": "OSCLogger",
+                            "LineCount": 25
+                        }
+                    }
+                },
+                {
+                    "Title": "Statistics",
+                    "Content": {
+                        "Type": "nap::gui::Panel",
+                        "mID": "Panel_066020e1",
+                        "Title": "Statistics Panel",
+                        "Style": "",
+                        "Position": {
+                            "x": 11.0,
+                            "y": 80.0
+                        },
+                        "Size": {
+                            "x": -20.0,
+                            "y": -70.0
+                        },
+                        "Flags": {
+                            "NoScrollBar": false,
+                            "NoScrollWithMouse": false,
+                            "HorizontalScrollBar": false
+                        },
+                        "Alpha": 1.0,
+                        "Border": true,
+                        "Content": {
+                            "Type": "nap::spatial::StatisticsGui",
+                            "mID": "StatisticsGui_f828b741",
+                            "Title": "Statistics Gui",
+                            "Style": ""
+                        }
+                    }
+                },
+                {
+                    "Title": "License",
+                    "Content": {
+                        "Type": "nap::gui::Panel",
+                        "mID": "LicensePanel",
+                        "Title": "License Panel",
+                        "Style": "",
+                        "Position": {
+                            "x": 11.0,
+                            "y": 80.0
+                        },
+                        "Size": {
+                            "x": -20.0,
+                            "y": -70.0
+                        },
+                        "Flags": {
+                            "NoScrollBar": false,
+                            "NoScrollWithMouse": false,
+                            "HorizontalScrollBar": false
+                        },
+                        "Alpha": 1.0,
+                        "Border": true,
+                        "Content": {
+                            "Type": "nap::spatial::LicensingGui",
+                            "mID": "LicensingGui_e46af14c",
+                            "Title": "",
+                            "Style": "",
+                            "License": "Licensing"
                         }
                     }
                 }
@@ -3279,6 +3404,10 @@
                     }
                 }
             ]
+        },
+        {
+            "Type": "nap::spatial::OSCLogger",
+            "mID": "OSCLogger"
         },
         {
             "Type": "nap::turboactivate::Licensing",
