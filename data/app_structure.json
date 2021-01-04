@@ -3094,29 +3094,6 @@
             ]
         },
         {
-            "Type": "nap::gui::Layout",
-            "mID": "SpeakerSetupLayout",
-            "Title": "",
-            "Style": "",
-            "Separators": false,
-            "Content": [
-                {
-                    "Type": "nap::spatial::MultiSpeakerSetupGui",
-                    "mID": "MultiSpeakerSetupGui_b0625815",
-                    "Title": "MultiSpeaker Setup Gui",
-                    "Style": "",
-                    "MultiSpeakerSetup": "multiSetup"
-                },
-                {
-                    "Type": "nap::spatial::HeadphoneSetupGui",
-                    "mID": "HeadphoneSetupGui_b429982b",
-                    "Title": "Headphones Setup Gui",
-                    "Style": "",
-                    "HeadphonesSetup": "headphonesSetup"
-                }
-            ]
-        },
-        {
             "Type": "nap::gui::Style",
             "mID": "HeaderFooterGuiStyle",
             "FloatSettings": [],
