@@ -3068,27 +3068,117 @@
         },
         {
             "Type": "nap::gui::Layout",
-            "mID": "AudioDeviceSetupTabLayout",
-            "Title": "AudioDeviceSetupTabLayout",
+            "mID": "MonitorGui2",
+            "Title": "MonitorGui",
             "Style": "",
             "Separators": false,
             "Content": [
                 {
-                    "Type": "nap::audio::AudioDeviceSettingsGui",
-                    "mID": "AudioDeviceSettingsGui_5aae1d6e",
-                    "Title": "Audio Device Settings",
+                    "Type": "nap::gui::GuiWindow",
+                    "mID": "GuiWindow_2ce198bf",
+                    "Title": "Monitor Header",
                     "Style": "",
-                    "ShowInputs": true
+                    "Position": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "Size": {
+                        "x": 0.0,
+                        "y": 30.0
+                    },
+                    "Flags": {
+                        "NoTitleBar": true,
+                        "NoResize": true,
+                        "NoMove": true,
+                        "NoScrollBar": true,
+                        "NoScrollWithMouse": true,
+                        "NoCollapse": true,
+                        "AlwaysAutoResize": false,
+                        "NoSavedSettings": true,
+                        "MenuBar": false,
+                        "HorizontalScrollBar": false
+                    },
+                    "Alpha": 1.0,
+                    "Open": true,
+                    "Border": true,
+                    "RenderWindow": "Window",
+                    "Content": {
+                        "Type": "nap::gui::Gui",
+                        "mID": "Gui_c027f4be",
+                        "Title": "MonitorHeader",
+                        "Style": "HeaderFooterGuiStyle"
+                    }
                 },
                 {
-                    "Type": "nap::spatial::InputVUMeters",
-                    "mID": "InputVUMeters_fdfa7ca8",
-                    "Title": "Input VU Meters",
+                    "Type": "nap::gui::GuiWindow",
+                    "mID": "GuiWindow_ce0eb5ed",
+                    "Title": "Monitor Footer",
                     "Style": "",
-                    "HorizontalWrapCount": 16,
-                    "VUMeterSize": {
-                        "x": 15.0,
-                        "y": 50.0
+                    "Position": {
+                        "x": 0.0,
+                        "y": -30.0
+                    },
+                    "Size": {
+                        "x": 0.0,
+                        "y": 30.0
+                    },
+                    "Flags": {
+                        "NoTitleBar": true,
+                        "NoResize": true,
+                        "NoMove": true,
+                        "NoScrollBar": true,
+                        "NoScrollWithMouse": true,
+                        "NoCollapse": true,
+                        "AlwaysAutoResize": false,
+                        "NoSavedSettings": true,
+                        "MenuBar": false,
+                        "HorizontalScrollBar": false
+                    },
+                    "Alpha": 1.0,
+                    "Open": true,
+                    "Border": true,
+                    "RenderWindow": "Window",
+                    "Content": {
+                        "Type": "nap::gui::Gui",
+                        "mID": "Gui_95723ac4",
+                        "Title": "Monitor Footer",
+                        "Style": "HeaderFooterGuiStyle"
+                    }
+                },
+                {
+                    "Type": "nap::gui::GuiWindow",
+                    "mID": "GuiWindow_71304667",
+                    "Title": "Side Panel",
+                    "Style": "",
+                    "Position": {
+                        "x": 0.0,
+                        "y": 30.0
+                    },
+                    "Size": {
+                        "x": 50.0,
+                        "y": -60.0
+                    },
+                    "Flags": {
+                        "NoTitleBar": true,
+                        "NoResize": true,
+                        "NoMove": true,
+                        "NoScrollBar": true,
+                        "NoScrollWithMouse": true,
+                        "NoCollapse": true,
+                        "AlwaysAutoResize": false,
+                        "NoSavedSettings": true,
+                        "MenuBar": false,
+                        "HorizontalScrollBar": false
+                    },
+                    "Alpha": 1.0,
+                    "Open": true,
+                    "Border": true,
+                    "RenderWindow": "Window",
+                    "Content": {
+                        "Type": "nap::gui::Gui",
+                        "mID": "Gui_0e3cb01d",
+                        "Title": "Side Panel",
+                        "Style": ""
                     }
                 }
             ]
