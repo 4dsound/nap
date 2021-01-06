@@ -97,13 +97,14 @@ namespace nap
 		InputService*			mInputService = nullptr;		///< Input service for processing input
 		IMGuiService*			mGuiService = nullptr;			///< Manages GUI related update / draw calls
 		ParameterService*       mParameterService = nullptr;
-		ObjectPtr<RenderWindow> mGuiWindow;						///< Pointer to the gui window
+		ResourcePtr<RenderWindow> mGuiWindow;						///< Pointer to the gui window
 		bool                    mGuiWindowIsVisible = true;     ///< Is the GUI window visible?
-		ObjectPtr<RenderWindow> mRenderWindow;					///< Pointer to the render window
+		ResourcePtr<RenderWindow> mRenderWindow;					///< Pointer to the render window
 		ObjectPtr<Scene>		mScene = nullptr;				///< Pointer to the main scene
 		ObjectPtr<spatial::TextOverlayControllerInstance> mTextOverlayController = nullptr;
 		ObjectPtr<PerspCameraComponentInstance> mCamera = nullptr; ///< The monitor camera
 		ObjectPtr<gui::Gui> mGui = nullptr;
+		ObjectPtr<gui::Gui> mMonitorGui = nullptr;
 
         spatial::SpatialService* mSpatialService = nullptr;  ///< Spatial sound service
         std::vector<std::string> mCommandLineArgs;				///< List with command line arguments

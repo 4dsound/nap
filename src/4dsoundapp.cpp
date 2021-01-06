@@ -9,11 +9,10 @@
 #include <rendercomponent.h>
 #include <audio/utility/audiofunctions.h>
 #include <Gui/GuiFunctions.h>
+#include <imgui/imgui_internal.h>
 
 // Spatial includes.
-#include <Spatial/Core/SpatialTypes.h>
 #include <Spatial/Core/EnvironmentComponent.h>
-#include <Spatial/Gui/ImGuiExtensions.h>
 #include <Spatial/Gui/GuiStyle.h>
 
 RTTI_BEGIN_CLASS_NO_DEFAULT_CONSTRUCTOR(nap::SpatialSoundApp)
@@ -105,10 +104,16 @@ namespace nap
 		if (!error.check(mGui != nullptr, "Gui not found"))
 			return false;
 
-		spatial::GuiStyle guiStyle;
-		guiStyle.apply(&ImGui::GetStyle());
+		mMonitorGui = mResourceManager->findObject<gui::Gui>("MonitorGui");
+		if (!error.check(mGui != nullptr, "Monitor Gui not found"))
+			return false;
 
-        // All done!
+		// Apply hard-coded ImGui style to both windows
+		spatial::GuiStyle guiStyle;
+		guiStyle.apply(&mGuiService->getContext(mGuiWindow)->Style);
+		guiStyle.apply(&mGuiService->getContext(mRenderWindow)->Style);
+
+		// All done!
         return true;
     }
 
@@ -122,6 +127,7 @@ namespace nap
         mInputService->processWindowEvents(*mRenderWindow, input_router, { &mScene->getRootEntity() });
 
 		mGui->show();
+		mMonitorGui->show();
     }
 
 
