@@ -332,17 +332,7 @@
                 {
                     "Type": "nap::spatial::SpatialAudioComponent",
                     "mID": "SpatialAudioComponent",
-                    "Sources": [
-                        {
-                            "Type": "nap::spatial::ExternalInputSource",
-                            "mID": "ExternalInputSource_356ef5a2",
-                            "EnableParameterName": "enable",
-                            "Enabled": true,
-                            "Prefix": "",
-                            "StartChannel": 0,
-                            "InputChannelCount": 1
-                        }
-                    ],
+                    "Sources": [],
                     "Receives": [],
                     "InputEffects": [
                         {
@@ -1823,6 +1813,19 @@
                     "Type": "nap::spatial::HeadphonesSettingsComponent",
                     "mID": "nap::spatial::HeadphonesSettingsComponent_3a8b380b",
                     "HeadphonesSetup": "headphonesSetup"
+                },
+                {
+                    "Type": "nap::spatial::DisplaySettingsComponent",
+                    "mID": "nap::spatial::DisplaySettingsComponent_0e53f7b6",
+                    "ParameterComponent": "./ParameterComponent",
+                    "ExposedDataComponent": "./ExposedDataComponent",
+                    "Dimmed": false,
+                    "Selected": false,
+                    "UniqueId": -1,
+                    "DisplayIndex": -1,
+                    "DisplayName": "",
+                    "Category": -1,
+                    "Visible": true
                 }
             ],
             "Children": [
@@ -1833,13 +1836,6 @@
             "Type": "nap::Entity",
             "mID": "SoundObjectVisualization",
             "Components": [
-                {
-                    "Type": "nap::spatial::DisplaySettingsComponent",
-                    "mID": "DisplaySettingsComponent",
-                    "ParameterComponent": "../ParameterComponent",
-                    "Dimmed": false,
-                    "Selected": false
-                },
                 {
                     "Type": "nap::spatial::RenderableMeshCopyComponent",
                     "mID": "ParticleVisualization",
@@ -1889,7 +1885,7 @@
                     "ExposedDataComponent": "../ExposedDataComponent",
                     "DataDependencies": [
                         "../MeasurementComponent",
-                        "./DisplaySettingsComponent"
+                        "../nap::spatial::DisplaySettingsComponent_0e53f7b6"
                     ],
                     "PositionData": "particlePositions",
                     "ScaleData": "",
@@ -1897,6 +1893,7 @@
                     "ColorData": "color",
                     "SelectedData": "selected",
                     "DimmedData": "dimmed",
+                    "VisibleData": "visible",
                     "ColorUniform": "color",
                     "ScaleUniform": "",
                     "DimmedColor": {
@@ -1968,12 +1965,13 @@
                     "TranfsormComponent": "./SoundObjectVisualizationTransform",
                     "ExposedDataComponent": "../ExposedDataComponent",
                     "DataDependencies": [
-                        "./DisplaySettingsComponent"
+                        "../nap::spatial::DisplaySettingsComponent_0e53f7b6"
                     ],
                     "ColorData": "color",
                     "NameData": "displayName",
                     "SelectedData": "selected",
                     "DimmedData": "dimmed",
+                    "VisibleData": "visible",
                     "ColorUniform": "color",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
@@ -2018,7 +2016,7 @@
                     "ExposedDataComponent": "../ExposedDataComponent",
                     "DataDependencies": [
                         "../MeasurementComponent",
-                        "./DisplaySettingsComponent"
+                        "../nap::spatial::DisplaySettingsComponent_0e53f7b6"
                     ],
                     "PositionData": "particlePositions",
                     "ScaleData": "particleDimensions",
@@ -2026,6 +2024,7 @@
                     "ColorData": "color",
                     "SelectedData": "selected",
                     "DimmedData": "dimmed",
+                    "VisibleData": "visible",
                     "ColorUniform": "color",
                     "ScaleUniform": "scale",
                     "DimmedColor": {
@@ -2784,10 +2783,6 @@
                 {
                     "Entity": "MonitorTextOverlay",
                     "InstanceProperties": []
-                },
-                {
-                    "Entity": "SoundObject",
-                    "InstanceProperties": []
                 }
             ]
         },
@@ -3068,7 +3063,7 @@
         },
         {
             "Type": "nap::gui::Layout",
-            "mID": "MonitorGui2",
+            "mID": "MonitorGui",
             "Title": "MonitorGui",
             "Style": "",
             "Separators": false,
@@ -3102,12 +3097,7 @@
                     "Open": true,
                     "Border": true,
                     "RenderWindow": "Window",
-                    "Content": {
-                        "Type": "nap::gui::Gui",
-                        "mID": "Gui_c027f4be",
-                        "Title": "MonitorHeader",
-                        "Style": "HeaderFooterGuiStyle"
-                    }
+                    "Content": ""
                 },
                 {
                     "Type": "nap::gui::GuiWindow",
@@ -3138,12 +3128,7 @@
                     "Open": true,
                     "Border": true,
                     "RenderWindow": "Window",
-                    "Content": {
-                        "Type": "nap::gui::Gui",
-                        "mID": "Gui_95723ac4",
-                        "Title": "Monitor Footer",
-                        "Style": "HeaderFooterGuiStyle"
-                    }
+                    "Content": ""
                 },
                 {
                     "Type": "nap::gui::GuiWindow",
@@ -3155,7 +3140,7 @@
                         "y": 30.0
                     },
                     "Size": {
-                        "x": 50.0,
+                        "x": 80.0,
                         "y": -60.0
                     },
                     "Flags": {
@@ -3175,10 +3160,11 @@
                     "Border": true,
                     "RenderWindow": "Window",
                     "Content": {
-                        "Type": "nap::gui::Gui",
-                        "mID": "Gui_0e3cb01d",
-                        "Title": "Side Panel",
-                        "Style": ""
+                        "Type": "nap::spatial::MonitorSidePanel",
+                        "mID": "MonitorSidePanel_fac9f277",
+                        "Title": "MonitorSidePanel",
+                        "Style": "SidePanelStyle",
+                        "MoitorController": "MonitorController"
                     }
                 }
             ]
@@ -3221,6 +3207,29 @@
             ],
             "ColorSettings": [],
             "FontScaling": 0.8999999761581421
+        },
+        {
+            "Type": "nap::gui::Style",
+            "mID": "SidePanelStyle",
+            "FloatSettings": [],
+            "SizeSettings": [
+                {
+                    "Variable": "WindowPadding (size)",
+                    "Value": {
+                        "x": 20.0,
+                        "y": 10.0
+                    }
+                },
+                {
+                    "Variable": "ItemSpacing (size)",
+                    "Value": {
+                        "x": 5.0,
+                        "y": 0.0
+                    }
+                }
+            ],
+            "ColorSettings": [],
+            "FontScaling": 0.800000011920929
         },
         {
             "Type": "nap::gui::TabbedLayout",
@@ -3439,6 +3448,18 @@
             "mID": "LinePlaneMesh_2baa8e75",
             "Columns": 10,
             "Rows": 10
+        },
+        {
+            "Type": "nap::spatial::MonitorController",
+            "mID": "MonitorController",
+            "VisualizationEntity": "SoundObjectVisualization"
+        },
+        {
+            "Type": "nap::spatial::MonitorSidePanel",
+            "mID": "MonitorSidePanel_f341ffaa",
+            "Title": "",
+            "Style": "",
+            "MoitorController": "MonitorController"
         },
         {
             "Type": "nap::spatial::MultiSpeakerSetup",

@@ -50,10 +50,10 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
         properties = nap.EnvironmentInstanceProperties()
         properties.addString("nap::ParameterComponent", "Name", name)
         properties.addInt("nap::spatial::SpatialAudioComponent", "MaxParticleCount", maxParticleCount)
-        # properties.addString("nap::spatial::SoundObjectVisualizationComponent", "DisplayName", name)
-        # properties.addInt("nap::spatial::SoundObjectVisualizationComponent", "DisplayIndex", index)
-        # properties.addInt("nap::spatial::SoundObjectVisualizationComponent", "UniqueID", uniqueID)
-        # properties.addInt("nap::spatial::SoundObjectVisualizationComponent", "Category", 2 if connect else 1)
+        properties.addString("nap::spatial::DisplaySettingsComponent", "DisplayName", name)
+        properties.addInt("nap::spatial::DisplaySettingsComponent", "DisplayIndex", index)
+        properties.addInt("nap::spatial::DisplaySettingsComponent", "UniqueId", uniqueID)
+        properties.addInt("nap::spatial::DisplaySettingsComponent", "Category", 2 if connect else 1)
 
         soundObject = environment.createEntity("SoundObject", properties)
 
