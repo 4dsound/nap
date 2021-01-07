@@ -2729,7 +2729,7 @@
             "Resizable": true,
             "Visible": true,
             "SampleShading": true,
-            "Title": "4DSOUND Engine 2.0.b7",
+            "Title": "4DSOUND Engine 2.0.b8",
             "Width": 820,
             "Height": 720,
             "Mode": "Immediate",
@@ -2750,7 +2750,7 @@
             "Resizable": true,
             "Visible": true,
             "SampleShading": true,
-            "Title": "4DSOUND Engine 2.0.b7",
+            "Title": "4DSOUND Engine 2.0.b8",
             "Width": 1280,
             "Height": 720,
             "Mode": "Immediate",
@@ -2925,7 +2925,7 @@
                         },
                         "Size": {
                             "x": -1.0,
-                            "y": 30.0
+                            "y": 25.0
                         },
                         "Flags": {
                             "NoScrollBar": true,
@@ -2948,11 +2948,11 @@
                         "Style": "HeaderFooterGuiStyle",
                         "Position": {
                             "x": 1.0,
-                            "y": -30.0
+                            "y": -26.0
                         },
                         "Size": {
                             "x": -1.0,
-                            "y": 30.0
+                            "y": 26.0
                         },
                         "Flags": {
                             "NoScrollBar": true,
@@ -2978,11 +2978,11 @@
                         "Style": "",
                         "Position": {
                             "x": 1.0,
-                            "y": 30.0
+                            "y": 25.0
                         },
                         "Size": {
                             "x": -1.0,
-                            "y": -60.0
+                            "y": -50.0
                         },
                         "Flags": {
                             "NoScrollBar": false,

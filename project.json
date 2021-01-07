@@ -2,7 +2,7 @@
   "Type": "nap::ProjectInfo",
   "mID": "ProjectInfo",
   "Title": "4DSOUND Engine",
-  "Version": "2.0.b7",
+  "Version": "2.0.b8",
   "RequiredModules": [
     "mod_napapp",
     "mod_napaudio",

@@ -32,4 +32,4 @@ project_json_to_cmake()
 target_link_libraries(${PROJECT_NAME} ${NAP_MODULES})
 
 # Package into release, export FBX, other shared source project fixes
-nap_source_project_packaging_and_shared_postprocessing(TRUE FALSE "apps" TRUE)
+nap_source_project_packaging_and_shared_postprocessing(TRUE FALSE "projects" TRUE)
