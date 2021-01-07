@@ -295,9 +295,12 @@
                     "RenderableMeshCopyComponent": "./nap::spatial::RenderableMeshCopyComponent_22059036",
                     "TextOverlayController": "../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
                     "MultiSpeakerSetup": "multiSetup",
+                    "MonitorController": "MonitorController",
                     "SpeakerType": "satellite",
                     "ShowTextLabels": true,
-                    "LabelPrefix": ""
+                    "LabelPrefix": "",
+                    "MonitorVisibilityProperty": "speakers",
+                    "MonitorLabelVisibilityProperty": "speakerLabels"
                 }
             ],
             "Children": []
@@ -1817,6 +1820,7 @@
                 {
                     "Type": "nap::spatial::DisplaySettingsComponent",
                     "mID": "nap::spatial::DisplaySettingsComponent_0e53f7b6",
+                    "MonitorController": "MonitorController",
                     "ParameterComponent": "./ParameterComponent",
                     "ExposedDataComponent": "./ExposedDataComponent",
                     "Dimmed": false,
@@ -1887,11 +1891,14 @@
                         "../MeasurementComponent",
                         "../nap::spatial::DisplaySettingsComponent_0e53f7b6"
                     ],
+                    "MonitorController": "MonitorController",
                     "PositionData": "particlePositions",
                     "ScaleData": "",
                     "RotationData": "particleRotations",
                     "ColorData": "color",
                     "SelectedData": "selected",
+                    "MonitorVisibilityProperty": "particles",
+                    "MonitorLabelVisibilityProperty": "particleLabels",
                     "DimmedData": "dimmed",
                     "VisibleData": "visible",
                     "ColorUniform": "color",
@@ -1907,7 +1914,7 @@
                         "z": 1.0
                     },
                     "BlinkFrequency": 1.0,
-                    "ShowLabels": false
+                    "ShowLabels": true
                 },
                 {
                     "Type": "nap::TransformComponent",
@@ -1967,11 +1974,14 @@
                     "DataDependencies": [
                         "../nap::spatial::DisplaySettingsComponent_0e53f7b6"
                     ],
+                    "MonitorController": "MonitorController",
                     "ColorData": "color",
                     "NameData": "displayName",
                     "SelectedData": "selected",
                     "DimmedData": "dimmed",
                     "VisibleData": "visible",
+                    "MonitorVisibilityProperty": "soundObjectShapes",
+                    "MonitorLabelVisibilityProperty": "soundObjectNames",
                     "ColorUniform": "color",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
@@ -2018,11 +2028,14 @@
                         "../MeasurementComponent",
                         "../nap::spatial::DisplaySettingsComponent_0e53f7b6"
                     ],
+                    "MonitorController": "MonitorController",
                     "PositionData": "particlePositions",
                     "ScaleData": "particleDimensions",
                     "RotationData": "particleRotations",
                     "ColorData": "color",
                     "SelectedData": "selected",
+                    "MonitorVisibilityProperty": "particleAreas",
+                    "MonitorLabelVisibilityProperty": "",
                     "DimmedData": "dimmed",
                     "VisibleData": "visible",
                     "ColorUniform": "color",
@@ -2126,9 +2139,12 @@
                     "RenderableMeshCopyComponent": "./nap::spatial::RenderableMeshCopyComponent_1a32303f",
                     "TextOverlayController": "../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
                     "MultiSpeakerSetup": "multiSetup",
+                    "MonitorController": "MonitorController",
                     "SpeakerType": "sub",
                     "ShowTextLabels": true,
-                    "LabelPrefix": "sub"
+                    "LabelPrefix": "sub",
+                    "MonitorVisibilityProperty": "speakers",
+                    "MonitorLabelVisibilityProperty": "speakerLabels"
                 }
             ],
             "Children": []
@@ -3072,7 +3088,7 @@
                 {
                     "Type": "nap::gui::GuiWindow",
                     "mID": "GuiWindow_2ce198bf",
-                    "Title": "Monitor Header",
+                    "Title": "MonitorHeaderWindow",
                     "Style": "",
                     "Position": {
                         "x": 0.0,
@@ -3080,7 +3096,7 @@
                     },
                     "Size": {
                         "x": 0.0,
-                        "y": 30.0
+                        "y": 26.0
                     },
                     "Flags": {
                         "NoTitleBar": true,
@@ -3095,81 +3111,157 @@
                         "HorizontalScrollBar": false,
                         "CanClose": false
                     },
-                    "Alpha": 1.0,
-                    "Open": true,
-                    "Border": true,
-                    "RenderWindow": "Window",
-                    "Content": ""
-                },
-                {
-                    "Type": "nap::gui::GuiWindow",
-                    "mID": "GuiWindow_ce0eb5ed",
-                    "Title": "Monitor Footer",
-                    "Style": "",
-                    "Position": {
-                        "x": 0.0,
-                        "y": -30.0
-                    },
-                    "Size": {
-                        "x": 0.0,
-                        "y": 30.0
-                    },
-                    "Flags": {
-                        "NoTitleBar": true,
-                        "NoResize": true,
-                        "NoMove": true,
-                        "NoScrollBar": true,
-                        "NoScrollWithMouse": true,
-                        "NoCollapse": true,
-                        "AlwaysAutoResize": false,
-                        "NoSavedSettings": true,
-                        "MenuBar": false,
-                        "HorizontalScrollBar": false,
-                        "CanClose": false
-                    },
-                    "Alpha": 1.0,
-                    "Open": true,
-                    "Border": true,
-                    "RenderWindow": "Window",
-                    "Content": ""
-                },
-                {
-                    "Type": "nap::gui::GuiWindow",
-                    "mID": "GuiWindow_71304667",
-                    "Title": "Side Panel",
-                    "Style": "",
-                    "Position": {
-                        "x": 0.0,
-                        "y": 30.0
-                    },
-                    "Size": {
-                        "x": 80.0,
-                        "y": -60.0
-                    },
-                    "Flags": {
-                        "NoTitleBar": true,
-                        "NoResize": true,
-                        "NoMove": true,
-                        "NoScrollBar": true,
-                        "NoScrollWithMouse": true,
-                        "NoCollapse": true,
-                        "AlwaysAutoResize": false,
-                        "NoSavedSettings": true,
-                        "MenuBar": false,
-                        "HorizontalScrollBar": false,
-                        "CanClose": false
-                    },
-                    "Alpha": 1.0,
+                    "Alpha": 0.699999988079071,
                     "Open": true,
                     "Border": true,
                     "RenderWindow": "Window",
                     "Content": {
-                        "Type": "nap::spatial::MonitorSidePanel",
-                        "mID": "MonitorSidePanel_fac9f277",
-                        "Title": "MonitorSidePanel",
-                        "Style": "SidePanelStyle",
-                        "MoitorController": "MonitorController",
-                        "SoundObjectInpectorWindow": "SoundObjectInspectorWindow"
+                        "Type": "nap::gui::Panel",
+                        "mID": "Panel_d842b9ee",
+                        "Title": "HeaderPanel",
+                        "Style": "HeaderFooterGuiStyle",
+                        "Position": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Size": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Flags": {
+                            "NoScrollBar": false,
+                            "NoScrollWithMouse": false,
+                            "HorizontalScrollBar": false
+                        },
+                        "Alpha": 0.0,
+                        "Border": true,
+                        "Content": {
+                            "Type": "nap::spatial::MonitorHeader",
+                            "mID": "MonitorHeader_605325db",
+                            "Title": "MonitorController",
+                            "Style": "",
+                            "MonitorController": "MonitorController"
+                        }
+                    }
+                },
+                {
+                    "Type": "nap::gui::GuiWindow",
+                    "mID": "GuiWindow_ce0eb5ed",
+                    "Title": "MonitorFooterWindow",
+                    "Style": "",
+                    "Position": {
+                        "x": 0.0,
+                        "y": -26.0
+                    },
+                    "Size": {
+                        "x": 0.0,
+                        "y": 25.0
+                    },
+                    "Flags": {
+                        "NoTitleBar": true,
+                        "NoResize": true,
+                        "NoMove": true,
+                        "NoScrollBar": true,
+                        "NoScrollWithMouse": false,
+                        "NoCollapse": true,
+                        "AlwaysAutoResize": false,
+                        "NoSavedSettings": true,
+                        "MenuBar": false,
+                        "HorizontalScrollBar": false,
+                        "CanClose": false
+                    },
+                    "Alpha": 0.699999988079071,
+                    "Open": true,
+                    "Border": true,
+                    "RenderWindow": "Window",
+                    "Content": {
+                        "Type": "nap::gui::Panel",
+                        "mID": "Panel_806e39f5",
+                        "Title": "MonitorFooterPanel",
+                        "Style": "HeaderFooterGuiStyle",
+                        "Position": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Size": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Flags": {
+                            "NoScrollBar": false,
+                            "NoScrollWithMouse": false,
+                            "HorizontalScrollBar": false
+                        },
+                        "Alpha": 0.0,
+                        "Border": true,
+                        "Content": {
+                            "Type": "nap::spatial::MonitorFooter",
+                            "mID": "MonitorFooter_d4fb97d2",
+                            "Title": "MonitorFooter",
+                            "Style": "HeaderFooterGuiStyle",
+                            "License": "Licensing",
+                            "Image": "LogoSmall"
+                        }
+                    }
+                },
+                {
+                    "Type": "nap::gui::GuiWindow",
+                    "mID": "GuiWindow_71304667",
+                    "Title": "SidePanelWindow",
+                    "Style": "",
+                    "Position": {
+                        "x": 0.0,
+                        "y": 26.0
+                    },
+                    "Size": {
+                        "x": 80.0,
+                        "y": -51.0
+                    },
+                    "Flags": {
+                        "NoTitleBar": true,
+                        "NoResize": true,
+                        "NoMove": true,
+                        "NoScrollBar": true,
+                        "NoScrollWithMouse": true,
+                        "NoCollapse": true,
+                        "AlwaysAutoResize": false,
+                        "NoSavedSettings": true,
+                        "MenuBar": false,
+                        "HorizontalScrollBar": true,
+                        "CanClose": false
+                    },
+                    "Alpha": 0.699999988079071,
+                    "Open": true,
+                    "Border": true,
+                    "RenderWindow": "Window",
+                    "Content": {
+                        "Type": "nap::gui::Panel",
+                        "mID": "Panel_4cce7a9d",
+                        "Title": "MonitorSidePanelPanel",
+                        "Style": "HeaderFooterGuiStyle",
+                        "Position": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Size": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Flags": {
+                            "NoScrollBar": false,
+                            "NoScrollWithMouse": false,
+                            "HorizontalScrollBar": false
+                        },
+                        "Alpha": 0.0,
+                        "Border": false,
+                        "Content": {
+                            "Type": "nap::spatial::MonitorSidePanel",
+                            "mID": "MonitorSidePanel_fa2a12da",
+                            "Title": "MonitorSidePanel",
+                            "Style": "",
+                            "MoitorController": "MonitorController",
+                            "SoundObjectInpectorWindow": "SoundObjectInspectorWindow"
+                        }
                     }
                 },
                 {
@@ -3515,7 +3607,44 @@
         },
         {
             "Type": "nap::spatial::MonitorController",
-            "mID": "MonitorController"
+            "mID": "MonitorController",
+            "VisibilityProperies": [
+                {
+                    "ID": "soundObjectShapes",
+                    "Title": "Sound Object Shapes",
+                    "Value": true
+                },
+                {
+                    "ID": "soundObjectNames",
+                    "Title": "Sound Object Names",
+                    "Value": true
+                },
+                {
+                    "ID": "particles",
+                    "Title": "Particles",
+                    "Value": true
+                },
+                {
+                    "ID": "particleAreas",
+                    "Title": "Particle Areas",
+                    "Value": true
+                },
+                {
+                    "ID": "particleLabels",
+                    "Title": "Particle Labels",
+                    "Value": false
+                },
+                {
+                    "ID": "speakers",
+                    "Title": "Speakers",
+                    "Value": true
+                },
+                {
+                    "ID": "speakerLabels",
+                    "Title": "Speaker Labels",
+                    "Value": false
+                }
+            ]
         },
         {
             "Type": "nap::spatial::MonitorSidePanel",
