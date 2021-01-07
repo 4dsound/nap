@@ -2884,7 +2884,8 @@
                 "AlwaysAutoResize": true,
                 "NoSavedSettings": true,
                 "MenuBar": false,
-                "HorizontalScrollBar": false
+                "HorizontalScrollBar": false,
+                "CanClose": false
             },
             "Alpha": 1.0,
             "Open": true,
@@ -3091,7 +3092,8 @@
                         "AlwaysAutoResize": false,
                         "NoSavedSettings": true,
                         "MenuBar": false,
-                        "HorizontalScrollBar": false
+                        "HorizontalScrollBar": false,
+                        "CanClose": false
                     },
                     "Alpha": 1.0,
                     "Open": true,
@@ -3122,7 +3124,8 @@
                         "AlwaysAutoResize": false,
                         "NoSavedSettings": true,
                         "MenuBar": false,
-                        "HorizontalScrollBar": false
+                        "HorizontalScrollBar": false,
+                        "CanClose": false
                     },
                     "Alpha": 1.0,
                     "Open": true,
@@ -3153,7 +3156,8 @@
                         "AlwaysAutoResize": false,
                         "NoSavedSettings": true,
                         "MenuBar": false,
-                        "HorizontalScrollBar": false
+                        "HorizontalScrollBar": false,
+                        "CanClose": false
                     },
                     "Alpha": 1.0,
                     "Open": true,
@@ -3164,7 +3168,67 @@
                         "mID": "MonitorSidePanel_fac9f277",
                         "Title": "MonitorSidePanel",
                         "Style": "SidePanelStyle",
-                        "MoitorController": "MonitorController"
+                        "MoitorController": "MonitorController",
+                        "SoundObjectInpectorWindow": "SoundObjectInspectorWindow"
+                    }
+                },
+                {
+                    "Type": "nap::gui::GuiWindow",
+                    "mID": "SoundObjectInspectorWindow",
+                    "Title": "Sound Object Inspector",
+                    "Style": "",
+                    "Position": {
+                        "x": 100.0,
+                        "y": 50.0
+                    },
+                    "Size": {
+                        "x": 500.0,
+                        "y": 300.0
+                    },
+                    "Flags": {
+                        "NoTitleBar": false,
+                        "NoResize": false,
+                        "NoMove": false,
+                        "NoScrollBar": true,
+                        "NoScrollWithMouse": true,
+                        "NoCollapse": false,
+                        "AlwaysAutoResize": false,
+                        "NoSavedSettings": false,
+                        "MenuBar": false,
+                        "HorizontalScrollBar": false,
+                        "CanClose": true
+                    },
+                    "Alpha": 0.75,
+                    "Open": false,
+                    "Border": true,
+                    "RenderWindow": "Window",
+                    "Content": {
+                        "Type": "nap::gui::Panel",
+                        "mID": "Panel_8e46681b",
+                        "Title": "SoundObjectInspectorPanel",
+                        "Style": "MainGuiStyle",
+                        "Position": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Size": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Flags": {
+                            "NoScrollBar": false,
+                            "NoScrollWithMouse": false,
+                            "HorizontalScrollBar": false
+                        },
+                        "Alpha": 0.0,
+                        "Border": true,
+                        "Content": {
+                            "Type": "nap::spatial::SoundObjectInspector",
+                            "mID": "SoundObjectInspector_a76c2761",
+                            "Title": "Sound Object Inspector",
+                            "Style": "",
+                            "MonitorController": "MonitorController"
+                        }
                     }
                 }
             ]
@@ -3451,15 +3515,15 @@
         },
         {
             "Type": "nap::spatial::MonitorController",
-            "mID": "MonitorController",
-            "VisualizationEntity": "SoundObjectVisualization"
+            "mID": "MonitorController"
         },
         {
             "Type": "nap::spatial::MonitorSidePanel",
             "mID": "MonitorSidePanel_f341ffaa",
             "Title": "",
             "Style": "",
-            "MoitorController": "MonitorController"
+            "MoitorController": "MonitorController",
+            "SoundObjectInpectorWindow": ""
         },
         {
             "Type": "nap::spatial::MultiSpeakerSetup",
