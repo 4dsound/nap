@@ -3394,191 +3394,173 @@
             "Style": "",
             "Tabs": [
                 {
+                    "Type": "nap::gui::Panel",
+                    "mID": "BasicGuiPanel",
                     "Title": "Setup",
+                    "Style": "",
+                    "Position": {
+                        "x": 11.0,
+                        "y": 50.0
+                    },
+                    "Size": {
+                        "x": -21.0,
+                        "y": -70.0
+                    },
+                    "Flags": {
+                        "NoScrollBar": false,
+                        "NoScrollWithMouse": false,
+                        "HorizontalScrollBar": false
+                    },
+                    "Alpha": 1.0,
+                    "Border": true,
                     "Content": {
-                        "Type": "nap::gui::Panel",
-                        "mID": "BasicGuiPanel",
-                        "Title": "BasicGuiPanel",
+                        "Type": "nap::gui::GuiLink",
+                        "mID": "GuiLink_afa57f80",
+                        "Title": "BasicGuiLink",
                         "Style": "",
-                        "Position": {
-                            "x": 11.0,
-                            "y": 80.0
-                        },
-                        "Size": {
-                            "x": -20.0,
-                            "y": -70.0
-                        },
-                        "Flags": {
-                            "NoScrollBar": false,
-                            "NoScrollWithMouse": false,
-                            "HorizontalScrollBar": false
-                        },
-                        "Alpha": 1.0,
-                        "Border": true,
-                        "Content": {
-                            "Type": "nap::gui::GuiLink",
-                            "mID": "GuiLink_afa57f80",
-                            "Title": "BasicGuiLink",
-                            "Style": "",
-                            "Link": "BasicGui"
-                        }
+                        "Link": "BasicGui"
                     }
                 },
                 {
+                    "Type": "nap::gui::Panel",
+                    "mID": "Panel_aa521aa3",
                     "Title": "Parameters",
+                    "Style": "",
+                    "Position": {
+                        "x": 11.0,
+                        "y": 50.0
+                    },
+                    "Size": {
+                        "x": -21.0,
+                        "y": -70.0
+                    },
+                    "Flags": {
+                        "NoScrollBar": false,
+                        "NoScrollWithMouse": false,
+                        "HorizontalScrollBar": false
+                    },
+                    "Alpha": 1.0,
+                    "Border": true,
                     "Content": {
-                        "Type": "nap::gui::Panel",
-                        "mID": "Panel_aa521aa3",
-                        "Title": "Parameters Panel",
+                        "Type": "nap::spatial::SpatialParameterGUI",
+                        "mID": "SpatialParameterGUI_49ce80de",
+                        "Title": "SpatialParameterGui",
                         "Style": "",
-                        "Position": {
-                            "x": 11.0,
-                            "y": 80.0
-                        },
-                        "Size": {
-                            "x": -20.0,
-                            "y": -70.0
-                        },
-                        "Flags": {
-                            "NoScrollBar": false,
-                            "NoScrollWithMouse": false,
-                            "HorizontalScrollBar": false
-                        },
-                        "Alpha": 1.0,
-                        "Border": true,
-                        "Content": {
-                            "Type": "nap::spatial::SpatialParameterGUI",
-                            "mID": "SpatialParameterGUI_49ce80de",
-                            "Title": "SpatialParameterGui",
-                            "Style": "",
-                            "Scene": "Scene",
-                            "ParameterGroup": "",
-                            "ReadOnly": false
-                        }
+                        "Scene": "Scene",
+                        "ParameterGroup": "",
+                        "ReadOnly": false
                     }
                 },
                 {
+                    "Type": "nap::gui::Panel",
+                    "mID": "Panel_a36473de",
                     "Title": "Exposed Data",
+                    "Style": "",
+                    "Position": {
+                        "x": 11.0,
+                        "y": 80.0
+                    },
+                    "Size": {
+                        "x": -21.0,
+                        "y": -70.0
+                    },
+                    "Flags": {
+                        "NoScrollBar": false,
+                        "NoScrollWithMouse": false,
+                        "HorizontalScrollBar": false
+                    },
+                    "Alpha": 1.0,
+                    "Border": true,
                     "Content": {
-                        "Type": "nap::gui::Panel",
-                        "mID": "Panel_a36473de",
-                        "Title": "Exposed Data Panel",
+                        "Type": "nap::spatial::ExposedDataGui",
+                        "mID": "ExposedDataGui_8b723989",
+                        "Title": "Exposed Data",
                         "Style": "",
-                        "Position": {
-                            "x": 11.0,
-                            "y": 80.0
-                        },
-                        "Size": {
-                            "x": -20.0,
-                            "y": -70.0
-                        },
-                        "Flags": {
-                            "NoScrollBar": false,
-                            "NoScrollWithMouse": false,
-                            "HorizontalScrollBar": false
-                        },
-                        "Alpha": 1.0,
-                        "Border": true,
-                        "Content": {
-                            "Type": "nap::spatial::ExposedDataGui",
-                            "mID": "ExposedDataGui_8b723989",
-                            "Title": "Exposed Data",
-                            "Style": "",
-                            "Scene": "Scene"
-                        }
+                        "Scene": "Scene"
                     }
                 },
                 {
+                    "Type": "nap::gui::Panel",
+                    "mID": "Panel_a933d332",
                     "Title": "OSC Log",
+                    "Style": "",
+                    "Position": {
+                        "x": 11.0,
+                        "y": 80.0
+                    },
+                    "Size": {
+                        "x": -21.0,
+                        "y": -70.0
+                    },
+                    "Flags": {
+                        "NoScrollBar": false,
+                        "NoScrollWithMouse": false,
+                        "HorizontalScrollBar": false
+                    },
+                    "Alpha": 1.0,
+                    "Border": true,
                     "Content": {
-                        "Type": "nap::gui::Panel",
-                        "mID": "Panel_a933d332",
-                        "Title": "OSC Log Panel",
+                        "Type": "nap::spatial::OSCLogGui",
+                        "mID": "OSCLogGui_759f2ca0",
+                        "Title": "OSC Log Gui",
                         "Style": "",
-                        "Position": {
-                            "x": 11.0,
-                            "y": 80.0
-                        },
-                        "Size": {
-                            "x": -20.0,
-                            "y": -70.0
-                        },
-                        "Flags": {
-                            "NoScrollBar": false,
-                            "NoScrollWithMouse": false,
-                            "HorizontalScrollBar": false
-                        },
-                        "Alpha": 1.0,
-                        "Border": true,
-                        "Content": {
-                            "Type": "nap::spatial::OSCLogGui",
-                            "mID": "OSCLogGui_759f2ca0",
-                            "Title": "OSC Log Gui",
-                            "Style": "",
-                            "OSCLogger": "OSCLogger",
-                            "LineCount": 25
-                        }
+                        "OSCLogger": "OSCLogger",
+                        "LineCount": 25
                     }
                 },
                 {
+                    "Type": "nap::gui::Panel",
+                    "mID": "Panel_066020e1",
                     "Title": "Statistics",
+                    "Style": "",
+                    "Position": {
+                        "x": 11.0,
+                        "y": 80.0
+                    },
+                    "Size": {
+                        "x": -21.0,
+                        "y": -70.0
+                    },
+                    "Flags": {
+                        "NoScrollBar": false,
+                        "NoScrollWithMouse": false,
+                        "HorizontalScrollBar": false
+                    },
+                    "Alpha": 1.0,
+                    "Border": true,
                     "Content": {
-                        "Type": "nap::gui::Panel",
-                        "mID": "Panel_066020e1",
-                        "Title": "Statistics Panel",
-                        "Style": "",
-                        "Position": {
-                            "x": 11.0,
-                            "y": 80.0
-                        },
-                        "Size": {
-                            "x": -20.0,
-                            "y": -70.0
-                        },
-                        "Flags": {
-                            "NoScrollBar": false,
-                            "NoScrollWithMouse": false,
-                            "HorizontalScrollBar": false
-                        },
-                        "Alpha": 1.0,
-                        "Border": true,
-                        "Content": {
-                            "Type": "nap::spatial::StatisticsGui",
-                            "mID": "StatisticsGui_f828b741",
-                            "Title": "Statistics Gui",
-                            "Style": ""
-                        }
+                        "Type": "nap::spatial::StatisticsGui",
+                        "mID": "StatisticsGui_f828b741",
+                        "Title": "Statistics Gui",
+                        "Style": ""
                     }
                 },
                 {
+                    "Type": "nap::gui::Panel",
+                    "mID": "LicensePanel",
                     "Title": "License",
+                    "Style": "",
+                    "Position": {
+                        "x": 11.0,
+                        "y": 80.0
+                    },
+                    "Size": {
+                        "x": -21.0,
+                        "y": -70.0
+                    },
+                    "Flags": {
+                        "NoScrollBar": false,
+                        "NoScrollWithMouse": false,
+                        "HorizontalScrollBar": false
+                    },
+                    "Alpha": 1.0,
+                    "Border": true,
                     "Content": {
-                        "Type": "nap::gui::Panel",
-                        "mID": "LicensePanel",
-                        "Title": "License Panel",
+                        "Type": "nap::spatial::LicensingGui",
+                        "mID": "LicensingGui_e46af14c",
+                        "Title": "",
                         "Style": "",
-                        "Position": {
-                            "x": 11.0,
-                            "y": 80.0
-                        },
-                        "Size": {
-                            "x": -20.0,
-                            "y": -70.0
-                        },
-                        "Flags": {
-                            "NoScrollBar": false,
-                            "NoScrollWithMouse": false,
-                            "HorizontalScrollBar": false
-                        },
-                        "Alpha": 1.0,
-                        "Border": true,
-                        "Content": {
-                            "Type": "nap::spatial::LicensingGui",
-                            "mID": "LicensingGui_e46af14c",
-                            "Title": "",
-                            "Style": "",
-                            "License": "Licensing"
-                        }
+                        "License": "Licensing"
                     }
                 }
             ]
