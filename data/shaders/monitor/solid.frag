@@ -22,13 +22,17 @@ void main()
     vec3 base_color = mix(ubo.color.rgb, intensity_color, ubo.intensity);
     
     // Calculate mesh to camera angle for halo effect
-    vec3 cam_normal = normalize(ubo.inCameraPosition - passPosition);
+    vec3 cam_normal = normalize(vec3(0, 0, 0) - passPosition);
     
     float cam_surface_dot = clamp(dot(normalize(passNormal), cam_normal), 0.0, 1.0);
     cam_surface_dot = clamp((1.0 - cam_surface_dot) - 0.1, 0.0, 1.0);
     cam_surface_dot = pow(cam_surface_dot, 2.0);
     
     // Mix in the halo, set fragment color output
-    out_Color.rgb = mix(base_color, halo_color, cam_surface_dot);
+    float cameraDistance = length(passPosition - ubo.inCameraPosition);
+    float maxCameraDistance = 7;
+    float distanceFade =  1 - 0.5 * (cameraDistance / maxCameraDistance);
+    vec3 fadedColor = mix(vec3(0.1, 0.1, 0.1), base_color, distanceFade);
+    out_Color.rgb = mix(fadedColor, halo_color, cam_surface_dot);
     out_Color.a = 0;
 }

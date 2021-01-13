@@ -65,7 +65,7 @@
                     "Visible": false,
                     "Mesh": "AxesHelperMesh",
                     "MaterialInstance": {
-                        "Material": "LineMaterial",
+                        "Material": "AxesHelperMaterial",
                         "Uniforms": [],
                         "Samplers": [],
                         "BlendMode": "NotSet",
@@ -242,6 +242,7 @@
                     "Type": "nap::spatial::RenderableMeshCopyComponent",
                     "mID": "nap::spatial::RenderableMeshCopyComponent_22059036",
                     "Visible": true,
+                    "CameraTransformComponent": "../camera/CameraTransformComponent",
                     "MaterialInstance": {
                         "Material": "SolidMaterial",
                         "Uniforms": [
@@ -286,6 +287,7 @@
                         }
                     ],
                     "Rotations": [],
+                    "CameraPositionUniform": "",
                     "UniformFloatValues": [],
                     "UniformVec3Values": []
                 },
@@ -295,7 +297,6 @@
                     "RenderableMeshCopyComponent": "./nap::spatial::RenderableMeshCopyComponent_22059036",
                     "TextOverlayController": "../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
                     "MultiSpeakerSetup": "multiSetup",
-                    "MonitorController": "MonitorController",
                     "SpeakerType": "satellite",
                     "ShowTextLabels": true,
                     "LabelPrefix": "",
@@ -330,7 +331,8 @@
                 },
                 {
                     "Type": "nap::spatial::OSCParameterControlComponent",
-                    "mID": "OSCParameterControlComponent"
+                    "mID": "OSCParameterControlComponent",
+                    "OSCLogger": "OSCLogger"
                 },
                 {
                     "Type": "nap::spatial::SpatialAudioComponent",
@@ -1844,6 +1846,7 @@
                     "Type": "nap::spatial::RenderableMeshCopyComponent",
                     "mID": "ParticleVisualization",
                     "Visible": true,
+                    "CameraTransformComponent": "../../camera/CameraTransformComponent",
                     "MaterialInstance": {
                         "Material": "SolidMaterial",
                         "Uniforms": [
@@ -1878,6 +1881,7 @@
                         }
                     ],
                     "Rotations": [],
+                    "CameraPositionUniform": "inCameraPosition",
                     "UniformFloatValues": [],
                     "UniformVec3Values": []
                 },
@@ -1891,7 +1895,6 @@
                         "../MeasurementComponent",
                         "../nap::spatial::DisplaySettingsComponent_0e53f7b6"
                     ],
-                    "MonitorController": "MonitorController",
                     "PositionData": "particlePositions",
                     "ScaleData": "",
                     "RotationData": "particleRotations",
@@ -1944,7 +1947,7 @@
                     "Visible": true,
                     "Mesh": "",
                     "MaterialInstance": {
-                        "Material": "ConstantMaterial",
+                        "Material": "LinesMaterial",
                         "Uniforms": [],
                         "Samplers": [],
                         "BlendMode": "NotSet",
@@ -1970,11 +1973,11 @@
                     "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
                     "ShapeComponent": "../ShapeComponent",
                     "TranfsormComponent": "./SoundObjectVisualizationTransform",
+                    "CameraTranfsormComponent": "../../camera/CameraTransformComponent",
                     "ExposedDataComponent": "../ExposedDataComponent",
                     "DataDependencies": [
                         "../nap::spatial::DisplaySettingsComponent_0e53f7b6"
                     ],
-                    "MonitorController": "MonitorController",
                     "ColorData": "color",
                     "NameData": "displayName",
                     "SelectedData": "selected",
@@ -1982,7 +1985,10 @@
                     "VisibleData": "visible",
                     "MonitorVisibilityProperty": "soundObjectShapes",
                     "MonitorLabelVisibilityProperty": "soundObjectNames",
+                    "UBO": "UBO",
+                    "UBOVert": "UBOVert",
                     "ColorUniform": "color",
+                    "CameraPositionUniform": "cameraPosition",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
@@ -2001,6 +2007,7 @@
                     "Type": "nap::spatial::RenderableMeshCopyComponent",
                     "mID": "CloudVisualization",
                     "Visible": true,
+                    "CameraTransformComponent": "../../camera/CameraTransformComponent",
                     "MaterialInstance": {
                         "Material": "PointCloudMaterial",
                         "Uniforms": [],
@@ -2015,6 +2022,7 @@
                     "Positions": [],
                     "Scales": [],
                     "Rotations": [],
+                    "CameraPositionUniform": "cameraPosition",
                     "UniformFloatValues": [],
                     "UniformVec3Values": []
                 },
@@ -2028,7 +2036,6 @@
                         "../MeasurementComponent",
                         "../nap::spatial::DisplaySettingsComponent_0e53f7b6"
                     ],
-                    "MonitorController": "MonitorController",
                     "PositionData": "particlePositions",
                     "ScaleData": "particleDimensions",
                     "RotationData": "particleRotations",
@@ -2086,6 +2093,7 @@
                     "Type": "nap::spatial::RenderableMeshCopyComponent",
                     "mID": "nap::spatial::RenderableMeshCopyComponent_1a32303f",
                     "Visible": true,
+                    "CameraTransformComponent": "../camera/CameraTransformComponent",
                     "MaterialInstance": {
                         "Material": "SolidMaterial",
                         "Uniforms": [
@@ -2130,6 +2138,7 @@
                         }
                     ],
                     "Rotations": [],
+                    "CameraPositionUniform": "",
                     "UniformFloatValues": [],
                     "UniformVec3Values": []
                 },
@@ -2139,7 +2148,6 @@
                     "RenderableMeshCopyComponent": "./nap::spatial::RenderableMeshCopyComponent_1a32303f",
                     "TextOverlayController": "../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
                     "MultiSpeakerSetup": "multiSetup",
-                    "MonitorController": "MonitorController",
                     "SpeakerType": "sub",
                     "ShowTextLabels": true,
                     "LabelPrefix": "sub",
@@ -2198,7 +2206,7 @@
             "Components": [
                 {
                     "Type": "nap::PerspCameraComponent",
-                    "mID": "PerspCameraComponenr",
+                    "mID": "PerspCameraComponent",
                     "Properties": {
                         "FieldOfView": 50.0,
                         "NearClippingPlane": 0.10000000149011612,
@@ -2223,7 +2231,7 @@
                 },
                 {
                     "Type": "nap::TransformComponent",
-                    "mID": "nap::TransformComponent",
+                    "mID": "CameraTransformComponent",
                     "Properties": {
                         "Translate": {
                             "x": 0.0,
@@ -2248,7 +2256,7 @@
                     "mID": "nap::FirstPersonController_46290306",
                     "MovementSpeed": 5.0,
                     "RotateSpeed": 0.004999999888241291,
-                    "PerspCameraComponent": "./PerspCameraComponenr"
+                    "PerspCameraComponent": "./PerspCameraComponent"
                 }
             ],
             "Children": []
@@ -2341,7 +2349,8 @@
                 },
                 {
                     "Type": "nap::spatial::OSCParameterControlComponent",
-                    "mID": "nap::spatial::OSCParameterControlComponent_bcfa0d0f"
+                    "mID": "nap::spatial::OSCParameterControlComponent_bcfa0d0f",
+                    "OSCLogger": "OSCLogger"
                 },
                 {
                     "Type": "nap::spatial::TransformationChainComponent",
@@ -2420,6 +2429,25 @@
         },
         {
             "Type": "nap::Material",
+            "mID": "AxesHelperMaterial",
+            "Uniforms": [],
+            "Samplers": [],
+            "Shader": "AxesHelperShader",
+            "VertexAttributeBindings": [
+                {
+                    "MeshAttributeID": "Position",
+                    "ShaderAttributeID": "in_Position"
+                },
+                {
+                    "MeshAttributeID": "Color0",
+                    "ShaderAttributeID": "in_Color0"
+                }
+            ],
+            "BlendMode": "Opaque",
+            "DepthMode": "InheritFromBlendMode"
+        },
+        {
+            "Type": "nap::Material",
             "mID": "ConstantMaterial",
             "Uniforms": [
                 {
@@ -2478,20 +2506,11 @@
         },
         {
             "Type": "nap::Material",
-            "mID": "LineMaterial",
+            "mID": "LinesMaterial",
             "Uniforms": [],
             "Samplers": [],
-            "Shader": "LineShader",
-            "VertexAttributeBindings": [
-                {
-                    "MeshAttributeID": "Position",
-                    "ShaderAttributeID": "in_Position"
-                },
-                {
-                    "MeshAttributeID": "Color0",
-                    "ShaderAttributeID": "in_Color0"
-                }
-            ],
+            "Shader": "LinesShader",
+            "VertexAttributeBindings": [],
             "BlendMode": "Opaque",
             "DepthMode": "InheritFromBlendMode"
         },
@@ -2799,8 +2818,18 @@
                 {
                     "Entity": "MonitorTextOverlay",
                     "InstanceProperties": []
+                },
+                {
+                    "Entity": "SoundObject",
+                    "InstanceProperties": []
                 }
             ]
+        },
+        {
+            "Type": "nap::ShaderFromFile",
+            "mID": "AxesHelperShader",
+            "VertShader": "shaders/monitor/axeshelper.vert",
+            "FragShader": "shaders/monitor/axeshelper.frag"
         },
         {
             "Type": "nap::ShaderFromFile",
@@ -2810,9 +2839,9 @@
         },
         {
             "Type": "nap::ShaderFromFile",
-            "mID": "LineShader",
-            "VertShader": "shaders/monitor/line.vert",
-            "FragShader": "shaders/monitor/line.frag"
+            "mID": "LinesShader",
+            "VertShader": "shaders/monitor/lines.vert",
+            "FragShader": "shaders/monitor/lines.frag"
         },
         {
             "Type": "nap::ShaderFromFile",
@@ -3458,7 +3487,7 @@
                     "Style": "",
                     "Position": {
                         "x": 11.0,
-                        "y": 80.0
+                        "y": 50.0
                     },
                     "Size": {
                         "x": -21.0,
@@ -3486,7 +3515,7 @@
                     "Style": "",
                     "Position": {
                         "x": 11.0,
-                        "y": 80.0
+                        "y": 50.0
                     },
                     "Size": {
                         "x": -21.0,
@@ -3515,7 +3544,7 @@
                     "Style": "",
                     "Position": {
                         "x": 11.0,
-                        "y": 80.0
+                        "y": 50.0
                     },
                     "Size": {
                         "x": -21.0,
@@ -3542,7 +3571,7 @@
                     "Style": "",
                     "Position": {
                         "x": 11.0,
-                        "y": 80.0
+                        "y": 50.0
                     },
                     "Size": {
                         "x": -21.0,
@@ -3592,37 +3621,44 @@
             "mID": "MonitorController",
             "VisibilityProperies": [
                 {
-                    "ID": "soundObjectShapes",
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "soundObjectShapes",
                     "Title": "Sound Object Shapes",
                     "Value": true
                 },
                 {
-                    "ID": "soundObjectNames",
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "soundObjectNames",
                     "Title": "Sound Object Names",
                     "Value": true
                 },
                 {
-                    "ID": "particles",
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "particles",
                     "Title": "Particles",
                     "Value": true
                 },
                 {
-                    "ID": "particleAreas",
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "particleAreas",
                     "Title": "Particle Areas",
                     "Value": true
                 },
                 {
-                    "ID": "particleLabels",
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "particleLabels",
                     "Title": "Particle Labels",
                     "Value": false
                 },
                 {
-                    "ID": "speakers",
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "speakers",
                     "Title": "Speakers",
                     "Value": true
                 },
                 {
-                    "ID": "speakerLabels",
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "speakerLabels",
                     "Title": "Speaker Labels",
                     "Value": false
                 }

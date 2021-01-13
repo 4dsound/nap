@@ -3,14 +3,14 @@
 GROUPS_COUNT = 1
 #############################################################################
 # The number of sound objects that do not receive from other sound objects.
-SOURCES_COUNT = 8
+SOURCES_COUNT = 0
 #############################################################################
 # The number of sound objects that receive from all other sound objects.
-SPACES_COUNT = 8
+SPACES_COUNT = 1
 #############################################################################
 # Set the maximum particle count for one source sound object.
-SOURCES_MAX_PARTICLE_COUNT = 64
+SOURCES_MAX_PARTICLE_COUNT = 27
 #############################################################################
 # Set the maximum particle count for one space sound object.
-SPACES_MAX_PARTICLE_COUNT = 64
+SPACES_MAX_PARTICLE_COUNT = 27
 #############################################################################
