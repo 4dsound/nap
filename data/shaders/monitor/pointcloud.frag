@@ -2,6 +2,7 @@
 
 in float pass_show;
 in float pass_alpha;
+in float pass_cameraDistance;
 
 uniform UBO
 {
