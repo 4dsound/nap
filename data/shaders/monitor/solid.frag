@@ -29,10 +29,7 @@ void main()
     cam_surface_dot = pow(cam_surface_dot, 2.0);
     
     // Mix in the halo, set fragment color output
-    float cameraDistance = length(passPosition - ubo.inCameraPosition);
-    float maxCameraDistance = 7;
-    float distanceFade =  1 - 0.5 * (cameraDistance / maxCameraDistance);
-    vec3 fadedColor = mix(vec3(0.1, 0.1, 0.1), base_color, distanceFade);
-    out_Color.rgb = mix(fadedColor, halo_color, cam_surface_dot);
+//    out_Color.rgb = mix(base_color, halo_color, cam_surface_dot);
+    out_Color.rgb = base_color;
     out_Color.a = 0;
 }

@@ -26,8 +26,6 @@ void main(void)
 {
     float size = ubovert.scale.x * ubovert.scale.y * ubovert.scale.z;
     float cameraDistance = length(in_Position - ubovert.cameraPosition);
-    float maxCameraDistance = 10;
-//    int pointCount = int(pow(size, 0.6 - 0.6 * (cameraDistance / maxCameraDistance)) * 1000000);
     int pointCount = int(pow(size, 0.6) * 1000000);
     if (length(in_Position - vec3(0, 0, 0)) > 0.5)
         pass_show = 0;
