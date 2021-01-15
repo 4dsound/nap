@@ -1889,21 +1889,11 @@
                     "Type": "nap::spatial::ParticleVisualizationController",
                     "mID": "ParticleVisualizationController",
                     "RenderableMeshCopyComponent": "./ParticleVisualization",
+                    "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
+                    "MeasurementComponent": "../MeasurementComponent",
                     "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
-                    "ExposedDataComponent": "../ExposedDataComponent",
-                    "DataDependencies": [
-                        "../MeasurementComponent",
-                        "../nap::spatial::DisplaySettingsComponent_0e53f7b6"
-                    ],
-                    "PositionData": "particlePositions",
-                    "ScaleData": "",
-                    "RotationData": "particleRotations",
-                    "ColorData": "color",
-                    "SelectedData": "selected",
                     "MonitorVisibilityProperty": "particles",
                     "MonitorLabelVisibilityProperty": "particleLabels",
-                    "DimmedData": "dimmed",
-                    "VisibleData": "visible",
                     "ColorUniform": "color",
                     "ScaleUniform": "",
                     "DimmedColor": {
@@ -1917,7 +1907,9 @@
                         "z": 1.0
                     },
                     "BlinkFrequency": 1.0,
-                    "ShowLabels": true
+                    "ShowLabels": true,
+                    "ControlScales": false,
+                    "ControlRotations": true
                 },
                 {
                     "Type": "nap::TransformComponent",
@@ -1974,15 +1966,7 @@
                     "ShapeComponent": "../ShapeComponent",
                     "TranfsormComponent": "./SoundObjectVisualizationTransform",
                     "CameraTranfsormComponent": "../../camera/CameraTransformComponent",
-                    "ExposedDataComponent": "../ExposedDataComponent",
-                    "DataDependencies": [
-                        "../nap::spatial::DisplaySettingsComponent_0e53f7b6"
-                    ],
-                    "ColorData": "color",
-                    "NameData": "displayName",
-                    "SelectedData": "selected",
-                    "DimmedData": "dimmed",
-                    "VisibleData": "visible",
+                    "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
                     "MonitorVisibilityProperty": "soundObjectShapes",
                     "MonitorLabelVisibilityProperty": "soundObjectNames",
                     "UBO": "UBO",
@@ -2030,21 +2014,11 @@
                     "Type": "nap::spatial::ParticleVisualizationController",
                     "mID": "CloudVisualizationController",
                     "RenderableMeshCopyComponent": "./CloudVisualization",
+                    "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
+                    "MeasurementComponent": "../MeasurementComponent",
                     "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
-                    "ExposedDataComponent": "../ExposedDataComponent",
-                    "DataDependencies": [
-                        "../MeasurementComponent",
-                        "../nap::spatial::DisplaySettingsComponent_0e53f7b6"
-                    ],
-                    "PositionData": "particlePositions",
-                    "ScaleData": "particleDimensions",
-                    "RotationData": "particleRotations",
-                    "ColorData": "color",
-                    "SelectedData": "selected",
                     "MonitorVisibilityProperty": "particleAreas",
                     "MonitorLabelVisibilityProperty": "",
-                    "DimmedData": "dimmed",
-                    "VisibleData": "visible",
                     "ColorUniform": "color",
                     "ScaleUniform": "scale",
                     "DimmedColor": {
@@ -2058,7 +2032,9 @@
                         "z": 1.0
                     },
                     "BlinkFrequency": 1.0,
-                    "ShowLabels": false
+                    "ShowLabels": false,
+                    "ControlScales": true,
+                    "ControlRotations": true
                 }
             ],
             "Children": []
