@@ -171,6 +171,34 @@
         },
         {
             "Type": "nap::Entity",
+            "mID": "MonitorParameterController",
+            "Components": [
+                {
+                    "Type": "nap::ParameterComponent",
+                    "mID": "MonitorParameterComponent",
+                    "Name": "monitor"
+                },
+                {
+                    "Type": "nap::spatial::OSCParameterControlComponent",
+                    "mID": "nap::spatial::OSCParameterControlComponent_f9ecb4f4",
+                    "OSCLogger": "OSCLogger"
+                },
+                {
+                    "Type": "nap::OSCInputComponent",
+                    "mID": "nap::OSCInputComponent_4a8d2ef6",
+                    "Addresses": []
+                },
+                {
+                    "Type": "nap::spatial::MonitorParameterController",
+                    "mID": "nap::spatial::MonitorParameterController_81913b60",
+                    "ParameterComponent": "./MonitorParameterComponent",
+                    "MonitorController": "MonitorController"
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Type": "nap::Entity",
             "mID": "MonitorTextOverlay",
             "Components": [
                 {
@@ -2813,7 +2841,7 @@
                     "InstanceProperties": []
                 },
                 {
-                    "Entity": "SoundObject",
+                    "Entity": "MonitorParameterController",
                     "InstanceProperties": []
                 }
             ]
