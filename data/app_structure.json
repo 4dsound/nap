@@ -61,7 +61,7 @@
                 },
                 {
                     "Type": "nap::RenderableMeshComponent",
-                    "mID": "nap::RenderableMeshComponent_c804222e",
+                    "mID": "AxesHelperVisualization",
                     "Visible": false,
                     "Mesh": "AxesHelperMesh",
                     "MaterialInstance": {
@@ -82,6 +82,12 @@
                             "y": 0.0
                         }
                     }
+                },
+                {
+                    "Type": "nap::spatial::MonitorVisibilityController",
+                    "mID": "nap::spatial::MonitorVisibilityController_c61a988a",
+                    "RenderableComponent": "./AxesHelperVisualization",
+                    "MonitorVisibilityProperty": "axesHelpers"
                 }
             ],
             "Children": []
@@ -114,7 +120,7 @@
                 },
                 {
                     "Type": "nap::RenderableMeshComponent",
-                    "mID": "nap::RenderableMeshComponent_6ee64499",
+                    "mID": "MonitorFloorVisualization",
                     "Visible": true,
                     "Mesh": "LinePlaneMesh_2baa8e75",
                     "MaterialInstance": {
@@ -153,6 +159,12 @@
                             "y": 0.0
                         }
                     }
+                },
+                {
+                    "Type": "nap::spatial::MonitorVisibilityController",
+                    "mID": "nap::spatial::MonitorVisibilityController_c958c88e",
+                    "RenderableComponent": "./MonitorFloorVisualization",
+                    "MonitorVisibilityProperty": "monitorFloor"
                 }
             ],
             "Children": []
@@ -1827,10 +1839,10 @@
                     "ExposedDataComponent": "./ExposedDataComponent",
                     "Dimmed": false,
                     "Selected": false,
-                    "UniqueId": -1,
-                    "DisplayIndex": -1,
+                    "UniqueId": 1,
+                    "DisplayIndex": 1,
                     "DisplayName": "",
-                    "Category": -1,
+                    "Category": 1,
                     "Visible": true
                 }
             ],
@@ -3636,6 +3648,18 @@
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "speakerLabels",
                     "Title": "Speaker Labels",
+                    "Value": false
+                },
+                {
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "monitorFloor",
+                    "Title": "Floor Grid",
+                    "Value": true
+                },
+                {
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "axesHelpers",
+                    "Title": "Axes Helpers",
                     "Value": false
                 }
             ]
