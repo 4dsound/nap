@@ -2470,7 +2470,7 @@
         },
         {
             "Type": "nap::ImageFromFile",
-            "mID": "Watermark",
+            "mID": "WatermarkImage",
             "Usage": "Static",
             "ImagePath": "img/watermark.png",
             "GenerateLods": true
@@ -3398,6 +3398,44 @@
                             "Style": "",
                             "MonitorController": "MonitorController"
                         }
+                    }
+                },
+                {
+                    "Type": "nap::gui::GuiWindow",
+                    "mID": "GuiWindow_5992cc2f",
+                    "Title": "Watermark",
+                    "Style": "",
+                    "Position": {
+                        "x": 100.0,
+                        "y": -70.0
+                    },
+                    "Size": {
+                        "x": 200.0,
+                        "y": 40.0
+                    },
+                    "Flags": {
+                        "NoTitleBar": true,
+                        "NoResize": true,
+                        "NoMove": true,
+                        "NoScrollBar": true,
+                        "NoScrollWithMouse": true,
+                        "NoCollapse": true,
+                        "AlwaysAutoResize": false,
+                        "NoSavedSettings": true,
+                        "MenuBar": false,
+                        "HorizontalScrollBar": false,
+                        "CanClose": false
+                    },
+                    "Alpha": 0.0,
+                    "Open": true,
+                    "Border": false,
+                    "RenderWindow": "Window",
+                    "Content": {
+                        "Type": "nap::spatial::Watermark",
+                        "mID": "Watermark_bdab239e",
+                        "Title": "Watermark",
+                        "Style": "",
+                        "Image": "WatermarkImage"
                     }
                 }
             ]
