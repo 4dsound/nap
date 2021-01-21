@@ -3045,7 +3045,7 @@
                             "Style": "",
                             "OSCLogger": "OSCLogger",
                             "License": "Licensing",
-                            "BasicAdvancedSelector": "BasicAdvancedSelector"
+                            "BasicAdvancedSelector": ""
                         }
                     },
                     {
@@ -3069,27 +3069,11 @@
                         "Alpha": 0.5,
                         "Border": true,
                         "Content": {
-                            "Type": "nap::gui::Selector",
-                            "mID": "BasicAdvancedSelector",
-                            "Title": "BasicAdvancedSelector",
+                            "Type": "nap::gui::GuiLink",
+                            "mID": "GuiLink_4510babd",
+                            "Title": "MainGuiLink",
                             "Style": "",
-                            "Index": 0,
-                            "Content": [
-                                {
-                                    "Type": "nap::gui::GuiLink",
-                                    "mID": "GuiLink_9313a643",
-                                    "Title": "BasicGui Link",
-                                    "Style": "",
-                                    "Link": "BasicGui"
-                                },
-                                {
-                                    "Type": "nap::gui::GuiLink",
-                                    "mID": "GuiLink_0e6ec7d7",
-                                    "Title": "Advanced Gui Link",
-                                    "Style": "",
-                                    "Link": "AdvancedGui"
-                                }
-                            ]
+                            "Link": "MainGui"
                         }
                     }
                 ]
@@ -3097,7 +3081,7 @@
         },
         {
             "Type": "nap::gui::HorizontalLayout",
-            "mID": "BasicGui",
+            "mID": "SetupGui",
             "Title": "Basic Gui",
             "Style": "",
             "ColumnWidths": [],
@@ -3410,7 +3394,7 @@
                         "y": -70.0
                     },
                     "Size": {
-                        "x": 200.0,
+                        "x": 250.0,
                         "y": 40.0
                     },
                     "Flags": {
@@ -3504,7 +3488,7 @@
         },
         {
             "Type": "nap::gui::TabbedLayout",
-            "mID": "AdvancedGui",
+            "mID": "MainGui",
             "Title": "Advanced",
             "Style": "",
             "Tabs": [
@@ -3531,9 +3515,9 @@
                     "Content": {
                         "Type": "nap::gui::GuiLink",
                         "mID": "GuiLink_afa57f80",
-                        "Title": "BasicGuiLink",
+                        "Title": "SetupGuiLink",
                         "Style": "",
-                        "Link": "BasicGui"
+                        "Link": "SetupGui"
                     }
                 },
                 {
