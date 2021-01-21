@@ -2075,6 +2075,33 @@
                     "ShowLabels": false,
                     "ControlScales": true,
                     "ControlRotations": true
+                },
+                {
+                    "Type": "nap::spatial::EnabledEffectDisplay",
+                    "mID": "nap::spatial::EnabledEffectDisplay_42004dbb",
+                    "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
+                    "SpatialAudioComponen": "../SpatialAudioComponent",
+                    "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
+                    "SpatialTransformationComponent": "../SpatialTransformationComponent",
+                    "MonitorVisibilityProperty": "effectLabels",
+                    "EffectLabels": [
+                        {
+                            "EffectName": "spatialDelay",
+                            "Label": "spatial delay"
+                        },
+                        {
+                            "EffectName": "granulator",
+                            "Label": "granulator"
+                        },
+                        {
+                            "EffectName": "reverb",
+                            "Label": "reverb"
+                        }
+                    ],
+                    "LabelPositionOffset": {
+                        "x": 0.0,
+                        "y": -20.0
+                    }
                 }
             ],
             "Children": []
@@ -3694,6 +3721,12 @@
                     "mID": "axesHelpers",
                     "Title": "Axes Helpers",
                     "Value": false
+                },
+                {
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "effectLabels",
+                    "Title": "Enabled Effects",
+                    "Value": true
                 }
             ]
         },
