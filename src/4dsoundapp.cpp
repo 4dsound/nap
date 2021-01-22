@@ -105,7 +105,11 @@ namespace nap
 			return false;
 
 		mMonitorGui = mResourceManager->findObject<gui::Gui>("MonitorGui");
-		if (!error.check(mGui != nullptr, "Monitor Gui not found"))
+		if (!error.check(mMonitorGui != nullptr, "Monitor Gui not found"))
+			return false;
+
+		mMonitorController = mResourceManager->findObject<spatial::MonitorController>("MonitorController");
+		if (!error.check(mMonitorController != nullptr, "MonitorController not found"))
 			return false;
 
 		// Apply hard-coded ImGui style to both windows
@@ -127,7 +131,9 @@ namespace nap
         mInputService->processWindowEvents(*mRenderWindow, input_router, { &mScene->getRootEntity() });
 
 		mGui->show();
-		mMonitorGui->show();
+
+		if (mMonitorController->isRenderingEnabled())
+			mMonitorGui->show();
     }
 
 
@@ -148,17 +154,20 @@ namespace nap
 			// Begin render pass
 			mRenderWindow->beginRendering();
 
-			std::vector<nap::RenderableComponentInstance*> renderableComponents;
-			getRenderableComponentsRecursive(mScene->getRootEntity(), renderableComponents);
+			if (mMonitorController->isRenderingEnabled())
+			{
+				std::vector<nap::RenderableComponentInstance*> renderableComponents;
+				getRenderableComponentsRecursive(mScene->getRootEntity(), renderableComponents);
 
-			// Render the world with the right camera directly to screen
-			mRenderService->renderObjects(*mRenderWindow, *mCamera, renderableComponents);
+				// Render the world with the right camera directly to screen
+				mRenderService->renderObjects(*mRenderWindow, *mCamera, renderableComponents);
 
-			// Render the text overlay
-			mTextOverlayController->draw(*mRenderWindow, *mCamera);
+				// Render the text overlay
+				mTextOverlayController->draw(*mRenderWindow, *mCamera);
 
-			// Render GUI elements
-			mGuiService->draw();
+				// Render GUI elements
+				mGuiService->draw();
+			}
 
 			// Stop render pass
 			mRenderWindow->endRendering();
@@ -212,7 +221,6 @@ namespace nap
 
 			if (releaseEvent->mKey == nap::EKeyCode::KEY_LCTRL || releaseEvent->mKey == nap::EKeyCode::KEY_RCTRL)
 				mCtrlKeyPressed = false;
-
 		}
 
         mInputService->addEvent(std::move(inputEvent));

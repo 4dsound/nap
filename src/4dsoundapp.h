@@ -2,6 +2,7 @@
 
 // Spatial includes
 #include <Spatial/Monitor/TextOverlayController.h>
+#include <Spatial/Monitor/MonitorController.h>
 
 // Gui Layout includes
 #include <Gui/Gui.h>
@@ -105,6 +106,7 @@ namespace nap
 		ObjectPtr<PerspCameraComponentInstance> mCamera = nullptr; ///< The monitor camera
 		ObjectPtr<gui::Gui> mGui = nullptr;
 		ObjectPtr<gui::Gui> mMonitorGui = nullptr;
+		ObjectPtr<spatial::MonitorController> mMonitorController = nullptr;
 
         spatial::SpatialService* mSpatialService = nullptr;  ///< Spatial sound service
         std::vector<std::string> mCommandLineArgs;				///< List with command line arguments
