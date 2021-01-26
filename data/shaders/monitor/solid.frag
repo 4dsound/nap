@@ -29,7 +29,7 @@ void main()
     cam_surface_dot = pow(cam_surface_dot, 2.0);
     
     // Mix in the halo, set fragment color output
-//    out_Color.rgb = mix(base_color, halo_color, cam_surface_dot);
-    out_Color.rgb = base_color;
+    out_Color.rgb = mix(base_color, halo_color, cam_surface_dot);
+//    out_Color.rgb = base_color;
     out_Color.a = 0;
 }

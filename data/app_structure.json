@@ -329,7 +329,8 @@
                     "Rotations": [],
                     "CameraPositionUniform": "",
                     "UniformFloatValues": [],
-                    "UniformVec3Values": []
+                    "UniformVec3Values": [],
+                    "CameraFacing": false
                 },
                 {
                     "Type": "nap::spatial::SpeakerGridVisualizationController",
@@ -1884,11 +1885,11 @@
             "Components": [
                 {
                     "Type": "nap::spatial::RenderableMeshCopyComponent",
-                    "mID": "ParticleVisualization",
+                    "mID": "PointParticleVisualization",
                     "Visible": true,
                     "CameraTransformComponent": "../../camera/CameraTransformComponent",
                     "MaterialInstance": {
-                        "Material": "SolidMaterial",
+                        "Material": "ConstantMaterial",
                         "Uniforms": [
                             {
                                 "Type": "nap::UniformStruct",
@@ -1923,16 +1924,17 @@
                     "Rotations": [],
                     "CameraPositionUniform": "inCameraPosition",
                     "UniformFloatValues": [],
-                    "UniformVec3Values": []
+                    "UniformVec3Values": [],
+                    "CameraFacing": false
                 },
                 {
                     "Type": "nap::spatial::ParticleVisualizationController",
-                    "mID": "ParticleVisualizationController",
-                    "RenderableMeshCopyComponent": "./ParticleVisualization",
+                    "mID": "PointParticleVisualizationController",
+                    "RenderableMeshCopyComponent": "./PointParticleVisualization",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
                     "MeasurementComponent": "../MeasurementComponent",
                     "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
-                    "MonitorVisibilityProperty": "particles",
+                    "MonitorVisibilityProperty": "particlePoints",
                     "MonitorLabelVisibilityProperty": "particleLabels",
                     "ColorUniform": "color",
                     "ScaleUniform": "",
@@ -2029,7 +2031,7 @@
                 },
                 {
                     "Type": "nap::spatial::RenderableMeshCopyComponent",
-                    "mID": "CloudVisualization",
+                    "mID": "CloudParticleVisualization",
                     "Visible": true,
                     "CameraTransformComponent": "../../camera/CameraTransformComponent",
                     "MaterialInstance": {
@@ -2048,16 +2050,17 @@
                     "Rotations": [],
                     "CameraPositionUniform": "cameraPosition",
                     "UniformFloatValues": [],
-                    "UniformVec3Values": []
+                    "UniformVec3Values": [],
+                    "CameraFacing": false
                 },
                 {
                     "Type": "nap::spatial::ParticleVisualizationController",
-                    "mID": "CloudVisualizationController",
-                    "RenderableMeshCopyComponent": "./CloudVisualization",
+                    "mID": "CloudParticleVisualizationController",
+                    "RenderableMeshCopyComponent": "./CloudParticleVisualization",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
                     "MeasurementComponent": "../MeasurementComponent",
                     "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
-                    "MonitorVisibilityProperty": "particleAreas",
+                    "MonitorVisibilityProperty": "particlePointClouds",
                     "MonitorLabelVisibilityProperty": "",
                     "ColorUniform": "color",
                     "ScaleUniform": "scale",
@@ -2102,6 +2105,106 @@
                         "x": 0.0,
                         "y": -20.0
                     }
+                },
+                {
+                    "Type": "nap::spatial::RenderableMeshCopyComponent",
+                    "mID": "HaloParticleVisualization",
+                    "Visible": true,
+                    "CameraTransformComponent": "../../camera/CameraTransformComponent",
+                    "MaterialInstance": {
+                        "Material": "HaloMaterial",
+                        "Uniforms": [],
+                        "Samplers": [],
+                        "BlendMode": "NotSet",
+                        "DepthMode": "NotSet"
+                    },
+                    "Mesh": "PlaneMesh",
+                    "UBO": "UBO",
+                    "UBOVert": "UBOVert",
+                    "TranformComponent": "./SoundObjectVisualizationTransform",
+                    "Positions": [],
+                    "Scales": [],
+                    "Rotations": [],
+                    "CameraPositionUniform": "",
+                    "UniformFloatValues": [],
+                    "UniformVec3Values": [],
+                    "CameraFacing": true
+                },
+                {
+                    "Type": "nap::spatial::ParticleVisualizationController",
+                    "mID": "HaloParticleVisualizationController",
+                    "RenderableMeshCopyComponent": "./HaloParticleVisualization",
+                    "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
+                    "MeasurementComponent": "../MeasurementComponent",
+                    "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
+                    "MonitorVisibilityProperty": "particleHalos",
+                    "MonitorLabelVisibilityProperty": "",
+                    "ColorUniform": "color",
+                    "ScaleUniform": "",
+                    "DimmedColor": {
+                        "x": 0.20000000298023225,
+                        "y": 0.20000000298023225,
+                        "z": 0.20000000298023225
+                    },
+                    "SelectedColor": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "BlinkFrequency": 1.0,
+                    "ShowLabels": false,
+                    "ControlScales": true,
+                    "ControlRotations": false
+                },
+                {
+                    "Type": "nap::spatial::RenderableMeshCopyComponent",
+                    "mID": "BoxParticleVisualization",
+                    "Visible": true,
+                    "CameraTransformComponent": "../../camera/CameraTransformComponent",
+                    "MaterialInstance": {
+                        "Material": "SolidMaterial",
+                        "Uniforms": [],
+                        "Samplers": [],
+                        "BlendMode": "NotSet",
+                        "DepthMode": "NotSet"
+                    },
+                    "Mesh": "BoxMesh",
+                    "UBO": "UBO",
+                    "UBOVert": "UBOVert",
+                    "TranformComponent": "./SoundObjectVisualizationTransform",
+                    "Positions": [],
+                    "Scales": [],
+                    "Rotations": [],
+                    "CameraPositionUniform": "cameraPosition",
+                    "UniformFloatValues": [],
+                    "UniformVec3Values": [],
+                    "CameraFacing": false
+                },
+                {
+                    "Type": "nap::spatial::ParticleVisualizationController",
+                    "mID": "BoxParticleVisualizationController",
+                    "RenderableMeshCopyComponent": "./BoxParticleVisualization",
+                    "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
+                    "MeasurementComponent": "../MeasurementComponent",
+                    "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
+                    "MonitorVisibilityProperty": "particleBoxes",
+                    "MonitorLabelVisibilityProperty": "",
+                    "ColorUniform": "color",
+                    "ScaleUniform": "",
+                    "DimmedColor": {
+                        "x": 0.20000000298023225,
+                        "y": 0.20000000298023225,
+                        "z": 0.20000000298023225
+                    },
+                    "SelectedColor": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "BlinkFrequency": 1.0,
+                    "ShowLabels": false,
+                    "ControlScales": true,
+                    "ControlRotations": true
                 }
             ],
             "Children": []
@@ -2183,7 +2286,8 @@
                     "Rotations": [],
                     "CameraPositionUniform": "",
                     "UniformFloatValues": [],
-                    "UniformVec3Values": []
+                    "UniformVec3Values": [],
+                    "CameraFacing": false
                 },
                 {
                     "Type": "nap::spatial::SpeakerGridVisualizationController",
@@ -2554,6 +2658,78 @@
         },
         {
             "Type": "nap::Material",
+            "mID": "HaloMaterial",
+            "Uniforms": [],
+            "Samplers": [],
+            "Shader": "HaloShader",
+            "VertexAttributeBindings": [
+                {
+                    "MeshAttributeID": "UV0",
+                    "ShaderAttributeID": "in_UV0"
+                },
+                {
+                    "MeshAttributeID": "Position",
+                    "ShaderAttributeID": "in_Position"
+                }
+            ],
+            "BlendMode": "AlphaBlend",
+            "DepthMode": "InheritFromBlendMode"
+        },
+        {
+            "Type": "nap::Material",
+            "mID": "LightingMaterial",
+            "Uniforms": [
+                {
+                    "Type": "nap::UniformStruct",
+                    "mID": "UniformStruct_84b9404b",
+                    "Name": "UBO",
+                    "Uniforms": [
+                        {
+                            "Type": "nap::UniformVec3",
+                            "mID": "UniformVec3_f8c14b8e",
+                            "Name": "lightPosition",
+                            "Value": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "Type": "nap::UniformVec3",
+                            "mID": "UniformVec3_0c09f0d9",
+                            "Name": "lightIntensity",
+                            "Value": {
+                                "x": 0.20000000298023225,
+                                "y": 0.20000000298023225,
+                                "z": 0.20000000298023225
+                            }
+                        },
+                        {
+                            "Type": "nap::UniformFloat",
+                            "mID": "UniformFloat_47b5876b",
+                            "Name": "ambientIntensity",
+                            "Value": 0.699999988079071
+                        }
+                    ]
+                }
+            ],
+            "Samplers": [],
+            "Shader": "LightingShader",
+            "VertexAttributeBindings": [
+                {
+                    "MeshAttributeID": "Position",
+                    "ShaderAttributeID": "in_Position"
+                },
+                {
+                    "MeshAttributeID": "Normal",
+                    "ShaderAttributeID": "in_Normal"
+                }
+            ],
+            "BlendMode": "Opaque",
+            "DepthMode": "InheritFromBlendMode"
+        },
+        {
+            "Type": "nap::Material",
             "mID": "LinesMaterial",
             "Uniforms": [],
             "Samplers": [],
@@ -2759,6 +2935,30 @@
             "Columns": 1
         },
         {
+            "Type": "nap::PlaneMesh",
+            "mID": "PlaneMesh",
+            "Usage": "Static",
+            "CullMode": "None",
+            "Size": {
+                "x": 1.0,
+                "y": 1.0
+            },
+            "Position": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "Color": {
+                "Values": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "Rows": 1,
+            "Columns": 1
+        },
+        {
             "Type": "nap::PointCloudMesh",
             "mID": "PointCloudMesh",
             "Usage": "Static",
@@ -2870,6 +3070,10 @@
                 {
                     "Entity": "MonitorParameterController",
                     "InstanceProperties": []
+                },
+                {
+                    "Entity": "SoundObject",
+                    "InstanceProperties": []
                 }
             ]
         },
@@ -2884,6 +3088,18 @@
             "mID": "FontShader",
             "VertShader": "shaders/font.vert",
             "FragShader": "shaders/font.frag"
+        },
+        {
+            "Type": "nap::ShaderFromFile",
+            "mID": "HaloShader",
+            "VertShader": "shaders/monitor/halo.vert",
+            "FragShader": "shaders/monitor/halo.frag"
+        },
+        {
+            "Type": "nap::ShaderFromFile",
+            "mID": "LightingShader",
+            "VertShader": "shaders/monitor/lighting.vert",
+            "FragShader": "shaders/monitor/lighting.frag"
         },
         {
             "Type": "nap::ShaderFromFile",
@@ -3498,201 +3714,222 @@
             "Style": "",
             "Tabs": [
                 {
-                    "Type": "nap::gui::Panel",
-                    "mID": "BasicGuiPanel",
-                    "Title": "Setup",
-                    "Style": "",
-                    "Position": {
-                        "x": 11.0,
-                        "y": 50.0
-                    },
-                    "Size": {
-                        "x": -21.0,
-                        "y": -70.0
-                    },
-                    "Flags": {
-                        "NoScrollBar": false,
-                        "NoScrollWithMouse": false,
-                        "HorizontalScrollBar": false
-                    },
-                    "Alpha": 1.0,
-                    "Border": true,
+                    "Visible": true,
                     "Content": {
-                        "Type": "nap::gui::GuiLink",
-                        "mID": "GuiLink_afa57f80",
-                        "Title": "SetupGuiLink",
+                        "Type": "nap::gui::Panel",
+                        "mID": "BasicGuiPanel",
+                        "Title": "Setup",
                         "Style": "",
-                        "Link": "SetupGui"
+                        "Position": {
+                            "x": 11.0,
+                            "y": 50.0
+                        },
+                        "Size": {
+                            "x": -21.0,
+                            "y": -70.0
+                        },
+                        "Flags": {
+                            "NoScrollBar": false,
+                            "NoScrollWithMouse": false,
+                            "HorizontalScrollBar": false
+                        },
+                        "Alpha": 1.0,
+                        "Border": true,
+                        "Content": {
+                            "Type": "nap::gui::GuiLink",
+                            "mID": "GuiLink_afa57f80",
+                            "Title": "SetupGuiLink",
+                            "Style": "",
+                            "Link": "SetupGui"
+                        }
                     }
                 },
                 {
-                    "Type": "nap::gui::Panel",
-                    "mID": "Panel_aa521aa3",
-                    "Title": "Parameters",
-                    "Style": "",
-                    "Position": {
-                        "x": 11.0,
-                        "y": 50.0
-                    },
-                    "Size": {
-                        "x": -21.0,
-                        "y": -70.0
-                    },
-                    "Flags": {
-                        "NoScrollBar": false,
-                        "NoScrollWithMouse": false,
-                        "HorizontalScrollBar": false
-                    },
-                    "Alpha": 1.0,
-                    "Border": true,
+                    "Visible": true,
                     "Content": {
-                        "Type": "nap::spatial::SpatialParameterGUI",
-                        "mID": "SpatialParameterGUI_49ce80de",
-                        "Title": "SpatialParameterGui",
+                        "Type": "nap::gui::Panel",
+                        "mID": "Panel_aa521aa3",
+                        "Title": "Parameters",
                         "Style": "",
-                        "Scene": "Scene",
-                        "ParameterGroup": "",
-                        "ReadOnly": false
+                        "Position": {
+                            "x": 11.0,
+                            "y": 50.0
+                        },
+                        "Size": {
+                            "x": -21.0,
+                            "y": -70.0
+                        },
+                        "Flags": {
+                            "NoScrollBar": false,
+                            "NoScrollWithMouse": false,
+                            "HorizontalScrollBar": false
+                        },
+                        "Alpha": 1.0,
+                        "Border": true,
+                        "Content": {
+                            "Type": "nap::spatial::SpatialParameterGUI",
+                            "mID": "SpatialParameterGUI_49ce80de",
+                            "Title": "SpatialParameterGui",
+                            "Style": "",
+                            "Scene": "Scene",
+                            "ParameterGroup": "",
+                            "ReadOnly": false
+                        }
                     }
                 },
                 {
-                    "Type": "nap::gui::Panel",
-                    "mID": "Panel_a36473de",
-                    "Title": "Exposed Data",
-                    "Style": "",
-                    "Position": {
-                        "x": 11.0,
-                        "y": 50.0
-                    },
-                    "Size": {
-                        "x": -21.0,
-                        "y": -70.0
-                    },
-                    "Flags": {
-                        "NoScrollBar": false,
-                        "NoScrollWithMouse": false,
-                        "HorizontalScrollBar": false
-                    },
-                    "Alpha": 1.0,
-                    "Border": true,
+                    "Visible": true,
                     "Content": {
-                        "Type": "nap::spatial::ExposedDataGui",
-                        "mID": "ExposedDataGui_8b723989",
+                        "Type": "nap::gui::Panel",
+                        "mID": "Panel_a36473de",
                         "Title": "Exposed Data",
                         "Style": "",
-                        "Scene": "Scene"
+                        "Position": {
+                            "x": 11.0,
+                            "y": 50.0
+                        },
+                        "Size": {
+                            "x": -21.0,
+                            "y": -70.0
+                        },
+                        "Flags": {
+                            "NoScrollBar": false,
+                            "NoScrollWithMouse": false,
+                            "HorizontalScrollBar": false
+                        },
+                        "Alpha": 1.0,
+                        "Border": true,
+                        "Content": {
+                            "Type": "nap::spatial::ExposedDataGui",
+                            "mID": "ExposedDataGui_8b723989",
+                            "Title": "Exposed Data",
+                            "Style": "",
+                            "Scene": "Scene"
+                        }
                     }
                 },
                 {
-                    "Type": "nap::gui::Panel",
-                    "mID": "Panel_a933d332",
-                    "Title": "OSC Log",
-                    "Style": "",
-                    "Position": {
-                        "x": 11.0,
-                        "y": 50.0
-                    },
-                    "Size": {
-                        "x": -21.0,
-                        "y": -70.0
-                    },
-                    "Flags": {
-                        "NoScrollBar": false,
-                        "NoScrollWithMouse": false,
-                        "HorizontalScrollBar": false
-                    },
-                    "Alpha": 1.0,
-                    "Border": true,
+                    "Visible": true,
                     "Content": {
-                        "Type": "nap::spatial::OSCLogGui",
-                        "mID": "OSCLogGui_759f2ca0",
-                        "Title": "OSC Log Gui",
+                        "Type": "nap::gui::Panel",
+                        "mID": "Panel_a933d332",
+                        "Title": "OSC Log",
                         "Style": "",
-                        "OSCLogger": "OSCLogger",
-                        "LineCount": 25
+                        "Position": {
+                            "x": 11.0,
+                            "y": 50.0
+                        },
+                        "Size": {
+                            "x": -21.0,
+                            "y": -70.0
+                        },
+                        "Flags": {
+                            "NoScrollBar": false,
+                            "NoScrollWithMouse": false,
+                            "HorizontalScrollBar": false
+                        },
+                        "Alpha": 1.0,
+                        "Border": true,
+                        "Content": {
+                            "Type": "nap::spatial::OSCLogGui",
+                            "mID": "OSCLogGui_759f2ca0",
+                            "Title": "OSC Log Gui",
+                            "Style": "",
+                            "OSCLogger": "OSCLogger",
+                            "LineCount": 25
+                        }
                     }
                 },
                 {
-                    "Type": "nap::gui::Panel",
-                    "mID": "Panel_066020e1",
-                    "Title": "Statistics",
-                    "Style": "",
-                    "Position": {
-                        "x": 11.0,
-                        "y": 50.0
-                    },
-                    "Size": {
-                        "x": -21.0,
-                        "y": -70.0
-                    },
-                    "Flags": {
-                        "NoScrollBar": false,
-                        "NoScrollWithMouse": false,
-                        "HorizontalScrollBar": false
-                    },
-                    "Alpha": 1.0,
-                    "Border": true,
+                    "Visible": true,
                     "Content": {
-                        "Type": "nap::spatial::StatisticsGui",
-                        "mID": "StatisticsGui_f828b741",
-                        "Title": "Statistics Gui",
-                        "Style": ""
-                    }
-                },
-                {
-                    "Type": "nap::gui::Panel",
-                    "mID": "LicensePanel",
-                    "Title": "License",
-                    "Style": "",
-                    "Position": {
-                        "x": 11.0,
-                        "y": 50.0
-                    },
-                    "Size": {
-                        "x": -21.0,
-                        "y": -70.0
-                    },
-                    "Flags": {
-                        "NoScrollBar": false,
-                        "NoScrollWithMouse": false,
-                        "HorizontalScrollBar": false
-                    },
-                    "Alpha": 1.0,
-                    "Border": true,
-                    "Content": {
-                        "Type": "nap::spatial::LicensingGui",
-                        "mID": "LicensingGui_e46af14c",
-                        "Title": "",
+                        "Type": "nap::gui::Panel",
+                        "mID": "Panel_066020e1",
+                        "Title": "Statistics",
                         "Style": "",
-                        "License": "Licensing"
+                        "Position": {
+                            "x": 11.0,
+                            "y": 50.0
+                        },
+                        "Size": {
+                            "x": -21.0,
+                            "y": -70.0
+                        },
+                        "Flags": {
+                            "NoScrollBar": false,
+                            "NoScrollWithMouse": false,
+                            "HorizontalScrollBar": false
+                        },
+                        "Alpha": 1.0,
+                        "Border": true,
+                        "Content": {
+                            "Type": "nap::spatial::StatisticsGui",
+                            "mID": "StatisticsGui_f828b741",
+                            "Title": "Statistics Gui",
+                            "Style": ""
+                        }
                     }
                 },
                 {
-                    "Type": "nap::gui::Panel",
-                    "mID": "MonitorVisibilityPanel",
-                    "Title": "Monitor Visibility",
-                    "Style": "",
-                    "Position": {
-                        "x": 11.0,
-                        "y": 50.0
-                    },
-                    "Size": {
-                        "x": -21.0,
-                        "y": -70.0
-                    },
-                    "Flags": {
-                        "NoScrollBar": false,
-                        "NoScrollWithMouse": false,
-                        "HorizontalScrollBar": false
-                    },
-                    "Alpha": 1.0,
-                    "Border": true,
+                    "Visible": true,
                     "Content": {
-                        "Type": "nap::spatial::MonitorVisibilityGui",
-                        "mID": "MonitorVisibilityGui_cc8310f7",
-                        "Title": "MonitorVisibilityGui",
+                        "Type": "nap::gui::Panel",
+                        "mID": "MonitorVisibilityPanel",
+                        "Title": "Monitor Visibility",
                         "Style": "",
-                        "MonitorController": "MonitorController"
+                        "Position": {
+                            "x": 11.0,
+                            "y": 50.0
+                        },
+                        "Size": {
+                            "x": -21.0,
+                            "y": -70.0
+                        },
+                        "Flags": {
+                            "NoScrollBar": false,
+                            "NoScrollWithMouse": false,
+                            "HorizontalScrollBar": false
+                        },
+                        "Alpha": 1.0,
+                        "Border": true,
+                        "Content": {
+                            "Type": "nap::spatial::MonitorVisibilityGui",
+                            "mID": "MonitorVisibilityGui_cc8310f7",
+                            "Title": "MonitorVisibilityGui",
+                            "Style": "",
+                            "MonitorController": "MonitorController"
+                        }
+                    }
+                },
+                {
+                    "Visible": false,
+                    "Content": {
+                        "Type": "nap::gui::Panel",
+                        "mID": "LicensePanel",
+                        "Title": "License",
+                        "Style": "",
+                        "Position": {
+                            "x": 11.0,
+                            "y": 50.0
+                        },
+                        "Size": {
+                            "x": -21.0,
+                            "y": -70.0
+                        },
+                        "Flags": {
+                            "NoScrollBar": false,
+                            "NoScrollWithMouse": false,
+                            "HorizontalScrollBar": false
+                        },
+                        "Alpha": 1.0,
+                        "Border": true,
+                        "Content": {
+                            "Type": "nap::spatial::LicensingGui",
+                            "mID": "LicensingGui_e46af14c",
+                            "Title": "",
+                            "Style": "",
+                            "License": "Licensing"
+                        }
                     }
                 }
             ]
@@ -3726,26 +3963,38 @@
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "soundObjectShapes",
-                    "Title": "Sound Object Shapes",
+                    "Title": "Shapes",
                     "Value": true
                 },
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "soundObjectNames",
-                    "Title": "Sound Object Names",
-                    "Value": true
+                    "Title": "Names",
+                    "Value": false
                 },
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
-                    "mID": "particles",
+                    "mID": "particlePoints",
                     "Title": "Particles",
                     "Value": true
                 },
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
-                    "mID": "particleAreas",
-                    "Title": "Particle Areas",
+                    "mID": "particlePointClouds",
+                    "Title": "Particle Clouds",
+                    "Value": false
+                },
+                {
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "particleHalos",
+                    "Title": "Particle Halos",
                     "Value": true
+                },
+                {
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "particleBoxes",
+                    "Title": "Particle Boxes",
+                    "Value": false
                 },
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
@@ -3780,7 +4029,7 @@
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "effectLabels",
-                    "Title": "Enabled Effects",
+                    "Title": "Effects",
                     "Value": true
                 }
             ]
