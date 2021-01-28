@@ -1933,11 +1933,13 @@
                     "RenderableMeshCopyComponent": "./PointParticleVisualization",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
                     "MeasurementComponent": "../MeasurementComponent",
+                    "SpatialAudioComponent": "../SpatialAudioComponent",
                     "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
                     "MonitorVisibilityProperty": "particlePoints",
                     "MonitorLabelVisibilityProperty": "particleLabels",
                     "ColorUniform": "color",
                     "ScaleUniform": "",
+                    "LevelUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
@@ -2059,11 +2061,13 @@
                     "RenderableMeshCopyComponent": "./CloudParticleVisualization",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
                     "MeasurementComponent": "../MeasurementComponent",
+                    "SpatialAudioComponent": "../SpatialAudioComponent",
                     "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
                     "MonitorVisibilityProperty": "particlePointClouds",
                     "MonitorLabelVisibilityProperty": "",
                     "ColorUniform": "color",
                     "ScaleUniform": "scale",
+                    "LevelUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
@@ -2136,11 +2140,13 @@
                     "RenderableMeshCopyComponent": "./HaloParticleVisualization",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
                     "MeasurementComponent": "../MeasurementComponent",
+                    "SpatialAudioComponent": "../SpatialAudioComponent",
                     "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
                     "MonitorVisibilityProperty": "particleHalos",
                     "MonitorLabelVisibilityProperty": "",
                     "ColorUniform": "color",
                     "ScaleUniform": "",
+                    "LevelUniform": "level",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
@@ -2186,11 +2192,13 @@
                     "RenderableMeshCopyComponent": "./BoxParticleVisualization",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
                     "MeasurementComponent": "../MeasurementComponent",
+                    "SpatialAudioComponent": "../SpatialAudioComponent",
                     "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
                     "MonitorVisibilityProperty": "particleBoxes",
                     "MonitorLabelVisibilityProperty": "",
                     "ColorUniform": "color",
                     "ScaleUniform": "",
+                    "LevelUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
@@ -2690,8 +2698,8 @@
                             "Name": "lightPosition",
                             "Value": {
                                 "x": 0.0,
-                                "y": 0.0,
-                                "z": 0.0
+                                "y": 5.0,
+                                "z": -5.0
                             }
                         },
                         {
@@ -2996,7 +3004,7 @@
             "Resizable": true,
             "Visible": true,
             "SampleShading": true,
-            "Title": "4DSOUND Engine 2.0.b8",
+            "Title": "4DSOUND Engine 2.0.b8.1",
             "Width": 820,
             "Height": 720,
             "Mode": "Immediate",
@@ -3017,7 +3025,7 @@
             "Resizable": true,
             "Visible": true,
             "SampleShading": true,
-            "Title": "4DSOUND Engine 2.0.b8",
+            "Title": "4DSOUND Engine 2.0.b8.1",
             "Width": 1280,
             "Height": 720,
             "Mode": "Immediate",
@@ -3069,10 +3077,6 @@
                 },
                 {
                     "Entity": "MonitorParameterController",
-                    "InstanceProperties": []
-                },
-                {
-                    "Entity": "SoundObject",
                     "InstanceProperties": []
                 }
             ]
@@ -3902,7 +3906,7 @@
                     }
                 },
                 {
-                    "Visible": false,
+                    "Visible": true,
                     "Content": {
                         "Type": "nap::gui::Panel",
                         "mID": "LicensePanel",
