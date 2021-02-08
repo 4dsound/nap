@@ -27,12 +27,23 @@ namespace nap
 		std::vector<RenderableComponentInstance*> locals;
 		entity.getComponentsOfType<RenderableComponentInstance>(locals);
 		for (auto& comp : locals)
-			if (comp->get_type() != RTTI_OF(Renderable2DTextComponentInstance))
-				components.emplace_back(comp);
+			components.emplace_back(comp);
 		for (auto& entity : entity.getChildren())
 			getRenderableComponentsRecursive(*entity, components);
 	}
 
+
+	template <typename T>
+	T* findComponentInScene(Scene& scene, const std::string& entityID, utility::ErrorState& errorState)
+	{
+		auto entity = scene.findEntity(entityID);
+		if (!errorState.check(entity != nullptr, "Unable to find entity %s", entityID.c_str()))
+			return nullptr;
+		auto result = entity->template findComponent<T>();
+		if (!errorState.check(result != nullptr, "Unable to find %s in %s", rtti::TypeInfo::get<T>().get_name().data(), entityID.c_str()))
+			return nullptr;
+		return result;
+	}
 
     /**
      * Initialize all the resources and instances used for drawing
@@ -45,9 +56,7 @@ namespace nap
         mSceneService	= getCore().getService<nap::SceneService>();
         mInputService	= getCore().getService<nap::InputService>();
         mGuiService		= getCore().getService<nap::IMGuiService>();
-        mSpatialService = getCore().getService<spatial::SpatialService>();
-        mParameterService = getCore().getService<nap::ParameterService>();
-        
+
         // Fetch the resource manager
         mResourceManager = getCore().getResourceManager();
         
@@ -76,29 +85,41 @@ namespace nap
             return false;
 
 		// Find the camera
-		auto cameraEntity = mScene->findEntity("camera");
-		if (!error.check(cameraEntity != nullptr, "unable to find camera"))
-			return false;
-		mCamera = cameraEntity->findComponent<nap::PerspCameraComponentInstance>();
-		if (!error.check(mCamera != nullptr, "unable to find camera"))
+		mCamera = findComponentInScene<PerspCameraComponentInstance>(*mScene, "camera", error);
+		if (mCamera == nullptr)
 			return false;
 
-		auto textOverlayEntity = mScene->findEntity("MonitorTextOverlay");
-		if (!error.check(textOverlayEntity != nullptr, "unable to find monitor text overlay"))
-			return false;
-		mTextOverlayController = textOverlayEntity->findComponent<nap::spatial::TextOverlayControllerInstance>();
-		if (!error.check(mTextOverlayController != nullptr, "unable to find text overlay"))
+		// Find ground
+		mGroundPlane = findComponentInScene<RenderableComponentInstance>(*mScene, "MonitorFloorGrid", error);
+		if (mGroundPlane == nullptr)
 			return false;
 
-		auto renderableTextComponent = textOverlayEntity->findComponent<Renderable2DTextComponentInstance>();
-		if (!error.check(renderableTextComponent != nullptr, "unable to find text overlay"))
+		// Find axes helpers
+		mAxesHelpers = findComponentInScene<RenderableComponentInstance>(*mScene, "AxesHelper", error);
+		if (mAxesHelpers == nullptr)
 			return false;
 
-        // Set the environment script to the command line argument (if any)
-        auto globalEntity = mScene->findEntity("global");
-        auto environmentComponent = globalEntity->findComponent<spatial::EnvironmentComponentInstance>();
+		// Find speaker visualizations
+		mSatellites = findComponentInScene<RenderableComponentInstance>(*mScene, "SatellitesVisualization", error);
+		if (mSatellites == nullptr)
+			return false;
+		mSubs = findComponentInScene<RenderableComponentInstance>(*mScene, "SubsVisualization", error);
+		if (mSubs == nullptr)
+			return false;
+
+		// Find text overlay controller
+		mTextOverlayController = findComponentInScene<nap::spatial::TextOverlayControllerInstance>(*mScene, "MonitorTextOverlay", error);
+		if (mTextOverlayController == nullptr)
+			return false;
+
+		// Find the environment
+		mEnvironment = findComponentInScene<spatial::EnvironmentComponentInstance>(*mScene, "global", error);
+		if (mEnvironment == nullptr)
+			return false;
+
+		// Set the environment script to the command line argument (if any)
         if (!mCommandLineArgs.empty())
-            environmentComponent->setScriptPath(mCommandLineArgs[0]);
+			mEnvironment->setScriptPath(mCommandLineArgs[0]);
 
 		mGui = mResourceManager->findObject<gui::Gui>("Gui");
 		if (!error.check(mGui != nullptr, "Gui not found"))
@@ -156,8 +177,9 @@ namespace nap
 
 			if (mMonitorController->isRenderingEnabled())
 			{
-				std::vector<nap::RenderableComponentInstance*> renderableComponents;
-				getRenderableComponentsRecursive(mScene->getRootEntity(), renderableComponents);
+				std::vector<nap::RenderableComponentInstance*> renderableComponents = { mGroundPlane.get(), mAxesHelpers.get(), mSatellites.get(), mSubs.get() };
+				for (auto& entity : mEnvironment->getEntities())
+					getRenderableComponentsRecursive(*entity, renderableComponents);
 
 				// Render the world with the right camera directly to screen
 				mRenderService->renderObjects(*mRenderWindow, *mCamera, renderableComponents);
