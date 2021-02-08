@@ -1953,7 +1953,8 @@
                     "BlinkFrequency": 1.0,
                     "ShowLabels": true,
                     "ControlScales": false,
-                    "ControlRotations": true
+                    "ControlRotations": true,
+                    "LevelSmoothTime": 0.05000000074505806
                 },
                 {
                     "Type": "nap::TransformComponent",
@@ -2081,7 +2082,8 @@
                     "BlinkFrequency": 1.0,
                     "ShowLabels": false,
                     "ControlScales": true,
-                    "ControlRotations": true
+                    "ControlRotations": true,
+                    "LevelSmoothTime": 0.05000000074505806
                 },
                 {
                     "Type": "nap::spatial::EnabledEffectDisplay",
@@ -2160,7 +2162,8 @@
                     "BlinkFrequency": 1.0,
                     "ShowLabels": false,
                     "ControlScales": true,
-                    "ControlRotations": false
+                    "ControlRotations": false,
+                    "LevelSmoothTime": 0.05000000074505806
                 },
                 {
                     "Type": "nap::spatial::RenderableMeshCopyComponent",
@@ -2212,7 +2215,8 @@
                     "BlinkFrequency": 1.0,
                     "ShowLabels": false,
                     "ControlScales": true,
-                    "ControlRotations": true
+                    "ControlRotations": true,
+                    "LevelSmoothTime": 0.05000000074505806
                 }
             ],
             "Children": []
@@ -2429,7 +2433,7 @@
                     "Type": "nap::spatial::EnvironmentComponent",
                     "mID": "nap::spatial::EnvironmentComponent",
                     "ScriptPath": "scripts/environment.py",
-                    "Entities": []
+                    "Entities": ["SoundObject"]
                 }
             ],
             "Children": []
@@ -2667,7 +2671,20 @@
         {
             "Type": "nap::Material",
             "mID": "HaloMaterial",
-            "Uniforms": [],
+            "Uniforms": [
+                {
+                    "Type": "nap::UniformStruct",
+                    "mID": "UniformStruct_6dd6c282",
+                    "Name": "UBOVert",
+                    "Uniforms": []
+                },
+                {
+                    "Type": "nap::UniformStruct",
+                    "mID": "UniformStruct_0dfcd8ed",
+                    "Name": "UBO",
+                    "Uniforms": []
+                }
+            ],
             "Samplers": [],
             "Shader": "HaloShader",
             "VertexAttributeBindings": [
