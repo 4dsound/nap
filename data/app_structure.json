@@ -1940,6 +1940,7 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "",
                     "LevelUniform": "",
+                    "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
@@ -2069,6 +2070,7 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "scale",
                     "LevelUniform": "",
+                    "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
@@ -2149,6 +2151,7 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "",
                     "LevelUniform": "level",
+                    "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
@@ -2202,6 +2205,7 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "",
                     "LevelUniform": "",
+                    "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
@@ -2433,7 +2437,10 @@
                     "Type": "nap::spatial::EnvironmentComponent",
                     "mID": "nap::spatial::EnvironmentComponent",
                     "ScriptPath": "scripts/environment.py",
-                    "Entities": ["SoundObject"]
+                    "Entities": [
+                        "SoundObject"
+                    ],
+                    "OSCSender": "OSCSender"
                 }
             ],
             "Children": []
