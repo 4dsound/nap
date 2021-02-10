@@ -123,3 +123,12 @@ def init(entity):
     createSpaces(environment, settings.SPACES_COUNT)
     createGroups(environment, settings.GROUPS_COUNT)
     addFollowAndGroupTransformationsToAllSoundObjects()
+
+    # send the environment initialized OSC message
+    oscInitMessage = nap.EnvironmentOSCMessage("/environment/init")
+    oscInitMessage.addInt(settings.SOURCES_COUNT)
+    oscInitMessage.addInt(settings.SPACES_COUNT)
+    oscInitMessage.addInt(settings.GROUPS_COUNT)
+    oscInitMessage.addInt(settings.SOURCES_MAX_PARTICLE_COUNT)
+    oscInitMessage.addInt(settings.SPACES_MAX_PARTICLE_COUNT)
+    environment.sendOSC(oscInitMessage)
