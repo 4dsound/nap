@@ -1,5 +1,13 @@
 #pragma once
 
+// Spatial includes
+#include <Spatial/Monitor/TextOverlayController.h>
+#include <Spatial/Monitor/MonitorController.h>
+#include <Spatial/Core/EnvironmentComponent.h>
+
+// Gui Layout includes
+#include <Gui/Gui.h>
+
 // Core includes
 #include <nap/resourcemanager.h>
 #include <nap/resourceptr.h>
@@ -9,14 +17,14 @@
 #include <imguiservice.h>
 #include <sceneservice.h>
 #include <inputservice.h>
+#include <parameter.h>
 #include <parameterservice.h>
 #include <Spatial/Core/SpatialService.h>
-#include <Spatial/Monitor/MonitorGui.h>
-#include <Spatial/Monitor/MonitorOverlayGui.h>
-#include <Spatial/Monitor/MonitorStyle.h>
 #include <scene.h>
 #include <renderwindow.h>
+#include <perspcameracomponent.h>
 #include <entity.h>
+#include <rendercomponent.h>
 #include <app.h>
 
 namespace nap
@@ -26,7 +34,7 @@ namespace nap
 	/**
 	 * Main application that is called from within the main loop
 	 */
-	class TheWorksApp : public App
+	class SpatialSoundApp : public App
 	{
 		RTTI_ENABLE(App)
 	public:
@@ -34,7 +42,7 @@ namespace nap
 		 * Constructor
 		 * @param core instance of the NAP core system
 		 */
-		TheWorksApp(nap::Core& core) : App(core) { }
+		SpatialSoundApp(nap::Core& core) : App(core) { }
 		
 		/**
 		 * Initialize all the services and app specific data structures
@@ -72,6 +80,11 @@ namespace nap
 		 */
 		virtual int shutdown() override;
 
+		/**
+		 * USed by the main function to pass the command line arguments.
+		 * @param count number of arguments
+		 * @param args arguments
+		 */
 		void setCommandLineArguments(int count, char* args[])
 		{
 		    for (auto i = 1; i < count; ++i)
@@ -79,24 +92,31 @@ namespace nap
 		}
 
 	private:
-		ResourceManager*		mResourceManager = nullptr;		///< Manages all the loaded data
-		std::string				mFilename = "";					///< The JSON file that is loaded on initialization
-		RenderService*			mRenderService = nullptr;		///< Render Service that handles render calls
-		SceneService*			mSceneService = nullptr;		///< Manages all the objects in the scene
-		InputService*			mInputService = nullptr;		///< Input service for processing input
-		IMGuiService*			mGuiService = nullptr;			///< Manages GUI related update / draw calls
-		ParameterService*       mParameterService = nullptr;
-		ObjectPtr<RenderWindow> mGuiWindow;						///< Pointer to the gui window
-		bool                    mGuiWindowIsVisible = true;     ///< Is the GUI window visible?
-		ObjectPtr<RenderWindow> mRenderWindow;					///< Pointer to the render window
-		ObjectPtr<Scene>		mScene = nullptr;				///< Pointer to the main scene
-        ObjectPtr<EntityInstance>	mDefaultInputRouter;			//< Routes input events to the input component
-        spatial::SpatialService*	mSpatialService = nullptr;		///< Manages spatial sound objects and speaker outputs
-        std::unique_ptr<spatial::MonitorGui>        mMonitorGui = nullptr;
-		std::unique_ptr<spatial::MonitorOverlayGui>	mMonitorOverlayGui = nullptr;
-		spatial::MonitorStyle		mMonitorStyle;
-        std::vector<std::string> mCommandLineArgs;
+		ResourceManager* mResourceManager = nullptr;	// Manages all the loaded data
+		RenderService* mRenderService = nullptr;		// Render Service that handles render calls
+		SceneService* mSceneService = nullptr;			// Manages all the objects in the scene
+		InputService* mInputService = nullptr;			// Input service for processing input
+		IMGuiService* mGuiService = nullptr;			// Manages GUI related update / draw calls
 
-		bool mCtrlKeyPressed = false; // Indicates wether the ctrl key is pressed
+		ResourcePtr<RenderWindow> mGuiWindow;			// Pointer to the gui window
+		ResourcePtr<RenderWindow> mRenderWindow;		// Pointer to the render window
+		ObjectPtr<Scene> mScene = nullptr;				// Pointer to the main scene
+
+		ObjectPtr<PerspCameraComponentInstance> mCamera = nullptr;
+		ObjectPtr<RenderableComponentInstance> mGroundPlane = nullptr;
+		ObjectPtr<RenderableComponentInstance> mAxesHelpers = nullptr;
+		ObjectPtr<RenderableComponentInstance> mSatellites = nullptr;
+		ObjectPtr<RenderableComponentInstance> mSubs = nullptr;
+		ObjectPtr<spatial::EnvironmentComponentInstance> mEnvironment = nullptr;
+		ObjectPtr<spatial::TextOverlayControllerInstance> mTextOverlayController = nullptr;
+		ObjectPtr<gui::Gui> mGui = nullptr;
+		ObjectPtr<gui::Gui> mMonitorGui = nullptr;
+		ObjectPtr<spatial::MonitorController> mMonitorController = nullptr;
+
+		bool mGuiWindowIsVisible = true;     		// Is the GUI window currently visible?
+		bool mCtrlKeyPressed = false; 				// Indicates wether the ctrl key is pressed
+
+		std::string mFileName = "app_structure.json"; 	// The JSON file that is loaded on initialization
+        std::vector<std::string> mCommandLineArgs;		// List with command line arguments
 	};
 }

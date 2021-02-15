@@ -9,8 +9,8 @@ SOURCES_COUNT = 0
 SPACES_COUNT = 1
 #############################################################################
 # Set the maximum particle count for one source sound object.
-SOURCES_MAX_PARTICLE_COUNT = 16
+SOURCES_MAX_PARTICLE_COUNT = 27
 #############################################################################
 # Set the maximum particle count for one space sound object.
-SPACES_MAX_PARTICLE_COUNT = 16
+SPACES_MAX_PARTICLE_COUNT = 27
 #############################################################################

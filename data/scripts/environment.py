@@ -50,10 +50,10 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
         properties = nap.EnvironmentInstanceProperties()
         properties.addString("nap::ParameterComponent", "Name", name)
         properties.addInt("nap::spatial::SpatialAudioComponent", "MaxParticleCount", maxParticleCount)
-        properties.addString("nap::spatial::SoundObjectVisualizationComponent", "DisplayName", name)
-        properties.addInt("nap::spatial::SoundObjectVisualizationComponent", "DisplayIndex", index)
-        properties.addInt("nap::spatial::SoundObjectVisualizationComponent", "UniqueID", uniqueID)
-        properties.addInt("nap::spatial::SoundObjectVisualizationComponent", "Category", 2 if connect else 1)
+        properties.addString("nap::spatial::DisplaySettingsComponent", "DisplayName", name)
+        properties.addInt("nap::spatial::DisplaySettingsComponent", "DisplayIndex", index)
+        properties.addInt("nap::spatial::DisplaySettingsComponent", "UniqueId", uniqueID)
+        properties.addInt("nap::spatial::DisplaySettingsComponent", "Category", 2 if connect else 1)
 
         soundObject = environment.createEntity("SoundObject", properties)
 
@@ -123,3 +123,12 @@ def init(entity):
     createSpaces(environment, settings.SPACES_COUNT)
     createGroups(environment, settings.GROUPS_COUNT)
     addFollowAndGroupTransformationsToAllSoundObjects()
+
+    # send the environment initialized OSC message
+    oscInitMessage = nap.EnvironmentOSCMessage("/environment/init")
+    oscInitMessage.addInt(settings.SOURCES_COUNT)
+    oscInitMessage.addInt(settings.SPACES_COUNT)
+    oscInitMessage.addInt(settings.GROUPS_COUNT)
+    oscInitMessage.addInt(settings.SOURCES_MAX_PARTICLE_COUNT)
+    oscInitMessage.addInt(settings.SPACES_MAX_PARTICLE_COUNT)
+    environment.sendOSC(oscInitMessage)

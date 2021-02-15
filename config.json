@@ -72,8 +72,8 @@
             "Type": "nap::audio::AudioServiceConfiguration",
             "mID": "nap::audio::AudioServiceConfiguration",
             "HostApi": "Core Audio",
-            "InputDevice": "Built-in Microphone",
-            "OutputDevice": "Built-in Output",
+            "InputDevice": "",
+            "OutputDevice": "",
             "InputChannelCount": 1,
             "OutputChannelCount": 2,
             "AllowChannelCountFailure": true,
@@ -99,16 +99,11 @@
         {
             "Type": "nap::spatial::MultiSpeakerServiceConfiguration",
             "mID": "nap::spatial::MultiSpeakerServiceConfiguration",
-            "Routing": [],
-            "SpeakerSetupFile": "",
+            "Routing": [1,2,3,4,5,6,7,8],
+            "SpeakerSetupFile": "setups/testsetup.xml",
             "Active": false,
             "MasterVolume": -48.0,
             "MasterSettings": []
-        },
-        {
-            "Type": "nap::spatial::SpatialGuiServiceConfiguration",
-            "mID": "nap::spatial::SpatialGuiServiceConfiguration",
-            "RenderMonitor": true
         }
     ]
 }
