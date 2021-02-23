@@ -2437,9 +2437,7 @@
                     "Type": "nap::spatial::EnvironmentComponent",
                     "mID": "nap::spatial::EnvironmentComponent",
                     "ScriptPath": "scripts/environment.py",
-                    "Entities": [
-                        "SoundObject"
-                    ],
+                    "Entities": [],
                     "OSCSender": "OSCSender"
                 }
             ],
