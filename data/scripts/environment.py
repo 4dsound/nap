@@ -63,6 +63,12 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
         # add external input
         soundObject.findComponent("nap::spatial::SpatialAudioComponentInstance").addExternalInput()
 
+        # add effect (to test)
+        testeffect = nap.DopplerEffect()
+        testeffect.Name = "testeffect"
+        soundObject.findComponent("nap::spatial::SpatialAudioComponentInstance").addPerceptionEffect(testeffect)
+
+
         # set input channel
         soundObject.findComponent("nap::ParameterComponentInstance").findParameter("externalInputEnable").setValue(True)
         soundObject.findComponent("nap::ParameterComponentInstance").findParameter("externalInputStartChannel").setValue(index)
