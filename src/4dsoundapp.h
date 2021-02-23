@@ -103,7 +103,8 @@ namespace nap
 		ObjectPtr<Scene> mScene = nullptr;				// Pointer to the main scene
 
 		ObjectPtr<PerspCameraComponentInstance> mCamera = nullptr;
-		ObjectPtr<RenderableComponentInstance> mGroundPlane = nullptr;
+		ObjectPtr<RenderableComponentInstance> mFloorWireFrame = nullptr;
+		ObjectPtr<RenderableComponentInstance> mFloor = nullptr;
 		ObjectPtr<RenderableComponentInstance> mAxesHelpers = nullptr;
 		ObjectPtr<RenderableComponentInstance> mSatellites = nullptr;
 		ObjectPtr<RenderableComponentInstance> mSubs = nullptr;

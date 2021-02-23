@@ -94,7 +94,90 @@
         },
         {
             "Type": "nap::Entity",
-            "mID": "MonitorFloorGrid",
+            "mID": "MonitorFloor",
+            "Components": [
+                {
+                    "Type": "nap::TransformComponent",
+                    "mID": "nap::TransformComponent_1263bf7e",
+                    "Properties": {
+                        "Translate": {
+                            "x": -0.0010000000474974514,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Rotate": {
+                            "x": 90.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "UniformScale": 10.0
+                    }
+                },
+                {
+                    "Type": "nap::RenderableMeshComponent",
+                    "mID": "nap::RenderableMeshComponent_a0fc7319",
+                    "Visible": true,
+                    "Mesh": "PlaneMesh",
+                    "MaterialInstance": {
+                        "Material": "ConstantMaterial",
+                        "Uniforms": [
+                            {
+                                "Type": "nap::UniformStruct",
+                                "mID": "UniformStruct_85d9386e",
+                                "Name": "UBO",
+                                "Uniforms": [
+                                    {
+                                        "Type": "nap::UniformVec3",
+                                        "mID": "UniformVec3_9310ef8e",
+                                        "Name": "color",
+                                        "Value": {
+                                            "x": 1.0,
+                                            "y": 1.0,
+                                            "z": 1.0
+                                        }
+                                    },
+                                    {
+                                        "Type": "nap::UniformFloat",
+                                        "mID": "UniformFloat_2a646b63",
+                                        "Name": "alpha",
+                                        "Value": 0.10000000149011612
+                                    }
+                                ]
+                            }
+                        ],
+                        "Samplers": [],
+                        "BlendMode": "AlphaBlend",
+                        "DepthMode": "InheritFromBlendMode"
+                    },
+                    "LineWidth": 1.0,
+                    "ClipRect": {
+                        "Min": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Max": {
+                            "x": 0.0,
+                            "y": 0.0
+                        }
+                    }
+                },
+                {
+                    "Type": "nap::spatial::MonitorVisibilityController",
+                    "mID": "nap::spatial::MonitorVisibilityController_15c130c6",
+                    "RenderableComponent": "./nap::RenderableMeshComponent_a0fc7319",
+                    "MonitorVisibilityProperty": "monitorFloor"
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Type": "nap::Entity",
+            "mID": "MonitorFloorWireFrame",
             "Components": [
                 {
                     "Type": "nap::TransformComponent",
@@ -115,16 +198,16 @@
                             "y": 1.0,
                             "z": 1.0
                         },
-                        "UniformScale": 10.0
+                        "UniformScale": 200.0
                     }
                 },
                 {
                     "Type": "nap::RenderableMeshComponent",
-                    "mID": "MonitorFloorVisualization",
+                    "mID": "MonitorFloorWireFrameVisualization",
                     "Visible": true,
                     "Mesh": "LinePlaneMesh_2baa8e75",
                     "MaterialInstance": {
-                        "Material": "ConstantMaterial",
+                        "Material": "FloorWireFrameMaterial",
                         "Uniforms": [
                             {
                                 "Type": "nap::UniformStruct",
@@ -145,8 +228,8 @@
                             }
                         ],
                         "Samplers": [],
-                        "BlendMode": "NotSet",
-                        "DepthMode": "NotSet"
+                        "BlendMode": "AlphaBlend",
+                        "DepthMode": "InheritFromBlendMode"
                     },
                     "LineWidth": 1.0,
                     "ClipRect": {
@@ -163,7 +246,7 @@
                 {
                     "Type": "nap::spatial::MonitorVisibilityController",
                     "mID": "nap::spatial::MonitorVisibilityController_c958c88e",
-                    "RenderableComponent": "./MonitorFloorVisualization",
+                    "RenderableComponent": "./MonitorFloorWireFrameVisualization",
                     "MonitorVisibilityProperty": "monitorFloor"
                 }
             ],
@@ -2647,6 +2730,21 @@
         },
         {
             "Type": "nap::Material",
+            "mID": "FloorWireFrameMaterial",
+            "Uniforms": [],
+            "Samplers": [],
+            "Shader": "FloorWireFrameShader",
+            "VertexAttributeBindings": [
+                {
+                    "MeshAttributeID": "Position",
+                    "ShaderAttributeID": "in_Position"
+                }
+            ],
+            "BlendMode": "NotSet",
+            "DepthMode": "InheritFromBlendMode"
+        },
+        {
+            "Type": "nap::Material",
             "mID": "FontMaterial",
             "Uniforms": [
                 {
@@ -3088,7 +3186,7 @@
                     "InstanceProperties": []
                 },
                 {
-                    "Entity": "MonitorFloorGrid",
+                    "Entity": "MonitorFloorWireFrame",
                     "InstanceProperties": []
                 },
                 {
@@ -3102,6 +3200,10 @@
                 {
                     "Entity": "MonitorParameterController",
                     "InstanceProperties": []
+                },
+                {
+                    "Entity": "MonitorFloor",
+                    "InstanceProperties": []
                 }
             ]
         },
@@ -3110,6 +3212,12 @@
             "mID": "AxesHelperShader",
             "VertShader": "shaders/monitor/axeshelper.vert",
             "FragShader": "shaders/monitor/axeshelper.frag"
+        },
+        {
+            "Type": "nap::ShaderFromFile",
+            "mID": "FloorWireFrameShader",
+            "VertShader": "shaders/monitor/grid.vert",
+            "FragShader": "shaders/monitor/grid.frag"
         },
         {
             "Type": "nap::ShaderFromFile",
@@ -3981,8 +4089,8 @@
         {
             "Type": "nap::spatial::LinePlaneMesh",
             "mID": "LinePlaneMesh_2baa8e75",
-            "Columns": 10,
-            "Rows": 10
+            "Columns": 200,
+            "Rows": 200
         },
         {
             "Type": "nap::spatial::MonitorController",
