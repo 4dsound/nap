@@ -136,8 +136,9 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
 
 
         # set input channel
-        soundObject.findComponent("nap::ParameterComponentInstance").findParameter("externalInputEnable").setValue(True)
-        soundObject.findComponent("nap::ParameterComponentInstance").findParameter("externalInputStartChannel").setValue(index)
+        parameterComponent = soundObject.findComponent("nap::ParameterComponentInstance")
+        parameterComponent.findParameter("externalInputEnable").setValue(True)
+        parameterComponent.findParameter("externalInputStartChannel").setValue(index)
 
         # add granulator source
         # granulator = nap.GranulatorSource()
