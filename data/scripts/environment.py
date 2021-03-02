@@ -50,12 +50,12 @@ spatialPhaser.ParallelDelayCount = 8
 gainScaling = nap.GainScalingEffect()
 gainScaling.Name = "gainScaling"
 
-# reverb = nap.ReverbEffect()
-# reverb.Name = "reverb"
-# reverb.PredelayBufferSize = 32768
+reverb = nap.ReverbEffect()
+reverb.Name = "reverb"
+reverb.PredelayBufferSize = 32768
 # reverb.LPFType = nap.FilterChainType.LowPass6dB
 # reverb.HPFType = nap.FilterChainType.HighPass6dB
-# TODO TODO How do I use RTTI_ENUMs
+# Note: enum properties can't be overwritten from python. Fortunately, the default values (6dB filters) are desired here.
 
 distanceIntensity = nap.DistanceIntensityEffect()
 distanceIntensity.Name = "distanceIntensity"
@@ -124,7 +124,7 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
         spatialAudioComponent.addInputEffect(doppler)
         spatialAudioComponent.addEffect(spatialPhaser)
         spatialAudioComponent.addEffect(gainScaling)
-        # spatialAudioComponent.addEffect(reverb)
+        spatialAudioComponent.addEffect(reverb)
         spatialAudioComponent.addPerceptionEffect(distanceIntensity)
         spatialAudioComponent.addPerceptionEffect(distanceDamping)
         spatialAudioComponent.addPerceptionEffect(elevationFilterUp)
