@@ -5,7 +5,6 @@
 #include <nap/logger.h>
 #include <inputrouter.h>
 #include <perspcameracomponent.h>
-#include <renderable2dtextcomponent.h>
 #include <rendercomponent.h>
 #include <audio/utility/audiofunctions.h>
 #include <Gui/GuiFunctions.h>
@@ -89,9 +88,14 @@ namespace nap
 		if (mCamera == nullptr)
 			return false;
 
-		// Find ground
-		mGroundPlane = findComponentInScene<RenderableComponentInstance>(*mScene, "MonitorFloorGrid", error);
-		if (mGroundPlane == nullptr)
+		// Find floor wireframe
+		mFloorWireFrame = findComponentInScene<RenderableComponentInstance>(*mScene, "MonitorFloorWireFrame", error);
+		if (mFloorWireFrame == nullptr)
+			return false;
+
+		// Find floor
+		mFloor = findComponentInScene<RenderableComponentInstance>(*mScene, "MonitorFloor", error);
+		if (mFloor == nullptr)
 			return false;
 
 		// Find axes helpers
@@ -177,7 +181,8 @@ namespace nap
 
 			if (mMonitorController->isRenderingEnabled())
 			{
-				std::vector<nap::RenderableComponentInstance*> renderableComponents = { mGroundPlane.get(), mAxesHelpers.get(), mSatellites.get(), mSubs.get() };
+				std::vector<nap::RenderableComponentInstance*> renderableComponents = {
+					mFloorWireFrame.get(), mFloor.get(), mAxesHelpers.get(), mSatellites.get(), mSubs.get() };
 				for (auto& entity : mEnvironment->getEntities())
 					getRenderableComponentsRecursive(*entity, renderableComponents);
 
