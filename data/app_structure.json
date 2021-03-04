@@ -2304,6 +2304,48 @@
                     "ControlScales": true,
                     "ControlRotations": true,
                     "LevelSmoothTime": 0.05000000074505806
+                },
+                {
+                    "Type": "nap::spatial::PathVisualizationController",
+                    "mID": "nap::spatial::PathVisualizationController_e62323de",
+                    "RenderableMeshComponent": "./PathVisualization",
+                    "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
+                    "TransformationChainComponent": "../SoundObjectTransformationChainComponent",
+                    "TransformComponent": "./SoundObjectVisualizationTransform",
+                    "MonitorVisibilityProperty": "",
+                    "MonitorLabelVisibilityProperty": "",
+                    "UBO": "UBO",
+                    "UBOVert": "UBOVert",
+                    "ColorUniform": "color",
+                    "DimmedColor": {
+                        "x": 0.20000000298023225,
+                        "y": 0.20000000298023225,
+                        "z": 0.20000000298023225
+                    }
+                },
+                {
+                    "Type": "nap::RenderableMeshComponent",
+                    "mID": "PathVisualization",
+                    "Visible": true,
+                    "Mesh": "",
+                    "MaterialInstance": {
+                        "Material": "LinesMaterial",
+                        "Uniforms": [],
+                        "Samplers": [],
+                        "BlendMode": "NotSet",
+                        "DepthMode": "NotSet"
+                    },
+                    "LineWidth": 1.0,
+                    "ClipRect": {
+                        "Min": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Max": {
+                            "x": 0.0,
+                            "y": 0.0
+                        }
+                    }
                 }
             ],
             "Children": []
