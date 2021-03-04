@@ -2312,7 +2312,7 @@
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
                     "TransformationChainComponent": "../SoundObjectTransformationChainComponent",
                     "TransformComponent": "./SoundObjectVisualizationTransform",
-                    "MonitorVisibilityProperty": "",
+                    "MonitorVisibilityProperty": "paths",
                     "MonitorLabelVisibilityProperty": "",
                     "UBO": "UBO",
                     "UBOVert": "UBOVert",
@@ -4208,6 +4208,12 @@
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "effectLabels",
                     "Title": "Effects",
+                    "Value": true
+                },
+                {
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "paths",
+                    "Title": "Paths",
                     "Value": true
                 }
             ]
