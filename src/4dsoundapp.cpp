@@ -67,16 +67,16 @@ namespace nap
             return false;
 		
 		// Get the gui window and make sure it's visible by moving it to the left of the screen
-		mGuiWindow = mResourceManager->findObject<nap::RenderWindow>("GuiWindow");
-		if (!error.check(mGuiWindow != nullptr, "unable to find gui window with name: %s", "GuiWindow"))
-            return false;
-		
+//		mGuiWindow = mResourceManager->findObject<nap::RenderWindow>("GuiWindow");
+//		if (!error.check(mGuiWindow != nullptr, "unable to find gui window with name: %s", "GuiWindow"))
+//            return false;
+//      mGuiWindow->setPosition(glm::vec2(10, mGuiWindow->getPosition()[1]));
+
 		// Get the render window
 		mRenderWindow = mResourceManager->findObject<nap::RenderWindow>("Window");
         if (!error.check(mRenderWindow != nullptr, "unable to find render window with name: %s", "Window"))
             return false;
 		
-        mGuiWindow->setPosition(glm::vec2(10, mGuiWindow->getPosition()[1]));
 
         // Get the scene that contains our entities and components
         mScene = mResourceManager->findObject<Scene>("Scene");
@@ -139,7 +139,7 @@ namespace nap
 
 		// Apply hard-coded ImGui style to both windows
 		spatial::GuiStyle guiStyle;
-		guiStyle.apply(&mGuiService->getContext(mGuiWindow)->Style);
+//		guiStyle.apply(&mGuiService->getContext(mGuiWindow)->Style);
 		guiStyle.apply(&mGuiService->getContext(mRenderWindow)->Style);
 
 		// All done!
@@ -166,13 +166,13 @@ namespace nap
 	{
 		mRenderService->beginFrame();
 
-		if (mRenderService->beginRecording(*mGuiWindow))
-		{
-			mGuiWindow->beginRendering();
-			mGuiService->draw();
-			mGuiWindow->endRendering();
-			mRenderService->endRecording();
-		}
+//		if (mRenderService->beginRecording(*mGuiWindow))
+//		{
+//			mGuiWindow->beginRendering();
+//			mGuiService->draw();
+//			mGuiWindow->endRendering();
+//			mRenderService->endRecording();
+//		}
 
 		if (mRenderService->beginRecording(*mRenderWindow))
 		{
@@ -220,19 +220,19 @@ namespace nap
 		{
 			nap::KeyPressEvent* press_event = static_cast<nap::KeyPressEvent*>(inputEvent.get());
 
-			if (press_event->mKey == nap::EKeyCode::KEY_TAB)
-			{
-				mGuiWindowIsVisible = !mGuiWindowIsVisible;
-				if (mGuiWindowIsVisible)
-				{
-					mGuiWindow->show();
-				}
-				else
-				{
-					mGuiWindow->hide();
-					mRenderWindow->show();
-				}
-			}
+//			if (press_event->mKey == nap::EKeyCode::KEY_TAB)
+//			{
+//				mGuiWindowIsVisible = !mGuiWindowIsVisible;
+//				if (mGuiWindowIsVisible)
+//				{
+//					mGuiWindow->show();
+//				}
+//				else
+//				{
+//					mGuiWindow->hide();
+//					mRenderWindow->show();
+//				}
+//			}
 
 			if (press_event->mKey == nap::EKeyCode::KEY_LCTRL || press_event->mKey == nap::EKeyCode::KEY_RCTRL)
 				mCtrlKeyPressed = true;

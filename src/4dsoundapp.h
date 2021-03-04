@@ -98,7 +98,7 @@ namespace nap
 		InputService* mInputService = nullptr;			// Input service for processing input
 		IMGuiService* mGuiService = nullptr;			// Manages GUI related update / draw calls
 
-		ResourcePtr<RenderWindow> mGuiWindow;			// Pointer to the gui window
+//		ResourcePtr<RenderWindow> mGuiWindow;			// Pointer to the gui window
 		ResourcePtr<RenderWindow> mRenderWindow;		// Pointer to the render window
 		ObjectPtr<Scene> mScene = nullptr;				// Pointer to the main scene
 
