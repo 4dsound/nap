@@ -22,6 +22,59 @@ def createSpaces(environment, count):
     createSoundObjects(environment, count, True, settings.SPACES_MAX_PARTICLE_COUNT)
 
 
+# define effects outside of the python function scope, so they remain alive (necessary if new effectprocessors are added later).
+granulator = nap.GranulatorEffect()
+granulator.Name = "granulator"
+granulator.CircularBufferSize = 524288
+granulator.CircularBufferChannelCount = 8
+granulator.InternalBufferSize = 32
+granulator.VoiceCount = 50
+
+inputDistanceIntensity = nap.InputDistanceIntensityEffect()
+inputDistanceIntensity.Name = "inputDistanceAttenuation"
+
+inputDistanceDamping = nap.InputDistanceDampingEffect()
+inputDistanceDamping.Name = "inputDistanceDamping"
+
+spatialDelay = nap.SpatialDelayEffect()
+spatialDelay.Name = "spatialDelay"
+
+doppler = nap.DopplerEffect()
+doppler.Name = "doppler"
+
+spatialPhaser = nap.SpatialPhaserEffect()
+spatialPhaser.Name = "spatialPhaser"
+spatialPhaser.DelayLineSize = 16384
+spatialPhaser.ParallelDelayCount = 8
+
+gainScaling = nap.GainScalingEffect()
+gainScaling.Name = "gainScaling"
+
+reverb = nap.ReverbEffect()
+reverb.Name = "reverb"
+reverb.PredelayBufferSize = 32768
+# reverb.LPFType = nap.FilterChainType.LowPass6dB
+# reverb.HPFType = nap.FilterChainType.HighPass6dB
+# Note: enum properties can't be overwritten from python. Fortunately, the default values (6dB filters) are desired here.
+
+distanceIntensity = nap.DistanceIntensityEffect()
+distanceIntensity.Name = "distanceIntensity"
+
+distanceDamping = nap.DistanceDampingEffect()
+distanceDamping.Name = "distanceDamping"
+
+elevationFilterUp = nap.ElevationFilterUpEffect()
+elevationFilterUp.Name = "elevationFilterAbove"
+
+elevationFilterDown = nap.ElevationFilterDownEffect()
+elevationFilterDown.Name = "elevationFilterBelow"
+
+distanceDiffusion = nap.DistanceDiffusionEffect()
+distanceDiffusion.Name = "distanceDiffusion"
+
+
+
+
 # count (int): the number of sound objects to create
 # connect (bool): whether the newly created sound objects should be connected to all other sound objects
 def createSoundObjects(environment, count, connect, maxParticleCount):
@@ -60,12 +113,49 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
         # set hue
         soundObject.findComponent("nap::ParameterComponentInstance").findParameter("hue").setValue((len(soundObjects) / float(settings.SOURCES_COUNT + settings.SPACES_COUNT)) * 255)
 
+
+
+        # add effects
+        spatialAudioComponent = soundObject.findComponent("nap::spatial::SpatialAudioComponentInstance")
+
+        if connect: # space sound objects
+            spatialAudioComponent.addInputEffect(granulator)
+            spatialAudioComponent.addInputEffect(inputDistanceIntensity)
+            spatialAudioComponent.addInputEffect(inputDistanceDamping)
+            spatialAudioComponent.addInputEffect(spatialDelay)
+            spatialAudioComponent.addEffect(doppler)
+            spatialAudioComponent.addEffect(spatialPhaser)
+            spatialAudioComponent.addEffect(gainScaling)
+            spatialAudioComponent.addEffect(reverb)
+            spatialAudioComponent.addPerceptionEffect(distanceIntensity)
+            spatialAudioComponent.addPerceptionEffect(distanceDamping)
+            spatialAudioComponent.addPerceptionEffect(elevationFilterUp)
+            spatialAudioComponent.addPerceptionEffect(elevationFilterDown)
+            spatialAudioComponent.addPerceptionEffect(distanceDiffusion)
+        else: # source sound objects (for now: just without spatial phaser)
+            spatialAudioComponent.addInputEffect(granulator)
+            spatialAudioComponent.addInputEffect(inputDistanceIntensity)
+            spatialAudioComponent.addInputEffect(inputDistanceDamping)
+            spatialAudioComponent.addInputEffect(spatialDelay)
+            spatialAudioComponent.addEffect(doppler)
+            spatialAudioComponent.addEffect(gainScaling)
+            spatialAudioComponent.addEffect(reverb)
+            spatialAudioComponent.addPerceptionEffect(distanceIntensity)
+            spatialAudioComponent.addPerceptionEffect(distanceDamping)
+            spatialAudioComponent.addPerceptionEffect(elevationFilterUp)
+            spatialAudioComponent.addPerceptionEffect(elevationFilterDown)
+            spatialAudioComponent.addPerceptionEffect(distanceDiffusion)
+
+
+
         # add external input
-        soundObject.findComponent("nap::spatial::SpatialAudioComponentInstance").addExternalInput()
+        spatialAudioComponent.addExternalInput()
+
 
         # set input channel
-        soundObject.findComponent("nap::ParameterComponentInstance").findParameter("externalInputEnable").setValue(True)
-        soundObject.findComponent("nap::ParameterComponentInstance").findParameter("externalInputStartChannel").setValue(index)
+        parameterComponent = soundObject.findComponent("nap::ParameterComponentInstance")
+        parameterComponent.findParameter("externalInputEnable").setValue(True)
+        parameterComponent.findParameter("externalInputStartChannel").setValue(index)
 
         # add granulator source
         # granulator = nap.GranulatorSource()
@@ -77,7 +167,7 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
         # soundObject.findComponent("nap::spatial::SpatialAudioComponentInstance").addTestSignal()
 
         # enable gainscaling by default
-        soundObject.findComponent("nap::ParameterComponentInstance").findParameter("effect/gainScaling/enable").setValue(True)
+        # soundObject.findComponent("nap::ParameterComponentInstance").findParameter("effect/gainScaling/enable").setValue(True)
 
         # append to list
         soundObjects.append(soundObject)
