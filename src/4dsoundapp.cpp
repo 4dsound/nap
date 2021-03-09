@@ -66,19 +66,17 @@ namespace nap
         if (!mResourceManager->loadFile(mFileName, error))
             return false;
 		
-		// Get the gui window and make sure it's visible by moving it to the left of the screen
-//		mGuiWindow = mResourceManager->findObject<nap::RenderWindow>("GuiWindow");
-//		if (!error.check(mGuiWindow != nullptr, "unable to find gui window with name: %s", "GuiWindow"))
-//            return false;
-//      mGuiWindow->setPosition(glm::vec2(10, mGuiWindow->getPosition()[1]));
-
 		// Get the render window
-		mRenderWindow = mResourceManager->findObject<nap::RenderWindow>("Window");
-        if (!error.check(mRenderWindow != nullptr, "unable to find render window with name: %s", "Window"))
+		mWindow = mResourceManager->findObject<nap::RenderWindow>("Window");
+        if (!error.check(mWindow != nullptr, "unable to find render window with name: %s", "Window"))
             return false;
-		
 
-        // Get the scene that contains our entities and components
+		// Get the detached gui window
+		mSecondaryWindow = mResourceManager->findObject<nap::RenderWindow>("SecondaryWindow");
+		if (!error.check(mSecondaryWindow != nullptr, "unable to find gui window with name: %s", "SecondaryWindow"))
+			return false;
+
+		// Get the scene that contains our entities and components
         mScene = mResourceManager->findObject<Scene>("Scene");
         if (!error.check(mScene != nullptr, "unable to find scene with name: %s", "Scene"))
             return false;
@@ -125,8 +123,12 @@ namespace nap
         if (!mCommandLineArgs.empty())
 			mEnvironment->setScriptPath(mCommandLineArgs[0]);
 
-		mGui = mResourceManager->findObject<gui::Gui>("Gui");
-		if (!error.check(mGui != nullptr, "Gui not found"))
+		mGuiWindow = mResourceManager->findObject<gui::Gui>("GuiWindow");
+		if (!error.check(mGuiWindow != nullptr, "GuiWindow not found"))
+			return false;
+
+		mDetachedGuiWindow = mResourceManager->findObject<gui::Gui>("DetachedGuiWindow");
+		if (!error.check(mDetachedGuiWindow != nullptr, "DetachedGuiWindow not found"))
 			return false;
 
 		mMonitorGui = mResourceManager->findObject<gui::Gui>("MonitorGui");
@@ -139,8 +141,8 @@ namespace nap
 
 		// Apply hard-coded ImGui style to both windows
 		spatial::GuiStyle guiStyle;
-//		guiStyle.apply(&mGuiService->getContext(mGuiWindow)->Style);
-		guiStyle.apply(&mGuiService->getContext(mRenderWindow)->Style);
+		guiStyle.apply(&mGuiService->getContext(mSecondaryWindow)->Style);
+		guiStyle.apply(&mGuiService->getContext(mWindow)->Style);
 
 		// All done!
         return true;
@@ -153,9 +155,27 @@ namespace nap
     {
         // Use a default input router to forward input events (recursively) to all input components in the default scene
         nap::DefaultInputRouter input_router(true);
-        mInputService->processWindowEvents(*mRenderWindow, input_router, { &mScene->getRootEntity() });
+        mInputService->processWindowEvents(*mWindow, input_router, { &mScene->getRootEntity() });
 
-		mGui->show();
+		if (mGuiWindow->mOpen)
+			mGuiWindow->show();
+
+		if (mDetachedGuiWindow->mOpen)
+		{
+			if (!mSecondaryWindowVisible)
+			{
+				mSecondaryWindow->show();
+				mSecondaryWindowVisible = true;
+			}
+			mDetachedGuiWindow->show();
+		}
+		else {
+			if (mSecondaryWindowVisible)
+			{
+				mSecondaryWindow->hide();
+				mSecondaryWindowVisible = false;
+			}
+		}
 
 		if (mMonitorController->isRenderingEnabled())
 			mMonitorGui->show();
@@ -166,18 +186,18 @@ namespace nap
 	{
 		mRenderService->beginFrame();
 
-//		if (mRenderService->beginRecording(*mGuiWindow))
-//		{
-//			mGuiWindow->beginRendering();
-//			mGuiService->draw();
-//			mGuiWindow->endRendering();
-//			mRenderService->endRecording();
-//		}
+		if (mRenderService->beginRecording(*mSecondaryWindow))
+		{
+			mSecondaryWindow->beginRendering();
+			mGuiService->draw();
+			mSecondaryWindow->endRendering();
+			mRenderService->endRecording();
+		}
 
-		if (mRenderService->beginRecording(*mRenderWindow))
+		if (mRenderService->beginRecording(*mWindow))
 		{
 			// Begin render pass
-			mRenderWindow->beginRendering();
+			mWindow->beginRendering();
 
 			if (mMonitorController->isRenderingEnabled())
 			{
@@ -187,17 +207,17 @@ namespace nap
 					getRenderableComponentsRecursive(*entity, renderableComponents);
 
 				// Render the world with the right camera directly to screen
-				mRenderService->renderObjects(*mRenderWindow, *mCamera, renderableComponents);
+				mRenderService->renderObjects(*mWindow, *mCamera, renderableComponents);
 
 				// Render the text overlay
-				mTextOverlayController->draw(*mRenderWindow, *mCamera);
+				mTextOverlayController->draw(*mWindow, *mCamera);
 
 				// Render GUI elements
 				mGuiService->draw();
 			}
 
 			// Stop render pass
-			mRenderWindow->endRendering();
+			mWindow->endRendering();
 
 			// End recording
 			mRenderService->endRecording();
@@ -225,7 +245,7 @@ namespace nap
 //				mGuiWindowIsVisible = !mGuiWindowIsVisible;
 //				if (mGuiWindowIsVisible)
 //				{
-//					mGuiWindow->show();
+//					mSecondaryWindow->show();
 //				}
 //				else
 //				{

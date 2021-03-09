@@ -7,6 +7,7 @@
 
 // Gui Layout includes
 #include <Gui/Gui.h>
+#include <Gui/Window.h>
 
 // Core includes
 #include <nap/resourcemanager.h>
@@ -98,8 +99,8 @@ namespace nap
 		InputService* mInputService = nullptr;			// Input service for processing input
 		IMGuiService* mGuiService = nullptr;			// Manages GUI related update / draw calls
 
-//		ResourcePtr<RenderWindow> mGuiWindow;			// Pointer to the gui window
-		ResourcePtr<RenderWindow> mRenderWindow;		// Pointer to the render window
+		ResourcePtr<RenderWindow> mSecondaryWindow;		// Pointer to the detached gui window
+		ResourcePtr<RenderWindow> mWindow;				// Pointer to the render window
 		ObjectPtr<Scene> mScene = nullptr;				// Pointer to the main scene
 
 		ObjectPtr<PerspCameraComponentInstance> mCamera = nullptr;
@@ -110,11 +111,12 @@ namespace nap
 		ObjectPtr<RenderableComponentInstance> mSubs = nullptr;
 		ObjectPtr<spatial::EnvironmentComponentInstance> mEnvironment = nullptr;
 		ObjectPtr<spatial::TextOverlayControllerInstance> mTextOverlayController = nullptr;
-		ObjectPtr<gui::Gui> mGui = nullptr;
+		ObjectPtr<gui::GuiWindow> mGuiWindow = nullptr;
+		ObjectPtr<gui::GuiWindow> mDetachedGuiWindow = nullptr;
 		ObjectPtr<gui::Gui> mMonitorGui = nullptr;
 		ObjectPtr<spatial::MonitorController> mMonitorController = nullptr;
 
-		bool mGuiWindowIsVisible = true;     		// Is the GUI window currently visible?
+		bool mSecondaryWindowVisible = false;     		// Is the GUI window currently visible?
 		bool mCtrlKeyPressed = false; 				// Indicates wether the ctrl key is pressed
 
 		std::string mFileName = "app_structure.json"; 	// The JSON file that is loaded on initialization
