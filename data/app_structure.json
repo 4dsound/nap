@@ -463,12 +463,9 @@
                     "mID": "SpatialAudioComponent",
                     "Sources": [],
                     "Receives": [],
-                    "InputEffects": [
-                    ],
-                    "Effects": [
-                    ],
-                    "PerceptionEffects": [
-                    ],
+                    "InputEffects": [],
+                    "Effects": [],
+                    "PerceptionEffects": [],
                     "MaxParticleCount": 64,
                     "EnableEffects": true
                 },
@@ -1160,6 +1157,28 @@
                     "ControlScales": true,
                     "ControlRotations": true,
                     "LevelSmoothTime": 0.05000000074505806
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Type": "nap::Entity",
+            "mID": "SpeakerSetupDataExposer",
+            "Components": [
+                {
+                    "Type": "nap::spatial::ExposedDataComponent",
+                    "mID": "nap::spatial::ExposedDataComponent_d2fbd3d2",
+                    "OscSender": "OSCSender"
+                },
+                {
+                    "Type": "nap::spatial::MultiSpeakerSetupDataExposer",
+                    "mID": "nap::spatial::MultiSpeakerSetupDataExposer_8af3fc6c",
+                    "MultiSpeakerSetup": "multiSetup"
+                },
+                {
+                    "Type": "nap::ParameterComponent",
+                    "mID": "nap::ParameterComponent_d472135f",
+                    "Name": "speakersetup"
                 }
             ],
             "Children": []
@@ -2057,6 +2076,10 @@
                 },
                 {
                     "Entity": "MonitorFloor",
+                    "InstanceProperties": []
+                },
+                {
+                    "Entity": "SpeakerSetupDataExposer",
                     "InstanceProperties": []
                 }
             ]
