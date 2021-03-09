@@ -1173,6 +1173,7 @@
                 {
                     "Type": "nap::spatial::MultiSpeakerSetupDataExposer",
                     "mID": "nap::spatial::MultiSpeakerSetupDataExposer_8af3fc6c",
+                    "ExposedDataComponent": "./nap::spatial::ExposedDataComponent_d2fbd3d2",
                     "MultiSpeakerSetup": "multiSetup"
                 },
                 {
