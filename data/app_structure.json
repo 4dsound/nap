@@ -463,12 +463,9 @@
                     "mID": "SpatialAudioComponent",
                     "Sources": [],
                     "Receives": [],
-                    "InputEffects": [
-                    ],
-                    "Effects": [
-                    ],
-                    "PerceptionEffects": [
-                    ],
+                    "InputEffects": [],
+                    "Effects": [],
+                    "PerceptionEffects": [],
                     "MaxParticleCount": 64,
                     "EnableEffects": true
                 },
@@ -949,8 +946,8 @@
                     "SpatialTransformationComponent": "../SpatialTransformationComponent",
                     "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
                     "ShapeComponent": "../ShapeComponent",
-                    "TranfsormComponent": "./SoundObjectVisualizationTransform",
-                    "CameraTranfsormComponent": "../../camera/CameraTransformComponent",
+                    "TransformComponent": "./SoundObjectVisualizationTransform",
+                    "CameraTransformComponent": "../../camera/CameraTransformComponent",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
                     "MonitorVisibilityProperty": "soundObjectShapes",
                     "MonitorLabelVisibilityProperty": "soundObjectNames",
