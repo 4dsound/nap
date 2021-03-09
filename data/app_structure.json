@@ -2311,11 +2311,9 @@
                     "RenderableMeshComponent": "./PathVisualization",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
                     "TransformationChainComponent": "../SoundObjectTransformationChainComponent",
-                    "TransformComponent": "./SoundObjectVisualizationTransform",
+                    "SpatialTransformationComponent": "../SpatialTransformationComponent",
                     "MonitorVisibilityProperty": "paths",
-                    "MonitorLabelVisibilityProperty": "",
                     "UBO": "UBO",
-                    "UBOVert": "UBOVert",
                     "ColorUniform": "color",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
