@@ -71,7 +71,7 @@
         {
             "Type": "nap::audio::AudioServiceConfiguration",
             "mID": "nap::audio::AudioServiceConfiguration",
-            "HostApi": "Core Audio",
+            "HostApi": "",
             "InputDevice": "",
             "OutputDevice": "",
             "InputChannelCount": 1,
