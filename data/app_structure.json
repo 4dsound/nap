@@ -3368,7 +3368,7 @@
         {
             "Type": "nap::gui::GuiWindow",
             "mID": "GuiWindow",
-            "Title": "",
+            "Title": "Control Panel",
             "Style": "",
             "Position": {
                 "x": 200.0,
@@ -3550,8 +3550,8 @@
                             "y": 0.0
                         },
                         "Flags": {
-                            "NoScrollBar": false,
-                            "NoScrollWithMouse": false,
+                            "NoScrollBar": true,
+                            "NoScrollWithMouse": true,
                             "HorizontalScrollBar": false
                         },
                         "Alpha": 0.0,
@@ -3561,7 +3561,9 @@
                             "mID": "MonitorHeader_605325db",
                             "Title": "MonitorController",
                             "Style": "",
-                            "MonitorController": "MonitorController"
+                            "MonitorController": "MonitorController",
+                            "GuiWindow": "GuiWindow",
+                            "DetachedGuiWindow": "DetachedGuiWindow"
                         }
                     }
                 },
@@ -3682,9 +3684,7 @@
                             "Title": "MonitorSidePanel",
                             "Style": "",
                             "MoitorController": "MonitorController",
-                            "SoundObjectInpectorWindow": "SoundObjectInspectorWindow",
-                            "GuiWindow": "GuiWindow",
-                            "DetachedGuiWindow": "DetachedGuiWindow"
+                            "SoundObjectInpectorWindow": "SoundObjectInspectorWindow"
                         }
                     }
                 },
