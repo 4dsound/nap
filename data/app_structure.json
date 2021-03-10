@@ -3126,7 +3126,7 @@
             "Resizable": true,
             "Visible": false,
             "SampleShading": true,
-            "Title": "4DSOUND Engine 2.0.b8.3",
+            "Title": "4DSOUND Control Panel",
             "Width": 800,
             "Height": 400,
             "Mode": "Immediate",
@@ -3517,7 +3517,7 @@
                     },
                     "Size": {
                         "x": 0.0,
-                        "y": 26.0
+                        "y": 28.0
                     },
                     "Flags": {
                         "NoTitleBar": true,
