@@ -1140,7 +1140,7 @@
                     "MonitorLabelVisibilityProperty": "",
                     "ColorUniform": "color",
                     "ScaleUniform": "",
-                    "LevelUniform": "",
+                    "LevelUniform": "lightIntensity",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
@@ -1729,20 +1729,10 @@
                     "Name": "UBO",
                     "Uniforms": [
                         {
-                            "Type": "nap::UniformVec3",
-                            "mID": "UniformVec3_0c09f0d9",
-                            "Name": "lightIntensity",
-                            "Value": {
-                                "x": 0.5,
-                                "y": 0.5,
-                                "z": 0.5
-                            }
-                        },
-                        {
                             "Type": "nap::UniformFloat",
                             "mID": "UniformFloat_47b5876b",
                             "Name": "ambientIntensity",
-                            "Value": 0.20000000298023225
+                            "Value": 0.30000001192092898
                         },
                         {
                             "Type": "nap::UniformFloat",
@@ -1768,34 +1758,9 @@
                             "Name": "lightPositions",
                             "Values": [
                                 {
-                                    "x": -10.0,
-                                    "y": 0.0,
-                                    "z": 0.0
-                                },
-                                {
-                                    "x": 10.0,
-                                    "y": 0.0,
-                                    "z": 0.0
-                                },
-                                {
-                                    "x": 0.0,
-                                    "y": 10.0,
-                                    "z": 0.0
-                                },
-                                {
-                                    "x": 0.0,
-                                    "y": -10.0,
-                                    "z": 0.0
-                                },
-                                {
                                     "x": 0.0,
                                     "y": 0.0,
-                                    "z": 10.0
-                                },
-                                {
-                                    "x": 0.0,
-                                    "y": 0.0,
-                                    "z": -10.0
+                                    "z": 0.0
                                 }
                             ]
                         },
@@ -1803,7 +1768,13 @@
                             "Type": "nap::UniformInt",
                             "mID": "UniformInt_05631af5",
                             "Name": "lightCount",
-                            "Value": 6
+                            "Value": 1
+                        },
+                        {
+                            "Type": "nap::UniformFloat",
+                            "mID": "UniformFloat_b0358fed",
+                            "Name": "lightIntensity",
+                            "Value": 0.8999999761581421
                         }
                     ]
                 }

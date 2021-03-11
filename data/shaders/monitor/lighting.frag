@@ -12,9 +12,9 @@ out vec4 out_Color;
 
 uniform UBO
 {
-	uniform vec3		lightPositions[6];	// World position of the lights
+	uniform vec3		lightPositions[1];	// World position of the lights
 	uniform int			lightCount;			// Number of lights
-	uniform vec3		lightIntensity;		// Light intensity
+	uniform float		lightIntensity;		// Light intensity
 	uniform float		ambientIntensity;	// Ambient light intensity
 	uniform float		shininess;			// Specular angle shininess
 	uniform float		specularIntensity;	// Amount of added specular
