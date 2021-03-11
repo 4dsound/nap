@@ -858,7 +858,7 @@
                         }
                     ],
                     "Rotations": [],
-                    "CameraPositionUniform": "inCameraPosition",
+                    "CameraPositionUniform": "",
                     "UniformFloatValues": [],
                     "UniformVec3Values": [],
                     "CameraFacing": false
@@ -1110,7 +1110,7 @@
                     "Visible": true,
                     "CameraTransformComponent": "../../camera/CameraTransformComponent",
                     "MaterialInstance": {
-                        "Material": "SolidMaterial",
+                        "Material": "LightingMaterial",
                         "Uniforms": [],
                         "Samplers": [],
                         "BlendMode": "NotSet",
@@ -1123,7 +1123,7 @@
                     "Positions": [],
                     "Scales": [],
                     "Rotations": [],
-                    "CameraPositionUniform": "cameraPosition",
+                    "CameraPositionUniform": "cameraLocation",
                     "UniformFloatValues": [],
                     "UniformVec3Values": [],
                     "CameraFacing": false
@@ -1733,9 +1733,9 @@
                             "mID": "UniformVec3_f8c14b8e",
                             "Name": "lightPosition",
                             "Value": {
-                                "x": 0.0,
+                                "x": 5.0,
                                 "y": 5.0,
-                                "z": -5.0
+                                "z": 5.0
                             }
                         },
                         {
@@ -1743,16 +1743,34 @@
                             "mID": "UniformVec3_0c09f0d9",
                             "Name": "lightIntensity",
                             "Value": {
-                                "x": 0.20000000298023225,
-                                "y": 0.20000000298023225,
-                                "z": 0.20000000298023225
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
                             }
                         },
                         {
                             "Type": "nap::UniformFloat",
                             "mID": "UniformFloat_47b5876b",
                             "Name": "ambientIntensity",
-                            "Value": 0.699999988079071
+                            "Value": 0.5
+                        },
+                        {
+                            "Type": "nap::UniformFloat",
+                            "mID": "UniformFloat_5479166a",
+                            "Name": "shininess",
+                            "Value": 15.0
+                        },
+                        {
+                            "Type": "nap::UniformFloat",
+                            "mID": "UniformFloat_09afcd98",
+                            "Name": "specularIntensity",
+                            "Value": 1.0
+                        },
+                        {
+                            "Type": "nap::UniformFloat",
+                            "mID": "UniformFloat_c9d1d3e2",
+                            "Name": "attenuationScale",
+                            "Value": 0.000010000000656873454
                         }
                     ]
                 }

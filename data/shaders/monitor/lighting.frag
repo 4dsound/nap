@@ -31,15 +31,15 @@ void main(void)
 	//calculate the location of this fragment (pixel) in world coordinates
     vec3 frag_position = vec3(pass_ModelMatrix * vec4(pass_Vert, 1));
 
-	//calculate the vector from this pixels surface to the light source
-	vec3 surfaceToLight = normalize(ubo.lightPosition - frag_position);
-
 	// calculate vector that defines the distance from camera to the surface
 	vec3 cameraPosition = ubo.cameraLocation;
 	vec3 surfaceToCamera = normalize(cameraPosition - frag_position);
 
 	// Ambient color
 	vec3 ambient = ubo.color.rgb * ubo.lightIntensity * ubo.ambientIntensity;
+
+	//calculate the vector from this pixels surface to the light source
+	vec3 surfaceToLight = normalize(ubo.lightPosition - frag_position);
 
 	//diffuse
     float diffuseCoefficient = max(0.0, dot(normal, surfaceToLight));
@@ -57,7 +57,7 @@ void main(void)
     float attenuation = 1.0 / (1.0 + ubo.attenuationScale * pow(distanceToLight, 2));
 
 	//linear color (color before gamma correction)
-    vec3 linearColor = ambient + attenuation*(diffuse + specular);
+    vec3 linearColor = ambient + attenuation * (diffuse + specular);
 
 	//final color (after gamma correction)
 	out_Color = vec4(linearColor, 1.0);
