@@ -12,7 +12,8 @@ out vec4 out_Color;
 
 uniform UBO
 {
-	uniform vec3		lightPosition;		// World position of the light
+	uniform vec3		lightPositions[6];	// World position of the lights
+	uniform int			lightCount;			// Number of lights
 	uniform vec3		lightIntensity;		// Light intensity
 	uniform float		ambientIntensity;	// Ambient light intensity
 	uniform float		shininess;			// Specular angle shininess
@@ -38,26 +39,31 @@ void main(void)
 	// Ambient color
 	vec3 ambient = ubo.color.rgb * ubo.lightIntensity * ubo.ambientIntensity;
 
-	//calculate the vector from this pixels surface to the light source
-	vec3 surfaceToLight = normalize(ubo.lightPosition - frag_position);
+	vec3 linearColor = ambient;
 
-	//diffuse
-    float diffuseCoefficient = max(0.0, dot(normal, surfaceToLight));
-	vec3 diffuse = diffuseCoefficient * ubo.color.rgb * ubo.lightIntensity;
-    
-	//specular
-	vec3 specularColor = vec3(1.0,1.0,1.0);
-	float specularCoefficient = 0.0;
-    if(diffuseCoefficient > 0.0)
-        specularCoefficient = pow(max(0.0, dot(surfaceToCamera, reflect(-surfaceToLight, normal))), ubo.shininess);
-    vec3 specular = specularCoefficient * specularColor * ubo.lightIntensity * ubo.specularIntensity;
-    
-	//attenuation based on light distance
-    float distanceToLight = length(ubo.lightPosition - frag_position);
-    float attenuation = 1.0 / (1.0 + ubo.attenuationScale * pow(distanceToLight, 2));
+	for (int i = 0; i < ubo.lightCount; i++)
+	{
+		//calculate the vector from this pixels surface to the light source
+		vec3 surfaceToLight = normalize(ubo.lightPositions[i] - frag_position);
 
-	//linear color (color before gamma correction)
-    vec3 linearColor = ambient + attenuation * (diffuse + specular);
+		//diffuse
+		float diffuseCoefficient = max(0.0, dot(normal, surfaceToLight));
+		vec3 diffuse = diffuseCoefficient * ubo.color.rgb * ubo.lightIntensity;
+
+		//specular
+		vec3 specularColor = vec3(1.0,1.0,1.0);
+		float specularCoefficient = 0.0;
+		if(diffuseCoefficient > 0.0)
+		specularCoefficient = pow(max(0.0, dot(surfaceToCamera, reflect(-surfaceToLight, normal))), ubo.shininess);
+		vec3 specular = specularCoefficient * specularColor * ubo.lightIntensity * ubo.specularIntensity;
+
+		//attenuation based on light distance
+		float distanceToLight = length(ubo.lightPositions[i] - frag_position);
+		float attenuation = 1.0 / (1.0 + ubo.attenuationScale * pow(distanceToLight, 2));
+
+		//linear color (color before gamma correction)
+		linearColor = linearColor + attenuation * (diffuse + specular);
+	}
 
 	//final color (after gamma correction)
 	out_Color = vec4(linearColor, 1.0);
