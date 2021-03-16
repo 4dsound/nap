@@ -7,6 +7,7 @@
 in vec3 pass_Normals;		// Normals
 in mat4 pass_ModelMatrix;	// Matrix
 in vec3 pass_Vert;			// The vertex position
+in vec3 pass_UVs;			// Vertex UV
 
 out vec4 out_Color;
 
@@ -21,10 +22,26 @@ uniform UBO
 	uniform float		attenuationScale;	// Light Falloff
 	uniform vec3		cameraLocation;		// World Space location of the camera
 	uniform vec3        color;
+	uniform int			wireframe;			// Set to > 0 to display only the wireframe
+	uniform float		lineWidth;			// Width of the lines in the wireframe
 } ubo;
 
 void main(void)
 {
+	float lightIntensity = ubo.lightIntensity;
+	float alpha = 1;
+
+	if (ubo.wireframe > 0)
+	{
+		float lineWidth = ubo.lineWidth;
+		if (pass_UVs.x < lineWidth || pass_UVs.y < lineWidth || pass_UVs.x >  1 - lineWidth || pass_UVs.y > 1 - lineWidth)
+			lightIntensity = 1;
+		else {
+			alpha = 0;
+			lightIntensity = 0;
+		}
+	}
+
 	//calculate normal in world coordinates
     mat3 normal_matrix = transpose(inverse(mat3(pass_ModelMatrix)));
     vec3 normal = normalize(normal_matrix * pass_Normals);
@@ -37,7 +54,7 @@ void main(void)
 	vec3 surfaceToCamera = normalize(cameraPosition - frag_position);
 
 	// Ambient color
-	vec3 ambient = ubo.color.rgb * ubo.lightIntensity * ubo.ambientIntensity;
+	vec3 ambient = ubo.color.rgb * lightIntensity * ubo.ambientIntensity;
 
 	vec3 linearColor = ambient;
 
@@ -48,14 +65,14 @@ void main(void)
 
 		//diffuse
 		float diffuseCoefficient = max(0.0, dot(normal, surfaceToLight));
-		vec3 diffuse = diffuseCoefficient * ubo.color.rgb * ubo.lightIntensity;
+		vec3 diffuse = diffuseCoefficient * ubo.color.rgb * lightIntensity;
 
 		//specular
 		vec3 specularColor = vec3(1.0,1.0,1.0);
 		float specularCoefficient = 0.0;
 		if(diffuseCoefficient > 0.0)
 		specularCoefficient = pow(max(0.0, dot(surfaceToCamera, reflect(-surfaceToLight, normal))), ubo.shininess);
-		vec3 specular = specularCoefficient * specularColor * ubo.lightIntensity * ubo.specularIntensity;
+		vec3 specular = specularCoefficient * specularColor * lightIntensity * ubo.specularIntensity;
 
 		//attenuation based on light distance
 		float distanceToLight = length(ubo.lightPositions[i] - frag_position);
@@ -66,5 +83,5 @@ void main(void)
 	}
 
 	//final color (after gamma correction)
-	out_Color = vec4(linearColor, 1.0);
+	out_Color = vec4(linearColor, alpha);
 }

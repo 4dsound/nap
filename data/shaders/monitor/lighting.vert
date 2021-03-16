@@ -15,11 +15,13 @@ uniform nap
 // Input attributes
 in vec3	in_Position;		// Vertex position
 in vec3 in_Normal;			// Vertex normal
+in vec3 in_UVs;				// Vertex UV
 
 // Output attributes to fragment shader
 out mat4 pass_ModelMatrix;
 out vec3 pass_Vert;
 out vec3 pass_Normals;
+out vec3 pass_UVs;
 
 void main(void)
 {
@@ -29,4 +31,5 @@ void main(void)
 	pass_Vert = in_Position;
 	pass_ModelMatrix = mvp.modelMatrix;
 	pass_Normals = in_Normal;
+	pass_UVs = in_UVs;
 }
