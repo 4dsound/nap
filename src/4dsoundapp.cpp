@@ -212,9 +212,10 @@ namespace nap
 				// Render the text overlay
 				mTextOverlayController->draw(*mWindow, *mCamera);
 
-				// Render GUI elements
-				mGuiService->draw();
 			}
+            
+            // Render GUI elements
+            mGuiService->draw();
 
 			// Stop render pass
 			mWindow->endRendering();
