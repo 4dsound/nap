@@ -152,7 +152,7 @@
                         ],
                         "Samplers": [],
                         "BlendMode": "AlphaBlend",
-                        "DepthMode": "ReadWrite"
+                        "DepthMode": "ReadOnly"
                     },
                     "LineWidth": 1.0,
                     "ClipRect": {
@@ -228,7 +228,7 @@
                             }
                         ],
                         "Samplers": [],
-                        "BlendMode": "Opaque",
+                        "BlendMode": "AlphaBlend",
                         "DepthMode": "ReadWrite"
                     },
                     "LineWidth": 1.0,
@@ -843,7 +843,7 @@
                         ],
                         "Samplers": [],
                         "BlendMode": "Opaque",
-                        "DepthMode": "InheritFromBlendMode"
+                        "DepthMode": "ReadWrite"
                     },
                     "Mesh": "SphereMesh",
                     "UBO": "UBO",
@@ -924,8 +924,8 @@
                         "Material": "LinesMaterial",
                         "Uniforms": [],
                         "Samplers": [],
-                        "BlendMode": "NotSet",
-                        "DepthMode": "NotSet"
+                        "BlendMode": "Opaque",
+                        "DepthMode": "ReadWrite"
                     },
                     "LineWidth": 1.0,
                     "ClipRect": {
@@ -978,8 +978,8 @@
                         "Material": "PointCloudMaterial",
                         "Uniforms": [],
                         "Samplers": [],
-                        "BlendMode": "NotSet",
-                        "DepthMode": "NotSet"
+                        "BlendMode": "Opaque",
+                        "DepthMode": "ReadWrite"
                     },
                     "Mesh": "PointCloudMesh",
                     "UBO": "UBO",
@@ -1059,8 +1059,8 @@
                         "Material": "HaloMaterial",
                         "Uniforms": [],
                         "Samplers": [],
-                        "BlendMode": "NotSet",
-                        "DepthMode": "NotSet"
+                        "BlendMode": "AlphaBlend",
+                        "DepthMode": "ReadOnly"
                     },
                     "Mesh": "PlaneMesh",
                     "UBO": "UBO",
@@ -1120,7 +1120,7 @@
                         "Uniforms": [],
                         "Samplers": [],
                         "BlendMode": "Opaque",
-                        "DepthMode": "InheritFromBlendMode"
+                        "DepthMode": "ReadWrite"
                     },
                     "Mesh": "BoxMesh",
                     "UBO": "UBO",
@@ -1189,8 +1189,8 @@
                         "Material": "LinesMaterial",
                         "Uniforms": [],
                         "Samplers": [],
-                        "BlendMode": "NotSet",
-                        "DepthMode": "NotSet"
+                        "BlendMode": "Opaque",
+                        "DepthMode": "ReadWrite"
                     },
                     "LineWidth": 1.0,
                     "ClipRect": {
@@ -1240,7 +1240,7 @@
                         ],
                         "Samplers": [],
                         "BlendMode": "AlphaBlend",
-                        "DepthMode": "ReadWrite"
+                        "DepthMode": "WriteOnly"
                     },
                     "Mesh": "BoxMesh",
                     "UBO": "UBO",
