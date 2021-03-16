@@ -241,20 +241,6 @@ namespace nap
 		{
 			nap::KeyPressEvent* press_event = static_cast<nap::KeyPressEvent*>(inputEvent.get());
 
-//			if (press_event->mKey == nap::EKeyCode::KEY_TAB)
-//			{
-//				mGuiWindowIsVisible = !mGuiWindowIsVisible;
-//				if (mGuiWindowIsVisible)
-//				{
-//					mSecondaryWindow->show();
-//				}
-//				else
-//				{
-//					mGuiWindow->hide();
-//					mRenderWindow->show();
-//				}
-//			}
-
 			if (press_event->mKey == nap::EKeyCode::KEY_LCTRL || press_event->mKey == nap::EKeyCode::KEY_RCTRL)
 				mCtrlKeyPressed = true;
 
