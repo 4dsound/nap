@@ -229,7 +229,7 @@
                         ],
                         "Samplers": [],
                         "BlendMode": "AlphaBlend",
-                        "DepthMode": "ReadWrite"
+                        "DepthMode": "ReadOnly"
                     },
                     "LineWidth": 1.0,
                     "ClipRect": {
