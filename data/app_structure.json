@@ -1108,7 +1108,7 @@
                     "ShowLabels": false,
                     "ControlScales": false,
                     "ControlRotations": false,
-                    "LevelSmoothTime": 0.05000000074505806
+                    "LevelSmoothTime": 1.0
                 },
                 {
                     "Type": "nap::spatial::RenderableMeshCopyComponent",
@@ -3172,7 +3172,7 @@
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "particleBoxes",
                     "Title": "Particle Boxes",
-                    "Value": true
+                    "Value": false
                 },
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
@@ -3220,7 +3220,7 @@
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "particleFrames",
                     "Title": "Particle Frames",
-                    "Value": false
+                    "Value": true
                 }
             ]
         },
