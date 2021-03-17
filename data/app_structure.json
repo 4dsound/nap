@@ -423,7 +423,6 @@
                     "MultiSpeakerSetup": "multiSetup",
                     "SpeakerType": "satellite",
                     "ShowTextLabels": true,
-                    "LabelPrefix": "",
                     "MonitorVisibilityProperty": "speakers",
                     "MonitorLabelVisibilityProperty": "speakerLabels"
                 }
@@ -1108,7 +1107,7 @@
                     "ShowLabels": false,
                     "ControlScales": false,
                     "ControlRotations": false,
-                    "LevelSmoothTime": 1.0
+                    "LevelSmoothTime": 0.05000000074505806
                 },
                 {
                     "Type": "nap::spatial::RenderableMeshCopyComponent",
@@ -1117,7 +1116,21 @@
                     "CameraTransformComponent": "../../camera/CameraTransformComponent",
                     "MaterialInstance": {
                         "Material": "LightingMaterial",
-                        "Uniforms": [],
+                        "Uniforms": [
+                            {
+                                "Type": "nap::UniformStruct",
+                                "mID": "UniformStruct_88af2269",
+                                "Name": "UBO",
+                                "Uniforms": [
+                                    {
+                                        "Type": "nap::UniformFloat",
+                                        "mID": "UniformFloat_55e181ce",
+                                        "Name": "lightIntensity",
+                                        "Value": 1.0
+                                    }
+                                ]
+                            }
+                        ],
                         "Samplers": [],
                         "BlendMode": "Opaque",
                         "DepthMode": "ReadWrite"
@@ -1146,7 +1159,7 @@
                     "MonitorLabelVisibilityProperty": "",
                     "ColorUniform": "color",
                     "ScaleUniform": "",
-                    "LevelUniform": "lightIntensity",
+                    "LevelUniform": "",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
@@ -1398,7 +1411,6 @@
                     "MultiSpeakerSetup": "multiSetup",
                     "SpeakerType": "sub",
                     "ShowTextLabels": true,
-                    "LabelPrefix": "sub",
                     "MonitorVisibilityProperty": "speakers",
                     "MonitorLabelVisibilityProperty": "speakerLabels"
                 }
@@ -3178,7 +3190,7 @@
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "particleBoxes",
                     "Title": "Particle Boxes",
-                    "Value": false
+                    "Value": true
                 },
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
@@ -3226,7 +3238,7 @@
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "particleFrames",
                     "Title": "Particle Frames",
-                    "Value": true
+                    "Value": false
                 }
             ]
         },
