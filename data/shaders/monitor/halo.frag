@@ -11,6 +11,5 @@ out vec4 out_Color;
 void main()
 {
     float distanceToCenter = distance(pass_UV0, vec3(0.5, 0.5, 0));
-    vec3 color = mix(vec3(0, 0, 0), ubo.color, pow(pass_Level * (1 - distanceToCenter * 2), 2) * 2);
-    out_Color = vec4(color, pass_Level * (1 - distanceToCenter * 2));
+    out_Color = vec4(ubo.color, pow(pass_Level * (1 - distanceToCenter * 2), 2) * 2);
 }
