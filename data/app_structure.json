@@ -2516,6 +2516,13 @@
                             "Style": ""
                         },
                         {
+                            "Type": "nap::spatial::FrameRateGui",
+                            "mID": "FrameRateGui_b8b35f95",
+                            "Title": "FrameRate",
+                            "Style": "",
+                            "MonitorController": "MonitorController"
+                        },
+                        {
                             "Type": "nap::spatial::InputVUMeters",
                             "mID": "InputVUMeters_ac2f6b4d",
                             "Title": "InputVUMeters",
