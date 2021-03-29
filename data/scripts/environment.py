@@ -6,6 +6,7 @@ import environmentSettings as settings
 groupTransformations = []
 particleLevelGroupTransformations = []
 soundObjects = []
+soundObjectNames = []
 
 def createGroups(environment, count):
     for i in range(count):
@@ -98,6 +99,7 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
             uniqueID = settings.SPACES_COUNT + i + 1
 
         name = prefix + str(index)
+        
 
         # create sound objects
         properties = nap.EnvironmentInstanceProperties()
@@ -172,6 +174,8 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
         # append to list
         soundObjects.append(soundObject)
         addedSoundObjects.append(soundObject)
+        soundObjectNames.append(name)
+
 
     # connect every added soundobjects to all other soundobjects.
     if connect:
@@ -189,7 +193,7 @@ def addFollowAndGroupTransformationsToAllSoundObjects():
         followNames = []
         for j in range(len(soundObjects)):
             if i != j:
-                followNames.append("source" + str(j+1))
+                followNames.append(soundObjectNames[j])
                 followTransformations.append(soundObjects[j].findComponentByID("FollowTransformationChainComponent"))
 
         soundObjectTransformationChainComponent = soundObjects[i].findComponentByID("SoundObjectTransformationChainComponent")
