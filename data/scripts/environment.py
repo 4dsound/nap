@@ -218,6 +218,11 @@ def init(entity):
     createGroups(environment, settings.GROUPS_COUNT)
     addFollowAndGroupTransformationsToAllSoundObjects()
 
+    # comment in below code to automatically expose speaker amplitudes over osc
+#    speakerSetupDataExposer = environment.findEntity("SpeakerSetupDataExposer")
+#    exposedDataComponent = speakerSetupDataExposer.findComponent("nap::spatial::ExposedDataComponentInstance")
+#    exposedDataComponent.addOSCOutput("speakerAmplitudes")
+
     # send the environment initialized OSC message
     oscInitMessage = nap.EnvironmentOSCMessage("/environment/init")
     oscInitMessage.addInt(settings.SOURCES_COUNT)
