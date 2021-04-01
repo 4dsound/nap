@@ -425,7 +425,12 @@
                     "SpeakerType": "satellite",
                     "ShowTextLabels": true,
                     "MonitorVisibilityProperty": "speakers",
-                    "MonitorLabelVisibilityProperty": "speakerLabels"
+                    "MonitorLabelVisibilityProperty": "speakerLabels",
+                    "SpeakerDimensions": {
+                        "x": 0.05000000074505806,
+                        "y": 0.15000000596046449,
+                        "z": 0.05000000074505806
+                    }
                 }
             ],
             "Children": []
@@ -1414,7 +1419,12 @@
                     "SpeakerType": "sub",
                     "ShowTextLabels": true,
                     "MonitorVisibilityProperty": "speakers",
-                    "MonitorLabelVisibilityProperty": "speakerLabels"
+                    "MonitorLabelVisibilityProperty": "speakerLabels",
+                    "SpeakerDimensions": {
+                        "x": 0.5,
+                        "y": 0.10000000149011612,
+                        "z": 0.5
+                    }
                 }
             ],
             "Children": []
