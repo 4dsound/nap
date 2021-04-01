@@ -379,16 +379,16 @@
                                         "mID": "UniformVec3_fbd9f72c",
                                         "Name": "color",
                                         "Value": {
-                                            "x": 0.699999988079071,
-                                            "y": 0.699999988079071,
-                                            "z": 0.699999988079071
+                                            "x": 0.5,
+                                            "y": 0.5,
+                                            "z": 0.5
                                         }
                                     },
                                     {
                                         "Type": "nap::UniformFloat",
                                         "mID": "UniformFloat_2ec815b0",
                                         "Name": "intensity",
-                                        "Value": -1.0
+                                        "Value": 0.0
                                     }
                                 ]
                             }
@@ -416,8 +416,8 @@
                     "CameraFacing": false
                 },
                 {
-                    "Type": "nap::spatial::SpeakerGridVisualizationController",
-                    "mID": "nap::spatial::SpeakerGridVisualizationController_086322b7",
+                    "Type": "nap::spatial::SpeakerTypeVisualizationController",
+                    "mID": "nap::spatial::SpeakerTypeVisualizationController_086322b7",
                     "MonitorController": "MonitorController",
                     "RenderableMeshCopyComponent": "./nap::spatial::RenderableMeshCopyComponent_22059036",
                     "TextOverlayController": "../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
@@ -430,6 +430,111 @@
                         "x": 0.05000000074505806,
                         "y": 0.15000000596046449,
                         "z": 0.05000000074505806
+                    },
+                    "Color": {
+                        "x": 0.25,
+                        "y": 0.25,
+                        "z": 0.25
+                    }
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Type": "nap::Entity",
+            "mID": "SideFillsVisualization",
+            "Components": [
+                {
+                    "Type": "nap::TransformComponent",
+                    "mID": "SideFillnap::TransformComponent_b10bc591",
+                    "Properties": {
+                        "Translate": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Rotate": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "UniformScale": 1.0
+                    }
+                },
+                {
+                    "Type": "nap::spatial::RenderableMeshCopyComponent",
+                    "mID": "SideFillnap::spatial::RenderableMeshCopyComponent_1a32303f",
+                    "Visible": true,
+                    "CameraTransformComponent": "../camera/CameraTransformComponent",
+                    "MaterialInstance": {
+                        "Material": "SolidMaterial",
+                        "Uniforms": [
+                            {
+                                "Type": "nap::UniformStruct",
+                                "mID": "SideFillUniformStruct_9487090b",
+                                "Name": "UBO",
+                                "Uniforms": [
+                                    {
+                                        "Type": "nap::UniformVec3",
+                                        "mID": "SideFillUniformVec3_8d6e0af4",
+                                        "Name": "color",
+                                        "Value": {
+                                            "x": 0.5,
+                                            "y": 0.5,
+                                            "z": 0.5
+                                        }
+                                    },
+                                    {
+                                        "Type": "nap::UniformFloat",
+                                        "mID": "SideFillUniformFloat_3dbd7b01",
+                                        "Name": "intensity",
+                                        "Value": 0.0
+                                    }
+                                ]
+                            }
+                        ],
+                        "Samplers": [],
+                        "BlendMode": "NotSet",
+                        "DepthMode": "NotSet"
+                    },
+                    "Mesh": "BoxMesh",
+                    "UBO": "UBO",
+                    "UBOVert": "UBOVert",
+                    "TranformComponent": "./SideFillnap::TransformComponent_b10bc591",
+                    "Positions": [],
+                    "Scales": [
+                        {
+                            "x": 0.15000000596046449,
+                            "y": 0.30000001192092898,
+                            "z": 0.15000000596046449
+                        }
+                    ],
+                    "Rotations": [],
+                    "CameraPositionUniform": "",
+                    "UniformFloatValues": [],
+                    "UniformVec3Values": [],
+                    "CameraFacing": false
+                },
+                {
+                    "Type": "nap::spatial::SpeakerTypeVisualizationController",
+                    "mID": "SideFillnap::spatial::SpeakerTypeVisualizationController_d03f6ef4",
+                    "MonitorController": "MonitorController",
+                    "RenderableMeshCopyComponent": "./SideFillnap::spatial::RenderableMeshCopyComponent_1a32303f",
+                    "TextOverlayController": "../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
+                    "MultiSpeakerSetup": "multiSetup",
+                    "SpeakerType": "sidefill",
+                    "ShowTextLabels": true,
+                    "MonitorVisibilityProperty": "speakers",
+                    "MonitorLabelVisibilityProperty": "speakerLabels",
+                    "SpeakerDimensions": {
+                        "x": 0.15000000596046449,
+                        "y": 0.30000001192092898,
+                        "z": 0.15000000596046449
                     },
                     "Color": {
                         "x": 0.25,
@@ -1415,8 +1520,8 @@
                     "CameraFacing": false
                 },
                 {
-                    "Type": "nap::spatial::SpeakerGridVisualizationController",
-                    "mID": "nap::spatial::SpeakerGridVisualizationController_d03f6ef4",
+                    "Type": "nap::spatial::SpeakerTypeVisualizationController",
+                    "mID": "nap::spatial::SpeakerTypeVisualizationController_d03f6ef4",
                     "MonitorController": "MonitorController",
                     "RenderableMeshCopyComponent": "./nap::spatial::RenderableMeshCopyComponent_1a32303f",
                     "TextOverlayController": "../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
@@ -2279,6 +2384,10 @@
                 },
                 {
                     "Entity": "SpeakerSetupDataExposer",
+                    "InstanceProperties": []
+                },
+                {
+                    "Entity": "SideFillsVisualization",
                     "InstanceProperties": []
                 }
             ]
