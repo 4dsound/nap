@@ -1421,9 +1421,9 @@
                     "MonitorVisibilityProperty": "speakers",
                     "MonitorLabelVisibilityProperty": "speakerLabels",
                     "SpeakerDimensions": {
-                        "x": 0.5,
-                        "y": 0.10000000149011612,
-                        "z": 0.5
+                        "x": 0.25,
+                        "y": 0.05000000074505806,
+                        "z": 0.25
                     }
                 }
             ],
