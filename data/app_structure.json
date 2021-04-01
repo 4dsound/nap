@@ -2018,6 +2018,16 @@
                                 "y": 1.0,
                                 "z": 0.0
                             }
+                        },
+                        {
+                            "Type": "nap::UniformVec3",
+                            "mID": "UniformVec3_09943382",
+                            "Name": "intensityColor",
+                            "Value": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            }
                         }
                     ]
                 }

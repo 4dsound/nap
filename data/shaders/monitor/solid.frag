@@ -9,6 +9,7 @@ uniform UBO {
     uniform vec3 inCameraPosition;            //< Camera World Space Position
     uniform float intensity;
     uniform vec3 color;
+    uniform vec3 intensityColor;
 } ubo;
 
 // output
@@ -17,9 +18,8 @@ out vec4 out_Color;
 void main()
 {
     vec3 halo_color = vec3(0.0, 0.0, 0.0);
-    vec3 intensity_color = vec3(1.0, 1.0, 1.0);
     
-    vec3 base_color = mix(ubo.color.rgb, intensity_color, ubo.intensity);
+    vec3 base_color = mix(ubo.color.rgb, ubo.intensityColor.rgb, ubo.intensity);
     
     // Calculate mesh to camera angle for halo effect
     vec3 cam_normal = normalize(vec3(0, 0, 0) - passPosition);
