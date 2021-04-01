@@ -144,6 +144,9 @@ namespace nap
 		guiStyle.apply(&mGuiService->getContext(mSecondaryWindow)->Style);
 		guiStyle.apply(&mGuiService->getContext(mWindow)->Style);
 
+		// Turn framerate capping on
+		capFramerate(true);
+
 		// All done!
         return true;
     }
@@ -157,6 +160,7 @@ namespace nap
         nap::DefaultInputRouter input_router(true);
         mInputService->processWindowEvents(*mWindow, input_router, { &mScene->getRootEntity() });
 
+		// Show the Gui
 		if (mGuiWindow->mOpen)
 			mGuiWindow->show();
 
@@ -177,8 +181,13 @@ namespace nap
 			}
 		}
 
+		// Show the Monitor Gui
 		if (mMonitorController->isRenderingEnabled())
 			mMonitorGui->show();
+
+		// Control framerate
+		if (mMonitorController->getFrameRate() != getRequestedFramerate())
+			setFramerate(mMonitorController->getFrameRate());
     }
 
 
