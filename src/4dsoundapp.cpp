@@ -108,6 +108,10 @@ namespace nap
 		mSubs = findComponentInScene<RenderableComponentInstance>(*mScene, "SubsVisualization", error);
 		if (mSubs == nullptr)
 			return false;
+        mSideFills = findComponentInScene<RenderableComponentInstance>(*mScene, "SideFillsVisualization", error);
+        if (mSideFills == nullptr)
+            return false;
+
 
 		// Find text overlay controller
 		mTextOverlayController = findComponentInScene<nap::spatial::TextOverlayControllerInstance>(*mScene, "MonitorTextOverlay", error);
@@ -211,7 +215,7 @@ namespace nap
 			if (mMonitorController->isRenderingEnabled())
 			{
 				std::vector<nap::RenderableComponentInstance*> renderableComponents = {
-					mFloorWireFrame.get(), mFloor.get(), mAxesHelpers.get(), mSatellites.get(), mSubs.get() };
+                    mFloorWireFrame.get(), mFloor.get(), mAxesHelpers.get(), mSatellites.get(), mSubs.get(), mSideFills.get() };
 				for (auto& entity : mEnvironment->getEntities())
 					getRenderableComponentsRecursive(*entity, renderableComponents);
 

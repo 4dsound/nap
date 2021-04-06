@@ -108,7 +108,8 @@ namespace nap
 		ObjectPtr<RenderableComponentInstance> mFloor = nullptr;
 		ObjectPtr<RenderableComponentInstance> mAxesHelpers = nullptr;
 		ObjectPtr<RenderableComponentInstance> mSatellites = nullptr;
-		ObjectPtr<RenderableComponentInstance> mSubs = nullptr;
+        ObjectPtr<RenderableComponentInstance> mSubs = nullptr;
+        ObjectPtr<RenderableComponentInstance> mSideFills = nullptr;
 		ObjectPtr<spatial::EnvironmentComponentInstance> mEnvironment = nullptr;
 		ObjectPtr<spatial::TextOverlayControllerInstance> mTextOverlayController = nullptr;
 		ObjectPtr<gui::GuiWindow> mGuiWindow = nullptr;
