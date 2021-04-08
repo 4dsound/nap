@@ -912,6 +912,20 @@
                     "DisplayName": "",
                     "Category": 1,
                     "Visible": true
+                },
+                {
+                    "Type": "nap::ControlSchedulerComponent",
+                    "mID": "nap::ControlSchedulerComponent_569b1fa5",
+                    "Components": [
+                        "./MixdownComponent",
+                        "./SpatialTransformationComponent",
+                        "./SpatialAudioComponent",
+                        "./MeasurementComponent",
+                        "./ShapeComponent",
+                        "./SoundObjectTransformationChainComponent",
+                        "./FollowTransformationChainComponent",
+                        "./nap::spatial::MixdownOutputComponent"
+                    ]
                 }
             ],
             "Children": [
@@ -1745,6 +1759,14 @@
                         }
                     ],
                     "Name": "particleTransformation"
+                },
+                {
+                    "Type": "nap::ControlSchedulerComponent",
+                    "mID": "nap::ControlSchedulerComponent_86dc02b4",
+                    "Components": [
+                        "./shapeTransformationChain",
+                        "./particleTransformationChain"
+                    ]
                 }
             ],
             "Children": []
