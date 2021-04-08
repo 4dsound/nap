@@ -924,8 +924,16 @@
                         "./ShapeComponent",
                         "./SoundObjectTransformationChainComponent",
                         "./FollowTransformationChainComponent",
-                        "./nap::spatial::MixdownOutputComponent"
+                        "./nap::spatial::MixdownOutputComponent",
+                        "./nap::spatial::EnvironmentControlComponent_870b1507"
                     ]
+                },
+                {
+                    "Type": "nap::spatial::EnvironmentControlComponent",
+                    "mID": "nap::spatial::EnvironmentControlComponent_870b1507",
+                    "SpatialAudioComponent": "./SpatialAudioComponent",
+                    "SpatializationComponent": "./SpatializationComponent",
+                    "ParameterComponent": "./ParameterComponent"
                 }
             ],
             "Children": [

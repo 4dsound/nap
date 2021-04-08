@@ -118,46 +118,46 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
 
 
         # add effects
-        spatialAudioComponent = soundObject.findComponent("nap::spatial::SpatialAudioComponentInstance")
+        controlComponent = soundObject.findComponent("nap::spatial::EnvironmentControlComponentInstance")
 
         if connect: # space sound objects
-            spatialAudioComponent.addInputEffect(granulator)
-            spatialAudioComponent.addInputEffect(inputDistanceIntensity)
-            spatialAudioComponent.addInputEffect(inputDistanceDamping)
-            spatialAudioComponent.addInputEffect(spatialDelay)
-            spatialAudioComponent.addEffect(doppler)
-            spatialAudioComponent.addEffect(spatialPhaser)
-            spatialAudioComponent.addEffect(gainScaling)
-            spatialAudioComponent.addEffect(reverb)
-            spatialAudioComponent.addEffect(distanceIntensity)
-            spatialAudioComponent.addEffect(distanceDamping)
-            spatialAudioComponent.addEffect(elevationFilterUp)
-            spatialAudioComponent.addEffect(elevationFilterDown)
-            spatialAudioComponent.addEffect(distanceDiffusion)
+            controlComponent.addInputEffect(granulator)
+            controlComponent.addInputEffect(inputDistanceIntensity)
+            controlComponent.addInputEffect(inputDistanceDamping)
+            controlComponent.addInputEffect(spatialDelay)
+            controlComponent.addEffect(doppler)
+            controlComponent.addEffect(spatialPhaser)
+            controlComponent.addEffect(gainScaling)
+            controlComponent.addEffect(reverb)
+            controlComponent.addEffect(distanceIntensity)
+            controlComponent.addEffect(distanceDamping)
+            controlComponent.addEffect(elevationFilterUp)
+            controlComponent.addEffect(elevationFilterDown)
+            controlComponent.addEffect(distanceDiffusion)
         else: # source sound objects (for now: just without spatial phaser)
-            spatialAudioComponent.addInputEffect(granulator)
-            spatialAudioComponent.addInputEffect(inputDistanceIntensity)
-            spatialAudioComponent.addInputEffect(inputDistanceDamping)
-            spatialAudioComponent.addInputEffect(spatialDelay)
-            spatialAudioComponent.addEffect(doppler)
-            spatialAudioComponent.addEffect(gainScaling)
-            spatialAudioComponent.addEffect(reverb)
-            spatialAudioComponent.addEffect(distanceIntensity)
-            spatialAudioComponent.addEffect(distanceDamping)
-            spatialAudioComponent.addEffect(elevationFilterUp)
-            spatialAudioComponent.addEffect(elevationFilterDown)
-            spatialAudioComponent.addEffect(distanceDiffusion)
+            controlComponent.addInputEffect(granulator)
+            controlComponent.addInputEffect(inputDistanceIntensity)
+            controlComponent.addInputEffect(inputDistanceDamping)
+            controlComponent.addInputEffect(spatialDelay)
+            controlComponent.addEffect(doppler)
+            controlComponent.addEffect(gainScaling)
+            controlComponent.addEffect(reverb)
+            controlComponent.addEffect(distanceIntensity)
+            controlComponent.addEffect(distanceDamping)
+            controlComponent.addEffect(elevationFilterUp)
+            controlComponent.addEffect(elevationFilterDown)
+            controlComponent.addEffect(distanceDiffusion)
 
 
 
         # add external input
-        spatialAudioComponent.addExternalInput()
+        controlComponent.addExternalInput()
 
 
         # set input channel
-        parameterComponent = soundObject.findComponent("nap::ParameterComponentInstance")
-        parameterComponent.findParameter("externalInputEnable").setValue(True)
-        parameterComponent.findParameter("externalInputStartChannel").setValue(index)
+        # parameterComponent = soundObject.findComponent("nap::ParameterComponentInstance")
+        # parameterComponent.findParameter("externalInputEnable").setValue(True)
+        # parameterComponent.findParameter("externalInputStartChannel").setValue(index)
 
         # add granulator source
         # granulator = nap.GranulatorSource()
@@ -182,7 +182,7 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
         for i in range(len(addedSoundObjects)):
             for j in range(len(soundObjects)):
                 if addedSoundObjects[i] is not soundObjects[j]:
-                    addedSoundObjects[i].findComponent("nap::spatial::SpatializationComponentInstance").connectInput(soundObjects[j].findComponent("nap::spatial::SpatializationComponentInstance"), 0.0)
+                    addedSoundObjects[i].findComponent("nap::spatial::EnvironmentControlComponentInstance").connectInput(soundObjects[j].findComponent("nap::spatial::EnvironmentControlComponentInstance"))
 
 
 def addFollowAndGroupTransformationsToAllSoundObjects():
