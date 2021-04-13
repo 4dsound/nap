@@ -99,7 +99,7 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
             uniqueID = settings.SPACES_COUNT + i + 1
 
         name = prefix + str(index)
-        
+
 
         # create sound objects
         properties = nap.EnvironmentInstanceProperties()
@@ -169,7 +169,7 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
         # soundObject.findComponent("nap::spatial::SpatialAudioComponentInstance").addTestSignal()
 
         # enable gainscaling by default
-        # soundObject.findComponent("nap::ParameterComponentInstance").findParameter("effect/gainScaling/enable").setValue(True)
+        soundObject.findComponent("nap::ParameterComponentInstance").findParameter("effect/gainScaling/enable").setValue(True)
 
         # append to list
         soundObjects.append(soundObject)
