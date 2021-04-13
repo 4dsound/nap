@@ -111,15 +111,12 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
         properties.addInt("nap::spatial::DisplaySettingsComponent", "Category", 2 if connect else 1)
 
         soundObject = environment.createEntity("SoundObject", properties)
-
-        # set hue
-        soundObject.findComponent("nap::ParameterComponentInstance").findParameter("hue").setValue((len(soundObjects) / float(settings.SOURCES_COUNT + settings.SPACES_COUNT)) * 255)
-
-
-
-        # add effects
         controlComponent = soundObject.findComponent("nap::spatial::EnvironmentControlComponentInstance")
 
+        # set hue
+        controlComponent.setParameterFloat("hue", (len(soundObjects) / float(settings.SOURCES_COUNT + settings.SPACES_COUNT)) * 255)
+
+        # add effects
         if connect: # space sound objects
             controlComponent.addInputEffect(granulator)
             controlComponent.addInputEffect(inputDistanceIntensity)
@@ -148,16 +145,12 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
             controlComponent.addEffect(elevationFilterDown)
             controlComponent.addEffect(distanceDiffusion)
 
-
-
         # add external input
         controlComponent.addExternalInput()
 
-
         # set input channel
-        # parameterComponent = soundObject.findComponent("nap::ParameterComponentInstance")
-        # parameterComponent.findParameter("externalInputEnable").setValue(True)
-        # parameterComponent.findParameter("externalInputStartChannel").setValue(index)
+        controlComponent.setParameterBool("externalInputEnable", True)
+        controlComponent.setParameterInt("externalInputStartChannel", index)
 
         # add granulator source
         # granulator = nap.GranulatorSource()
@@ -169,7 +162,7 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
         # soundObject.findComponent("nap::spatial::SpatialAudioComponentInstance").addTestSignal()
 
         # enable gainscaling by default
-        # soundObject.findComponent("nap::ParameterComponentInstance").findParameter("effect/gainScaling/enable").setValue(True)
+        controlComponent.setParameterBool("effect/gainScaling/enable", True)
 
         # append to list
         soundObjects.append(soundObject)
@@ -216,7 +209,7 @@ def init(entity):
     createSources(environment, settings.SOURCES_COUNT)
     createSpaces(environment, settings.SPACES_COUNT)
     createGroups(environment, settings.GROUPS_COUNT)
-    addFollowAndGroupTransformationsToAllSoundObjects()
+    # addFollowAndGroupTransformationsToAllSoundObjects()
 
     # comment in below code to automatically expose speaker amplitudes over osc
 #    speakerSetupDataExposer = environment.findEntity("SpeakerSetupDataExposer")
@@ -224,10 +217,10 @@ def init(entity):
 #    exposedDataComponent.addOSCOutput("speakerAmplitudes")
 
     # send the environment initialized OSC message
-    oscInitMessage = nap.EnvironmentOSCMessage("/environment/init")
-    oscInitMessage.addInt(settings.SOURCES_COUNT)
-    oscInitMessage.addInt(settings.SPACES_COUNT)
-    oscInitMessage.addInt(settings.GROUPS_COUNT)
-    oscInitMessage.addInt(settings.SOURCES_MAX_PARTICLE_COUNT)
-    oscInitMessage.addInt(settings.SPACES_MAX_PARTICLE_COUNT)
-    environment.sendOSC(oscInitMessage)
+    # oscInitMessage = nap.EnvironmentOSCMessage("/environment/init")
+    # oscInitMessage.addInt(settings.SOURCES_COUNT)
+    # oscInitMessage.addInt(settings.SPACES_COUNT)
+    # oscInitMessage.addInt(settings.GROUPS_COUNT)
+    # oscInitMessage.addInt(settings.SOURCES_MAX_PARTICLE_COUNT)
+    # oscInitMessage.addInt(settings.SPACES_MAX_PARTICLE_COUNT)
+    # environment.sendOSC(oscInitMessage)
