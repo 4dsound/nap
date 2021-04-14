@@ -10,6 +10,9 @@
 	<speaker id="6" ch="6" x="-7.34788e-16" y="1" z="-4" speakerType="satellite" />
 	<speaker id="7" ch="7" x="2.82843" y="1" z="-2.82843" speakerType="satellite" />
 
+    <speaker id="sub" ch="8" x="0" y="0" z="0" speakerType="sub" />
+
+    
 	<grid name="circle">
 		<shape type="circle" speakers="0 1 2 3 4 5 6 7" />
 		<shape type="projectionLine" speakers="1 0" />
@@ -21,6 +24,10 @@
 		<shape type="projectionLine" speakers="7 6" />
 		<shape type="projectionLine" speakers="0 7" />
 	</grid>
+    
+    <grid name="subs">
+        <shape type="static" speakers="sub" />
+    </grid>
 
 	<!-- generated straight routing for Engine 1.7.x compatibility -->
 	<routing value="0 1 2 3 4 5 6 7" /> 

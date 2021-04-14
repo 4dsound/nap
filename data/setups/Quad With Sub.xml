@@ -2,10 +2,10 @@
 
 <setup version="2.1">
     
-      <speaker id="s0" ch="0" x="-2" y="1" z="-2" speakerType="satellite" />
-      <speaker id="s1" ch="1" x="2" y="1" z="-2" speakerType="satellite" />
-      <speaker id="s2" ch="2" x="-2" y="1" z="2" speakerType="satellite" />
-      <speaker id="s3" ch="3" x="2" y="1" z="2" speakerType="satellite" />
+      <speaker id="0" ch="0" x="-2" y="1" z="-2" speakerType="satellite" />
+      <speaker id="1" ch="1" x="2" y="1" z="-2" speakerType="satellite" />
+      <speaker id="2" ch="2" x="-2" y="1" z="2" speakerType="satellite" />
+      <speaker id="3" ch="3" x="2" y="1" z="2" speakerType="satellite" />
       <speaker id="sub" ch="4" x="0" y="0" z="0" speakerType="sub" />
 
       <grid name="satellites">
