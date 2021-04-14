@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup version="2.1">
+
+	<speaker id="0" ch="0" x="4" y="1" z="0" speakerType="satellite" />
+	<speaker id="1" ch="1" x="2.82843" y="1" z="2.82843" speakerType="satellite" />
+	<speaker id="2" ch="2" x="2.44929e-16" y="1" z="4" speakerType="satellite" />
+	<speaker id="3" ch="3" x="-2.82843" y="1" z="2.82843" speakerType="satellite" />
+	<speaker id="4" ch="4" x="-4" y="1" z="4.89859e-16" speakerType="satellite" />
+	<speaker id="5" ch="5" x="-2.82843" y="1" z="-2.82843" speakerType="satellite" />
+	<speaker id="6" ch="6" x="-7.34788e-16" y="1" z="-4" speakerType="satellite" />
+	<speaker id="7" ch="7" x="2.82843" y="1" z="-2.82843" speakerType="satellite" />
+
+	<grid name="circle">
+		<shape type="circle" speakers="0 1 2 3 4 5 6 7" />
+		<shape type="projectionLine" speakers="1 0" />
+		<shape type="projectionLine" speakers="2 1" />
+		<shape type="projectionLine" speakers="3 2" />
+		<shape type="projectionLine" speakers="4 3" />
+		<shape type="projectionLine" speakers="5 4" />
+		<shape type="projectionLine" speakers="6 5" />
+		<shape type="projectionLine" speakers="7 6" />
+		<shape type="projectionLine" speakers="0 7" />
+	</grid>
+
+	<!-- generated straight routing for Engine 1.7.x compatibility -->
+	<routing value="0 1 2 3 4 5 6 7" /> 
+
+</setup>

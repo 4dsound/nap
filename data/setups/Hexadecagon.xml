@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup version="2.1">
+
+	<speaker id="0" ch="0" x="4" y="1" z="0" speakerType="satellite" />
+	<speaker id="1" ch="1" x="3.69552" y="1" z="1.53073" speakerType="satellite" />
+	<speaker id="2" ch="2" x="2.82843" y="1" z="2.82843" speakerType="satellite" />
+	<speaker id="3" ch="3" x="1.53073" y="1" z="3.69552" speakerType="satellite" />
+	<speaker id="4" ch="4" x="2.44929e-16" y="1" z="4" speakerType="satellite" />
+	<speaker id="5" ch="5" x="-1.53073" y="1" z="3.69552" speakerType="satellite" />
+	<speaker id="6" ch="6" x="-2.82843" y="1" z="2.82843" speakerType="satellite" />
+	<speaker id="7" ch="7" x="-3.69552" y="1" z="1.53073" speakerType="satellite" />
+	<speaker id="8" ch="8" x="-4" y="1" z="4.89859e-16" speakerType="satellite" />
+	<speaker id="9" ch="9" x="-3.69552" y="1" z="-1.53073" speakerType="satellite" />
+	<speaker id="10" ch="10" x="-2.82843" y="1" z="-2.82843" speakerType="satellite" />
+	<speaker id="11" ch="11" x="-1.53073" y="1" z="-3.69552" speakerType="satellite" />
+	<speaker id="12" ch="12" x="-7.34788e-16" y="1" z="-4" speakerType="satellite" />
+	<speaker id="13" ch="13" x="1.53073" y="1" z="-3.69552" speakerType="satellite" />
+	<speaker id="14" ch="14" x="2.82843" y="1" z="-2.82843" speakerType="satellite" />
+	<speaker id="15" ch="15" x="3.69552" y="1" z="-1.53073" speakerType="satellite" />
+
+	<grid name="circle">
+		<shape type="circle" speakers="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" />
+		<shape type="projectionLine" speakers="1 0" />
+		<shape type="projectionLine" speakers="2 1" />
+		<shape type="projectionLine" speakers="3 2" />
+		<shape type="projectionLine" speakers="4 3" />
+		<shape type="projectionLine" speakers="5 4" />
+		<shape type="projectionLine" speakers="6 5" />
+		<shape type="projectionLine" speakers="7 6" />
+		<shape type="projectionLine" speakers="8 7" />
+		<shape type="projectionLine" speakers="9 8" />
+		<shape type="projectionLine" speakers="10 9" />
+		<shape type="projectionLine" speakers="11 10" />
+		<shape type="projectionLine" speakers="12 11" />
+		<shape type="projectionLine" speakers="13 12" />
+		<shape type="projectionLine" speakers="14 13" />
+		<shape type="projectionLine" speakers="15 14" />
+		<shape type="projectionLine" speakers="0 15" />
+	</grid>
+
+	<!-- generated straight routing for Engine 1.7.x compatibility -->
+	<routing value="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" /> 
+
+</setup>
