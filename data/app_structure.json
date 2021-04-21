@@ -420,6 +420,7 @@
                     "ShowTextLabels": true,
                     "MonitorVisibilityProperty": "speakers",
                     "MonitorLabelVisibilityProperty": "speakerLabels",
+                    "MonitorPanningVisibilityProperty": "speakerPanning",
                     "SpeakerDimensions": {
                         "x": 0.05000000074505806,
                         "y": 0.15000000596046449,
@@ -519,6 +520,7 @@
                     "ShowTextLabels": true,
                     "MonitorVisibilityProperty": "speakers",
                     "MonitorLabelVisibilityProperty": "speakerLabels",
+                    "MonitorPanningVisibilityProperty": "speakerPanning",
                     "SpeakerDimensions": {
                         "x": 0.15000000596046449,
                         "y": 0.30000001192092898,
@@ -1512,6 +1514,7 @@
                     "ShowTextLabels": true,
                     "MonitorVisibilityProperty": "speakers",
                     "MonitorLabelVisibilityProperty": "speakerLabels",
+                    "MonitorPanningVisibilityProperty": "speakerPanning",
                     "SpeakerDimensions": {
                         "x": 0.25,
                         "y": 0.05000000074505806,
@@ -3328,6 +3331,12 @@
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "speakers",
                     "Title": "Speakers",
+                    "Value": true
+                },
+                {
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "speakerPanning",
+                    "Title": "S. Panning",
                     "Value": true
                 },
                 {
