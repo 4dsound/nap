@@ -189,16 +189,16 @@ def addFollowAndGroupTransformationsToAllSoundObjects():
                 followNames.append(soundObjectNames[j])
                 followTransformations.append(soundObjects[j].findComponentByID("FollowTransformationChainComponent"))
 
-        soundObjectTransformationChainComponent = soundObjects[i].findComponentByID("SoundObjectTransformationChainComponent")
-        soundObjectTransformationChainComponent.addSwitchExternalTransformation("follow", followTransformations, followNames)
+        controlComponent = soundObjects[i].findComponent("nap::spatial::EnvironmentControlComponentInstance")
+        controlComponent.addSwitchExternalTransformation("follow", followTransformations, followNames)
 
         for k in range(len(groupTransformations)):
-            soundObjectTransformationChainComponent.addExternalTransformation("group" + str(k+1), groupTransformations[k], True, True)
+            controlComponent.addExternalTransformation("group" + str(k+1), groupTransformations[k], True, True)
 
         shapeComponent = soundObjects[i].findComponentByID("ShapeComponent")
 
         for l in range(len(particleLevelGroupTransformations)):
-            shapeComponent.addExternalShapeTransformation("group" + str(l+1), particleLevelGroupTransformations[l], True, True)
+            controlComponent.addExternalShapeTransformation("group" + str(l+1), particleLevelGroupTransformations[l], True, True)
 
 
 def init(entity):
@@ -209,7 +209,7 @@ def init(entity):
     createSources(environment, settings.SOURCES_COUNT)
     createSpaces(environment, settings.SPACES_COUNT)
     createGroups(environment, settings.GROUPS_COUNT)
-    # addFollowAndGroupTransformationsToAllSoundObjects()
+    addFollowAndGroupTransformationsToAllSoundObjects()
 
     # comment in below code to automatically expose speaker amplitudes over osc
 #    speakerSetupDataExposer = environment.findEntity("SpeakerSetupDataExposer")
@@ -217,10 +217,10 @@ def init(entity):
 #    exposedDataComponent.addOSCOutput("speakerAmplitudes")
 
     # send the environment initialized OSC message
-    # oscInitMessage = nap.EnvironmentOSCMessage("/environment/init")
-    # oscInitMessage.addInt(settings.SOURCES_COUNT)
-    # oscInitMessage.addInt(settings.SPACES_COUNT)
-    # oscInitMessage.addInt(settings.GROUPS_COUNT)
-    # oscInitMessage.addInt(settings.SOURCES_MAX_PARTICLE_COUNT)
-    # oscInitMessage.addInt(settings.SPACES_MAX_PARTICLE_COUNT)
-    # environment.sendOSC(oscInitMessage)
+    oscInitMessage = nap.EnvironmentOSCMessage("/environment/init")
+    oscInitMessage.addValue(settings.SOURCES_COUNT)
+    oscInitMessage.addValue(settings.SPACES_COUNT)
+    oscInitMessage.addValue(settings.GROUPS_COUNT)
+    oscInitMessage.addValue(settings.SOURCES_MAX_PARTICLE_COUNT)
+    oscInitMessage.addValue(settings.SPACES_MAX_PARTICLE_COUNT)
+    environment.sendOSC(oscInitMessage)

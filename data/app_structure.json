@@ -933,7 +933,9 @@
                     "mID": "nap::spatial::EnvironmentControlComponent_870b1507",
                     "SpatialAudioComponent": "./SpatialAudioComponent",
                     "SpatializationComponent": "./SpatializationComponent",
-                    "ParameterComponent": "./ParameterComponent"
+                    "ParameterComponent": "./ParameterComponent",
+                    "TransformationChainComponent": "./SoundObjectTransformationChainComponent",
+                    "ShapeComponent": "./ShapeComponent"
                 }
             ],
             "Children": [
@@ -3091,7 +3093,7 @@
                     }
                 },
                 {
-                    "Visible": true,
+                    "Visible": false,
                     "Content": {
                         "Type": "nap::gui::Panel",
                         "mID": "Panel_aa521aa3",
@@ -3118,7 +3120,6 @@
                             "Title": "SpatialParameterGui",
                             "Style": "",
                             "Scene": "Scene",
-                            "ParameterGroup": "",
                             "ReadOnly": false
                         }
                     }
