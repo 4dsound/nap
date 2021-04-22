@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup version="2.1">
+    <speaker id="0" ch="0" x="-6" y="0" z="-6" speakerType="satellite" />
+    <speaker id="1" ch="1" x="-2" y="0" z="-6" speakerType="satellite" />
+    <speaker id="2" ch="2" x="2" y="0" z="-6" speakerType="satellite" />
+    <speaker id="3" ch="3" x="6" y="0" z="-6" speakerType="satellite" />
+
+    <speaker id="4" ch="4" x="-6" y="2" z="-6" speakerType="satellite" />
+    <speaker id="5" ch="5" x="-2" y="2" z="-6" speakerType="satellite" />
+    <speaker id="6" ch="6" x="2" y="2" z="-6" speakerType="satellite" />
+    <speaker id="7" ch="7" x="6" y="2" z="-6" speakerType="satellite" />
+
+    <speaker id="8" ch="8" x="-6" y="4" z="-6" speakerType="satellite" />
+    <speaker id="9" ch="9" x="-2" y="4" z="-6" speakerType="satellite" />
+    <speaker id="10" ch="10" x="2" y="4" z="-6" speakerType="satellite" />
+    <speaker id="11" ch="11" x="6" y="4" z="-6" speakerType="satellite" />
+
+
+    <speaker id="12" ch="12" x="-6" y="0" z="-2" speakerType="satellite" />
+    <speaker id="13" ch="13" x="-2" y="0" z="-2" speakerType="satellite" />
+    <speaker id="14" ch="14" x="2" y="0" z="-2" speakerType="satellite" />
+    <speaker id="15" ch="15" x="6" y="0" z="-2" speakerType="satellite" />
+
+    <speaker id="16" ch="16" x="-6" y="2" z="-2" speakerType="satellite" />
+    <speaker id="17" ch="17" x="-2" y="2" z="-2" speakerType="satellite" />
+    <speaker id="18" ch="18" x="2" y="2" z="-2" speakerType="satellite" />
+    <speaker id="19" ch="19" x="6" y="2" z="-2" speakerType="satellite" />
+
+    <speaker id="20" ch="20" x="-6" y="4" z="-2" speakerType="satellite" />
+    <speaker id="21" ch="21" x="-2" y="4" z="-2" speakerType="satellite" />
+    <speaker id="22" ch="22" x="2" y="4" z="-2" speakerType="satellite" />
+    <speaker id="23" ch="23" x="6" y="4" z="-2" speakerType="satellite" />
+
+
+    <speaker id="24" ch="24" x="-6" y="0" z="2" speakerType="satellite" />
+    <speaker id="25" ch="25" x="-2" y="0" z="2" speakerType="satellite" />
+    <speaker id="26" ch="26" x="2" y="0" z="2" speakerType="satellite" />
+    <speaker id="27" ch="27" x="6" y="0" z="2" speakerType="satellite" />
+
+    <speaker id="28" ch="28" x="-6" y="2" z="2" speakerType="satellite" />
+    <speaker id="29" ch="29" x="-2" y="2" z="2" speakerType="satellite" />
+    <speaker id="30" ch="30" x="2" y="2" z="2" speakerType="satellite" />
+    <speaker id="31" ch="31" x="6" y="2" z="2" speakerType="satellite" />
+
+    <speaker id="32" ch="32" x="-6" y="4" z="2" speakerType="satellite" />
+    <speaker id="33" ch="33" x="-2" y="4" z="2" speakerType="satellite" />
+    <speaker id="34" ch="34" x="2" y="4" z="2" speakerType="satellite" />
+    <speaker id="35" ch="35" x="6" y="4" z="2" speakerType="satellite" />
+
+
+    <speaker id="36" ch="36" x="-6" y="0" z="6" speakerType="satellite" />
+    <speaker id="37" ch="37" x="-2" y="0" z="6" speakerType="satellite" />
+    <speaker id="38" ch="38" x="2" y="0" z="6" speakerType="satellite" />
+    <speaker id="39" ch="39" x="6" y="0" z="6" speakerType="satellite" />
+
+    <speaker id="40" ch="40" x="-6" y="2" z="6" speakerType="satellite" />
+    <speaker id="41" ch="41" x="-2" y="2" z="6" speakerType="satellite" />
+    <speaker id="42" ch="42" x="2" y="2" z="6" speakerType="satellite" />
+    <speaker id="43" ch="43" x="6" y="2" z="6" speakerType="satellite" />
+
+    <speaker id="44" ch="44" x="-6" y="4" z="6" speakerType="satellite" />
+    <speaker id="45" ch="45" x="-2" y="4" z="6" speakerType="satellite" />
+    <speaker id="46" ch="46" x="2" y="4" z="6" speakerType="satellite" />
+    <speaker id="47" ch="47" x="6" y="4" z="6" speakerType="satellite" />
+
+    <speaker id="101" ch="48" x="-4" y="0" z="-4" speakerType="sub" />
+    <speaker id="102" ch="49" x="0" y="0" z="-4" speakerType="sub" />
+    <speaker id="103" ch="50" x="4" y="0" z="-4" speakerType="sub" />
+    <speaker id="104" ch="51" x="-4" y="0" z="0" speakerType="sub" />
+    <speaker id="105" ch="52" x="0" y="0" z="0" speakerType="sub" />
+    <speaker id="106" ch="53" x="4" y="0" z="0" speakerType="sub" />
+    <speaker id="107" ch="54" x="-4" y="0" z="4" speakerType="sub" />
+    <speaker id="108" ch="55" x="0" y="0" z="4" speakerType="sub" />
+    <speaker id="109" ch="56" x="4" y="0" z="4" speakerType="sub" />
+
+    <speaker id="201" ch="60" x="-8" y="3" z="-8" speakerType="sidefill" />
+    <speaker id="202" ch="59" x="-8" y="3" z="8" speakerType="sidefill" />
+    <speaker id="203" ch="58" x="8" y="3" z="-8" speakerType="sidefill" />
+    <speaker id="204" ch="57" x="8" y="3" z="8" speakerType="sidefill" />
+
+    <grid name="Satellites">
+        <shape type="cube" speakers="0 1 4 5 12 13 16 17" />
+        <shape type="cube" speakers="1 2 5 6 13 14 17 18" />
+        <shape type="cube" speakers="2 3 6 7 14 15 18 19" />
+
+        <shape type="cube" speakers="4 5 8 9 16 17 20 21" />
+        <shape type="cube" speakers="5 6 9 10 17 18 21 22" />
+        <shape type="cube" speakers="6 7 10 11 18 19 22 23" />
+
+        <shape type="cube" speakers="12 13 16 17 24 25 28 29" />
+        <shape type="cube" speakers="13 14 17 18 25 26 29 30" />
+        <shape type="cube" speakers="14 15 18 19 26 27 30 31" />
+
+        <shape type="cube" speakers="16 17 20 21 28 29 32 33" />
+        <shape type="cube" speakers="17 18 21 22 29 30 33 34" />
+        <shape type="cube" speakers="18 19 22 23 30 31 34 35" />
+
+        <shape type="cube" speakers="24 25 28 29 36 37 40 41" />
+        <shape type="cube" speakers="25 26 29 30 37 38 41 42" />
+        <shape type="cube" speakers="26 27 30 31 38 39 42 43" />
+
+        <shape type="cube" speakers="28 29 32 33 40 41 44 45" />
+        <shape type="cube" speakers="29 30 33 34 41 42 45 46" />
+        <shape type="cube" speakers="30 31 34 35 42 43 46 47" />
+
+        <shape type="projectionPlane" speakers="1 0 5 4" />
+        <shape type="projectionPlane" speakers="5 4 9 8" />
+        <shape type="projectionPlane" speakers="2 1 6 5" />
+        <shape type="projectionPlane" speakers="6 5 10 9" />
+        <shape type="projectionPlane" speakers="3 2 7 6" />
+        <shape type="projectionPlane" speakers="7 6 11 10" />
+
+        <shape type="projectionPlane" speakers="9 8 21 20" />
+        <shape type="projectionPlane" speakers="10 9 22 21" />
+        <shape type="projectionPlane" speakers="11 10 23 22" />
+        <shape type="projectionPlane" speakers="21 20 33 32" />
+        <shape type="projectionPlane" speakers="22 21 34 33" />
+        <shape type="projectionPlane" speakers="23 22 35 34" />
+        <shape type="projectionPlane" speakers="33 32 45 44" />
+        <shape type="projectionPlane" speakers="34 33 46 45" />
+        <shape type="projectionPlane" speakers="35 34 47 46" />
+
+        <shape type="projectionPlane" speakers="15 3 19 7" />
+        <shape type="projectionPlane" speakers="19 7 23 11" />
+        <shape type="projectionPlane" speakers="27 15 31 19" />
+        <shape type="projectionPlane" speakers="31 19 35 23" />
+        <shape type="projectionPlane" speakers="39 27 43 31" />
+        <shape type="projectionPlane" speakers="43 31 47 35" />
+
+        <shape type="projectionPlane" speakers="37 36 25 24" />
+        <shape type="projectionPlane" speakers="38 37 26 25" />
+        <shape type="projectionPlane" speakers="39 38 27 26" />
+        <shape type="projectionPlane" speakers="25 24 13 12" />
+        <shape type="projectionPlane" speakers="26 25 14 13" />
+        <shape type="projectionPlane" speakers="27 26 15 14" />
+        <shape type="projectionPlane" speakers="13 12 1 0" />
+        <shape type="projectionPlane" speakers="14 13 2 1" />
+        <shape type="projectionPlane" speakers="15 14 3 2" />
+
+        <shape type="projectionPlane" speakers="36 37 40 41" />
+        <shape type="projectionPlane" speakers="40 41 44 45" />
+        <shape type="projectionPlane" speakers="37 38 41 42" />
+        <shape type="projectionPlane" speakers="41 42 45 46" />
+        <shape type="projectionPlane" speakers="38 39 42 43" />
+        <shape type="projectionPlane" speakers="42 43 46 47" />
+
+        <shape type="projectionPlane" speakers="0 12 4 16" />
+        <shape type="projectionPlane" speakers="4 16 8 20" />
+        <shape type="projectionPlane" speakers="12 24 16 28" />
+        <shape type="projectionPlane" speakers="16 28 20 32" />
+        <shape type="projectionPlane" speakers="24 36 28 40" />
+        <shape type="projectionPlane" speakers="28 40 32 44" />
+
+        <projectionPoint x="0" y="2" z="0" />
+
+    </grid>
+    <grid name="Subs" speakerType="sub">
+
+        <shape type="square" speakers="101 102 104 105" />
+        <shape type="square" speakers="102 103 105 106" />
+        <shape type="square" speakers="104 105 107 108" />
+        <shape type="square" speakers="105 106 108 109" />
+
+        <shape type="projectionLine" speakers="107 108" />
+        <shape type="projectionLine" speakers="108 109" />
+        <shape type="projectionLine" speakers="109 106" />
+        <shape type="projectionLine" speakers="106 103" />
+        <shape type="projectionLine" speakers="103 102" />
+        <shape type="projectionLine" speakers="102 101" />
+        <shape type="projectionLine" speakers="101 104" />
+        <shape type="projectionLine" speakers="104 107" />
+
+
+    </grid>
+    <grid name="Side Fills">
+
+        <shape type="square" speakers="201 203 202 204" />
+
+        <shape type="projectionLine" speakers="201 202" />
+        <shape type="projectionLine" speakers="202 204" />
+        <shape type="projectionLine" speakers="204 203" />
+        <shape type="projectionLine" speakers="203 201" />
+
+        <projectionPoint x="0" y="3" z="0" />
+
+    </grid>
+
+    <wall name="left" channels="8 20 32 44 4 16 28 40 0 12 24 36" />
+    <wall name="right" channels="11 23 35 47 7 19 31 43 3 15 27 39" />
+    <wall name="front" channels="8 9 10 11 4 5 6 7 0 1 2 3" />
+    <wall name="back" channels="44 45 46 47 40 41 42 43 36 37 38 39" />
+    <wall name="top" channels="8 9 10 11 20 21 22 23 32 33 34 35 44 45 46 47" />
+    <wall name="bottom" channels="0 1 2 3 12 13 14 15 24 25 26 27 36 37 38 39" />
+
+
+    <group name="Bottom Layer" channels="0 1 2 3 12 13 14 15 24 25 26 27 36 37 38 39" />
+    <group name="Mid Layer" channels="4 5 6 7 16 17 18 19 28 29 30 31 40 41 42 43" />
+    <group name="Top Layer" channels="8 9 10 11 20 21 22 23 32 33 34 35 44 45 46 47" />
+
+    <group name="Column 1" channels="0 4 8" />
+    <group name="Column 2" channels="1 5 9" />
+    <group name="Column 3" channels="2 6 10" />
+    <group name="Column 4" channels="3 7 11" />
+
+    <group name="Column 5" channels="12 16 20" />
+    <group name="Column 6" channels="13 17 21" />
+    <group name="Column 7" channels="14 18 22" />
+    <group name="Column 8" channels="15 19 23" />
+
+    <group name="Column 9" channels="24 28 32" />
+    <group name="Column 10" channels="25 29 33" />
+    <group name="Column 11" channels="26 30 34" />
+    <group name="Column 12" channels="27 31 35" />
+
+    <group name="Column 13" channels="36 40 44" />
+    <group name="Column 14" channels="37 41 45" />
+    <group name="Column 15" channels="38 42 46" />
+    <group name="Column 16" channels="39 43 47" />
+
+    <routing value="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60" />
+
+    <center x="0" y="2" z="0" />
+
+</setup>
