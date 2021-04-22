@@ -59,7 +59,7 @@ reverb.PredelayBufferSize = 32768
 # Note: enum properties can't be overwritten from python. Fortunately, the default values (6dB filters) are desired here.
 
 distanceIntensity = nap.DistanceIntensityEffect()
-distanceIntensity.Name = "distanceIntensity"
+distanceIntensity.Name = "distanceAttenuation"
 
 distanceDamping = nap.DistanceDampingEffect()
 distanceDamping.Name = "distanceDamping"
@@ -99,7 +99,7 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
             uniqueID = settings.SPACES_COUNT + i + 1
 
         name = prefix + str(index)
-        
+
 
         # create sound objects
         properties = nap.EnvironmentInstanceProperties()
