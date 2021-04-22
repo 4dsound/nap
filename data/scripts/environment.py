@@ -135,6 +135,7 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
             spatialAudioComponent.addEffect(elevationFilterDown)
             spatialAudioComponent.addEffect(distanceDiffusion)
         else: # source sound objects
+            spatialAudioComponent.addEffect(granulator)
             spatialAudioComponent.addEffect(spatialDelay)
             spatialAudioComponent.addEffect(doppler)
             spatialAudioComponent.addEffect(gainScaling)
