@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<setup version="2.1">
+    
+      <speaker id="s0" ch="0" x="-2" y="1" z="-2" speakerType="sub" />
+      <speaker id="s1" ch="1" x="2" y="1" z="-2" speakerType="sub" />
+      <speaker id="s2" ch="2" x="-2" y="1" z="2" speakerType="sub" />
+      <speaker id="s3" ch="3" x="2" y="1" z="2" speakerType="sub" />
+      <speaker id="sub" ch="4" x="0" y="0" z="0" speakerType="sub" />
+
+      <grid name="satellites">
+          <shape type="square" speakers="s0 s1 s2 s3" />
+          <shape type="projectionLine" speakers="s1 s0" />
+          <shape type="projectionLine" speakers="s0 s2" />
+          <shape type="projectionLine" speakers="s2 s3" />
+          <shape type="projectionLine" speakers="s3 s1" />
+      </grid>
+      
+      <grid name="subs">
+          <shape type="static" speakers="sub" />
+      </grid>
+      
+</setup>
