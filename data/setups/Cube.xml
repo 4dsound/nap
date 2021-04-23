@@ -3,14 +3,14 @@
 
 <setup>
 
-      <speaker id="0" ch="0" x="-2" y="0" z="-2" speakerType="satellite" />
-      <speaker id="1" ch="1" x="2" y="0" z="-2" speakerType="satellite" />
-      <speaker id="2" ch="2" x="-2" y="4" z="-2" speakerType="satellite" />
-      <speaker id="3" ch="3" x="2" y="4" z="-2" speakerType="satellite" />
-      <speaker id="4" ch="4" x="-2" y="0" z="2" speakerType="satellite" />
-      <speaker id="5" ch="5" x="2" y="0" z="2" speakerType="satellite" />
-      <speaker id="6" ch="6" x="-2" y="4" z="2" speakerType="satellite" />
-      <speaker id="7" ch="7" x="2" y="4" z="2" speakerType="satellite" />
+      <speaker id="s0" ch="0" x="-2" y="0" z="-2" speakerType="satellite" />
+      <speaker id="s1" ch="1" x="2" y="0" z="-2" speakerType="satellite" />
+      <speaker id="s2" ch="2" x="-2" y="4" z="-2" speakerType="satellite" />
+      <speaker id="s3" ch="3" x="2" y="4" z="-2" speakerType="satellite" />
+      <speaker id="s4" ch="4" x="-2" y="0" z="2" speakerType="satellite" />
+      <speaker id="s5" ch="5" x="2" y="0" z="2" speakerType="satellite" />
+      <speaker id="s6" ch="6" x="-2" y="4" z="2" speakerType="satellite" />
+      <speaker id="s7" ch="7" x="2" y="4" z="2" speakerType="satellite" />
       <speaker id="sub" ch="8" x="0" y="0" z="0" speakerType="sub" />
 
 
