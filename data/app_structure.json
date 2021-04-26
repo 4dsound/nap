@@ -2656,17 +2656,12 @@
                     "Separators": false,
                     "Content": [
                         {
-                            "Type": "nap::spatial::MultiSpeakerSetupGui",
-                            "mID": "MultiSpeakerSetupGui_d0fcf6d2",
-                            "Title": "Multi Speaker Setup",
+                            "Type": "nap::spatial::SetupGui",
+                            "mID": "SetupGui_a307bbb2",
+                            "Title": "Setups",
                             "Style": "",
-                            "MultiSpeakerSetup": "multiSetup"
-                        },
-                        {
-                            "Type": "nap::spatial::HeadphoneSetupGui",
-                            "mID": "HeadphoneSetupGui_99d2ef03",
-                            "Title": "HeadphonesSetup",
-                            "Style": "",
+                            "License": "Licensing",
+                            "MultiSpeakerSetup": "multiSetup",
                             "HeadphonesSetup": "headphonesSetup"
                         }
                     ]
