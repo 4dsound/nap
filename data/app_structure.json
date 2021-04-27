@@ -549,6 +549,7 @@
                 {
                     "Type": "nap::spatial::GridSettingsComponent",
                     "mID": "GridSettingsComponent",
+                    "ParameterComponent": "./ParameterComponent",
                     "MultiSpeakerSetup": "multiSetup"
                 },
                 {
