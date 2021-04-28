@@ -1424,6 +1424,18 @@
                     "ControlScales": true,
                     "ControlRotations": true,
                     "LevelSmoothTime": 0.05000000074505806
+                },
+                {
+                    "Type": "nap::ControlSchedulerComponent",
+                    "mID": "nap::ControlSchedulerComponent_b7064ceb",
+                    "Components": [
+                        "./nap::spatial::EnabledEffectDisplay_42004dbb",
+                        "./BoxWireframeParticleVisualizationController",
+                        "./BoxParticleVisualizationController",
+                        "./HaloParticleVisualizationController",
+                        "./CloudParticleVisualizationController",
+                        "./PointParticleVisualizationController"
+                    ]
                 }
             ],
             "Children": []
