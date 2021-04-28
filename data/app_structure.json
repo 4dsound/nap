@@ -1429,6 +1429,8 @@
                     "Type": "nap::ControlSchedulerComponent",
                     "mID": "nap::ControlSchedulerComponent_b7064ceb",
                     "Components": [
+                        "./ShapeVisualizationController",
+                        "./nap::spatial::PathVisualizationController_e62323de",
                         "./nap::spatial::EnabledEffectDisplay_42004dbb",
                         "./BoxWireframeParticleVisualizationController",
                         "./BoxParticleVisualizationController",
