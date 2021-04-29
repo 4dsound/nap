@@ -411,7 +411,7 @@
                 },
                 {
                     "Type": "nap::spatial::SpeakerTypeVisualizationController",
-                    "mID": "nap::spatial::SpeakerTypeVisualizationController_086322b7",
+                    "mID": "SatellitesVisualizationController",
                     "MonitorController": "MonitorController",
                     "RenderableMeshCopyComponent": "./nap::spatial::RenderableMeshCopyComponent_22059036",
                     "TextOverlayController": "../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
@@ -430,6 +430,13 @@
                         "y": 0.5,
                         "z": 0.5
                     }
+                },
+                {
+                    "Type": "nap::ControlSchedulerComponent",
+                    "mID": "nap::ControlSchedulerComponent_bb2d1025",
+                    "Components": [
+                        "./SatellitesVisualizationController"
+                    ]
                 }
             ],
             "Children": []
@@ -510,7 +517,7 @@
                 },
                 {
                     "Type": "nap::spatial::SpeakerTypeVisualizationController",
-                    "mID": "SideFillnap::spatial::SpeakerTypeVisualizationController_d03f6ef4",
+                    "mID": "SideFillVisualizationController",
                     "MonitorController": "MonitorController",
                     "RenderableMeshCopyComponent": "./SideFillnap::spatial::RenderableMeshCopyComponent_1a32303f",
                     "TextOverlayController": "../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
@@ -529,6 +536,13 @@
                         "y": 0.5,
                         "z": 0.5
                     }
+                },
+                {
+                    "Type": "nap::ControlSchedulerComponent",
+                    "mID": "nap::ControlSchedulerComponent_5164af1e",
+                    "Components": [
+                        "./SideFillVisualizationController"
+                    ]
                 }
             ],
             "Children": []
@@ -1541,7 +1555,7 @@
                 },
                 {
                     "Type": "nap::spatial::SpeakerTypeVisualizationController",
-                    "mID": "nap::spatial::SpeakerTypeVisualizationController_d03f6ef4",
+                    "mID": "SubsVisualizationController",
                     "MonitorController": "MonitorController",
                     "RenderableMeshCopyComponent": "./nap::spatial::RenderableMeshCopyComponent_1a32303f",
                     "TextOverlayController": "../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
@@ -1560,6 +1574,13 @@
                         "y": 0.5,
                         "z": 0.5
                     }
+                },
+                {
+                    "Type": "nap::ControlSchedulerComponent",
+                    "mID": "nap::ControlSchedulerComponent_aedfbc09",
+                    "Components": [
+                        "./SubsVisualizationController"
+                    ]
                 }
             ],
             "Children": []
