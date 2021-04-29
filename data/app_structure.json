@@ -420,6 +420,7 @@
                     "ShowTextLabels": true,
                     "MonitorVisibilityProperty": "speakers",
                     "MonitorLabelVisibilityProperty": "speakerLabels",
+                    "MonitorPanningVisibilityProperty": "speakerPanning",
                     "SpeakerDimensions": {
                         "x": 0.05000000074505806,
                         "y": 0.15000000596046449,
@@ -526,6 +527,7 @@
                     "ShowTextLabels": true,
                     "MonitorVisibilityProperty": "speakers",
                     "MonitorLabelVisibilityProperty": "speakerLabels",
+                    "MonitorPanningVisibilityProperty": "speakerPanning",
                     "SpeakerDimensions": {
                         "x": 0.15000000596046449,
                         "y": 0.30000001192092898,
@@ -1564,6 +1566,7 @@
                     "ShowTextLabels": true,
                     "MonitorVisibilityProperty": "speakers",
                     "MonitorLabelVisibilityProperty": "speakerLabels",
+                    "MonitorPanningVisibilityProperty": "speakerPanning",
                     "SpeakerDimensions": {
                         "x": 0.25,
                         "y": 0.05000000074505806,
@@ -2723,17 +2726,12 @@
                     "Separators": false,
                     "Content": [
                         {
-                            "Type": "nap::spatial::MultiSpeakerSetupGui",
-                            "mID": "MultiSpeakerSetupGui_d0fcf6d2",
-                            "Title": "Multi Speaker Setup",
+                            "Type": "nap::spatial::SetupGui",
+                            "mID": "SetupGui_a307bbb2",
+                            "Title": "Setups",
                             "Style": "",
-                            "MultiSpeakerSetup": "multiSetup"
-                        },
-                        {
-                            "Type": "nap::spatial::HeadphoneSetupGui",
-                            "mID": "HeadphoneSetupGui_99d2ef03",
-                            "Title": "HeadphonesSetup",
-                            "Style": "",
+                            "License": "Licensing",
+                            "MultiSpeakerSetup": "multiSetup",
                             "HeadphonesSetup": "headphonesSetup"
                         }
                     ]
@@ -3357,31 +3355,37 @@
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "particlePoints",
-                    "Title": "Particle Points",
+                    "Title": "P. Points",
                     "Value": true
                 },
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "particlePointClouds",
-                    "Title": "Particle Clouds",
+                    "Title": "P. Clouds",
                     "Value": false
                 },
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "particleHalos",
-                    "Title": "Particle Halos",
+                    "Title": "P. Halos",
                     "Value": true
                 },
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "particleBoxes",
-                    "Title": "Particle Boxes",
+                    "Title": "P. Boxes",
                     "Value": true
                 },
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "particleLabels",
-                    "Title": "Particle Labels",
+                    "Title": "P. Labels",
+                    "Value": false
+                },
+                {
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "particleFrames",
+                    "Title": "P. Frames",
                     "Value": false
                 },
                 {
@@ -3392,8 +3396,14 @@
                 },
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "speakerPanning",
+                    "Title": "S. Panning",
+                    "Value": true
+                },
+                {
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "speakerLabels",
-                    "Title": "Speaker Labels",
+                    "Title": "S. Labels",
                     "Value": false
                 },
                 {
@@ -3405,7 +3415,7 @@
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "axesHelpers",
-                    "Title": "Axes Helpers",
+                    "Title": "Axes",
                     "Value": false
                 },
                 {
@@ -3419,12 +3429,6 @@
                     "mID": "paths",
                     "Title": "Paths",
                     "Value": true
-                },
-                {
-                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
-                    "mID": "particleFrames",
-                    "Title": "Particle Frames",
-                    "Value": false
                 }
             ]
         },
