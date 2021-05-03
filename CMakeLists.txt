@@ -18,8 +18,15 @@ source_group("headers" FILES ${HEADERS})
 source_group("sources" FILES ${SOURCES})
 source_group("shaders" FILES ${SHADERS})
 
-# add executable
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} ${SHADERS})
+# Add executable, include plist files if found
+file(GLOB_RECURSE INFO_PLIST macos/*.plist)
+if(APPLE AND INFO_PLIST)
+	source_group("propertylist" FILES ${INFO_PLIST})
+    add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} ${SHADERS} ${INFO_PLIST})
+    copy_files_to_bin(${INFO_PLIST})
+else()
+    add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} ${SHADERS})
+endif()
 
 set_target_properties(${PROJECT_NAME} PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "$(OutDir)")
 set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER Apps)
