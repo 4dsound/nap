@@ -3127,7 +3127,7 @@
                     }
                 },
                 {
-                    "Visible": false,
+                    "Visible": true,
                     "Content": {
                         "Type": "nap::gui::Panel",
                         "mID": "Panel_aa521aa3",
