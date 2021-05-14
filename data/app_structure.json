@@ -411,7 +411,7 @@
                 },
                 {
                     "Type": "nap::spatial::SpeakerTypeVisualizationController",
-                    "mID": "nap::spatial::SpeakerTypeVisualizationController_086322b7",
+                    "mID": "SatellitesVisualizationController",
                     "MonitorController": "MonitorController",
                     "RenderableMeshCopyComponent": "./nap::spatial::RenderableMeshCopyComponent_22059036",
                     "TextOverlayController": "../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
@@ -431,6 +431,13 @@
                         "y": 0.5,
                         "z": 0.5
                     }
+                },
+                {
+                    "Type": "nap::ControlSchedulerComponent",
+                    "mID": "nap::ControlSchedulerComponent_bb2d1025",
+                    "Components": [
+                        "./SatellitesVisualizationController"
+                    ]
                 }
             ],
             "Children": []
@@ -511,7 +518,7 @@
                 },
                 {
                     "Type": "nap::spatial::SpeakerTypeVisualizationController",
-                    "mID": "SideFillnap::spatial::SpeakerTypeVisualizationController_d03f6ef4",
+                    "mID": "SideFillVisualizationController",
                     "MonitorController": "MonitorController",
                     "RenderableMeshCopyComponent": "./SideFillnap::spatial::RenderableMeshCopyComponent_1a32303f",
                     "TextOverlayController": "../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
@@ -531,6 +538,13 @@
                         "y": 0.5,
                         "z": 0.5
                     }
+                },
+                {
+                    "Type": "nap::ControlSchedulerComponent",
+                    "mID": "nap::ControlSchedulerComponent_5164af1e",
+                    "Components": [
+                        "./SideFillVisualizationController"
+                    ]
                 }
             ],
             "Children": []
@@ -915,6 +929,30 @@
                     "DisplayName": "",
                     "Category": 1,
                     "Visible": true
+                },
+                {
+                    "Type": "nap::ControlSchedulerComponent",
+                    "mID": "nap::ControlSchedulerComponent_569b1fa5",
+                    "Components": [
+                        "./MixdownComponent",
+                        "./SpatialTransformationComponent",
+                        "./SpatialAudioComponent",
+                        "./MeasurementComponent",
+                        "./ShapeComponent",
+                        "./SoundObjectTransformationChainComponent",
+                        "./FollowTransformationChainComponent",
+                        "./nap::spatial::MixdownOutputComponent",
+                        "./nap::spatial::EnvironmentControlComponent_870b1507"
+                    ]
+                },
+                {
+                    "Type": "nap::spatial::EnvironmentControlComponent",
+                    "mID": "nap::spatial::EnvironmentControlComponent_870b1507",
+                    "SpatialAudioComponent": "./SpatialAudioComponent",
+                    "SpatializationComponent": "./SpatializationComponent",
+                    "ParameterComponent": "./ParameterComponent",
+                    "TransformationChainComponent": "./SoundObjectTransformationChainComponent",
+                    "ShapeComponent": "./ShapeComponent"
                 }
             ],
             "Children": [
@@ -1403,6 +1441,20 @@
                     "ControlScales": true,
                     "ControlRotations": true,
                     "LevelSmoothTime": 0.05000000074505806
+                },
+                {
+                    "Type": "nap::ControlSchedulerComponent",
+                    "mID": "nap::ControlSchedulerComponent_b7064ceb",
+                    "Components": [
+                        "./ShapeVisualizationController",
+                        "./nap::spatial::PathVisualizationController_e62323de",
+                        "./nap::spatial::EnabledEffectDisplay_42004dbb",
+                        "./BoxWireframeParticleVisualizationController",
+                        "./BoxParticleVisualizationController",
+                        "./HaloParticleVisualizationController",
+                        "./CloudParticleVisualizationController",
+                        "./PointParticleVisualizationController"
+                    ]
                 }
             ],
             "Children": []
@@ -1506,7 +1558,7 @@
                 },
                 {
                     "Type": "nap::spatial::SpeakerTypeVisualizationController",
-                    "mID": "nap::spatial::SpeakerTypeVisualizationController_d03f6ef4",
+                    "mID": "SubsVisualizationController",
                     "MonitorController": "MonitorController",
                     "RenderableMeshCopyComponent": "./nap::spatial::RenderableMeshCopyComponent_1a32303f",
                     "TextOverlayController": "../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
@@ -1526,6 +1578,13 @@
                         "y": 0.5,
                         "z": 0.5
                     }
+                },
+                {
+                    "Type": "nap::ControlSchedulerComponent",
+                    "mID": "nap::ControlSchedulerComponent_aedfbc09",
+                    "Components": [
+                        "./SubsVisualizationController"
+                    ]
                 }
             ],
             "Children": []
@@ -1749,6 +1808,14 @@
                         }
                     ],
                     "Name": "particleTransformation"
+                },
+                {
+                    "Type": "nap::ControlSchedulerComponent",
+                    "mID": "nap::ControlSchedulerComponent_86dc02b4",
+                    "Components": [
+                        "./shapeTransformationChain",
+                        "./particleTransformationChain"
+                    ]
                 }
             ],
             "Children": []
@@ -3087,7 +3154,6 @@
                             "Title": "SpatialParameterGui",
                             "Style": "",
                             "Scene": "Scene",
-                            "ParameterGroup": "",
                             "ReadOnly": false
                         }
                     }
