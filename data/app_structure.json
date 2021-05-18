@@ -942,7 +942,8 @@
                         "./SoundObjectTransformationChainComponent",
                         "./FollowTransformationChainComponent",
                         "./nap::spatial::MixdownOutputComponent",
-                        "./nap::spatial::EnvironmentControlComponent_870b1507"
+                        "./nap::spatial::EnvironmentControlComponent_870b1507",
+                        "./ExposedDataComponent"
                     ]
                 },
                 {
