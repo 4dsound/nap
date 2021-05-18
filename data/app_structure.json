@@ -1691,7 +1691,7 @@
                     "PerspCameraComponent": "./PerspCameraComponent",
                     "LookAtPosition": {
                         "x": 0.0,
-                        "y": 2.5,
+                        "y": 5.0,
                         "z": 0.0
                     }
                 }
@@ -1707,7 +1707,8 @@
                     "mID": "nap::spatial::EnvironmentComponent",
                     "ScriptPath": "scripts/environment.py",
                     "Entities": [],
-                    "OSCSender": "OSCSender"
+                    "OSCSender": "OSCSender",
+                    "StateMachine": "EnvironmentState"
                 }
             ],
             "Children": []
@@ -1842,28 +1843,14 @@
             "Type": "nap::ImageFromFile",
             "mID": "Logo",
             "Usage": "Static",
-            "ImagePath": "img/logo-transparent.png",
-            "GenerateLods": true
-        },
-        {
-            "Type": "nap::ImageFromFile",
-            "mID": "Logo-4DSOUND",
-            "Usage": "Static",
-            "ImagePath": "img/logo-4DSOUND.png",
-            "GenerateLods": true
-        },
-        {
-            "Type": "nap::ImageFromFile",
-            "mID": "Logo-theworks",
-            "Usage": "Static",
-            "ImagePath": "img/logo-theworks.png",
+            "ImagePath": "img/logo.png",
             "GenerateLods": true
         },
         {
             "Type": "nap::ImageFromFile",
             "mID": "LogoSmall",
             "Usage": "Static",
-            "ImagePath": "img/logo-4d-small.png",
+            "ImagePath": "img/logo-transparent.png",
             "GenerateLods": true
         },
         {
@@ -2350,6 +2337,16 @@
             "Path": "scripts/shapes/precalculatedVesicaEye2D.py"
         },
         {
+            "Type": "nap::RenderTexture2D",
+            "mID": "StartupVideoTexture",
+            "Usage": "Static",
+            "Fill": true,
+            "Width": 1920,
+            "Height": 1080,
+            "Format": "RGBA8",
+            "ColorSpace": "Linear"
+        },
+        {
             "Type": "nap::RenderWindow",
             "mID": "SecondaryWindow",
             "Borderless": false,
@@ -2511,6 +2508,36 @@
             }
         },
         {
+            "Type": "nap::StateMachine",
+            "mID": "EnvironmentState",
+            "States": [
+                {
+                    "Type": "nap::StateMachine::State",
+                    "mID": "loadingState",
+                    "Name": "loading"
+                },
+                {
+                    "Type": "nap::StateMachine::State",
+                    "mID": "runningState",
+                    "Name": "running"
+                }
+            ]
+        },
+        {
+            "Type": "nap::VideoPlayer",
+            "mID": "StartupVideoPlayer",
+            "Loop": true,
+            "VideoFiles": [
+                {
+                    "Type": "nap::VideoFile",
+                    "mID": "VideoFile_241c0472",
+                    "Path": "videos/4dlogo_orbit.mov"
+                }
+            ],
+            "VideoIndex": 0,
+            "Speed": 1.0
+        },
+        {
             "Type": "nap::audio::Graph",
             "mID": "satelliteGraph",
             "Objects": [
@@ -2662,13 +2689,51 @@
                         "Border": true,
                         "Content": {
                             "Type": "nap::gui::GuiLink",
-                            "mID": "GuiLink_4510babd",
-                            "Title": "MainGuiLink",
+                            "mID": "GuiLink_fa0485a7",
+                            "Title": "GuiLink",
                             "Style": "",
                             "Link": "Gui"
                         }
                     }
                 ]
+            }
+        },
+        {
+            "Type": "nap::gui::GuiWindow",
+            "mID": "LoadingGuiWindow",
+            "Title": "LoadingGuiWindow",
+            "Style": "",
+            "Position": {
+                "x": 50.0,
+                "y": 50.0
+            },
+            "Size": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "Flags": {
+                "NoTitleBar": true,
+                "NoResize": true,
+                "NoMove": true,
+                "NoScrollBar": true,
+                "NoScrollWithMouse": true,
+                "NoCollapse": true,
+                "AlwaysAutoResize": true,
+                "NoSavedSettings": false,
+                "MenuBar": false,
+                "HorizontalScrollBar": false,
+                "CanClose": false
+            },
+            "Alpha": 0.0,
+            "Open": true,
+            "Border": false,
+            "RenderWindow": "Window",
+            "Content": {
+                "Type": "nap::spatial::LoadingGui",
+                "mID": "LoadingGui_9bee8e51",
+                "Title": "",
+                "Style": "",
+                "Image": "Logo"
             }
         },
         {

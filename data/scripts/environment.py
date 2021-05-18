@@ -206,6 +206,7 @@ def init(entity):
 
     environment = entity.findComponent("nap::spatial::EnvironmentComponentInstance")
 
+    environment.setCurrentState("loading")
     createSources(environment, settings.SOURCES_COUNT)
     createSpaces(environment, settings.SPACES_COUNT)
     createGroups(environment, settings.GROUPS_COUNT)
@@ -224,3 +225,5 @@ def init(entity):
     oscInitMessage.addValue(settings.SOURCES_MAX_PARTICLE_COUNT)
     oscInitMessage.addValue(settings.SPACES_MAX_PARTICLE_COUNT)
     environment.sendOSC(oscInitMessage)
+
+    environment.setCurrentState("running")

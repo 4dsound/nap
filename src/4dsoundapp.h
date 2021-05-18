@@ -4,6 +4,7 @@
 #include <Spatial/Monitor/TextOverlayController.h>
 #include <Spatial/Monitor/MonitorController.h>
 #include <Spatial/Core/EnvironmentComponent.h>
+#include <Spatial/Core/StateMachine.h>
 
 // Gui Layout includes
 #include <Gui/Gui.h>
@@ -27,6 +28,7 @@
 #include <entity.h>
 #include <rendercomponent.h>
 #include <app.h>
+#include <rendervideocomponent.h>
 
 namespace nap
 {
@@ -102,6 +104,8 @@ namespace nap
 		ResourcePtr<RenderWindow> mSecondaryWindow;		// Pointer to the detached gui window
 		ResourcePtr<RenderWindow> mWindow;				// Pointer to the render window
 		ObjectPtr<Scene> mScene = nullptr;				// Pointer to the main scene
+		ResourcePtr<StateMachine> mEnvironmentStateMachine = nullptr; // Pointer to the environment state
+		ResourcePtr<StateMachine::State> mEnvironmentLoadingState = nullptr; // State indicating the environment is loading
 
 		ObjectPtr<PerspCameraComponentInstance> mCamera = nullptr;
 		ObjectPtr<RenderableComponentInstance> mFloorWireFrame = nullptr;
@@ -114,6 +118,7 @@ namespace nap
 		ObjectPtr<spatial::TextOverlayControllerInstance> mTextOverlayController = nullptr;
 		ObjectPtr<gui::GuiWindow> mGuiWindow = nullptr;
 		ObjectPtr<gui::GuiWindow> mDetachedGuiWindow = nullptr;
+		ObjectPtr<gui::GuiWindow> mLoadingGuiWindow = nullptr;
 		ObjectPtr<gui::Gui> mMonitorGui = nullptr;
 		ObjectPtr<spatial::MonitorController> mMonitorController = nullptr;
 

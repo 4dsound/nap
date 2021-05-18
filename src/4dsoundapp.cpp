@@ -9,6 +9,8 @@
 #include <audio/utility/audiofunctions.h>
 #include <Gui/GuiFunctions.h>
 #include <imgui/imgui_internal.h>
+#include <imguiutils.h>
+#include <videoplayer.h>
 
 // Spatial includes.
 #include <Spatial/Core/EnvironmentComponent.h>
@@ -112,7 +114,6 @@ namespace nap
         if (mSideFills == nullptr)
             return false;
 
-
 		// Find text overlay controller
 		mTextOverlayController = findComponentInScene<nap::spatial::TextOverlayControllerInstance>(*mScene, "MonitorTextOverlay", error);
 		if (mTextOverlayController == nullptr)
@@ -135,12 +136,25 @@ namespace nap
 		if (!error.check(mDetachedGuiWindow != nullptr, "DetachedGuiWindow not found"))
 			return false;
 
+		// Get the loading gui window
+		mLoadingGuiWindow = mResourceManager->findObject<gui::Gui>("LoadingGuiWindow");
+		if (!error.check(mLoadingGuiWindow != nullptr, "unable to find gui window with name: %s", "LoadingGuiWindow"))
+			return false;
+
 		mMonitorGui = mResourceManager->findObject<gui::Gui>("MonitorGui");
 		if (!error.check(mMonitorGui != nullptr, "Monitor Gui not found"))
 			return false;
 
 		mMonitorController = mResourceManager->findObject<spatial::MonitorController>("MonitorController");
 		if (!error.check(mMonitorController != nullptr, "MonitorController not found"))
+			return false;
+
+		mEnvironmentStateMachine = mResourceManager->findObject<StateMachine>("EnvironmentState");
+		if (!error.check(mEnvironmentStateMachine != nullptr, "EnvironmentState not found"))
+			return false;
+
+		mEnvironmentLoadingState = mResourceManager->findObject<StateMachine::State>("loadingState");
+		if (!error.check(mEnvironmentStateMachine != nullptr, "EnvironmentStateMachine state loadingState not found"))
 			return false;
 
 		// Apply hard-coded ImGui style to both windows
@@ -160,9 +174,16 @@ namespace nap
     // Called when the window is updating
     void SpatialSoundApp::update(double deltaTime)
     {
-        // Use a default input router to forward input events (recursively) to all input components in the default scene
-        nap::DefaultInputRouter input_router(true);
-        mInputService->processWindowEvents(*mWindow, input_router, { &mScene->getRootEntity() });
+		// Use a default input router to forward input events (recursively) to all input components in the default scene
+		nap::DefaultInputRouter input_router(true);
+		mInputService->processWindowEvents(*mWindow, input_router, { &mScene->getRootEntity() });
+
+		// Don't show GUIs while in loading state. Doing so will lock the main thread as the control thread is busy
+		if (mEnvironmentStateMachine->getCurrentState().get() == mEnvironmentLoadingState.get())
+		{
+			mLoadingGuiWindow->show();
+			return;
+		}
 
 		// Show the Gui
 		if (mGuiWindow->mOpen)
@@ -214,17 +235,22 @@ namespace nap
 
 			if (mMonitorController->isRenderingEnabled())
 			{
-				std::vector<nap::RenderableComponentInstance*> renderableComponents = {
-                    mFloorWireFrame.get(), mFloor.get(), mAxesHelpers.get(), mSatellites.get(), mSubs.get(), mSideFills.get() };
-				for (auto& entity : mEnvironment->getEntities())
-					getRenderableComponentsRecursive(*entity, renderableComponents);
+				if (mEnvironmentStateMachine->getCurrentState().get() == mEnvironmentLoadingState.get())
+				{
+					mRenderService->renderObjects(*mWindow, *mCamera, { mFloorWireFrame.get() });
+				}
+				else {
+					std::vector<nap::RenderableComponentInstance*> renderableComponents = { mFloorWireFrame.get(), mFloor.get(), mAxesHelpers.get(), mSatellites.get(), mSubs.get(), mSideFills.get() };
 
-				// Render the world with the right camera directly to screen
-				mRenderService->renderObjects(*mWindow, *mCamera, renderableComponents);
+					for (auto& entity : mEnvironment->getEntities())
+						getRenderableComponentsRecursive(*entity, renderableComponents);
 
-				// Render the text overlay
-				mTextOverlayController->draw(*mWindow, *mCamera);
+					// Render the world with the right camera directly to screen
+					mRenderService->renderObjects(*mWindow, *mCamera, renderableComponents);
 
+					// Render the text overlay
+					mTextOverlayController->draw(*mWindow, *mCamera);
+				}
 			}
             
             // Render GUI elements
