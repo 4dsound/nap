@@ -206,7 +206,7 @@ def init(entity):
 
     environment = entity.findComponent("nap::spatial::EnvironmentComponentInstance")
 
-    environment.setCurrentState("loading")
+    environment.setCurrentState("starting")
     createSources(environment, settings.SOURCES_COUNT)
     createSpaces(environment, settings.SPACES_COUNT)
     createGroups(environment, settings.GROUPS_COUNT)

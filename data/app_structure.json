@@ -94,6 +94,21 @@
         },
         {
             "Type": "nap::Entity",
+            "mID": "Environment",
+            "Components": [
+                {
+                    "Type": "nap::spatial::EnvironmentComponent",
+                    "mID": "nap::spatial::EnvironmentComponent",
+                    "ScriptPath": "scripts/environment.py",
+                    "Entities": [],
+                    "OSCSender": "OSCSender",
+                    "StateMachine": "EnvironmentState"
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Type": "nap::Entity",
             "mID": "MonitorFloor",
             "Components": [
                 {
@@ -1484,6 +1499,28 @@
         },
         {
             "Type": "nap::Entity",
+            "mID": "StartupVideo",
+            "Components": [
+                {
+                    "Type": "nap::RenderVideoComponent",
+                    "mID": "nap::RenderVideoComponent_1dc7a6b1",
+                    "Visible": true,
+                    "OutputTexture": "StartupVideoTexture",
+                    "VideoPlayer": "StartupVideoPlayer",
+                    "Samples": "One",
+                    "ClearColor": {
+                        "Values": [
+                            255,
+                            255,
+                            255
+                        ]
+                    }
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Type": "nap::Entity",
             "mID": "SubsVisualization",
             "Components": [
                 {
@@ -1700,21 +1737,6 @@
         },
         {
             "Type": "nap::Entity",
-            "mID": "global",
-            "Components": [
-                {
-                    "Type": "nap::spatial::EnvironmentComponent",
-                    "mID": "nap::spatial::EnvironmentComponent",
-                    "ScriptPath": "scripts/environment.py",
-                    "Entities": [],
-                    "OSCSender": "OSCSender",
-                    "StateMachine": "EnvironmentState"
-                }
-            ],
-            "Children": []
-        },
-        {
-            "Type": "nap::Entity",
             "mID": "groupTransformationObject",
             "Components": [
                 {
@@ -1838,13 +1860,6 @@
                 "DPI": 96
             },
             "Font": "fonts/MuseoSans_500.otf"
-        },
-        {
-            "Type": "nap::ImageFromFile",
-            "mID": "Logo",
-            "Usage": "Static",
-            "ImagePath": "img/logo.png",
-            "GenerateLods": true
         },
         {
             "Type": "nap::ImageFromFile",
@@ -2340,9 +2355,9 @@
             "Type": "nap::RenderTexture2D",
             "mID": "StartupVideoTexture",
             "Usage": "Static",
-            "Fill": true,
-            "Width": 1920,
-            "Height": 1080,
+            "Fill": false,
+            "Width": 1236,
+            "Height": 1100,
             "Format": "RGBA8",
             "ColorSpace": "Linear"
         },
@@ -2401,7 +2416,7 @@
                     "InstanceProperties": []
                 },
                 {
-                    "Entity": "global",
+                    "Entity": "Environment",
                     "InstanceProperties": []
                 },
                 {
@@ -2438,6 +2453,10 @@
                 },
                 {
                     "Entity": "SideFillsVisualization",
+                    "InstanceProperties": []
+                },
+                {
+                    "Entity": "StartupVideo",
                     "InstanceProperties": []
                 }
             ]
@@ -2513,8 +2532,8 @@
             "States": [
                 {
                     "Type": "nap::StateMachine::State",
-                    "mID": "loadingState",
-                    "Name": "loading"
+                    "mID": "startupState",
+                    "Name": "starting"
                 },
                 {
                     "Type": "nap::StateMachine::State",
@@ -2682,8 +2701,8 @@
                         },
                         "Flags": {
                             "NoScrollBar": true,
-                            "NoScrollWithMouse": false,
-                            "HorizontalScrollBar": false
+                            "NoScrollWithMouse": true,
+                            "HorizontalScrollBar": true
                         },
                         "Alpha": 0.5,
                         "Border": true,
@@ -2708,8 +2727,8 @@
                 "y": 50.0
             },
             "Size": {
-                "x": 0.0,
-                "y": 0.0
+                "x": -100.0,
+                "y": -100.0
             },
             "Flags": {
                 "NoTitleBar": true,
@@ -2729,11 +2748,11 @@
             "Border": false,
             "RenderWindow": "Window",
             "Content": {
-                "Type": "nap::spatial::LoadingGui",
+                "Type": "nap::spatial::StartupGui",
                 "mID": "LoadingGui_9bee8e51",
                 "Title": "",
                 "Style": "",
-                "Image": "Logo"
+                "Image": "StartupVideoTexture"
             }
         },
         {
@@ -2890,7 +2909,7 @@
                         "NoResize": true,
                         "NoMove": true,
                         "NoScrollBar": true,
-                        "NoScrollWithMouse": false,
+                        "NoScrollWithMouse": true,
                         "NoCollapse": true,
                         "AlwaysAutoResize": false,
                         "NoSavedSettings": true,
@@ -2916,9 +2935,9 @@
                             "y": 0.0
                         },
                         "Flags": {
-                            "NoScrollBar": false,
-                            "NoScrollWithMouse": false,
-                            "HorizontalScrollBar": false
+                            "NoScrollBar": true,
+                            "NoScrollWithMouse": true,
+                            "HorizontalScrollBar": true
                         },
                         "Alpha": 0.0,
                         "Border": true,
@@ -2977,9 +2996,9 @@
                             "y": 0.0
                         },
                         "Flags": {
-                            "NoScrollBar": false,
-                            "NoScrollWithMouse": false,
-                            "HorizontalScrollBar": false
+                            "NoScrollBar": true,
+                            "NoScrollWithMouse": true,
+                            "HorizontalScrollBar": true
                         },
                         "Alpha": 0.0,
                         "Border": false,

@@ -120,8 +120,13 @@ namespace nap
 			return false;
 
 		// Find the environment
-		mEnvironment = findComponentInScene<spatial::EnvironmentComponentInstance>(*mScene, "global", error);
+		mEnvironment = findComponentInScene<spatial::EnvironmentComponentInstance>(*mScene, "Environment", error);
 		if (mEnvironment == nullptr)
+			return false;
+
+		// Find the startup video component
+		mStartupVideoComponent = findComponentInScene<RenderVideoComponentInstance>(*mScene, "StartupVideo", error);
+		if (mStartupVideoComponent == nullptr)
 			return false;
 
 		// Set the environment script to the command line argument (if any)
@@ -153,9 +158,14 @@ namespace nap
 		if (!error.check(mEnvironmentStateMachine != nullptr, "EnvironmentState not found"))
 			return false;
 
-		mEnvironmentLoadingState = mResourceManager->findObject<StateMachine::State>("loadingState");
-		if (!error.check(mEnvironmentStateMachine != nullptr, "EnvironmentStateMachine state loadingState not found"))
+		mEnvironmentStartupState = mResourceManager->findObject<StateMachine::State>("startupState");
+		if (!error.check(mEnvironmentStateMachine != nullptr, "EnvironmentStateMachine state startupState not found"))
 			return false;
+
+		mStartupVideoPlayer = mResourceManager->findObject<VideoPlayer>("StartupVideoPlayer");
+		if (!error.check(mStartupVideoPlayer != nullptr, "mStartupVideoPlayer not found"))
+			return false;
+		mStartupVideoPlayer->play();
 
 		// Apply hard-coded ImGui style to both windows
 		spatial::GuiStyle guiStyle;
@@ -179,7 +189,7 @@ namespace nap
 		mInputService->processWindowEvents(*mWindow, input_router, { &mScene->getRootEntity() });
 
 		// Don't show GUIs while in loading state. Doing so will lock the main thread as the control thread is busy
-		if (mEnvironmentStateMachine->getCurrentState().get() == mEnvironmentLoadingState.get())
+		if (mEnvironmentStateMachine->getCurrentState().get() == mEnvironmentStartupState.get())
 		{
 			mLoadingGuiWindow->show();
 			return;
@@ -220,26 +230,37 @@ namespace nap
 	{
 		mRenderService->beginFrame();
 
-		if (mRenderService->beginRecording(*mSecondaryWindow))
+		if (mEnvironmentStateMachine->getCurrentState().get() == mEnvironmentStartupState.get())
 		{
-			mSecondaryWindow->beginRendering();
-			mGuiService->draw();
-			mSecondaryWindow->endRendering();
-			mRenderService->endRecording();
-		}
+			mRenderService->beginHeadlessRecording();
+			mStartupVideoComponent->draw();
+			mRenderService->endHeadlessRecording();
 
-		if (mRenderService->beginRecording(*mWindow))
-		{
-			// Begin render pass
-			mWindow->beginRendering();
-
-			if (mMonitorController->isRenderingEnabled())
+			if (mRenderService->beginRecording(*mWindow))
 			{
-				if (mEnvironmentStateMachine->getCurrentState().get() == mEnvironmentLoadingState.get())
+				mWindow->beginRendering();
+				mGuiService->draw();
+				mRenderService->renderObjects(*mWindow, *mCamera, { mFloorWireFrame.get() });
+				mWindow->endRendering();
+				mRenderService->endRecording();
+			}
+		}
+		else {
+			if (mRenderService->beginRecording(*mSecondaryWindow))
+			{
+				mSecondaryWindow->beginRendering();
+				mGuiService->draw();
+				mSecondaryWindow->endRendering();
+				mRenderService->endRecording();
+			}
+
+			if (mRenderService->beginRecording(*mWindow))
+			{
+				// Begin render pass
+				mWindow->beginRendering();
+
+				if (mMonitorController->isRenderingEnabled())
 				{
-					mRenderService->renderObjects(*mWindow, *mCamera, { mFloorWireFrame.get() });
-				}
-				else {
 					std::vector<nap::RenderableComponentInstance*> renderableComponents = { mFloorWireFrame.get(), mFloor.get(), mAxesHelpers.get(), mSatellites.get(), mSubs.get(), mSideFills.get() };
 
 					for (auto& entity : mEnvironment->getEntities())
@@ -251,17 +272,18 @@ namespace nap
 					// Render the text overlay
 					mTextOverlayController->draw(*mWindow, *mCamera);
 				}
+
+				// Render GUI elements
+				mGuiService->draw();
+
+				// Stop render pass
+				mWindow->endRendering();
+
+				// End recording
+				mRenderService->endRecording();
 			}
-            
-            // Render GUI elements
-            mGuiService->draw();
-
-			// Stop render pass
-			mWindow->endRendering();
-
-			// End recording
-			mRenderService->endRecording();
 		}
+
 
 		// Proceed to next frame
 		mRenderService->endFrame();

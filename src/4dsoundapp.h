@@ -105,7 +105,7 @@ namespace nap
 		ResourcePtr<RenderWindow> mWindow;				// Pointer to the render window
 		ObjectPtr<Scene> mScene = nullptr;				// Pointer to the main scene
 		ResourcePtr<StateMachine> mEnvironmentStateMachine = nullptr; // Pointer to the environment state
-		ResourcePtr<StateMachine::State> mEnvironmentLoadingState = nullptr; // State indicating the environment is loading
+		ResourcePtr<StateMachine::State> mEnvironmentStartupState = nullptr; // State indicating the environment is starting up
 
 		ObjectPtr<PerspCameraComponentInstance> mCamera = nullptr;
 		ObjectPtr<RenderableComponentInstance> mFloorWireFrame = nullptr;
@@ -121,6 +121,8 @@ namespace nap
 		ObjectPtr<gui::GuiWindow> mLoadingGuiWindow = nullptr;
 		ObjectPtr<gui::Gui> mMonitorGui = nullptr;
 		ObjectPtr<spatial::MonitorController> mMonitorController = nullptr;
+		ObjectPtr<VideoPlayer> mStartupVideoPlayer = nullptr;
+		ObjectPtr<RenderVideoComponentInstance> mStartupVideoComponent = nullptr;
 
 		bool mSecondaryWindowVisible = false;     		// Is the GUI window currently visible?
 		bool mCtrlKeyPressed = false; 				// Indicates wether the ctrl key is pressed
