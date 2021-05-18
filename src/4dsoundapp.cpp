@@ -165,7 +165,6 @@ namespace nap
 		mStartupVideoPlayer = mResourceManager->findObject<VideoPlayer>("StartupVideoPlayer");
 		if (!error.check(mStartupVideoPlayer != nullptr, "mStartupVideoPlayer not found"))
 			return false;
-		mStartupVideoPlayer->play();
 
 		// Apply hard-coded ImGui style to both windows
 		spatial::GuiStyle guiStyle;
@@ -191,9 +190,13 @@ namespace nap
 		// Don't show GUIs while in loading state. Doing so will lock the main thread as the control thread is busy
 		if (mEnvironmentStateMachine->getCurrentState().get() == mEnvironmentStartupState.get())
 		{
+			if (!mStartupVideoPlayer->isPlaying())
+				mStartupVideoPlayer->play();
 			mLoadingGuiWindow->show();
 			return;
 		}
+		else
+			mStartupVideoPlayer->stopPlayback();
 
 		// Show the Gui
 		if (mGuiWindow->mOpen)
