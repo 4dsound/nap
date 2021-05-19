@@ -2440,6 +2440,11 @@
             ]
         },
         {
+            "Type": "nap::SettingsFile",
+            "mID": "SettingsFile",
+            "Path": "settings.json"
+        },
+        {
             "Type": "nap::ShaderFromFile",
             "mID": "AxesHelperShader",
             "VertShader": "shaders/monitor/axeshelper.vert",
@@ -3327,7 +3332,8 @@
             "Port": 8000,
             "BufferScale": 1024,
             "IpSettingName": "oscSenderIp",
-            "PortSettingName": "oscSenderPort"
+            "PortSettingName": "oscSenderPort",
+            "SettingsFile": "SettingsFile"
         },
         {
             "Type": "nap::spatial::HeadphonesSpeakerSetup",
