@@ -15,7 +15,8 @@
     "mod_napimgui",
     "mod_napnativefiledialog",
     "mod_napparameter",
-    "mod_napcameracontrol"
+    "mod_napcameracontrol",
+    "mod_napsettings"
   ],
   "Data": "data/app_structure.json",
   "ServiceConfig": "config.json",
