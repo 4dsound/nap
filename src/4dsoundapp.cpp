@@ -235,10 +235,13 @@ namespace nap
 
 		if (mEnvironmentStateMachine->getCurrentState().get() == mEnvironmentStartupState.get())
 		{
+            
+            // Render the startup video.
 			mRenderService->beginHeadlessRecording();
 			mStartupVideoComponent->draw();
 			mRenderService->endHeadlessRecording();
 
+            // Render the floor wireframe.
 			if (mRenderService->beginRecording(*mWindow))
 			{
 				mWindow->beginRendering();
@@ -249,6 +252,8 @@ namespace nap
 			}
 		}
 		else {
+            
+            // Render the secondary window gui.
 			if (mRenderService->beginRecording(*mSecondaryWindow))
 			{
 				mSecondaryWindow->beginRendering();
@@ -257,6 +262,7 @@ namespace nap
 				mRenderService->endRecording();
 			}
 
+            // Render the primary window monitor and gui.
 			if (mRenderService->beginRecording(*mWindow))
 			{
 				// Begin render pass
