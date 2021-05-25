@@ -72,11 +72,18 @@ namespace nap
 		mWindow = mResourceManager->findObject<nap::RenderWindow>("Window");
         if (!error.check(mWindow != nullptr, "unable to find render window with name: %s", "Window"))
             return false;
+		mWindow->hide(); // Hide on startup
 
 		// Get the detached gui window
 		mSecondaryWindow = mResourceManager->findObject<nap::RenderWindow>("SecondaryWindow");
 		if (!error.check(mSecondaryWindow != nullptr, "unable to find gui window with name: %s", "SecondaryWindow"))
 			return false;
+
+		// Get the startup window
+		mStartupWindow = mResourceManager->findObject<nap::RenderWindow>("StartupWindow");
+		if (!error.check(mStartupWindow != nullptr, "unable to find window with name: %s", "StartupWindow"))
+			return false;
+		mStartupWindow->show(); // Show on startup
 
 		// Get the scene that contains our entities and components
         mScene = mResourceManager->findObject<Scene>("Scene");
@@ -195,8 +202,19 @@ namespace nap
 			mLoadingGuiWindow->show();
 			return;
 		}
-		else
+		else {
 			mStartupVideoPlayer->stopPlayback();
+			if (mStartupWindowVisible)
+			{
+				mStartupWindow->hide();
+				mStartupWindowVisible = false;
+			}
+			if (!mPrimaryWindowVisible)
+			{
+				mWindow->show();
+				mPrimaryWindowVisible = true;
+			}
+		}
 
 		// Show the Gui
 		if (mGuiWindow->mOpen)
@@ -242,12 +260,12 @@ namespace nap
 			mRenderService->endHeadlessRecording();
 
             // Render the floor wireframe.
-			if (mRenderService->beginRecording(*mWindow))
+			if (mRenderService->beginRecording(*mStartupWindow))
 			{
-				mWindow->beginRendering();
+				mStartupWindow->beginRendering();
 				mGuiService->draw();
-				mRenderService->renderObjects(*mWindow, *mCamera, { mFloorWireFrame.get() });
-				mWindow->endRendering();
+				mRenderService->renderObjects(*mStartupWindow, *mCamera, { mFloorWireFrame.get() });
+				mStartupWindow->endRendering();
 				mRenderService->endRecording();
 			}
 		}

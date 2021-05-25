@@ -2384,6 +2384,27 @@
         },
         {
             "Type": "nap::RenderWindow",
+            "mID": "StartupWindow",
+            "Borderless": true,
+            "Resizable": false,
+            "Visible": true,
+            "SampleShading": true,
+            "Title": "",
+            "Width": 512,
+            "Height": 512,
+            "Mode": "Immediate",
+            "ClearColor": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0,
+                "a": 1.0
+            },
+            "Samples": "Four",
+            "AdditionalSwapImages": 1
+        },
+        {
+            "Type": "nap::RenderWindow",
             "mID": "Window",
             "Borderless": false,
             "Resizable": true,
@@ -2723,12 +2744,12 @@
             "Title": "LoadingGuiWindow",
             "Style": "",
             "Position": {
-                "x": 50.0,
-                "y": 50.0
+                "x": 0.0,
+                "y": 0.0
             },
             "Size": {
-                "x": -100.0,
-                "y": -100.0
+                "x": 0.0,
+                "y": 0.0
             },
             "Flags": {
                 "NoTitleBar": true,
@@ -2746,13 +2767,14 @@
             "Alpha": 0.0,
             "Open": true,
             "Border": false,
-            "RenderWindow": "Window",
+            "RenderWindow": "StartupWindow",
             "Content": {
                 "Type": "nap::spatial::StartupGui",
                 "mID": "LoadingGui_9bee8e51",
                 "Title": "",
                 "Style": "",
-                "Image": "StartupVideoTexture"
+                "Image": "StartupVideoTexture",
+                "Text": "Starting engine..."
             }
         },
         {

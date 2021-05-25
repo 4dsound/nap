@@ -123,8 +123,11 @@ namespace nap
 		ObjectPtr<spatial::MonitorController> mMonitorController = nullptr;
 		ObjectPtr<VideoPlayer> mStartupVideoPlayer = nullptr;
 		ObjectPtr<RenderVideoComponentInstance> mStartupVideoComponent = nullptr;
+		ObjectPtr<RenderWindow> mStartupWindow = nullptr;
 
 		bool mSecondaryWindowVisible = false;     		// Is the GUI window currently visible?
+		bool mPrimaryWindowVisible = false;			// Is the main window visible?
+		bool mStartupWindowVisible = true;			// Is the startup window visible?
 		bool mCtrlKeyPressed = false; 				// Indicates wether the ctrl key is pressed
 
 		std::string mFileName = "app_structure.json"; 	// The JSON file that is loaded on initialization
