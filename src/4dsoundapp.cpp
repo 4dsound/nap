@@ -202,19 +202,18 @@ namespace nap
 			mLoadingGuiWindow->show();
 			return;
 		}
-		else {
-			mStartupVideoPlayer->stopPlayback();
-			if (mStartupWindowVisible)
-			{
-				mStartupWindow->hide();
-				mStartupWindowVisible = false;
-			}
-			if (!mPrimaryWindowVisible)
-			{
-				mWindow->show();
-				mPrimaryWindowVisible = true;
-			}
-		}
+        
+        mStartupVideoPlayer->stopPlayback();
+        if (mStartupWindowVisible)
+        {
+            mStartupWindow->hide();
+            mStartupWindowVisible = false;
+        }
+        if (!mPrimaryWindowVisible)
+        {
+            mWindow->show();
+            mPrimaryWindowVisible = true;
+        }
 
 		// Show the Gui
 		if (mGuiWindow->mOpen)
