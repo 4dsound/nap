@@ -2220,13 +2220,6 @@
             "AllowPortReuse": true
         },
         {
-            "Type": "nap::OSCSender",
-            "mID": "OSCSender",
-            "IpAddress": "127.0.0.1",
-            "Port": 8000,
-            "BufferScale": 1024
-        },
-        {
             "Type": "nap::ParameterGroup",
             "mID": "MultiSpeakerMasterParameters",
             "Parameters": [
@@ -2482,6 +2475,11 @@
                     "InstanceProperties": []
                 }
             ]
+        },
+        {
+            "Type": "nap::SettingsFile",
+            "mID": "SettingsFile",
+            "Path": "settings.json"
         },
         {
             "Type": "nap::ShaderFromFile",
@@ -2812,6 +2810,13 @@
                             "Title": "FrameRate",
                             "Style": "",
                             "MonitorController": "MonitorController"
+                        },
+                        {
+                            "Type": "nap::spatial::OSCSenderGui",
+                            "mID": "OSCSenderGui_52ad2274",
+                            "Title": "",
+                            "Style": "",
+                            "OSCSender": "OSCSender"
                         },
                         {
                             "Type": "nap::spatial::InputVUMeters",
@@ -3425,6 +3430,16 @@
         {
             "Type": "nap::spatial::AxesHelperMesh",
             "mID": "AxesHelperMesh"
+        },
+        {
+            "Type": "nap::spatial::ConfigurableOSCSender",
+            "mID": "OSCSender",
+            "IpAddress": "127.0.0.1",
+            "Port": 8000,
+            "BufferScale": 1024,
+            "IpSettingName": "oscSenderIp",
+            "PortSettingName": "oscSenderPort",
+            "SettingsFile": "SettingsFile"
         },
         {
             "Type": "nap::spatial::HeadphonesSpeakerSetup",
