@@ -9,6 +9,8 @@
 #include <audio/utility/audiofunctions.h>
 #include <Gui/GuiFunctions.h>
 #include <imgui/imgui_internal.h>
+#include <imguiutils.h>
+#include <videoplayer.h>
 
 // Spatial includes.
 #include <Spatial/Core/EnvironmentComponent.h>
@@ -70,11 +72,18 @@ namespace nap
 		mWindow = mResourceManager->findObject<nap::RenderWindow>("Window");
         if (!error.check(mWindow != nullptr, "unable to find render window with name: %s", "Window"))
             return false;
+		mWindow->hide(); // Hide on startup
 
 		// Get the detached gui window
 		mSecondaryWindow = mResourceManager->findObject<nap::RenderWindow>("SecondaryWindow");
 		if (!error.check(mSecondaryWindow != nullptr, "unable to find gui window with name: %s", "SecondaryWindow"))
 			return false;
+
+		// Get the startup window
+		mStartupWindow = mResourceManager->findObject<nap::RenderWindow>("StartupWindow");
+		if (!error.check(mStartupWindow != nullptr, "unable to find window with name: %s", "StartupWindow"))
+			return false;
+		mStartupWindow->show(); // Show on startup
 
 		// Get the scene that contains our entities and components
         mScene = mResourceManager->findObject<Scene>("Scene");
@@ -112,15 +121,19 @@ namespace nap
         if (mSideFills == nullptr)
             return false;
 
-
 		// Find text overlay controller
 		mTextOverlayController = findComponentInScene<nap::spatial::TextOverlayControllerInstance>(*mScene, "MonitorTextOverlay", error);
 		if (mTextOverlayController == nullptr)
 			return false;
 
 		// Find the environment
-		mEnvironment = findComponentInScene<spatial::EnvironmentComponentInstance>(*mScene, "global", error);
+		mEnvironment = findComponentInScene<spatial::EnvironmentComponentInstance>(*mScene, "Environment", error);
 		if (mEnvironment == nullptr)
+			return false;
+
+		// Find the startup video component
+		mStartupVideoComponent = findComponentInScene<RenderVideoComponentInstance>(*mScene, "StartupVideo", error);
+		if (mStartupVideoComponent == nullptr)
 			return false;
 
 		// Set the environment script to the command line argument (if any)
@@ -135,12 +148,29 @@ namespace nap
 		if (!error.check(mDetachedGuiWindow != nullptr, "DetachedGuiWindow not found"))
 			return false;
 
+		// Get the loading gui window
+		mLoadingGuiWindow = mResourceManager->findObject<gui::Gui>("LoadingGuiWindow");
+		if (!error.check(mLoadingGuiWindow != nullptr, "unable to find gui window with name: %s", "LoadingGuiWindow"))
+			return false;
+
 		mMonitorGui = mResourceManager->findObject<gui::Gui>("MonitorGui");
 		if (!error.check(mMonitorGui != nullptr, "Monitor Gui not found"))
 			return false;
 
 		mMonitorController = mResourceManager->findObject<spatial::MonitorController>("MonitorController");
 		if (!error.check(mMonitorController != nullptr, "MonitorController not found"))
+			return false;
+
+		mEnvironmentStateMachine = mResourceManager->findObject<StateMachine>("EnvironmentState");
+		if (!error.check(mEnvironmentStateMachine != nullptr, "EnvironmentState not found"))
+			return false;
+
+		mEnvironmentStartupState = mResourceManager->findObject<StateMachine::State>("startupState");
+		if (!error.check(mEnvironmentStateMachine != nullptr, "EnvironmentStateMachine state startupState not found"))
+			return false;
+
+		mStartupVideoPlayer = mResourceManager->findObject<VideoPlayer>("StartupVideoPlayer");
+		if (!error.check(mStartupVideoPlayer != nullptr, "mStartupVideoPlayer not found"))
 			return false;
 
 		// Apply hard-coded ImGui style to both windows
@@ -160,9 +190,30 @@ namespace nap
     // Called when the window is updating
     void SpatialSoundApp::update(double deltaTime)
     {
-        // Use a default input router to forward input events (recursively) to all input components in the default scene
-        nap::DefaultInputRouter input_router(true);
-        mInputService->processWindowEvents(*mWindow, input_router, { &mScene->getRootEntity() });
+		// Use a default input router to forward input events (recursively) to all input components in the default scene
+		nap::DefaultInputRouter input_router(true);
+		mInputService->processWindowEvents(*mWindow, input_router, { &mScene->getRootEntity() });
+
+		// Don't show GUIs while in loading state. Doing so will lock the main thread as the control thread is busy
+		if (mEnvironmentStateMachine->getCurrentState().get() == mEnvironmentStartupState.get())
+		{
+			if (!mStartupVideoPlayer->isPlaying())
+				mStartupVideoPlayer->play();
+			mLoadingGuiWindow->show();
+			return;
+		}
+        
+        mStartupVideoPlayer->stopPlayback();
+        if (mStartupWindowVisible)
+        {
+            mStartupWindow->hide();
+            mStartupWindowVisible = false;
+        }
+        if (!mPrimaryWindowVisible)
+        {
+            mWindow->show();
+            mPrimaryWindowVisible = true;
+        }
 
 		// Show the Gui
 		if (mGuiWindow->mOpen)
@@ -199,43 +250,66 @@ namespace nap
 	{
 		mRenderService->beginFrame();
 
-		if (mRenderService->beginRecording(*mSecondaryWindow))
+		if (mEnvironmentStateMachine->getCurrentState().get() == mEnvironmentStartupState.get())
 		{
-			mSecondaryWindow->beginRendering();
-			mGuiService->draw();
-			mSecondaryWindow->endRendering();
-			mRenderService->endRecording();
-		}
-
-		if (mRenderService->beginRecording(*mWindow))
-		{
-			// Begin render pass
-			mWindow->beginRendering();
-
-			if (mMonitorController->isRenderingEnabled())
-			{
-				std::vector<nap::RenderableComponentInstance*> renderableComponents = {
-                    mFloorWireFrame.get(), mFloor.get(), mAxesHelpers.get(), mSatellites.get(), mSubs.get(), mSideFills.get() };
-				for (auto& entity : mEnvironment->getEntities())
-					getRenderableComponentsRecursive(*entity, renderableComponents);
-
-				// Render the world with the right camera directly to screen
-				mRenderService->renderObjects(*mWindow, *mCamera, renderableComponents);
-
-				// Render the text overlay
-				mTextOverlayController->draw(*mWindow, *mCamera);
-
-			}
             
-            // Render GUI elements
-            mGuiService->draw();
+            // Render the startup video.
+			mRenderService->beginHeadlessRecording();
+			mStartupVideoComponent->draw();
+			mRenderService->endHeadlessRecording();
 
-			// Stop render pass
-			mWindow->endRendering();
-
-			// End recording
-			mRenderService->endRecording();
+            // Render the floor wireframe.
+			if (mRenderService->beginRecording(*mStartupWindow))
+			{
+				mStartupWindow->beginRendering();
+				mGuiService->draw();
+				mRenderService->renderObjects(*mStartupWindow, *mCamera, { mFloorWireFrame.get() });
+				mStartupWindow->endRendering();
+				mRenderService->endRecording();
+			}
 		}
+		else {
+            
+            // Render the secondary window gui.
+			if (mRenderService->beginRecording(*mSecondaryWindow))
+			{
+				mSecondaryWindow->beginRendering();
+				mGuiService->draw();
+				mSecondaryWindow->endRendering();
+				mRenderService->endRecording();
+			}
+
+            // Render the primary window monitor and gui.
+			if (mRenderService->beginRecording(*mWindow))
+			{
+				// Begin render pass
+				mWindow->beginRendering();
+
+				if (mMonitorController->isRenderingEnabled())
+				{
+					std::vector<nap::RenderableComponentInstance*> renderableComponents = { mFloorWireFrame.get(), mFloor.get(), mAxesHelpers.get(), mSatellites.get(), mSubs.get(), mSideFills.get() };
+
+					for (auto& entity : mEnvironment->getEntities())
+						getRenderableComponentsRecursive(*entity, renderableComponents);
+
+					// Render the world with the right camera directly to screen
+					mRenderService->renderObjects(*mWindow, *mCamera, renderableComponents);
+
+					// Render the text overlay
+					mTextOverlayController->draw(*mWindow, *mCamera);
+				}
+
+				// Render GUI elements
+				mGuiService->draw();
+
+				// Stop render pass
+				mWindow->endRendering();
+
+				// End recording
+				mRenderService->endRecording();
+			}
+		}
+
 
 		// Proceed to next frame
 		mRenderService->endFrame();

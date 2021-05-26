@@ -1,0 +1,6 @@
+{
+    "OSCSender": {
+        "oscSenderPort": 8000,
+        "oscSenderIp": "127.0.0.1"
+    }
+}
