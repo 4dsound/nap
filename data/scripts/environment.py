@@ -114,7 +114,7 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
         controlComponent = soundObject.findComponent("nap::spatial::EnvironmentControlComponentInstance")
 
         # set hue
-        controlComponent.setParameterFloat("hue", (len(soundObjects) / float(settings.SOURCES_COUNT + settings.SPACES_COUNT)) * 255)
+        controlComponent.setParameterFloat("hue", 0)
 
         # add effects
         if connect: # space sound objects
