@@ -919,7 +919,8 @@
                 {
                     "Type": "nap::spatial::ExposedDataComponent",
                     "mID": "ExposedDataComponent",
-                    "OscSender": "OSCSender"
+                    "OscSender": "OSCSender",
+                    "SettingsFile": "SettingsFile"
                 },
                 {
                     "Type": "nap::spatial::MixdownOutputComponent",
@@ -1482,7 +1483,8 @@
                 {
                     "Type": "nap::spatial::ExposedDataComponent",
                     "mID": "nap::spatial::ExposedDataComponent_d2fbd3d2",
-                    "OscSender": "OSCSender"
+                    "OscSender": "OSCSender",
+                    "SettingsFile": "SettingsFile"
                 },
                 {
                     "Type": "nap::spatial::MultiSpeakerSetupDataExposer",
@@ -1672,7 +1674,8 @@
                 {
                     "Type": "nap::spatial::ExposedDataComponent",
                     "mID": "binauralExposedDataComponent",
-                    "OscSender": ""
+                    "OscSender": "",
+                    "SettingsFile": ""
                 }
             ],
             "Children": []
@@ -1814,7 +1817,8 @@
                 {
                     "Type": "nap::spatial::ExposedDataComponent",
                     "mID": "groupExposedDataComponent",
-                    "OscSender": ""
+                    "OscSender": "OSCSender",
+                    "SettingsFile": "SettingsFile"
                 },
                 {
                     "Type": "nap::spatial::OSCParameterControlComponent",
@@ -1845,7 +1849,8 @@
                     "mID": "nap::ControlSchedulerComponent_86dc02b4",
                     "Components": [
                         "./shapeTransformationChain",
-                        "./particleTransformationChain"
+                        "./particleTransformationChain",
+                        "./groupExposedDataComponent"
                     ]
                 }
             ],
