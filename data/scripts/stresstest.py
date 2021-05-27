@@ -1,7 +1,7 @@
 import nap
 import math
 
-maxParticleCount = 1024
+maxParticleCount = 128
 
 # define effects outside of the python function scope, so they remain alive (necessary if new effectprocessors are added later).
 granulator = nap.GranulatorEffect()
@@ -104,7 +104,9 @@ def addTestLine(environment, enableEffects, name):
 
 def init(entity):
     print("stresstest environment init")
+    environment.setCurrentState("starting")
     environment = entity.findComponent("nap::spatial::EnvironmentComponentInstance")
     source = addTestLine(environment, True, "source")
     # space = addTestLine(environment, True, "space")
     # space.connectInput(source)
+    environment.setCurrentState("running")
