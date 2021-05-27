@@ -104,8 +104,8 @@ def addTestLine(environment, enableEffects, name):
 
 def init(entity):
     print("stresstest environment init")
-    environment.setCurrentState("starting")
     environment = entity.findComponent("nap::spatial::EnvironmentComponentInstance")
+    environment.setCurrentState("starting")
     source = addTestLine(environment, True, "source")
     # space = addTestLine(environment, True, "space")
     # space.connectInput(source)
