@@ -1494,6 +1494,13 @@
                     "Type": "nap::ParameterComponent",
                     "mID": "nap::ParameterComponent_d472135f",
                     "Name": "speakersetup"
+                },
+                {
+                    "Type": "nap::ControlSchedulerComponent",
+                    "mID": "nap::ControlSchedulerComponent_c39a2fe8",
+                    "Components": [
+                        "./nap::spatial::ExposedDataComponent_d2fbd3d2"
+                    ]
                 }
             ],
             "Children": []
