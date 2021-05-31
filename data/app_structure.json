@@ -3565,7 +3565,9 @@
                     "Title": "Paths",
                     "Value": true
                 }
-            ]
+            ],
+            "SettingsFile": "SettingsFile",
+            "RenderingEnabledSettingName": "RenderingEnabled"
         },
         {
             "Type": "nap::spatial::MultiSpeakerSetup",
