@@ -13,7 +13,7 @@ out vec4 out_Color;
 
 uniform UBO
 {
-	uniform vec3		lightPositions[1];	// World position of the lights
+	uniform vec3		lightPositions[2];	// World position of the lights
 	uniform int			lightCount;			// Number of lights
 	uniform float		lightIntensity;		// Light intensity
 	uniform float		ambientIntensity;	// Ambient light intensity
@@ -41,6 +41,15 @@ void main(void)
 			lightIntensity = 0;
 		}
 	}
+    
+    vec3[2] lightPositions;
+    
+    // convert light positions to object space, so they move together with the sound object
+    // TODO: not sure if this is correct!
+    for(int i = 0; i < ubo.lightCount; i++)
+    {
+        lightPositions[i] = vec3(vec4(ubo.lightPositions[i], 1) * inverse(pass_ModelMatrix));
+    }
 
 	//calculate normal in world coordinates
     mat3 normal_matrix = transpose(inverse(mat3(pass_ModelMatrix)));
@@ -61,7 +70,7 @@ void main(void)
 	for (int i = 0; i < ubo.lightCount; i++)
 	{
 		//calculate the vector from this pixels surface to the light source
-		vec3 surfaceToLight = normalize(ubo.lightPositions[i] - frag_position);
+		vec3 surfaceToLight = normalize(lightPositions[i] - frag_position);
 
 		//diffuse
 		float diffuseCoefficient = max(0.0, dot(normal, surfaceToLight));
@@ -75,7 +84,7 @@ void main(void)
 		vec3 specular = specularCoefficient * specularColor * lightIntensity * ubo.specularIntensity;
 
 		//attenuation based on light distance
-		float distanceToLight = length(ubo.lightPositions[i] - frag_position);
+		float distanceToLight = length(lightPositions[i] - frag_position);
 		float attenuation = 1.0 / (1.0 + ubo.attenuationScale * pow(distanceToLight, 2));
 
 		//linear color (color before gamma correction)

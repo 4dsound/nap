@@ -2025,7 +2025,7 @@
                             "Type": "nap::UniformFloat",
                             "mID": "UniformFloat_47b5876b",
                             "Name": "ambientIntensity",
-                            "Value": 0.30000001192092898
+                            "Value": 0.4000000059604645
                         },
                         {
                             "Type": "nap::UniformFloat",
@@ -2037,7 +2037,7 @@
                             "Type": "nap::UniformFloat",
                             "mID": "UniformFloat_09afcd98",
                             "Name": "specularIntensity",
-                            "Value": 0.699999988079071
+                            "Value": 0.4000000059604645
                         },
                         {
                             "Type": "nap::UniformFloat",
@@ -2051,9 +2051,14 @@
                             "Name": "lightPositions",
                             "Values": [
                                 {
-                                    "x": 0.0,
-                                    "y": 0.0,
-                                    "z": 0.0
+                                    "x": -10.0,
+                                    "y": 10.0,
+                                    "z": -10.0
+                                },
+                                {
+                                    "x": 10.0,
+                                    "y": 10.0,
+                                    "z": 10.0
                                 }
                             ]
                         },
@@ -2061,13 +2066,13 @@
                             "Type": "nap::UniformInt",
                             "mID": "UniformInt_05631af5",
                             "Name": "lightCount",
-                            "Value": 1
+                            "Value": 2
                         },
                         {
                             "Type": "nap::UniformFloat",
                             "mID": "UniformFloat_b0358fed",
                             "Name": "lightIntensity",
-                            "Value": 0.8999999761581421
+                            "Value": 1.0
                         },
                         {
                             "Type": "nap::UniformFloat",
