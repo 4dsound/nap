@@ -3,7 +3,8 @@
         {
             "Type": "nap::IMGuiServiceConfiguration",
             "mID": "nap::IMGuiServiceConfiguration",
-            "FontSize": 17.0,
+            "FontSize": 15.0,
+            "FontFile": "fonts/SuisseIntl-Regular.otf",
             "HighlightColor": {
                 "Values": [
                     200,
