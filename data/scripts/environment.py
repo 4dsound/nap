@@ -51,12 +51,8 @@ spatialPhaser.ParallelDelayCount = 8
 gainScaling = nap.GainScalingEffect()
 gainScaling.Name = "gainScaling"
 
-reverb = nap.ReverbEffect()
+reverb = nap.ReverbEffect47()
 reverb.Name = "reverb"
-reverb.PredelayBufferSize = 32768
-# reverb.LPFType = nap.FilterChainType.LowPass6dB
-# reverb.HPFType = nap.FilterChainType.HighPass6dB
-# Note: enum properties can't be overwritten from python. Fortunately, the default values (6dB filters) are desired here.
 
 distanceIntensity = nap.DistanceIntensityEffect()
 distanceIntensity.Name = "distanceAttenuation"
