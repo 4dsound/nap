@@ -925,7 +925,8 @@
                 {
                     "Type": "nap::spatial::ExposedDataComponent",
                     "mID": "ExposedDataComponent",
-                    "OscSender": "OSCSender"
+                    "OscSender": "OSCSender",
+                    "SettingsFile": "SettingsFile"
                 },
                 {
                     "Type": "nap::spatial::MixdownOutputComponent",
@@ -1488,7 +1489,8 @@
                 {
                     "Type": "nap::spatial::ExposedDataComponent",
                     "mID": "nap::spatial::ExposedDataComponent_d2fbd3d2",
-                    "OscSender": "OSCSender"
+                    "OscSender": "OSCSender",
+                    "SettingsFile": "SettingsFile"
                 },
                 {
                     "Type": "nap::spatial::MultiSpeakerSetupDataExposer",
@@ -1678,7 +1680,8 @@
                 {
                     "Type": "nap::spatial::ExposedDataComponent",
                     "mID": "binauralExposedDataComponent",
-                    "OscSender": ""
+                    "OscSender": "OSCSender",
+                    "SettingsFile": "SettingsFile"
                 }
             ],
             "Children": []
@@ -1820,7 +1823,8 @@
                 {
                     "Type": "nap::spatial::ExposedDataComponent",
                     "mID": "groupExposedDataComponent",
-                    "OscSender": "OSCSender"
+                    "OscSender": "OSCSender",
+                    "SettingsFile": "SettingsFile"
                 },
                 {
                     "Type": "nap::spatial::OSCParameterControlComponent",
@@ -3572,7 +3576,9 @@
                     "Title": "Paths",
                     "Value": true
                 }
-            ]
+            ],
+            "SettingsFile": "SettingsFile",
+            "RenderingEnabledSettingName": "RenderingEnabled"
         },
         {
             "Type": "nap::spatial::MultiSpeakerSetup",
