@@ -763,6 +763,12 @@
                             "Type": "nap::spatial::FibonacciSphereShape",
                             "mID": "FibonacciSphereShape",
                             "Name": "fibonacciSphere"
+                        },
+                        {
+                            "Type": "nap::spatial::SpeakerSetupShape",
+                            "mID": "SpeakerSetupShape_9cf4f774",
+                            "Name": "speakerSetup",
+                            "MultiSpeakerSetup": "multiSetup"
                         }
                     ],
                     "ShapeTransformations": [
@@ -919,8 +925,7 @@
                 {
                     "Type": "nap::spatial::ExposedDataComponent",
                     "mID": "ExposedDataComponent",
-                    "OscSender": "OSCSender",
-                    "SettingsFile": "SettingsFile"
+                    "OscSender": "OSCSender"
                 },
                 {
                     "Type": "nap::spatial::MixdownOutputComponent",
@@ -1483,8 +1488,7 @@
                 {
                     "Type": "nap::spatial::ExposedDataComponent",
                     "mID": "nap::spatial::ExposedDataComponent_d2fbd3d2",
-                    "OscSender": "OSCSender",
-                    "SettingsFile": "SettingsFile"
+                    "OscSender": "OSCSender"
                 },
                 {
                     "Type": "nap::spatial::MultiSpeakerSetupDataExposer",
@@ -1674,8 +1678,7 @@
                 {
                     "Type": "nap::spatial::ExposedDataComponent",
                     "mID": "binauralExposedDataComponent",
-                    "OscSender": "",
-                    "SettingsFile": ""
+                    "OscSender": ""
                 }
             ],
             "Children": []
@@ -1817,8 +1820,7 @@
                 {
                     "Type": "nap::spatial::ExposedDataComponent",
                     "mID": "groupExposedDataComponent",
-                    "OscSender": "OSCSender",
-                    "SettingsFile": "SettingsFile"
+                    "OscSender": "OSCSender"
                 },
                 {
                     "Type": "nap::spatial::OSCParameterControlComponent",
@@ -3570,9 +3572,7 @@
                     "Title": "Paths",
                     "Value": true
                 }
-            ],
-            "SettingsFile": "SettingsFile",
-            "RenderingEnabledSettingName": "RenderingEnabled"
+            ]
         },
         {
             "Type": "nap::spatial::MultiSpeakerSetup",
