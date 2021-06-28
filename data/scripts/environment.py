@@ -51,8 +51,15 @@ spatialPhaser.ParallelDelayCount = 8
 gainScaling = nap.GainScalingEffect()
 gainScaling.Name = "gainScaling"
 
-reverb = nap.ReverbEffect47()
+reverb47 = nap.ReverbEffect47()
+reverb47.Name = "reverb"
+
+reverb = nap.ReverbEffect()
 reverb.Name = "reverb"
+reverb.PredelayBufferSize = 32768
+# reverb.LPFType = nap.FilterChainType.LowPass6dB
+# reverb.HPFType = nap.FilterChainType.HighPass6dB
+# Note: enum properties can't be overwritten from python. Fortunately, the default values (6dB filters) are desired here.
 
 distanceIntensity = nap.DistanceIntensityEffect()
 distanceIntensity.Name = "distanceAttenuation"
@@ -75,12 +82,10 @@ distanceDiffusion.Name = "distanceDiffusion"
 # count (int): the number of sound objects to create
 # connect (bool): whether the newly created sound objects should be connected to all other sound objects
 def createSoundObjects(environment, count, connect, maxParticleCount):
-
     addedSoundObjects = []
 
     # create sources.
     for i in range(count):
-
         # name sources 'source' and spaces 'space'
         if connect:
             prefix = "space"
@@ -95,7 +100,6 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
             uniqueID = settings.SPACES_COUNT + i + 1
 
         name = prefix + str(index)
-
 
         # create sound objects
         properties = nap.EnvironmentInstanceProperties()
@@ -139,8 +143,6 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
             controlComponent.addEffect(elevationFilterDown)
             controlComponent.addEffect(distanceDiffusion)
 
-
-
         # add external input
         controlComponent.addExternalInput()
 
@@ -165,13 +167,45 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
         addedSoundObjects.append(soundObject)
         soundObjectNames.append(name)
 
-
     # connect every added soundobjects to all other soundobjects.
     if connect:
         for i in range(len(addedSoundObjects)):
             for j in range(len(soundObjects)):
                 if addedSoundObjects[i] is not soundObjects[j]:
                     addedSoundObjects[i].findComponent("nap::spatial::EnvironmentControlComponentInstance").connectInput(soundObjects[j].findComponent("nap::spatial::EnvironmentControlComponentInstance"))
+
+
+def createReverbs(environment, count, maxParticleCount):
+    for i in range(count):
+        index = i + 1
+        name = "spatialverb" + str(index)
+        uniqueID = settings.SOURCES_COUNT + settings.SPACES_COUNT + i
+
+        # create reverb sound objects
+        properties = nap.EnvironmentInstanceProperties()
+        properties.addString("nap::ParameterComponent", "Name", name)
+        properties.addInt("nap::spatial::SpatialAudioComponent", "MaxParticleCount", maxParticleCount)
+        properties.addString("nap::spatial::DisplaySettingsComponent", "DisplayName", name)
+        properties.addInt("nap::spatial::DisplaySettingsComponent", "DisplayIndex", index)
+        properties.addInt("nap::spatial::DisplaySettingsComponent", "UniqueId", uniqueID)
+        properties.addInt("nap::spatial::DisplaySettingsComponent", "Category", 3)
+
+        soundObject = environment.createEntity("SoundObject", properties)
+        controlComponent = soundObject.findComponent("nap::spatial::EnvironmentControlComponentInstance")
+
+        # set hue
+        controlComponent.setParameterFloat("hue", 0)
+        controlComponent.setParameterOption("shapeType", "speakerSetup")
+
+        # add effects
+        controlComponent.addInputEffect(inputDistanceIntensity)
+        controlComponent.addInputEffect(inputDistanceDamping)
+        controlComponent.addInputEffect(spatialDelay)
+        controlComponent.addEffect(reverb47)
+
+        for j in range(len(soundObjects)):
+            input = soundObjects[j].findComponent("nap::spatial::EnvironmentControlComponentInstance")
+            controlComponent.connectInput(input)
 
 
 def addFollowAndGroupTransformationsToAllSoundObjects():
@@ -205,6 +239,7 @@ def init(entity):
     environment.setCurrentState("starting")
     createSources(environment, settings.SOURCES_COUNT)
     createSpaces(environment, settings.SPACES_COUNT)
+    createReverbs(environment, settings.REVERB_COUNT, settings.REVERB_MAX_PARTICLE_COUNT)
     createGroups(environment, settings.GROUPS_COUNT)
     addFollowAndGroupTransformationsToAllSoundObjects()
 
