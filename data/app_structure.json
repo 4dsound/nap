@@ -990,9 +990,9 @@
                     "Type": "nap::spatial::ShapeVisualizationController",
                     "mID": "ShapeVisualizationController",
                     "RenderableMeshComponent": "./ShapeVisualization",
+                    "MeshComponent": "./ShapeLineMeshComponent",
                     "SpatialTransformationComponent": "../SpatialTransformationComponent",
                     "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
-                    "ShapeComponent": "../ShapeComponent",
                     "TransformComponent": "./SoundObjectVisualizationTransform",
                     "CameraTransformComponent": "../../camera/CameraTransformComponent",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
@@ -1192,7 +1192,7 @@
                 },
                 {
                     "Type": "nap::spatial::EnabledEffectDisplay",
-                    "mID": "nap::spatial::EnabledEffectDisplay_42004dbb",
+                    "mID": "EnabledEffectDisplay",
                     "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
                     "SpatialAudioComponen": "../SpatialAudioComponent",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
@@ -1347,7 +1347,7 @@
                 },
                 {
                     "Type": "nap::spatial::PathVisualizationController",
-                    "mID": "nap::spatial::PathVisualizationController_e62323de",
+                    "mID": "PathVisualizationController",
                     "RenderableMeshComponent": "./PathVisualization",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
                     "TransformationChainComponent": "../SoundObjectTransformationChainComponent",
@@ -1467,17 +1467,86 @@
                 },
                 {
                     "Type": "nap::ControlSchedulerComponent",
-                    "mID": "nap::ControlSchedulerComponent_b7064ceb",
+                    "mID": "ControlSchedulerComponent",
                     "Components": [
                         "./ShapeVisualizationController",
-                        "./nap::spatial::PathVisualizationController_e62323de",
-                        "./nap::spatial::EnabledEffectDisplay_42004dbb",
+                        "./PathVisualizationController",
+                        "./EnabledEffectDisplay",
                         "./BoxWireframeParticleVisualizationController",
                         "./BoxParticleVisualizationController",
                         "./HaloParticleVisualizationController",
                         "./CloudParticleVisualizationController",
-                        "./PointParticleVisualizationController"
+                        "./PointParticleVisualizationController",
+                        "./ShapeLineMeshComponent",
+                        "./PointCloudShapeVisualizationController",
+                        "./ShapePointCloudComponent"
                     ]
+                },
+                {
+                    "Type": "nap::spatial::ShapeLineMeshComponent",
+                    "mID": "ShapeLineMeshComponent",
+                    "SpatialTransformationComponent": "../SpatialTransformationComponent",
+                    "ShapeComponent": "../ShapeComponent"
+                },
+                {
+                    "Type": "nap::spatial::ShapeVisualizationController",
+                    "mID": "PointCloudShapeVisualizationController",
+                    "RenderableMeshComponent": "./PointCloudShapeVisualization",
+                    "MeshComponent": "./ShapePointCloudComponent",
+                    "SpatialTransformationComponent": "../SpatialTransformationComponent",
+                    "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
+                    "TransformComponent": "./SoundObjectVisualizationTransform",
+                    "CameraTransformComponent": "../../camera/CameraTransformComponent",
+                    "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
+                    "MonitorVisibilityProperty": "",
+                    "MonitorLabelVisibilityProperty": "",
+                    "UBO": "UBO",
+                    "UBOVert": "UBOVert",
+                    "ColorUniform": "color",
+                    "CameraPositionUniform": "",
+                    "DimmedColor": {
+                        "x": 0.20000000298023225,
+                        "y": 0.20000000298023225,
+                        "z": 0.20000000298023225
+                    },
+                    "SelectedColor": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "BlinkFrequency": 1.0,
+                    "ReservedVertexCount": 16,
+                    "ShowTextLabel": false
+                },
+                {
+                    "Type": "nap::RenderableMeshComponent",
+                    "mID": "PointCloudShapeVisualization",
+                    "Visible": true,
+                    "Mesh": "",
+                    "MaterialInstance": {
+                        "Material": "LinesMaterial",
+                        "Uniforms": [],
+                        "Samplers": [],
+                        "BlendMode": "Opaque",
+                        "DepthMode": "ReadWrite"
+                    },
+                    "LineWidth": 1.0,
+                    "ClipRect": {
+                        "Min": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Max": {
+                            "x": 0.0,
+                            "y": 0.0
+                        }
+                    }
+                },
+                {
+                    "Type": "nap::spatial::ShapePointCloudComponent",
+                    "mID": "ShapePointCloudComponent",
+                    "SpatialTransformationComponent": "../SpatialTransformationComponent",
+                    "ShapeComponent": "../ShapeComponent"
                 }
             ],
             "Children": []
@@ -2376,7 +2445,15 @@
             "Width": 1236,
             "Height": 1100,
             "Format": "RGBA8",
-            "ColorSpace": "Linear"
+            "ColorSpace": "Linear",
+            "ClearColor": {
+                "Values": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            }
         },
         {
             "Type": "nap::RenderWindow",
