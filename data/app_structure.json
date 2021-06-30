@@ -1914,25 +1914,25 @@
                             "Type": "nap::UniformFloat",
                             "mID": "UniformFloat_1ec19db8",
                             "Name": "ambientIntensity",
-                            "Value": 0.4000000059604645
+                            "Value": 0.20000000298023225
                         },
                         {
                             "Type": "nap::UniformFloat",
                             "mID": "UniformFloat_beab792a",
                             "Name": "shininess",
-                            "Value": 10.0
+                            "Value": 1.0
                         },
                         {
                             "Type": "nap::UniformFloat",
                             "mID": "UniformFloat_52e7cc9d",
                             "Name": "specularIntensity",
-                            "Value": 0.4000000059604645
+                            "Value": 0.0
                         },
                         {
                             "Type": "nap::UniformFloat",
                             "mID": "UniformFloat_3a90e90c",
                             "Name": "attenuationScale",
-                            "Value": 1.0
+                            "Value": 0.0
                         },
                         {
                             "Type": "nap::UniformVec3Array",
@@ -1961,7 +1961,7 @@
                             "Type": "nap::UniformFloat",
                             "mID": "UniformFloat_a97d71e0",
                             "Name": "lightIntensity",
-                            "Value": 1.0
+                            "Value": 0.20000000298023225
                         }
                     ]
                 },
@@ -2138,7 +2138,7 @@
                             "Type": "nap::UniformFloat",
                             "mID": "UniformFloat_c9d1d3e2",
                             "Name": "attenuationScale",
-                            "Value": 1.0
+                            "Value": 0.0
                         },
                         {
                             "Type": "nap::UniformVec3Array",
@@ -2465,7 +2465,15 @@
             "Width": 1236,
             "Height": 1100,
             "Format": "RGBA8",
-            "ColorSpace": "Linear"
+            "ColorSpace": "Linear",
+            "ClearColor": {
+                "Values": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            }
         },
         {
             "Type": "nap::RenderWindow",
@@ -3551,7 +3559,8 @@
         },
         {
             "Type": "nap::spatial::BoxFrameMesh",
-            "mID": "BoxFrameMesh"
+            "mID": "BoxFrameMesh",
+            "Displacement": 0.25
         },
         {
             "Type": "nap::spatial::ConfigurableOSCSender",
