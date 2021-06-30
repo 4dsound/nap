@@ -763,6 +763,12 @@
                             "Type": "nap::spatial::FibonacciSphereShape",
                             "mID": "FibonacciSphereShape",
                             "Name": "fibonacciSphere"
+                        },
+                        {
+                            "Type": "nap::spatial::SpeakerSetupShape",
+                            "mID": "SpeakerSetupShape_9cf4f774",
+                            "Name": "speakerSetup",
+                            "MultiSpeakerSetup": "multiSetup"
                         }
                     ],
                     "ShapeTransformations": [
@@ -1662,8 +1668,8 @@
                 {
                     "Type": "nap::spatial::ExposedDataComponent",
                     "mID": "binauralExposedDataComponent",
-                    "OscSender": "",
-                    "SettingsFile": ""
+                    "OscSender": "OSCSender",
+                    "SettingsFile": "SettingsFile"
                 }
             ],
             "Children": []
