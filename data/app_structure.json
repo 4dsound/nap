@@ -3592,7 +3592,7 @@
         {
             "Type": "nap::spatial::BoxFrameMesh",
             "mID": "BoxFrameMesh",
-            "Displacement": 0.25
+            "Displacement": 0.5
         },
         {
             "Type": "nap::spatial::ConfigurableOSCSender",

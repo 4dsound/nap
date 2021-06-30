@@ -34,7 +34,7 @@ void main(void)
 	// Calculate position
     float selectedMultiplier = 1.f;
     if(ubovert.selected >= 0.f)
-        selectedMultiplier = 5.f;
+        selectedMultiplier = 2.5f;
     
 	vec3 displacement = in_Displacement * selectedMultiplier * 0.05 / vec3(max(1, ubovert.scale.x), max(1, ubovert.scale.y), max(1, ubovert.scale.z));
     gl_Position = mvp.projectionMatrix * mvp.viewMatrix * mvp.modelMatrix * vec4(in_Position + displacement, 1.0);
