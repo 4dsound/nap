@@ -21,6 +21,9 @@ uniform UBO
 	uniform float		attenuationScale;	// Light Falloff
 	uniform vec3		cameraLocation;		// World Space location of the camera
 	uniform vec3        color;
+    uniform vec3        depthColor;         // Color that particles fade to when disappearing in the back.
+    uniform float       depthThreshold;     // Threshold of fading to grey.
+    uniform float       depthCurvature;     // Power of fading.
 } ubo;
 
 void main(void)
@@ -76,7 +79,13 @@ void main(void)
 		//linear color (color before gamma correction)
 		linearColor = linearColor + attenuation * (diffuse + specular);
 	}
-
+    
+    // depth buffer blend
+    float depthThreshold = 10.;
+    float depthValue = pow(min(1.0, length(cameraPosition - frag_position) / ubo.depthThreshold), ubo.depthCurvature);
+    vec3 finalColor = depthValue * ubo.depthColor + (1. - depthValue) * linearColor;
+    
+    
 	//final color (after gamma correction)
-	out_Color = vec4(linearColor, alpha);
+	out_Color = vec4(finalColor, alpha);
 }

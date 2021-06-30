@@ -1962,6 +1962,28 @@
                             "mID": "UniformFloat_a97d71e0",
                             "Name": "lightIntensity",
                             "Value": 0.20000000298023225
+                        },
+                        {
+                            "Type": "nap::UniformFloat",
+                            "mID": "UniformFloat_95d1bbfd",
+                            "Name": "depthThreshold",
+                            "Value": 40.0
+                        },
+                        {
+                            "Type": "nap::UniformFloat",
+                            "mID": "UniformFloat_efe04c99",
+                            "Name": "depthCurvature",
+                            "Value": 0.75
+                        },
+                        {
+                            "Type": "nap::UniformVec3",
+                            "mID": "UniformVec3_91d6dd51",
+                            "Name": "depthColor",
+                            "Value": {
+                                "x": 0.5,
+                                "y": 0.5,
+                                "z": 0.5
+                            }
                         }
                     ]
                 },
