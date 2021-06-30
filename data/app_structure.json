@@ -1464,7 +1464,8 @@
                         "./BoxParticleVisualizationController",
                         "./HaloParticleVisualizationController",
                         "./CloudParticleVisualizationController",
-                        "./PointParticleVisualizationController"
+                        "./PointParticleVisualizationController",
+                        "./VantagePointVisualizationController"
                     ]
                 },
                 {
@@ -1493,7 +1494,7 @@
                 },
                 {
                     "Type": "nap::spatial::AnchorVisualizationController",
-                    "mID": "VantagepointVisualizationController",
+                    "mID": "VantagePointVisualizationController",
                     "RenderableMeshComponent": "./VantagePointVisualization",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
                     "ExposedDataCompnoent": "../ExposedDataComponent",
