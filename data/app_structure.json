@@ -1079,6 +1079,12 @@
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
+                    "SelectedColor": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "BlinkFrequency": 1.0,
                     "ShowLabels": true,
                     "ControlScales": false,
                     "ControlRotations": true,
@@ -1173,6 +1179,12 @@
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
+                    "SelectedColor": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "BlinkFrequency": 1.0,
                     "ShowLabels": false,
                     "ControlScales": true,
                     "ControlRotations": true,
@@ -1254,6 +1266,12 @@
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
+                    "SelectedColor": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "BlinkFrequency": 1.0,
                     "ShowLabels": false,
                     "ControlScales": false,
                     "ControlRotations": false,
@@ -1316,6 +1334,12 @@
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
+                    "SelectedColor": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "BlinkFrequency": 1.0,
                     "ShowLabels": false,
                     "ControlScales": true,
                     "ControlRotations": true,
@@ -1418,6 +1442,12 @@
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
+                    "SelectedColor": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "BlinkFrequency": 1.0,
                     "ShowLabels": false,
                     "ControlScales": true,
                     "ControlRotations": true,
@@ -1459,6 +1489,22 @@
                             "x": 0.0,
                             "y": 0.0
                         }
+                    }
+                },
+                {
+                    "Type": "nap::spatial::AnchorVisualizationController",
+                    "mID": "VantagepointVisualizationController",
+                    "RenderableMeshComponent": "./VantagePointVisualization",
+                    "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
+                    "ExposedDataCompnoent": "../ExposedDataComponent",
+                    "DataAddress": "vantagePoint",
+                    "MonitorVisibilityProperty": "",
+                    "UBO": "UBO",
+                    "ColorUniform": "color",
+                    "DimmedColor": {
+                        "x": 0.20000000298023225,
+                        "y": 0.20000000298023225,
+                        "z": 0.20000000298023225
                     }
                 }
             ],
@@ -2459,7 +2505,15 @@
             "Width": 1236,
             "Height": 1100,
             "Format": "RGBA8",
-            "ColorSpace": "Linear"
+            "ColorSpace": "Linear",
+            "ClearColor": {
+                "Values": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            }
         },
         {
             "Type": "nap::RenderWindow",
@@ -3540,6 +3594,10 @@
             ]
         },
         {
+            "Type": "nap::spatial::AnchorMesh",
+            "mID": "AnchorMesh"
+        },
+        {
             "Type": "nap::spatial::AxesHelperMesh",
             "mID": "AxesHelperMesh"
         },
@@ -3708,10 +3766,6 @@
         {
             "Type": "nap::spatial::OSCLogger",
             "mID": "OSCLogger"
-        },
-        {
-            "Type": "nap::spatial::AnchorMesh",
-            "mID": "AnchorMesh"
         },
         {
             "Type": "nap::turboactivate::Licensing",
