@@ -1079,12 +1079,6 @@
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
-                    "SelectedColor": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0
-                    },
-                    "BlinkFrequency": 1.0,
                     "ShowLabels": true,
                     "ControlScales": false,
                     "ControlRotations": true,
@@ -1179,12 +1173,6 @@
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
-                    "SelectedColor": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0
-                    },
-                    "BlinkFrequency": 1.0,
                     "ShowLabels": false,
                     "ControlScales": true,
                     "ControlRotations": true,
@@ -1266,12 +1254,6 @@
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
-                    "SelectedColor": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0
-                    },
-                    "BlinkFrequency": 1.0,
                     "ShowLabels": false,
                     "ControlScales": false,
                     "ControlRotations": false,
@@ -1334,12 +1316,6 @@
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
-                    "SelectedColor": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0
-                    },
-                    "BlinkFrequency": 1.0,
                     "ShowLabels": false,
                     "ControlScales": true,
                     "ControlRotations": true,
@@ -1442,12 +1418,6 @@
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
-                    "SelectedColor": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0
-                    },
-                    "BlinkFrequency": 1.0,
                     "ShowLabels": false,
                     "ControlScales": true,
                     "ControlRotations": true,
@@ -1466,6 +1436,30 @@
                         "./CloudParticleVisualizationController",
                         "./PointParticleVisualizationController"
                     ]
+                },
+                {
+                    "Type": "nap::RenderableMeshComponent",
+                    "mID": "VantagePointVisualization",
+                    "Visible": true,
+                    "Mesh": "AnchorMesh",
+                    "MaterialInstance": {
+                        "Material": "LinesMaterial",
+                        "Uniforms": [],
+                        "Samplers": [],
+                        "BlendMode": "Opaque",
+                        "DepthMode": "ReadWrite"
+                    },
+                    "LineWidth": 1.0,
+                    "ClipRect": {
+                        "Min": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Max": {
+                            "x": 0.0,
+                            "y": 0.0
+                        }
+                    }
                 }
             ],
             "Children": []
@@ -3714,6 +3708,10 @@
         {
             "Type": "nap::spatial::OSCLogger",
             "mID": "OSCLogger"
+        },
+        {
+            "Type": "nap::spatial::AnchorMesh",
+            "mID": "AnchorMesh"
         },
         {
             "Type": "nap::turboactivate::Licensing",
