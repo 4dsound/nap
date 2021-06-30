@@ -10,7 +10,7 @@ out vec4 out_Color;
 
 void main()
 {
-    out_Color = vec4(ubo.color, 0);
-//    float distanceToCenter = distance(pass_UV0, vec3(0.5, 0.5, 0));
-//    out_Color = vec4(ubo.color, pow(max(0, (1 - distanceToCenter * 2)), 2) * 2);
+//    out_Color = vec4(ubo.color, 0);
+    float distanceToCenter = distance(pass_UV0, vec3(0.5, 0.5, 0));
+    out_Color = vec4(ubo.color, 0.2 - distanceToCenter * 0.7);
 }

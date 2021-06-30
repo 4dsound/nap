@@ -22,5 +22,5 @@ out vec3 pass_UV0;
 void main(void)
 {
     pass_UV0 = in_UV0;
-    gl_Position = mvp.projectionMatrix * mvp.viewMatrix * mvp.modelMatrix * vec4(in_Position + in_RelativePosition * 0.1, 1.0);
+    gl_Position = mvp.projectionMatrix * mvp.viewMatrix * mvp.modelMatrix * vec4(in_Position, 1.0) + vec4(in_RelativePosition * 5, 0);
 }

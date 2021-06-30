@@ -1479,7 +1479,9 @@
                         "./PointParticleVisualizationController",
                         "./ShapeLineMeshComponent",
                         "./PointCloudShapeVisualizationController",
-                        "./ShapePointCloudComponent"
+                        "./ShapePointCloudComponent",
+                        "./PlaneCloudShapeVisualizationController",
+                        "./ShapePlaneCloudComponent"
                     ]
                 },
                 {
@@ -1559,8 +1561,8 @@
                         "Material": "PlaneCloudMaterial",
                         "Uniforms": [],
                         "Samplers": [],
-                        "BlendMode": "Opaque",
-                        "DepthMode": "ReadWrite"
+                        "BlendMode": "AlphaBlend",
+                        "DepthMode": "ReadOnly"
                     },
                     "LineWidth": 1.0,
                     "ClipRect": {
