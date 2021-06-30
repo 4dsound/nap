@@ -1474,7 +1474,7 @@
                     "Visible": true,
                     "Mesh": "AnchorMesh",
                     "MaterialInstance": {
-                        "Material": "LinesMaterial",
+                        "Material": "AnchorMaterial",
                         "Uniforms": [],
                         "Samplers": [],
                         "BlendMode": "Opaque",
@@ -1922,6 +1922,16 @@
             "Usage": "Static",
             "ImagePath": "img/watermark.png",
             "GenerateLods": true
+        },
+        {
+            "Type": "nap::Material",
+            "mID": "AnchorMaterial",
+            "Uniforms": [],
+            "Samplers": [],
+            "Shader": "AnchorShader",
+            "VertexAttributeBindings": [],
+            "BlendMode": "Opaque",
+            "DepthMode": "InheritFromBlendMode"
         },
         {
             "Type": "nap::Material",
@@ -2641,6 +2651,12 @@
             "Type": "nap::SettingsFile",
             "mID": "SettingsFile",
             "Path": "settings.json"
+        },
+        {
+            "Type": "nap::ShaderFromFile",
+            "mID": "AnchorShader",
+            "VertShader": "shaders/monitor/anchor.vert",
+            "FragShader": "shaders/monitor/anchor.frag"
         },
         {
             "Type": "nap::ShaderFromFile",
