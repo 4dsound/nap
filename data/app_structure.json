@@ -1073,6 +1073,7 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "",
                     "LevelUniform": "",
+                    "SelectedUniform": "",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
@@ -1173,6 +1174,7 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "scale",
                     "LevelUniform": "",
+                    "SelectedUniform": "",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
@@ -1260,6 +1262,7 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "",
                     "LevelUniform": "level",
+                    "SelectedUniform": "",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
@@ -1328,6 +1331,7 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "",
                     "LevelUniform": "",
+                    "SelectedUniform": "",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
@@ -1436,6 +1440,7 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "scale",
                     "LevelUniform": "",
+                    "SelectedUniform": "selected",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
