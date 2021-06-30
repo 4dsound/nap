@@ -1919,7 +1919,7 @@
                             "Type": "nap::UniformFloat",
                             "mID": "UniformFloat_1ec19db8",
                             "Name": "ambientIntensity",
-                            "Value": 0.20000000298023225
+                            "Value": 0.30000001192092898
                         },
                         {
                             "Type": "nap::UniformFloat",
@@ -1953,6 +1953,11 @@
                                     "x": 10.0,
                                     "y": 10.0,
                                     "z": 10.0
+                                },
+                                {
+                                    "x": 0.0,
+                                    "y": -5.0,
+                                    "z": 0.0
                                 }
                             ]
                         },
@@ -1960,7 +1965,7 @@
                             "Type": "nap::UniformInt",
                             "mID": "UniformInt_c7b4bda7",
                             "Name": "lightCount",
-                            "Value": 2
+                            "Value": 3
                         },
                         {
                             "Type": "nap::UniformFloat",
@@ -2227,7 +2232,7 @@
                     "ShaderAttributeID": "in_UVs"
                 }
             ],
-            "BlendMode": "NotSet",
+            "BlendMode": "Opaque",
             "DepthMode": "InheritFromBlendMode"
         },
         {
