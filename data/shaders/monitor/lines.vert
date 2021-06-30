@@ -6,11 +6,16 @@ uniform nap
     uniform mat4 modelMatrix;
 } mvp;
 
+uniform UBOVert
+{
+    uniform vec3 positionOffset;
+} ubovert;
+
 in vec3 in_Position;
 out vec3 pass_Position;
 
 void main(void)
 {
-    pass_Position = in_Position;
+    pass_Position = in_Position + ubovert.positionOffset;
     gl_Position = mvp.projectionMatrix * mvp.viewMatrix * mvp.modelMatrix * vec4(in_Position, 1.0);
 }
