@@ -1498,7 +1498,7 @@
                     "TransformComponent": "./SoundObjectVisualizationTransform",
                     "CameraTransformComponent": "../../camera/CameraTransformComponent",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
-                    "MonitorVisibilityProperty": "",
+                    "MonitorVisibilityProperty": "shapePointCloud",
                     "MonitorLabelVisibilityProperty": "",
                     "UBO": "UBO",
                     "UBOVert": "UBOVert",
@@ -1543,10 +1543,74 @@
                     }
                 },
                 {
-                    "Type": "nap::spatial::ShapePointCloudComponent",
+                    "Type": "nap::spatial::ShapeCloudComponent",
                     "mID": "ShapePointCloudComponent",
                     "SpatialTransformationComponent": "../SpatialTransformationComponent",
-                    "ShapeComponent": "../ShapeComponent"
+                    "ShapeComponent": "../ShapeComponent",
+                    "ParticleType": "Points",
+                    "MaxParticleCount": 10000
+                },
+                {
+                    "Type": "nap::RenderableMeshComponent",
+                    "mID": "PlaneCloudShapeVisualization",
+                    "Visible": true,
+                    "Mesh": "",
+                    "MaterialInstance": {
+                        "Material": "PlaneCloudMaterial",
+                        "Uniforms": [],
+                        "Samplers": [],
+                        "BlendMode": "Opaque",
+                        "DepthMode": "ReadWrite"
+                    },
+                    "LineWidth": 1.0,
+                    "ClipRect": {
+                        "Min": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Max": {
+                            "x": 0.0,
+                            "y": 0.0
+                        }
+                    }
+                },
+                {
+                    "Type": "nap::spatial::ShapeVisualizationController",
+                    "mID": "PlaneCloudShapeVisualizationController",
+                    "RenderableMeshComponent": "./PlaneCloudShapeVisualization",
+                    "MeshComponent": "./ShapePlaneCloudComponent",
+                    "SpatialTransformationComponent": "../SpatialTransformationComponent",
+                    "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
+                    "TransformComponent": "./SoundObjectVisualizationTransform",
+                    "CameraTransformComponent": "../../camera/CameraTransformComponent",
+                    "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
+                    "MonitorVisibilityProperty": "shapePlaneCloud",
+                    "MonitorLabelVisibilityProperty": "",
+                    "UBO": "UBO",
+                    "UBOVert": "UBOVert",
+                    "ColorUniform": "color",
+                    "CameraPositionUniform": "cameraPosition",
+                    "DimmedColor": {
+                        "x": 0.20000000298023225,
+                        "y": 0.20000000298023225,
+                        "z": 0.20000000298023225
+                    },
+                    "SelectedColor": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "BlinkFrequency": 1.0,
+                    "ReservedVertexCount": 16,
+                    "ShowTextLabel": false
+                },
+                {
+                    "Type": "nap::spatial::ShapeCloudComponent",
+                    "mID": "ShapePlaneCloudComponent",
+                    "SpatialTransformationComponent": "../SpatialTransformationComponent",
+                    "ShapeComponent": "../ShapeComponent",
+                    "ParticleType": "Planes",
+                    "MaxParticleCount": 10000
                 }
             ],
             "Children": []
@@ -2195,6 +2259,64 @@
         },
         {
             "Type": "nap::Material",
+            "mID": "PlaneCloudMaterial",
+            "Uniforms": [
+                {
+                    "Type": "nap::UniformStruct",
+                    "mID": "UniformStruct_df2508cd",
+                    "Name": "UBO",
+                    "Uniforms": [
+                        {
+                            "Type": "nap::UniformVec3",
+                            "mID": "UniformVec3_4eb5bc75",
+                            "Name": "color",
+                            "Value": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        }
+                    ]
+                },
+                {
+                    "Type": "nap::UniformStruct",
+                    "mID": "UniformStruct_8365f9bb",
+                    "Name": "UBOVert",
+                    "Uniforms": [
+                        {
+                            "Type": "nap::UniformVec3",
+                            "mID": "UniformVec3_1b7c2e28",
+                            "Name": "cameraPosition",
+                            "Value": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        }
+                    ]
+                }
+            ],
+            "Samplers": [],
+            "Shader": "PlaneCloudShader",
+            "VertexAttributeBindings": [
+                {
+                    "MeshAttributeID": "Position",
+                    "ShaderAttributeID": "in_Position"
+                },
+                {
+                    "MeshAttributeID": "RelativePosition",
+                    "ShaderAttributeID": "in_RelativePosition"
+                },
+                {
+                    "MeshAttributeID": "UV0",
+                    "ShaderAttributeID": "in_UV0"
+                }
+            ],
+            "BlendMode": "Opaque",
+            "DepthMode": "InheritFromBlendMode"
+        },
+        {
+            "Type": "nap::Material",
             "mID": "PointCloudMaterial",
             "Uniforms": [
                 {
@@ -2616,6 +2738,12 @@
             "mID": "LinesShader",
             "VertShader": "shaders/monitor/lines.vert",
             "FragShader": "shaders/monitor/lines.frag"
+        },
+        {
+            "Type": "nap::ShaderFromFile",
+            "mID": "PlaneCloudShader",
+            "VertShader": "shaders/monitor/planecloud.vert",
+            "FragShader": "shaders/monitor/planecloud.frag"
         },
         {
             "Type": "nap::ShaderFromFile",
@@ -3652,6 +3780,18 @@
                     "mID": "paths",
                     "Title": "Paths",
                     "Value": true
+                },
+                {
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "shapePointCloud",
+                    "Title": "S. Cloud Lite",
+                    "Value": false
+                },
+                {
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "shapePlaneCloud",
+                    "Title": "S. Cloud",
+                    "Value": false
                 }
             ],
             "SettingsFile": "SettingsFile",
