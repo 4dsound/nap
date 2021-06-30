@@ -7,6 +7,7 @@
 in vec3 pass_Normals;		// Normals
 in mat4 pass_ModelMatrix;	// Matrix
 in vec3 pass_Vert;			// The vertex position
+in float pass_BypassDepth;  // True when particle is selected
 
 out vec4 out_Color;
 
@@ -82,7 +83,9 @@ void main(void)
     
     // depth buffer blend
     float depthThreshold = 10.;
-    float depthValue = pow(min(1.0, length(cameraPosition - frag_position) / ubo.depthThreshold), ubo.depthCurvature);
+    float depthValue = 0.f;
+    if(pass_BypassDepth < 0.f)
+        depthValue = pow(min(1.0, length(cameraPosition - frag_position) / ubo.depthThreshold), ubo.depthCurvature);
     vec3 finalColor = depthValue * ubo.depthColor + (1. - depthValue) * linearColor;
     
     

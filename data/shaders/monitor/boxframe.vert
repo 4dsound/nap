@@ -27,6 +27,7 @@ in vec3 in_Displacement;	// Vertex displacement
 out mat4 pass_ModelMatrix;
 out vec3 pass_Vert;
 out vec3 pass_Normals;
+out float pass_BypassDepth;
 
 void main(void)
 {
@@ -41,4 +42,5 @@ void main(void)
 	pass_Vert = in_Position + in_Displacement * 0.1;
 	pass_ModelMatrix = mvp.modelMatrix;
 	pass_Normals = in_Normal;
+    pass_BypassDepth = ubovert.selected;
 }
