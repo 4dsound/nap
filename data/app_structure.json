@@ -1497,16 +1497,21 @@
                     "mID": "VantagePointVisualizationController",
                     "RenderableMeshComponent": "./VantagePointVisualization",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
-                    "ExposedDataCompnoent": "../ExposedDataComponent",
+                    "ExposedDataComponent": "../ExposedDataComponent",
+                    "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
+                    "LabelText": "Vantage Point",
                     "DataAddress": "vantagePoint",
                     "MonitorVisibilityProperty": "",
                     "UBO": "UBO",
                     "ColorUniform": "color",
+                    "UBOVert": "UBOVert",
+                    "PositionOffsetUniform": "positionOffset",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
-                    }
+                    },
+                    "VisibilityTime": 5.0
                 }
             ],
             "Children": []
