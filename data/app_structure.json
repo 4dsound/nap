@@ -1948,7 +1948,7 @@
                             "Type": "nap::UniformFloat",
                             "mID": "UniformFloat_95d1bbfd",
                             "Name": "depthThreshold",
-                            "Value": 60.0
+                            "Value": 30.0
                         },
                         {
                             "Type": "nap::UniformFloat",
