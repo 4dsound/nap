@@ -1074,18 +1074,13 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "",
                     "LevelUniform": "",
+                    "SelectedUniform": "",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
-                    "SelectedColor": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0
-                    },
-                    "BlinkFrequency": 1.0,
                     "ShowLabels": true,
                     "ControlScales": false,
                     "ControlRotations": true,
@@ -1174,18 +1169,13 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "scale",
                     "LevelUniform": "",
+                    "SelectedUniform": "",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
-                    "SelectedColor": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0
-                    },
-                    "BlinkFrequency": 1.0,
                     "ShowLabels": false,
                     "ControlScales": true,
                     "ControlRotations": true,
@@ -1261,18 +1251,13 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "",
                     "LevelUniform": "level",
+                    "SelectedUniform": "",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
-                    "SelectedColor": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0
-                    },
-                    "BlinkFrequency": 1.0,
                     "ShowLabels": false,
                     "ControlScales": false,
                     "ControlRotations": false,
@@ -1329,18 +1314,13 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "",
                     "LevelUniform": "",
+                    "SelectedUniform": "",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
-                    "SelectedColor": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0
-                    },
-                    "BlinkFrequency": 1.0,
                     "ShowLabels": false,
                     "ControlScales": true,
                     "ControlRotations": true,
@@ -1437,18 +1417,13 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "scale",
                     "LevelUniform": "",
+                    "SelectedUniform": "selected",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
-                    "SelectedColor": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0
-                    },
-                    "BlinkFrequency": 1.0,
                     "ShowLabels": false,
                     "ControlScales": true,
                     "ControlRotations": true,
@@ -1973,7 +1948,7 @@
                             "Type": "nap::UniformFloat",
                             "mID": "UniformFloat_95d1bbfd",
                             "Name": "depthThreshold",
-                            "Value": 40.0
+                            "Value": 60.0
                         },
                         {
                             "Type": "nap::UniformFloat",
@@ -3587,7 +3562,8 @@
         },
         {
             "Type": "nap::spatial::BoxFrameMesh",
-            "mID": "BoxFrameMesh"
+            "mID": "BoxFrameMesh",
+            "Displacement": 1.0
         },
         {
             "Type": "nap::spatial::ConfigurableOSCSender",
