@@ -768,7 +768,8 @@
                             "Type": "nap::spatial::SpeakerSetupShape",
                             "mID": "SpeakerSetupShape_9cf4f774",
                             "Name": "speakerSetup",
-                            "MultiSpeakerSetup": "multiSetup"
+                            "MultiSpeakerSetup": "multiSetup",
+                            "GridIndex": 1
                         }
                     ],
                     "ShapeTransformations": [
@@ -1073,7 +1074,6 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "",
                     "LevelUniform": "",
-                    "SelectedUniform": "",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
@@ -1174,7 +1174,6 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "scale",
                     "LevelUniform": "",
-                    "SelectedUniform": "",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
@@ -1262,7 +1261,6 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "",
                     "LevelUniform": "level",
-                    "SelectedUniform": "",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
@@ -1331,7 +1329,6 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "",
                     "LevelUniform": "",
-                    "SelectedUniform": "",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
@@ -1440,7 +1437,6 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "scale",
                     "LevelUniform": "",
-                    "SelectedUniform": "selected",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
@@ -3591,8 +3587,7 @@
         },
         {
             "Type": "nap::spatial::BoxFrameMesh",
-            "mID": "BoxFrameMesh",
-            "Displacement": 0.5
+            "mID": "BoxFrameMesh"
         },
         {
             "Type": "nap::spatial::ConfigurableOSCSender",
@@ -3660,7 +3655,7 @@
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "particleBoxes",
                     "Title": "P. Boxes",
-                    "Value": true
+                    "Value": false
                 },
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
@@ -3672,7 +3667,7 @@
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "particleFrames",
                     "Title": "P. Frames",
-                    "Value": false
+                    "Value": true
                 },
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
