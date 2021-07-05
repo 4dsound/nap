@@ -8,7 +8,7 @@ SOURCES_COUNT = 4
 SPACES_COUNT = 4
 
 # Number of sound objects with spatial delay and reverb47 mapped to speaker
-REVERB_COUNT = 1
+REVERB_COUNT = 0
 
 # Set the maximum particle count for one source sound object.
 SOURCES_MAX_PARTICLE_COUNT = 128

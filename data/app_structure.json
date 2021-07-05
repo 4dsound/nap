@@ -1391,25 +1391,13 @@
                     "Visible": true,
                     "CameraTransformComponent": "../../camera/CameraTransformComponent",
                     "MaterialInstance": {
-                        "Material": "LightingMaterial",
+                        "Material": "BoxFrameMaterial",
                         "Uniforms": [
                             {
                                 "Type": "nap::UniformStruct",
                                 "mID": "UniformStruct_865f772d",
                                 "Name": "UBO",
                                 "Uniforms": [
-                                    {
-                                        "Type": "nap::UniformInt",
-                                        "mID": "UniformInt_25748219",
-                                        "Name": "wireframe",
-                                        "Value": 1
-                                    },
-                                    {
-                                        "Type": "nap::UniformFloat",
-                                        "mID": "UniformFloat_a3466d11",
-                                        "Name": "lineWidth",
-                                        "Value": 0.019999999552965165
-                                    },
                                     {
                                         "Type": "nap::UniformFloat",
                                         "mID": "UniformFloat_9a13dbaf",
@@ -1420,10 +1408,10 @@
                             }
                         ],
                         "Samplers": [],
-                        "BlendMode": "AlphaBlend",
-                        "DepthMode": "WriteOnly"
+                        "BlendMode": "Opaque",
+                        "DepthMode": "ReadWrite"
                     },
-                    "Mesh": "BoxMesh",
+                    "Mesh": "BoxFrameMesh",
                     "UBO": "UBO",
                     "UBOVert": "UBOVert",
                     "TranformComponent": "./SoundObjectVisualizationTransform",
@@ -1446,7 +1434,7 @@
                     "MonitorVisibilityProperty": "particleFrames",
                     "MonitorLabelVisibilityProperty": "",
                     "ColorUniform": "color",
-                    "ScaleUniform": "",
+                    "ScaleUniform": "scale",
                     "LevelUniform": "",
                     "TimeUniform": "",
                     "DimmedColor": {
@@ -2050,6 +2038,107 @@
         },
         {
             "Type": "nap::Material",
+            "mID": "BoxFrameMaterial",
+            "Uniforms": [
+                {
+                    "Type": "nap::UniformStruct",
+                    "mID": "UniformStruct_86ecb238",
+                    "Name": "UBO",
+                    "Uniforms": [
+                        {
+                            "Type": "nap::UniformFloat",
+                            "mID": "UniformFloat_1ec19db8",
+                            "Name": "ambientIntensity",
+                            "Value": 0.4000000059604645
+                        },
+                        {
+                            "Type": "nap::UniformFloat",
+                            "mID": "UniformFloat_beab792a",
+                            "Name": "shininess",
+                            "Value": 10.0
+                        },
+                        {
+                            "Type": "nap::UniformFloat",
+                            "mID": "UniformFloat_52e7cc9d",
+                            "Name": "specularIntensity",
+                            "Value": 0.4000000059604645
+                        },
+                        {
+                            "Type": "nap::UniformFloat",
+                            "mID": "UniformFloat_3a90e90c",
+                            "Name": "attenuationScale",
+                            "Value": 1.0
+                        },
+                        {
+                            "Type": "nap::UniformVec3Array",
+                            "mID": "UniformVec3Array_ed95ba94",
+                            "Name": "lightPositions",
+                            "Values": [
+                                {
+                                    "x": -10.0,
+                                    "y": 10.0,
+                                    "z": -10.0
+                                },
+                                {
+                                    "x": 10.0,
+                                    "y": 10.0,
+                                    "z": 10.0
+                                }
+                            ]
+                        },
+                        {
+                            "Type": "nap::UniformInt",
+                            "mID": "UniformInt_c7b4bda7",
+                            "Name": "lightCount",
+                            "Value": 2
+                        },
+                        {
+                            "Type": "nap::UniformFloat",
+                            "mID": "UniformFloat_a97d71e0",
+                            "Name": "lightIntensity",
+                            "Value": 1.0
+                        }
+                    ]
+                },
+                {
+                    "Type": "nap::UniformStruct",
+                    "mID": "UniformStruct_8efcc523",
+                    "Name": "UBOVert",
+                    "Uniforms": [
+                        {
+                            "Type": "nap::UniformVec3",
+                            "mID": "UniformVec3_89a2d591",
+                            "Name": "scale",
+                            "Value": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            }
+                        }
+                    ]
+                }
+            ],
+            "Samplers": [],
+            "Shader": "BoxFrameShader",
+            "VertexAttributeBindings": [
+                {
+                    "MeshAttributeID": "Position",
+                    "ShaderAttributeID": "in_Position"
+                },
+                {
+                    "MeshAttributeID": "Normal",
+                    "ShaderAttributeID": "in_Normal"
+                },
+                {
+                    "MeshAttributeID": "Displacement",
+                    "ShaderAttributeID": "in_Displacement"
+                }
+            ],
+            "BlendMode": "Opaque",
+            "DepthMode": "InheritFromBlendMode"
+        },
+        {
+            "Type": "nap::Material",
             "mID": "ConstantMaterial",
             "Uniforms": [
                 {
@@ -2184,7 +2273,7 @@
                             "Type": "nap::UniformFloat",
                             "mID": "UniformFloat_c9d1d3e2",
                             "Name": "attenuationScale",
-                            "Value": 0.000010000000656873454
+                            "Value": 1.0
                         },
                         {
                             "Type": "nap::UniformVec3Array",
@@ -2710,6 +2799,12 @@
             "mID": "AxesHelperShader",
             "VertShader": "shaders/monitor/axeshelper.vert",
             "FragShader": "shaders/monitor/axeshelper.frag"
+        },
+        {
+            "Type": "nap::ShaderFromFile",
+            "mID": "BoxFrameShader",
+            "VertShader": "shaders/monitor/boxframe.vert",
+            "FragShader": "shaders/monitor/boxframe.frag"
         },
         {
             "Type": "nap::ShaderFromFile",
@@ -3660,6 +3755,10 @@
         {
             "Type": "nap::spatial::AxesHelperMesh",
             "mID": "AxesHelperMesh"
+        },
+        {
+            "Type": "nap::spatial::BoxFrameMesh",
+            "mID": "BoxFrameMesh"
         },
         {
             "Type": "nap::spatial::ConfigurableOSCSender",
