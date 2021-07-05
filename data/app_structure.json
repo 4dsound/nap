@@ -1544,7 +1544,7 @@
                     "ShapeComponent": "../ShapeComponent",
                     "ParticleType": "Points",
                     "MaxParticleCount": 10000,
-                    "ParticleDensity": 1.0
+                    "ParticleDensity": 50.0
                 },
                 {
                     "Type": "nap::RenderableMeshComponent",
