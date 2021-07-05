@@ -12,5 +12,8 @@ void main()
 {
 //    out_Color = vec4(ubo.color, 0);
 //    float distanceToCenter = distance(pass_UV0, vec3(0.5, 0.5, 0));
-    out_Color = vec4(ubo.color, 1);
+    float alpha = 1;
+//    if (distanceToCenter > 0.5)
+//        alpha = 0;
+    out_Color = vec4(ubo.color, alpha);
 }

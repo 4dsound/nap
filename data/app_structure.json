@@ -1609,7 +1609,7 @@
                     "ShapeComponent": "../ShapeComponent",
                     "ParticleType": "Planes",
                     "MaxParticleCount": 50000,
-                    "ParticleDensity": 2.0
+                    "ParticleDensity": 100.0
                 }
             ],
             "Children": []
