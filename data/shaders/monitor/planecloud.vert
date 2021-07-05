@@ -10,6 +10,7 @@ uniform nap
 uniform UBOVert
 {
     uniform vec3 cameraPosition;
+    uniform vec2 renderTargetSize;
 } ubovert;
 
 
@@ -23,5 +24,7 @@ void main(void)
 {
     pass_UV0 = in_UV0;
     float distanceToCamera = distance(ubovert.cameraPosition, in_Position);
-    gl_Position = mvp.projectionMatrix * mvp.viewMatrix * mvp.modelMatrix * vec4(in_Position, 1.0) + vec4(in_RelativePosition * 3, 0);
+    float aspectRatio = ubovert.renderTargetSize.y / ubovert.renderTargetSize.x;
+    vec3 size = vec3(in_RelativePosition.x * aspectRatio, in_RelativePosition.y, 0) * 0.1;
+    gl_Position = mvp.projectionMatrix * mvp.viewMatrix * mvp.modelMatrix * vec4(in_Position, 1.0) + vec4(size, 0);
 }

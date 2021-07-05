@@ -768,7 +768,8 @@
                             "Type": "nap::spatial::SpeakerSetupShape",
                             "mID": "SpeakerSetupShape_9cf4f774",
                             "Name": "speakerSetup",
-                            "MultiSpeakerSetup": "multiSetup"
+                            "MultiSpeakerSetup": "multiSetup",
+                            "GridIndex": 1
                         }
                     ],
                     "ShapeTransformations": [
@@ -998,10 +999,12 @@
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
                     "MonitorVisibilityProperty": "soundObjectShapes",
                     "MonitorLabelVisibilityProperty": "soundObjectNames",
+                    "Rendertarget": "",
                     "UBO": "UBO",
                     "UBOVert": "UBOVert",
                     "ColorUniform": "color",
                     "CameraPositionUniform": "cameraPosition",
+                    "RenderTargetSizeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
@@ -1490,10 +1493,12 @@
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
                     "MonitorVisibilityProperty": "shapePointCloud",
                     "MonitorLabelVisibilityProperty": "",
+                    "Rendertarget": "",
                     "UBO": "UBO",
                     "UBOVert": "UBOVert",
                     "ColorUniform": "color",
                     "CameraPositionUniform": "",
+                    "RenderTargetSizeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
@@ -1538,7 +1543,8 @@
                     "SpatialTransformationComponent": "../SpatialTransformationComponent",
                     "ShapeComponent": "../ShapeComponent",
                     "ParticleType": "Points",
-                    "MaxParticleCount": 10000
+                    "MaxParticleCount": 10000,
+                    "ParticleDensity": 1.0
                 },
                 {
                     "Type": "nap::RenderableMeshComponent",
@@ -1576,10 +1582,12 @@
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
                     "MonitorVisibilityProperty": "shapePlaneCloud",
                     "MonitorLabelVisibilityProperty": "",
+                    "Rendertarget": "Window",
                     "UBO": "UBO",
                     "UBOVert": "UBOVert",
                     "ColorUniform": "color",
                     "CameraPositionUniform": "cameraPosition",
+                    "RenderTargetSizeUniform": "renderTargetSize",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
@@ -1600,7 +1608,8 @@
                     "SpatialTransformationComponent": "../SpatialTransformationComponent",
                     "ShapeComponent": "../ShapeComponent",
                     "ParticleType": "Planes",
-                    "MaxParticleCount": 10000
+                    "MaxParticleCount": 50000,
+                    "ParticleDensity": 2.0
                 }
             ],
             "Children": []
