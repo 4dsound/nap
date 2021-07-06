@@ -768,7 +768,8 @@
                             "Type": "nap::spatial::SpeakerSetupShape",
                             "mID": "SpeakerSetupShape_9cf4f774",
                             "Name": "speakerSetup",
-                            "MultiSpeakerSetup": "multiSetup"
+                            "MultiSpeakerSetup": "multiSetup",
+                            "GridIndex": 1
                         }
                     ],
                     "ShapeTransformations": [
@@ -1073,18 +1074,13 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "",
                     "LevelUniform": "",
+                    "SelectedUniform": "",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
-                    "SelectedColor": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0
-                    },
-                    "BlinkFrequency": 1.0,
                     "ShowLabels": true,
                     "ControlScales": false,
                     "ControlRotations": true,
@@ -1173,18 +1169,13 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "scale",
                     "LevelUniform": "",
+                    "SelectedUniform": "",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
-                    "SelectedColor": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0
-                    },
-                    "BlinkFrequency": 1.0,
                     "ShowLabels": false,
                     "ControlScales": true,
                     "ControlRotations": true,
@@ -1260,18 +1251,13 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "",
                     "LevelUniform": "level",
+                    "SelectedUniform": "",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
-                    "SelectedColor": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0
-                    },
-                    "BlinkFrequency": 1.0,
                     "ShowLabels": false,
                     "ControlScales": false,
                     "ControlRotations": false,
@@ -1328,18 +1314,13 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "",
                     "LevelUniform": "",
+                    "SelectedUniform": "",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
-                    "SelectedColor": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0
-                    },
-                    "BlinkFrequency": 1.0,
                     "ShowLabels": false,
                     "ControlScales": true,
                     "ControlRotations": true,
@@ -1436,18 +1417,13 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "scale",
                     "LevelUniform": "",
+                    "SelectedUniform": "selected",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
-                    "SelectedColor": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0
-                    },
-                    "BlinkFrequency": 1.0,
                     "ShowLabels": false,
                     "ControlScales": true,
                     "ControlRotations": true,
@@ -1914,25 +1890,25 @@
                             "Type": "nap::UniformFloat",
                             "mID": "UniformFloat_1ec19db8",
                             "Name": "ambientIntensity",
-                            "Value": 0.4000000059604645
+                            "Value": 0.30000001192092898
                         },
                         {
                             "Type": "nap::UniformFloat",
                             "mID": "UniformFloat_beab792a",
                             "Name": "shininess",
-                            "Value": 10.0
+                            "Value": 1.0
                         },
                         {
                             "Type": "nap::UniformFloat",
                             "mID": "UniformFloat_52e7cc9d",
                             "Name": "specularIntensity",
-                            "Value": 0.4000000059604645
+                            "Value": 0.0
                         },
                         {
                             "Type": "nap::UniformFloat",
                             "mID": "UniformFloat_3a90e90c",
                             "Name": "attenuationScale",
-                            "Value": 1.0
+                            "Value": 0.0
                         },
                         {
                             "Type": "nap::UniformVec3Array",
@@ -1948,6 +1924,11 @@
                                     "x": 10.0,
                                     "y": 10.0,
                                     "z": 10.0
+                                },
+                                {
+                                    "x": 0.0,
+                                    "y": -5.0,
+                                    "z": 0.0
                                 }
                             ]
                         },
@@ -1955,13 +1936,35 @@
                             "Type": "nap::UniformInt",
                             "mID": "UniformInt_c7b4bda7",
                             "Name": "lightCount",
-                            "Value": 2
+                            "Value": 3
                         },
                         {
                             "Type": "nap::UniformFloat",
                             "mID": "UniformFloat_a97d71e0",
                             "Name": "lightIntensity",
-                            "Value": 1.0
+                            "Value": 0.20000000298023225
+                        },
+                        {
+                            "Type": "nap::UniformFloat",
+                            "mID": "UniformFloat_95d1bbfd",
+                            "Name": "depthThreshold",
+                            "Value": 30.0
+                        },
+                        {
+                            "Type": "nap::UniformFloat",
+                            "mID": "UniformFloat_efe04c99",
+                            "Name": "depthCurvature",
+                            "Value": 0.75
+                        },
+                        {
+                            "Type": "nap::UniformVec3",
+                            "mID": "UniformVec3_91d6dd51",
+                            "Name": "depthColor",
+                            "Value": {
+                                "x": 0.5,
+                                "y": 0.5,
+                                "z": 0.5
+                            }
                         }
                     ]
                 },
@@ -2138,7 +2141,7 @@
                             "Type": "nap::UniformFloat",
                             "mID": "UniformFloat_c9d1d3e2",
                             "Name": "attenuationScale",
-                            "Value": 1.0
+                            "Value": 0.0
                         },
                         {
                             "Type": "nap::UniformVec3Array",
@@ -2200,7 +2203,7 @@
                     "ShaderAttributeID": "in_UVs"
                 }
             ],
-            "BlendMode": "NotSet",
+            "BlendMode": "Opaque",
             "DepthMode": "InheritFromBlendMode"
         },
         {
@@ -2465,7 +2468,15 @@
             "Width": 1236,
             "Height": 1100,
             "Format": "RGBA8",
-            "ColorSpace": "Linear"
+            "ColorSpace": "Linear",
+            "ClearColor": {
+                "Values": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            }
         },
         {
             "Type": "nap::RenderWindow",
@@ -3551,7 +3562,8 @@
         },
         {
             "Type": "nap::spatial::BoxFrameMesh",
-            "mID": "BoxFrameMesh"
+            "mID": "BoxFrameMesh",
+            "Displacement": 1.0
         },
         {
             "Type": "nap::spatial::ConfigurableOSCSender",
@@ -3619,7 +3631,7 @@
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "particleBoxes",
                     "Title": "P. Boxes",
-                    "Value": true
+                    "Value": false
                 },
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
@@ -3631,7 +3643,7 @@
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "particleFrames",
                     "Title": "P. Frames",
-                    "Value": false
+                    "Value": true
                 },
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
