@@ -13,7 +13,7 @@ out vec4 out_Color;
 
 uniform UBO
 {
-	uniform vec3		lightPositions[3];	// World position of the lights
+	uniform vec3		lightPositions[1];	// World position of the lights
 	uniform int			lightCount;			// Number of lights
 	uniform float		lightIntensity;		// Light intensity
 	uniform float		ambientIntensity;	// Ambient light intensity

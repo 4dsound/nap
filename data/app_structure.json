@@ -1011,12 +1011,6 @@
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
-                    "SelectedColor": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0
-                    },
-                    "BlinkFrequency": 1.0,
                     "ReservedVertexCount": 16,
                     "ShowTextLabel": true
                 },
@@ -1481,12 +1475,6 @@
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
-                    "SelectedColor": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0
-                    },
-                    "BlinkFrequency": 1.0,
                     "ReservedVertexCount": 16,
                     "ShowTextLabel": false
                 },
@@ -1571,12 +1559,6 @@
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
-                    "SelectedColor": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0
-                    },
-                    "BlinkFrequency": 1.0,
                     "ReservedVertexCount": 16,
                     "ShowTextLabel": false
                 },
@@ -1587,7 +1569,7 @@
                     "ShapeComponent": "../ShapeComponent",
                     "ParticleType": "Planes",
                     "MaxParticleCount": 50000,
-                    "ParticleDensity": 130.0
+                    "ParticleDensity": 150.0
                 }
             ],
             "Children": []
@@ -2065,16 +2047,6 @@
                                     "x": -10.0,
                                     "y": 10.0,
                                     "z": -10.0
-                                },
-                                {
-                                    "x": 10.0,
-                                    "y": 10.0,
-                                    "z": 10.0
-                                },
-                                {
-                                    "x": 0.0,
-                                    "y": -5.0,
-                                    "z": 0.0
                                 }
                             ]
                         },
@@ -2082,7 +2054,7 @@
                             "Type": "nap::UniformInt",
                             "mID": "UniformInt_c7b4bda7",
                             "Name": "lightCount",
-                            "Value": 3
+                            "Value": 1
                         },
                         {
                             "Type": "nap::UniformFloat",
@@ -3853,7 +3825,7 @@
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "particleBoxes",
                     "Title": "P. Boxes",
-                    "Value": false
+                    "Value": true
                 },
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
@@ -3865,7 +3837,7 @@
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "particleFrames",
                     "Title": "P. Frames",
-                    "Value": true
+                    "Value": false
                 },
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
