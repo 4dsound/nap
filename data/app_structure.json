@@ -1005,6 +1005,7 @@
                     "ColorUniform": "color",
                     "CameraPositionUniform": "cameraPosition",
                     "RenderTargetSizeUniform": "",
+                    "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
@@ -1499,6 +1500,7 @@
                     "ColorUniform": "color",
                     "CameraPositionUniform": "",
                     "RenderTargetSizeUniform": "",
+                    "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
@@ -1555,8 +1557,8 @@
                         "Material": "PlaneCloudMaterial",
                         "Uniforms": [],
                         "Samplers": [],
-                        "BlendMode": "AlphaBlend",
-                        "DepthMode": "ReadOnly"
+                        "BlendMode": "Opaque",
+                        "DepthMode": "ReadWrite"
                     },
                     "LineWidth": 1.0,
                     "ClipRect": {
@@ -1588,6 +1590,7 @@
                     "ColorUniform": "color",
                     "CameraPositionUniform": "cameraPosition",
                     "RenderTargetSizeUniform": "renderTargetSize",
+                    "TimeUniform": "time",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
@@ -1609,7 +1612,7 @@
                     "ShapeComponent": "../ShapeComponent",
                     "ParticleType": "Planes",
                     "MaxParticleCount": 50000,
-                    "ParticleDensity": 100.0
+                    "ParticleDensity": 130.0
                 }
             ],
             "Children": []
@@ -2410,6 +2413,14 @@
                 {
                     "MeshAttributeID": "UV0",
                     "ShaderAttributeID": "in_UV0"
+                },
+                {
+                    "MeshAttributeID": "Normal",
+                    "ShaderAttributeID": "in_Normal"
+                },
+                {
+                    "MeshAttributeID": "UV1",
+                    "ShaderAttributeID": "in_UV1"
                 }
             ],
             "BlendMode": "Opaque",
@@ -2464,10 +2475,14 @@
                 {
                     "MeshAttributeID": "Position",
                     "ShaderAttributeID": "in_Position"
+                },
+                {
+                    "MeshAttributeID": "Normal",
+                    "ShaderAttributeID": "in_Normal"
                 }
             ],
-            "BlendMode": "AlphaBlend",
-            "DepthMode": "InheritFromBlendMode"
+            "BlendMode": "Opaque",
+            "DepthMode": "ReadWrite"
         },
         {
             "Type": "nap::Material",

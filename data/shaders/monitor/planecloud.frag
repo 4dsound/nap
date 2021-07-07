@@ -6,14 +6,12 @@ uniform UBO
 } ubo;
 
 in vec3 pass_UV0;
-out vec4 out_Color;
+out vec3 out_Color;
 
 void main()
 {
-//    out_Color = vec4(ubo.color, 0);
 //    float distanceToCenter = distance(pass_UV0, vec3(0.5, 0.5, 0));
-    float alpha = 1;
 //    if (distanceToCenter > 0.5)
 //        alpha = 0;
-    out_Color = vec4(ubo.color, alpha);
+    out_Color = vec3(ubo.color);
 }
