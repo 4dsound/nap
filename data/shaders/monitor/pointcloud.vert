@@ -1,6 +1,5 @@
-#version 150 core
+#version 450 core
 
-// NAP uniform buffer objects, contains all the matrices
 uniform nap
 {
     uniform mat4 projectionMatrix;
@@ -11,31 +10,20 @@ uniform nap
 uniform UBOVert
 {
     uniform vec3 scale;
-    uniform vec3 cameraPosition;
+    uniform float time;
 } ubovert;
 
-in vec3	in_Position;
-in int in_Index;
 
-out float pass_show;
-out float pass_alpha;
-out float pass_cameraDistance;
+in vec3 in_Position;
+in vec3 in_Normal;
+in vec3	in_UV0;
 
 void main(void)
-
 {
-    float size = ubovert.scale.x * ubovert.scale.y * ubovert.scale.z;
-    float cameraDistance = length(in_Position - ubovert.cameraPosition);
-    int pointCount = int(pow(size, 0.6) * 1000000);
-    if (length(in_Position - vec3(0, 0, 0)) > 0.5)
-        pass_show = 0;
-    else
-        pass_show = 1;
-
-    if (in_Index > pointCount)
-        pass_show = 0;
-
-    pass_alpha = 1 - length(in_Position - vec3(0, 0, 0));
-    pass_cameraDistance = cameraDistance;
-    gl_Position = mvp.projectionMatrix * mvp.viewMatrix * mvp.modelMatrix * vec4(in_Position, 1.0);
+    float amplitude = 0.1;
+    float speed = 1;
+    vec3 displacementX = in_Normal * sin(in_UV0.x * 50 + ubovert.time * speed) * max(0, 0.6 - distance(vec3(in_UV0.x, in_UV0.y, 0), vec3(0.5, 0.5, 0)));
+    vec3 displacementY = in_Normal * sin(in_UV0.y * 50 + ubovert.time * speed) * max(0, 0.6 - distance(vec3(in_UV0.x, in_UV0.y, 0), vec3(0.5, 0.5, 0)));
+    vec3 position = in_Position + amplitude * ubovert.scale * (displacementX + displacementY);
+    gl_Position = mvp.projectionMatrix * mvp.viewMatrix * mvp.modelMatrix * vec4(position, 1.0);
 }

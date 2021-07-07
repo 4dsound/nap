@@ -9,7 +9,6 @@ uniform nap
 
 uniform UBOVert
 {
-    uniform vec3 cameraPosition;
     uniform vec3 scale;
     uniform vec2 renderTargetSize;
     uniform float time;
@@ -27,7 +26,6 @@ out vec3 pass_UV0;
 void main(void)
 {
     pass_UV0 = in_UV0;
-    float distanceToCamera = distance(ubovert.cameraPosition, in_Position);
     float aspectRatio = ubovert.renderTargetSize.y / ubovert.renderTargetSize.x;
     vec3 size = vec3(in_RelativePosition.x * aspectRatio, in_RelativePosition.y, 0) * 0.05;
 
