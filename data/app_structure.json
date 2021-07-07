@@ -1004,6 +1004,7 @@
                     "UBOVert": "UBOVert",
                     "ColorUniform": "color",
                     "CameraPositionUniform": "cameraPosition",
+                    "ScaleUniform": "",
                     "RenderTargetSizeUniform": "",
                     "TimeUniform": "",
                     "DimmedColor": {
@@ -1468,6 +1469,7 @@
                     "UBOVert": "UBOVert",
                     "ColorUniform": "color",
                     "CameraPositionUniform": "",
+                    "ScaleUniform": "",
                     "RenderTargetSizeUniform": "",
                     "TimeUniform": "",
                     "DimmedColor": {
@@ -1552,6 +1554,7 @@
                     "UBOVert": "UBOVert",
                     "ColorUniform": "color",
                     "CameraPositionUniform": "cameraPosition",
+                    "ScaleUniform": "scale",
                     "RenderTargetSizeUniform": "renderTargetSize",
                     "TimeUniform": "time",
                     "DimmedColor": {
