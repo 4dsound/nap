@@ -68,28 +68,32 @@ void main()
     cloudValue += 0.0625*noise( uv + ubo.time * 2. ); uv = m*uv;
     cloudValue = 0.5 + 0.5*cloudValue;
         
-    // border fade
-    float borderIntensity = 0.f;
-    float borderValue;
-    if(pass_UV0.x < 0.5)
-        borderValue = ease_in_out_quad(pass_UV0.x * 2.);
-    else
-        borderValue = ease_in_out_quad(2. - pass_UV0.x * 2.);
+    // border fade (turned off)
+    // float borderIntensity = 0.f;
+    // float borderValue;
+    // if(pass_UV0.x < 0.5)
+    //     borderValue = ease_in_out_quad(pass_UV0.x * 2.);
+    // else
+    //     borderValue = ease_in_out_quad(2. - pass_UV0.x * 2.);
     
-    if(pass_UV0.y < 0.5)
-        borderValue *= ease_in_out_quad(pass_UV0.y * 2.);
-    else
-        borderValue *= ease_in_out_quad(2. - pass_UV0.y * 2.);
+    // if(pass_UV0.y < 0.5)
+    //     borderValue *= ease_in_out_quad(pass_UV0.y * 2.);
+    // else
+    //     borderValue *= ease_in_out_quad(2. - pass_UV0.y * 2.);
     
-    borderValue *= 1.5f;
+    // borderValue *= 1.5f;
 
-    borderValue = (1. - borderIntensity) * 1. + borderIntensity * borderValue;
+    // borderValue = (1. - borderIntensity) * 1. + borderIntensity * borderValue;
     
-    float outPower = 1.f;
+    // float outPower = 1.f;
     
-    float outValue = pow(cloudValue * borderValue, outPower) * ubo.level;
+    // float outValue = pow(cloudValue * borderValue, outPower) * ubo.level;
+
+    float outValue = cloudValue;
+
+    // NOTE: comment in to work in alphablend mode.
+    // out_Color = vec4(ubo.color.r, ubo.color.g, ubo.color.b, outValue);
     
     out_Color = vec4(ubo.color.r * outValue, ubo.color.g * outValue, ubo.color.b * outValue, 1.0);
-    // out_Color = vec4(1,0,0,1);
 }
 
