@@ -1440,8 +1440,58 @@
                         "./BoxParticleVisualizationController",
                         "./HaloParticleVisualizationController",
                         "./CloudParticleVisualizationController",
-                        "./PointParticleVisualizationController"
+                        "./PointParticleVisualizationController",
+                        "./CloudBoxVisualizationController"
                     ]
+                },
+                {
+                    "Type": "nap::spatial::RenderableMeshCopyComponent",
+                    "mID": "CloudBoxVisualization",
+                    "Visible": true,
+                    "CameraTransformComponent": "../../camera/CameraTransformComponent",
+                    "MaterialInstance": {
+                        "Material": "CloudBoxMaterial",
+                        "Uniforms": [],
+                        "Samplers": [],
+                        "BlendMode": "Additive",
+                        "DepthMode": "ReadOnly"
+                    },
+                    "Mesh": "BoxMesh",
+                    "UBO": "UBO",
+                    "UBOVert": "UBOVert",
+                    "TranformComponent": "./SoundObjectVisualizationTransform",
+                    "Positions": [],
+                    "Scales": [],
+                    "Rotations": [],
+                    "CameraPositionUniform": "",
+                    "UniformFloatValues": [],
+                    "UniformVec3Values": [],
+                    "CameraFacing": false
+                },
+                {
+                    "Type": "nap::spatial::ParticleVisualizationController",
+                    "mID": "CloudBoxVisualizationController",
+                    "RenderableMeshCopyComponent": "./CloudBoxVisualization",
+                    "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
+                    "MeasurementComponent": "../MeasurementComponent",
+                    "SpatialAudioComponent": "../SpatialAudioComponent",
+                    "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
+                    "MonitorVisibilityProperty": "",
+                    "MonitorLabelVisibilityProperty": "",
+                    "ColorUniform": "color",
+                    "ScaleUniform": "",
+                    "LevelUniform": "level",
+                    "SelectedUniform": "",
+                    "TimeUniform": "time",
+                    "DimmedColor": {
+                        "x": 0.20000000298023225,
+                        "y": 0.20000000298023225,
+                        "z": 0.20000000298023225
+                    },
+                    "ShowLabels": false,
+                    "ControlScales": true,
+                    "ControlRotations": true,
+                    "LevelSmoothTime": 0.05000000074505806
                 }
             ],
             "Children": []
@@ -2003,6 +2053,25 @@
                 }
             ],
             "BlendMode": "Opaque",
+            "DepthMode": "InheritFromBlendMode"
+        },
+        {
+            "Type": "nap::Material",
+            "mID": "CloudBoxMaterial",
+            "Uniforms": [],
+            "Samplers": [],
+            "Shader": "CloudBoxShader",
+            "VertexAttributeBindings": [
+                {
+                    "MeshAttributeID": "UV0",
+                    "ShaderAttributeID": "in_UV0"
+                },
+                {
+                    "MeshAttributeID": "Position",
+                    "ShaderAttributeID": "in_Position"
+                }
+            ],
+            "BlendMode": "AlphaBlend",
             "DepthMode": "InheritFromBlendMode"
         },
         {
@@ -2615,6 +2684,12 @@
             "mID": "BoxFrameShader",
             "VertShader": "shaders/monitor/boxframe.vert",
             "FragShader": "shaders/monitor/boxframe.frag"
+        },
+        {
+            "Type": "nap::ShaderFromFile",
+            "mID": "CloudBoxShader",
+            "VertShader": "shaders/monitor/cloud.vert",
+            "FragShader": "shaders/monitor/cloud.frag"
         },
         {
             "Type": "nap::ShaderFromFile",
