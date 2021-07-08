@@ -1454,7 +1454,7 @@
                         "Uniforms": [],
                         "Samplers": [],
                         "BlendMode": "Additive",
-                        "DepthMode": "ReadOnly"
+                        "DepthMode": "InheritFromBlendMode"
                     },
                     "Mesh": "BoxMesh",
                     "UBO": "UBO",
@@ -1476,7 +1476,7 @@
                     "MeasurementComponent": "../MeasurementComponent",
                     "SpatialAudioComponent": "../SpatialAudioComponent",
                     "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
-                    "MonitorVisibilityProperty": "",
+                    "MonitorVisibilityProperty": "cloudbox",
                     "MonitorLabelVisibilityProperty": "",
                     "ColorUniform": "color",
                     "ScaleUniform": "",
@@ -3760,6 +3760,12 @@
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "paths",
                     "Title": "Paths",
+                    "Value": true
+                },
+                {
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "cloudbox",
+                    "Title": "P. Cl. B.",
                     "Value": true
                 }
             ],
