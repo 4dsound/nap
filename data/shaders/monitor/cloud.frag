@@ -85,7 +85,7 @@ void main()
 
     borderValue = (1. - borderIntensity) * 1. + borderIntensity * borderValue;
     
-    float outPower = 0.5f;
+    float outPower = 1.f;
     
     float outValue = pow(cloudValue * borderValue, outPower) * ubo.level;
     
