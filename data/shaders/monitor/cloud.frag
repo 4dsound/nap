@@ -89,7 +89,7 @@ void main()
     
     // float outValue = pow(cloudValue * borderValue, outPower) * ubo.level;
 
-    float outValue = cloudValue;
+    float outValue = cloudValue * ubo.level;
 
     // NOTE: comment in to work in alphablend mode.
     // out_Color = vec4(ubo.color.r, ubo.color.g, ubo.color.b, outValue);
