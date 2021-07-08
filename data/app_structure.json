@@ -1520,7 +1520,7 @@
                     "Visible": true,
                     "CameraTransformComponent": "../../camera/CameraTransformComponent",
                     "MaterialInstance": {
-                        "Material": "CloudBoxMaterial",
+                        "Material": "FlameMaterial",
                         "Uniforms": [],
                         "Samplers": [],
                         "BlendMode": "Additive",
@@ -2174,6 +2174,25 @@
         },
         {
             "Type": "nap::Material",
+            "mID": "FlameMaterial",
+            "Uniforms": [],
+            "Samplers": [],
+            "Shader": "FlameShader",
+            "VertexAttributeBindings": [
+                {
+                    "MeshAttributeID": "UV0",
+                    "ShaderAttributeID": "in_UV0"
+                },
+                {
+                    "MeshAttributeID": "Position",
+                    "ShaderAttributeID": "in_Position"
+                }
+            ],
+            "BlendMode": "Additive",
+            "DepthMode": "InheritFromBlendMode"
+        },
+        {
+            "Type": "nap::Material",
             "mID": "FloorWireFrameMaterial",
             "Uniforms": [],
             "Samplers": [],
@@ -2760,6 +2779,12 @@
             "mID": "CloudBoxShader",
             "VertShader": "shaders/monitor/cloud.vert",
             "FragShader": "shaders/monitor/cloud.frag"
+        },
+        {
+            "Type": "nap::ShaderFromFile",
+            "mID": "FlameShader",
+            "VertShader": "shaders/monitor/flame.vert",
+            "FragShader": "shaders/monitor/flame.frag"
         },
         {
             "Type": "nap::ShaderFromFile",
