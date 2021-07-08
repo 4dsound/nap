@@ -34,6 +34,26 @@
             "mID": "ConstantShader"
         },
         {
+            "Type": "nap::CrossedPlanesMesh",
+            "mID": "CrossMesh",
+            "Size": {
+                "x": 1.0,
+                "y": 1.0
+            },
+            "Usage": "Static",
+            "CullMode": "None",
+            "Color": {
+                "Values": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "Rows": 1,
+            "Columns": 1
+        },
+        {
             "Type": "nap::Entity",
             "mID": "AxesHelper",
             "Components": [
@@ -1441,7 +1461,8 @@
                         "./HaloParticleVisualizationController",
                         "./CloudParticleVisualizationController",
                         "./PointParticleVisualizationController",
-                        "./CloudBoxVisualizationController"
+                        "./CloudBoxVisualizationController",
+                        "./FlameVisualizationController"
                     ]
                 },
                 {
@@ -1477,6 +1498,55 @@
                     "SpatialAudioComponent": "../SpatialAudioComponent",
                     "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
                     "MonitorVisibilityProperty": "cloudbox",
+                    "MonitorLabelVisibilityProperty": "",
+                    "ColorUniform": "color",
+                    "ScaleUniform": "",
+                    "LevelUniform": "level",
+                    "SelectedUniform": "",
+                    "TimeUniform": "time",
+                    "DimmedColor": {
+                        "x": 0.20000000298023225,
+                        "y": 0.20000000298023225,
+                        "z": 0.20000000298023225
+                    },
+                    "ShowLabels": false,
+                    "ControlScales": true,
+                    "ControlRotations": true,
+                    "LevelSmoothTime": 0.05000000074505806
+                },
+                {
+                    "Type": "nap::spatial::RenderableMeshCopyComponent",
+                    "mID": "FlameVisualization",
+                    "Visible": true,
+                    "CameraTransformComponent": "../../camera/CameraTransformComponent",
+                    "MaterialInstance": {
+                        "Material": "CloudBoxMaterial",
+                        "Uniforms": [],
+                        "Samplers": [],
+                        "BlendMode": "Additive",
+                        "DepthMode": "InheritFromBlendMode"
+                    },
+                    "Mesh": "CrossMesh",
+                    "UBO": "UBO",
+                    "UBOVert": "UBOVert",
+                    "TranformComponent": "./SoundObjectVisualizationTransform",
+                    "Positions": [],
+                    "Scales": [],
+                    "Rotations": [],
+                    "CameraPositionUniform": "",
+                    "UniformFloatValues": [],
+                    "UniformVec3Values": [],
+                    "CameraFacing": false
+                },
+                {
+                    "Type": "nap::spatial::ParticleVisualizationController",
+                    "mID": "FlameVisualizationController",
+                    "RenderableMeshCopyComponent": "./FlameVisualization",
+                    "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
+                    "MeasurementComponent": "../MeasurementComponent",
+                    "SpatialAudioComponent": "../SpatialAudioComponent",
+                    "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
+                    "MonitorVisibilityProperty": "flame",
                     "MonitorLabelVisibilityProperty": "",
                     "ColorUniform": "color",
                     "ScaleUniform": "",
@@ -2071,7 +2141,7 @@
                     "ShaderAttributeID": "in_Position"
                 }
             ],
-            "BlendMode": "AlphaBlend",
+            "BlendMode": "Additive",
             "DepthMode": "InheritFromBlendMode"
         },
         {
@@ -3767,6 +3837,12 @@
                     "mID": "cloudbox",
                     "Title": "P. Cl. B.",
                     "Value": true
+                },
+                {
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "flame",
+                    "Title": "P. Flame",
+                    "Value": false
                 }
             ],
             "SettingsFile": "SettingsFile",
