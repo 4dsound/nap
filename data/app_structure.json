@@ -1551,7 +1551,7 @@
                     "TransformComponent": "./SoundObjectVisualizationTransform",
                     "CameraTransformComponent": "../../camera/CameraTransformComponent",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
-                    "ExposedDataComponent": "",
+                    "ExposedDataComponent": "../ExposedDataComponent",
                     "MonitorVisibilityProperty": "shapePlaneCloud",
                     "MonitorLabelVisibilityProperty": "",
                     "Rendertarget": "Window",
@@ -1562,7 +1562,14 @@
                     "ScaleUniform": "scale",
                     "RenderTargetSizeUniform": "renderTargetSize",
                     "TimeUniform": "time",
-                    "ExposedDataMapping": [],
+                    "ExposedDataMapping": [
+                        {
+                            "Type": "nap::spatial::ExposedFloatUniformMapping",
+                            "mID": "ExposedFloatUniformMapping_64c20747",
+                            "ExposedDataName": "effect/spatialDelay/peripheralScale",
+                            "UniformName": "spatialDelay_peripheralScale"
+                        }
+                    ],
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
