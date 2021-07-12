@@ -1695,6 +1695,36 @@
                             "mID": "ExposedFloatUniformMapping_64c20747",
                             "ExposedDataName": "effect/spatialDelay/peripheralScale",
                             "UniformName": "spatialDelay_peripheralScale"
+                        },
+                        {
+                            "Type": "nap::spatial::ExposedFloatUniformMapping",
+                            "mID": "ExposedFloatUniformMapping_3148461d",
+                            "ExposedDataName": "effect/spatialDelay/noiseModulationDepth",
+                            "UniformName": "spatialDelay_noiseDepth"
+                        },
+                        {
+                            "Type": "nap::spatial::ExposedFloatUniformMapping",
+                            "mID": "ExposedFloatUniformMapping_6e9eec77",
+                            "ExposedDataName": "effect/spatialDelay/randomPatternScale",
+                            "UniformName": "spatialDelay_random"
+                        },
+                        {
+                            "Type": "nap::spatial::ExposedFloatUniformMapping",
+                            "mID": "ExposedFloatUniformMapping_376c6d01",
+                            "ExposedDataName": "effect/spatialDelay/noiseModulationSpeed",
+                            "UniformName": "spatialDelay_noiseSpeed"
+                        },
+                        {
+                            "Type": "nap::spatial::ExposedFloatUniformMapping",
+                            "mID": "ExposedFloatUniformMapping_5bd282c9",
+                            "ExposedDataName": "effect/spatialDelay/smooth",
+                            "UniformName": "spatialDelay_smooth"
+                        },
+                        {
+                            "Type": "nap::spatial::ExposedFloatUniformMapping",
+                            "mID": "ExposedFloatUniformMapping_50bfc1ab",
+                            "ExposedDataName": "effect/spatialDelay/modulationTimePassed",
+                            "UniformName": "spatialDelay_modulationTimePassed"
                         }
                     ],
                     "DimmedColor": {
