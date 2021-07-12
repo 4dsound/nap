@@ -997,6 +997,7 @@
                     "TransformComponent": "./SoundObjectVisualizationTransform",
                     "CameraTransformComponent": "../../camera/CameraTransformComponent",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
+                    "ExposedDataComponent": "",
                     "MonitorVisibilityProperty": "soundObjectShapes",
                     "MonitorLabelVisibilityProperty": "soundObjectNames",
                     "Rendertarget": "",
@@ -1007,6 +1008,7 @@
                     "ScaleUniform": "",
                     "RenderTargetSizeUniform": "",
                     "TimeUniform": "",
+                    "ExposedDataMapping": [],
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
@@ -1462,6 +1464,7 @@
                     "TransformComponent": "./SoundObjectVisualizationTransform",
                     "CameraTransformComponent": "../../camera/CameraTransformComponent",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
+                    "ExposedDataComponent": "",
                     "MonitorVisibilityProperty": "shapePointCloud",
                     "MonitorLabelVisibilityProperty": "",
                     "Rendertarget": "",
@@ -1472,6 +1475,7 @@
                     "ScaleUniform": "scale",
                     "RenderTargetSizeUniform": "",
                     "TimeUniform": "time",
+                    "ExposedDataMapping": [],
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
@@ -1547,6 +1551,7 @@
                     "TransformComponent": "./SoundObjectVisualizationTransform",
                     "CameraTransformComponent": "../../camera/CameraTransformComponent",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
+                    "ExposedDataComponent": "",
                     "MonitorVisibilityProperty": "shapePlaneCloud",
                     "MonitorLabelVisibilityProperty": "",
                     "Rendertarget": "Window",
@@ -1557,6 +1562,7 @@
                     "ScaleUniform": "scale",
                     "RenderTargetSizeUniform": "renderTargetSize",
                     "TimeUniform": "time",
+                    "ExposedDataMapping": [],
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
@@ -2444,7 +2450,7 @@
                 }
             ],
             "Samplers": [],
-            "Shader": "PlaneCloudShader",
+            "Shader": "ShapePlaneCloudShader",
             "VertexAttributeBindings": [
                 {
                     "MeshAttributeID": "Position",
@@ -2488,7 +2494,7 @@
                 }
             ],
             "Samplers": [],
-            "Shader": "PointCloudShader",
+            "Shader": "ShapePointCloudShader",
             "VertexAttributeBindings": [
                 {
                     "MeshAttributeID": "Position",
@@ -2890,14 +2896,14 @@
         },
         {
             "Type": "nap::ShaderFromFile",
-            "mID": "PlaneCloudShader",
-            "VertShader": "shaders/monitor/planecloud.vert",
+            "mID": "ShapePlaneCloudShader",
+            "VertShader": "shaders/monitor/shapeplanecloud.vert",
             "FragShader": "shaders/monitor/planecloud.frag"
         },
         {
             "Type": "nap::ShaderFromFile",
-            "mID": "PointCloudShader",
-            "VertShader": "shaders/monitor/pointcloud.vert",
+            "mID": "ShapePointCloudShader",
+            "VertShader": "shaders/monitor/shapepointcloud.vert",
             "FragShader": "shaders/monitor/pointcloud.frag"
         },
         {
