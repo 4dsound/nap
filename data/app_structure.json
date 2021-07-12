@@ -34,6 +34,26 @@
             "mID": "ConstantShader"
         },
         {
+            "Type": "nap::CrossedPlanesMesh",
+            "mID": "CrossMesh",
+            "Size": {
+                "x": 1.0,
+                "y": 1.0
+            },
+            "Usage": "Static",
+            "CullMode": "None",
+            "Color": {
+                "Values": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "Rows": 1,
+            "Columns": 1
+        },
+        {
             "Type": "nap::Entity",
             "mID": "AxesHelper",
             "Components": [
@@ -1440,8 +1460,108 @@
                         "./BoxParticleVisualizationController",
                         "./HaloParticleVisualizationController",
                         "./CloudParticleVisualizationController",
-                        "./PointParticleVisualizationController"
+                        "./PointParticleVisualizationController",
+                        "./CloudBoxVisualizationController",
+                        "./FlameVisualizationController"
                     ]
+                },
+                {
+                    "Type": "nap::spatial::RenderableMeshCopyComponent",
+                    "mID": "CloudBoxVisualization",
+                    "Visible": true,
+                    "CameraTransformComponent": "../../camera/CameraTransformComponent",
+                    "MaterialInstance": {
+                        "Material": "CloudBoxMaterial",
+                        "Uniforms": [],
+                        "Samplers": [],
+                        "BlendMode": "Additive",
+                        "DepthMode": "InheritFromBlendMode"
+                    },
+                    "Mesh": "BoxMesh",
+                    "UBO": "UBO",
+                    "UBOVert": "UBOVert",
+                    "TranformComponent": "./SoundObjectVisualizationTransform",
+                    "Positions": [],
+                    "Scales": [],
+                    "Rotations": [],
+                    "CameraPositionUniform": "",
+                    "UniformFloatValues": [],
+                    "UniformVec3Values": [],
+                    "CameraFacing": false
+                },
+                {
+                    "Type": "nap::spatial::ParticleVisualizationController",
+                    "mID": "CloudBoxVisualizationController",
+                    "RenderableMeshCopyComponent": "./CloudBoxVisualization",
+                    "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
+                    "MeasurementComponent": "../MeasurementComponent",
+                    "SpatialAudioComponent": "../SpatialAudioComponent",
+                    "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
+                    "MonitorVisibilityProperty": "cloudbox",
+                    "MonitorLabelVisibilityProperty": "",
+                    "ColorUniform": "color",
+                    "ScaleUniform": "",
+                    "LevelUniform": "level",
+                    "SelectedUniform": "",
+                    "TimeUniform": "time",
+                    "DimmedColor": {
+                        "x": 0.20000000298023225,
+                        "y": 0.20000000298023225,
+                        "z": 0.20000000298023225
+                    },
+                    "ShowLabels": false,
+                    "ControlScales": true,
+                    "ControlRotations": true,
+                    "LevelSmoothTime": 0.05000000074505806
+                },
+                {
+                    "Type": "nap::spatial::RenderableMeshCopyComponent",
+                    "mID": "FlameVisualization",
+                    "Visible": true,
+                    "CameraTransformComponent": "../../camera/CameraTransformComponent",
+                    "MaterialInstance": {
+                        "Material": "FlameMaterial",
+                        "Uniforms": [],
+                        "Samplers": [],
+                        "BlendMode": "Additive",
+                        "DepthMode": "InheritFromBlendMode"
+                    },
+                    "Mesh": "CrossMesh",
+                    "UBO": "UBO",
+                    "UBOVert": "UBOVert",
+                    "TranformComponent": "./SoundObjectVisualizationTransform",
+                    "Positions": [],
+                    "Scales": [],
+                    "Rotations": [],
+                    "CameraPositionUniform": "",
+                    "UniformFloatValues": [],
+                    "UniformVec3Values": [],
+                    "CameraFacing": false
+                },
+                {
+                    "Type": "nap::spatial::ParticleVisualizationController",
+                    "mID": "FlameVisualizationController",
+                    "RenderableMeshCopyComponent": "./FlameVisualization",
+                    "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
+                    "MeasurementComponent": "../MeasurementComponent",
+                    "SpatialAudioComponent": "../SpatialAudioComponent",
+                    "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
+                    "MonitorVisibilityProperty": "flame",
+                    "MonitorLabelVisibilityProperty": "",
+                    "ColorUniform": "color",
+                    "ScaleUniform": "",
+                    "LevelUniform": "level",
+                    "SelectedUniform": "",
+                    "TimeUniform": "time",
+                    "DimmedColor": {
+                        "x": 0.20000000298023225,
+                        "y": 0.20000000298023225,
+                        "z": 0.20000000298023225
+                    },
+                    "ShowLabels": false,
+                    "ControlScales": true,
+                    "ControlRotations": true,
+                    "LevelSmoothTime": 0.05000000074505806
                 }
             ],
             "Children": []
@@ -2007,6 +2127,25 @@
         },
         {
             "Type": "nap::Material",
+            "mID": "CloudBoxMaterial",
+            "Uniforms": [],
+            "Samplers": [],
+            "Shader": "CloudBoxShader",
+            "VertexAttributeBindings": [
+                {
+                    "MeshAttributeID": "UV0",
+                    "ShaderAttributeID": "in_UV0"
+                },
+                {
+                    "MeshAttributeID": "Position",
+                    "ShaderAttributeID": "in_Position"
+                }
+            ],
+            "BlendMode": "Additive",
+            "DepthMode": "InheritFromBlendMode"
+        },
+        {
+            "Type": "nap::Material",
             "mID": "ConstantMaterial",
             "Uniforms": [
                 {
@@ -2031,6 +2170,25 @@
             "Shader": "ConstantShader",
             "VertexAttributeBindings": [],
             "BlendMode": "Opaque",
+            "DepthMode": "InheritFromBlendMode"
+        },
+        {
+            "Type": "nap::Material",
+            "mID": "FlameMaterial",
+            "Uniforms": [],
+            "Samplers": [],
+            "Shader": "FlameShader",
+            "VertexAttributeBindings": [
+                {
+                    "MeshAttributeID": "UV0",
+                    "ShaderAttributeID": "in_UV0"
+                },
+                {
+                    "MeshAttributeID": "Position",
+                    "ShaderAttributeID": "in_Position"
+                }
+            ],
+            "BlendMode": "Additive",
             "DepthMode": "InheritFromBlendMode"
         },
         {
@@ -2615,6 +2773,18 @@
             "mID": "BoxFrameShader",
             "VertShader": "shaders/monitor/boxframe.vert",
             "FragShader": "shaders/monitor/boxframe.frag"
+        },
+        {
+            "Type": "nap::ShaderFromFile",
+            "mID": "CloudBoxShader",
+            "VertShader": "shaders/monitor/cloud.vert",
+            "FragShader": "shaders/monitor/cloud.frag"
+        },
+        {
+            "Type": "nap::ShaderFromFile",
+            "mID": "FlameShader",
+            "VertShader": "shaders/monitor/flame.vert",
+            "FragShader": "shaders/monitor/flame.frag"
         },
         {
             "Type": "nap::ShaderFromFile",
@@ -3686,6 +3856,18 @@
                     "mID": "paths",
                     "Title": "Paths",
                     "Value": true
+                },
+                {
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "cloudbox",
+                    "Title": "P. Cl. B.",
+                    "Value": true
+                },
+                {
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "flame",
+                    "Title": "P. Flame",
+                    "Value": false
                 }
             ],
             "SettingsFile": "SettingsFile",
