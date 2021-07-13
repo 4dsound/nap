@@ -2,7 +2,7 @@
 uniform UBO
 {
     uniform vec3 color;
-    uniform float time;
+//    uniform float time;
 } ubo;
 
 in vec3 pass_UV0;
@@ -52,19 +52,21 @@ void main()
     float extraValue = (1. - distanceToCenter) * (1. - distanceToCenter) * (1. - angleValue * 0.5) - distanceToCenter * distanceToCenter;
 
     // cloud noise
-    float uvMp = 1.;
-    vec2 uv = vec2(uvMp * pass_UV0.x, uvMp * pass_UV0.y);
-    mat2 m = mat2( 1.6,  1.2, -1.2,  1.6 );
-    float cloudValue = 0.5000*noise( uv + ubo.time * 2. ); uv = m*uv;
-    cloudValue += 0.2500*noise( uv + ubo.time * 2.); uv = m*uv;
-    cloudValue += 0.1250*noise( uv + ubo.time * 2.); uv = m*uv;
-    cloudValue += 0.0625*noise( uv + ubo.time * 2. ); uv = m*uv;
-    cloudValue = 0.5 + 0.5*cloudValue;
+//    float uvMp = 1.;
+//    vec2 uv = vec2(uvMp * pass_UV0.x, uvMp * pass_UV0.y);
+//    mat2 m = mat2( 1.6,  1.2, -1.2,  1.6 );
+//    float cloudValue = 0.5000*noise( uv + ubo.time * 2. ); uv = m*uv;
+//    cloudValue += 0.2500*noise( uv + ubo.time * 2.); uv = m*uv;
+//    cloudValue += 0.1250*noise( uv + ubo.time * 2.); uv = m*uv;
+//    cloudValue += 0.0625*noise( uv + ubo.time * 2. ); uv = m*uv;
+//    cloudValue = 0.5 + 0.5*cloudValue;
+    
+    float cloudValue = 1.f;
 
 
 
 
 
-    out_Color = vec4(ubo.color, distanceValue * distanceValue * pass_Level * 0.5 * cloudValue) +   vec4(ubo.color + vec3(0.2, 0.2, 0.2), extraValue * pass_Level * 0.1 * cloudValue);
+    out_Color = vec4(ubo.color, distanceValue * distanceValue * pass_Level * 0.5 * (1. - 0.5 * cloudValue)) +   vec4(ubo.color + vec3(0.2, 0.2, 0.2), extraValue * pass_Level * 0.1 * (1. - 0.0 * cloudValue));
 ;
 }
