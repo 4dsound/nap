@@ -40,17 +40,17 @@ float noise( in vec2 p )
 void main()
 {
     float sqrt_2 = 1.4142135624f;
-    
+
     // angular ray pattern
     float angleToCenter = atan((pass_UV0.y - 0.5) / (pass_UV0.x - 0.5));
     int rayCount = 5;
     float angleValue = max(0, sin((angleToCenter) * rayCount));
-    
+
     float distanceToCenter = min(1, distance(pass_UV0, vec3(0.5, 0.5, 0.)) * 2.);
     float distanceValue = (1. - distanceToCenter) * (1. - distanceToCenter) * (1. - distanceToCenter);
-    
+
     float extraValue = (1. - distanceToCenter) * (1. - distanceToCenter) * (1. - angleValue * 0.5) - distanceToCenter * distanceToCenter;
-    
+
     // cloud noise
     float uvMp = 1.;
     vec2 uv = vec2(uvMp * pass_UV0.x, uvMp * pass_UV0.y);
@@ -60,11 +60,11 @@ void main()
     cloudValue += 0.1250*noise( uv + ubo.time * 2.); uv = m*uv;
     cloudValue += 0.0625*noise( uv + ubo.time * 2. ); uv = m*uv;
     cloudValue = 0.5 + 0.5*cloudValue;
-        
 
-    
-    
-    
+
+
+
+
     out_Color = vec4(ubo.color, distanceValue * distanceValue * pass_Level * 0.5 * cloudValue) +   vec4(ubo.color + vec3(0.2, 0.2, 0.2), extraValue * pass_Level * 0.1 * cloudValue);
 ;
 }

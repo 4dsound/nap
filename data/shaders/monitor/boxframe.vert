@@ -32,14 +32,15 @@ out float pass_Selected;
 void main(void)
 {
 	// Calculate position
-    float selectedMultiplier = 0.5f;
+    float selectedMultiplier = 1.f;
     if(ubovert.selected >= 0.f)
-        selectedMultiplier = 1.0f;
+        selectedMultiplier = 2.f;
     
-	vec3 displacement = in_Displacement * selectedMultiplier * 0.05 / vec3(max(1, ubovert.scale.x), max(1, ubovert.scale.y), max(1, ubovert.scale.z));
+    vec3 displacement = in_Displacement * selectedMultiplier * 0.02f;
+    displacement = vec3(vec4(displacement, 1.) * inverse(mvp.modelMatrix));
     gl_Position = mvp.projectionMatrix * mvp.viewMatrix * mvp.modelMatrix * vec4(in_Position + displacement, 1.0);
 
-	pass_Vert = in_Position + in_Displacement * 0.1;
+	pass_Vert = in_Position + in_Displacement;
 	pass_ModelMatrix = mvp.modelMatrix;
 	pass_Normals = in_Normal;
 	pass_Selected = ubovert.selected;
