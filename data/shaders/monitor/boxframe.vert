@@ -15,6 +15,7 @@ uniform nap
 uniform UBOVert
 {
 	uniform vec3 scale;
+    uniform float selected;
 } ubovert;
 
 // Input attributes
@@ -26,14 +27,20 @@ in vec3 in_Displacement;	// Vertex displacement
 out mat4 pass_ModelMatrix;
 out vec3 pass_Vert;
 out vec3 pass_Normals;
+out float pass_Selected;
 
 void main(void)
 {
 	// Calculate position
-	vec3 displacement = in_Displacement * 0.05 / vec3(max(1, ubovert.scale.x), max(1, ubovert.scale.y), max(1, ubovert.scale.z));
+    float selectedMultiplier = 0.5f;
+    if(ubovert.selected >= 0.f)
+        selectedMultiplier = 1.0f;
+    
+	vec3 displacement = in_Displacement * selectedMultiplier * 0.05 / vec3(max(1, ubovert.scale.x), max(1, ubovert.scale.y), max(1, ubovert.scale.z));
     gl_Position = mvp.projectionMatrix * mvp.viewMatrix * mvp.modelMatrix * vec4(in_Position + displacement, 1.0);
 
 	pass_Vert = in_Position + in_Displacement * 0.1;
 	pass_ModelMatrix = mvp.modelMatrix;
 	pass_Normals = in_Normal;
+	pass_Selected = ubovert.selected;
 }
