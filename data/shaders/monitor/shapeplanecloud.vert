@@ -12,14 +12,14 @@ uniform UBOVert
     uniform vec3 scale;
     uniform vec2 renderTargetSize;
     uniform float time;
+    uniform int spatialDelay_enable;
+    uniform float spatialDelay_dryWet;
     uniform float spatialDelay_peripheralScale;
     uniform float spatialDelay_random;
     uniform float spatialDelay_noiseDepth;
     uniform float spatialDelay_noiseSpeed;
     uniform float spatialDelay_smooth;
     uniform float spatialDelay_modulationTimePassed;
-//    uniform float spatialDelay_distanceScale;
-//    uniform float spatialDelay_randomPatternScale;
 } ubovert;
 
 
@@ -63,17 +63,20 @@ void main(void)
     float aspectRatio = ubovert.renderTargetSize.y / ubovert.renderTargetSize.x;
     vec3 size = vec3(in_RelativePosition.x * aspectRatio, in_RelativePosition.y, 0) * 0.05;
 
-    float amplitude = ubovert.spatialDelay_random * 0.1;
-    float detail = 2 + ubovert.spatialDelay_noiseDepth * (1 - ubovert.spatialDelay_smooth) * 4;
-    float speed = ubovert.spatialDelay_noiseSpeed;
-    vec3 displacementX = in_Normal * noise(vec2(in_UV1.x * detail + ubovert.spatialDelay_modulationTimePassed, 0)) * max(0, 0.6 - distance(vec3(in_UV1.x, in_UV1.y, 0), vec3(0.5, 0.5, 0)));
-    vec3 displacementY = in_Normal * noise(vec2(0, in_UV1.y * detail + ubovert.spatialDelay_modulationTimePassed)) * max(0, 0.6 - distance(vec3(in_UV1.x, in_UV1.y, 0), vec3(0.5, 0.5, 0)));
+    float spatialDelayAmount = ubovert.spatialDelay_dryWet * ubovert.spatialDelay_enable;
 
-    float peripheralDistance = abs(distance(vec3(0, 0, 0), vec3(0.5, 0.5, 0.5) * ubovert.scale) - distance(vec3(0, 0, 0), in_Position));
-    float peripheralScale = ubovert.spatialDelay_peripheralScale * 0.0125;
-//    vec3 peripheralDisplacement = ((-in_Position - vec3(0, 0, 0))) * peripheralScale * ubovert.scale * (5 - peripheralDistance);
+    float randomAmplitude = pow(ubovert.spatialDelay_random/30.0, 0.3) * 3;
+    float randomDetail = 2;
+    vec3 randomDisplacement = in_Normal * randomAmplitude * noise(vec2(in_UV1.x * randomDetail + 1, in_UV1.y * randomDetail + 1)) * max(0, 0.6 - distance(vec3(in_UV1.x, in_UV1.y, 0), vec3(0.5, 0.5, 0)));
 
-    vec3 peripheralPosition = mix(in_Position, vec3(0, 0, 0), peripheralDistance * peripheralScale);;
-    vec3 position = peripheralPosition + amplitude * ubovert.scale * (displacementX + displacementY);
+    float modulationAmplitude = pow(ubovert.spatialDelay_noiseDepth/1000, 0.3) * 3;
+    float modulationDetail = (1 - ubovert.spatialDelay_smooth) * 20;
+    vec3 modulationDisplacement = in_Normal * modulationAmplitude * noise(vec2(in_UV1.x * modulationDetail + ubovert.spatialDelay_modulationTimePassed, in_UV1.y * modulationDetail)) * max(0, 0.6 - distance(vec3(in_UV1.x, in_UV1.y, 0), vec3(0.5, 0.5, 0)));
+
+    float peripheralDistance = abs(distance(vec3(0, 0, 0), vec3(0.5, 0.5, 0.5) * ubovert.scale) - distance(vec3(0, 0, 0), in_Position) );
+    float peripheralScale = ubovert.spatialDelay_peripheralScale * 0.07;
+
+    vec3 peripheralPosition = mix(in_Position, vec3(0, 0, 0), peripheralDistance * peripheralScale * spatialDelayAmount / ubovert.scale);
+    vec3 position = peripheralPosition + ubovert.scale * spatialDelayAmount * (randomDisplacement + modulationDisplacement);
     gl_Position = (mvp.projectionMatrix * mvp.viewMatrix * mvp.modelMatrix * vec4(position, 1.0)) + vec4(size, 0);
 }

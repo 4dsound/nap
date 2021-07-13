@@ -1034,12 +1034,6 @@
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
-                    "SelectedColor": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0
-                    },
-                    "BlinkFrequency": 1.0,
                     "ReservedVertexCount": 16,
                     "ShowTextLabel": true
                 },
@@ -1710,12 +1704,6 @@
                         },
                         {
                             "Type": "nap::spatial::ExposedFloatUniformMapping",
-                            "mID": "ExposedFloatUniformMapping_376c6d01",
-                            "ExposedDataName": "effect/spatialDelay/noiseModulationSpeed",
-                            "UniformName": "spatialDelay_noiseSpeed"
-                        },
-                        {
-                            "Type": "nap::spatial::ExposedFloatUniformMapping",
                             "mID": "ExposedFloatUniformMapping_5bd282c9",
                             "ExposedDataName": "effect/spatialDelay/smooth",
                             "UniformName": "spatialDelay_smooth"
@@ -1725,6 +1713,24 @@
                             "mID": "ExposedFloatUniformMapping_50bfc1ab",
                             "ExposedDataName": "effect/spatialDelay/modulationTimePassed",
                             "UniformName": "spatialDelay_modulationTimePassed"
+                        },
+                        {
+                            "Type": "nap::spatial::ExposedBoolUniformMapping",
+                            "mID": "ExposedBoolUniformMapping_33ea05b8",
+                            "ExposedDataName": "effect/spatialDelay/enable",
+                            "UniformName": "spatialDelay_enable"
+                        },
+                        {
+                            "Type": "nap::spatial::ExposedFloatUniformMapping",
+                            "mID": "ExposedFloatUniformMapping_105120a5",
+                            "ExposedDataName": "effect/spatialDelay/dryWet",
+                            "UniformName": "spatialDelay_dryWet"
+                        },
+                        {
+                            "Type": "nap::spatial::ExposedFloatUniformMapping",
+                            "mID": "ExposedFloatUniformMapping_5e31993e",
+                            "ExposedDataName": "effect/spatialDelay/noiseModulationSpeed",
+                            "UniformName": "spatialDelay_noiseSpeed"
                         }
                     ],
                     "DimmedColor": {
