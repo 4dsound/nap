@@ -1014,26 +1014,28 @@
                     "MeshComponent": "./ShapeLineMeshComponent",
                     "SpatialTransformationComponent": "../SpatialTransformationComponent",
                     "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
+                    "ShapeComponent": "../ShapeComponent",
                     "TransformComponent": "./SoundObjectVisualizationTransform",
                     "CameraTransformComponent": "../../camera/CameraTransformComponent",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
                     "ExposedDataComponent": "",
                     "MonitorVisibilityProperty": "soundObjectShapes",
                     "MonitorLabelVisibilityProperty": "soundObjectNames",
-                    "Rendertarget": "",
                     "UBO": "UBO",
                     "UBOVert": "UBOVert",
                     "ColorUniform": "color",
                     "CameraPositionUniform": "cameraPosition",
-                    "ScaleUniform": "",
-                    "RenderTargetSizeUniform": "",
-                    "TimeUniform": "",
-                    "ExposedDataMapping": [],
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
+                    "SelectedColor": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    },
+                    "BlinkFrequency": 1.0,
                     "ReservedVertexCount": 16,
                     "ShowTextLabel": true
                 },
@@ -1468,8 +1470,55 @@
                         "./ShapePlaneCloudComponent",
                         "./PointParticleVisualizationController",
                         "./CloudBoxVisualizationController",
-                        "./FlameVisualizationController"
+                        "./FlameVisualizationController",
+                        "./VantagePointVisualizationController",
+                        "./CloudBoxVisualizationController"
                     ]
+                },
+                {
+                    "Type": "nap::RenderableMeshComponent",
+                    "mID": "VantagePointVisualization",
+                    "Visible": true,
+                    "Mesh": "AnchorMesh",
+                    "MaterialInstance": {
+                        "Material": "AnchorMaterial",
+                        "Uniforms": [],
+                        "Samplers": [],
+                        "BlendMode": "Opaque",
+                        "DepthMode": "ReadWrite"
+                    },
+                    "LineWidth": 1.0,
+                    "ClipRect": {
+                        "Min": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Max": {
+                            "x": 0.0,
+                            "y": 0.0
+                        }
+                    }
+                },
+                {
+                    "Type": "nap::spatial::AnchorVisualizationController",
+                    "mID": "VantagePointVisualizationController",
+                    "RenderableMeshComponent": "./VantagePointVisualization",
+                    "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
+                    "ExposedDataComponent": "../ExposedDataComponent",
+                    "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
+                    "LabelText": "Vantage Point",
+                    "DataAddress": "vantagePoint",
+                    "MonitorVisibilityProperty": "",
+                    "UBO": "UBO",
+                    "ColorUniform": "color",
+                    "UBOVert": "UBOVert",
+                    "PositionOffsetUniform": "positionOffset",
+                    "DimmedColor": {
+                        "x": 0.20000000298023225,
+                        "y": 0.20000000298023225,
+                        "z": 0.20000000298023225
+                    },
+                    "VisibilityTime": 5.0
                 },
                 {
                     "Type": "nap::spatial::RenderableMeshCopyComponent",
@@ -2164,6 +2213,16 @@
             "Usage": "Static",
             "ImagePath": "img/watermark.png",
             "GenerateLods": true
+        },
+        {
+            "Type": "nap::Material",
+            "mID": "AnchorMaterial",
+            "Uniforms": [],
+            "Samplers": [],
+            "Shader": "AnchorShader",
+            "VertexAttributeBindings": [],
+            "BlendMode": "Opaque",
+            "DepthMode": "InheritFromBlendMode"
         },
         {
             "Type": "nap::Material",
@@ -3053,6 +3112,12 @@
             "Type": "nap::SettingsFile",
             "mID": "SettingsFile",
             "Path": "settings.json"
+        },
+        {
+            "Type": "nap::ShaderFromFile",
+            "mID": "AnchorShader",
+            "VertShader": "shaders/monitor/anchor.vert",
+            "FragShader": "shaders/monitor/anchor.frag"
         },
         {
             "Type": "nap::ShaderFromFile",
@@ -4029,6 +4094,10 @@
                     }
                 }
             ]
+        },
+        {
+            "Type": "nap::spatial::AnchorMesh",
+            "mID": "AnchorMesh"
         },
         {
             "Type": "nap::spatial::AxesHelperMesh",
