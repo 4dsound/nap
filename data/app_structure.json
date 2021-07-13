@@ -1461,8 +1461,8 @@
                         "./HaloParticleVisualizationController",
                         "./CloudParticleVisualizationController",
                         "./PointParticleVisualizationController",
-
-                        "./VantagePointVisualizationController"
+                        "./VantagePointVisualizationController",
+                        "./CloudBoxVisualizationController"
                     ]
                 },
                 {
@@ -1503,6 +1503,11 @@
                     "ColorUniform": "color",
                     "UBOVert": "UBOVert",
                     "PositionOffsetUniform": "positionOffset",
+                    "DimmedColor": {
+                        "x": 0.20000000298023225,
+                        "y": 0.20000000298023225,
+                        "z": 0.20000000298023225
+                    },
                     "VisibilityTime": 5.0
                 },
                 {
