@@ -1,11 +1,14 @@
 # The number of group transformations.
-GROUPS_COUNT = 1
+GROUPS_COUNT = 3
+
+# The number of simple sources.
+SIMPLE_SOURCES_COUNT = 4
 
 # The number of sound objects that do not receive from other sound objects.
 SOURCES_COUNT = 4
 
 # The number of sound objects that receive from all other sound objects.
-SPACES_COUNT = 4
+SPACES_COUNT = 3
 
 # Number of sound objects with spatial delay and reverb47 mapped to speaker
 REVERB_COUNT = 1
