@@ -1014,28 +1014,26 @@
                     "MeshComponent": "./ShapeLineMeshComponent",
                     "SpatialTransformationComponent": "../SpatialTransformationComponent",
                     "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
-                    "ShapeComponent": "../ShapeComponent",
                     "TransformComponent": "./SoundObjectVisualizationTransform",
                     "CameraTransformComponent": "../../camera/CameraTransformComponent",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
                     "ExposedDataComponent": "",
                     "MonitorVisibilityProperty": "soundObjectShapes",
                     "MonitorLabelVisibilityProperty": "soundObjectNames",
+                    "Rendertarget": "",
                     "UBO": "UBO",
                     "UBOVert": "UBOVert",
                     "ColorUniform": "color",
                     "CameraPositionUniform": "cameraPosition",
+                    "ScaleUniform": "",
+                    "RenderTargetSizeUniform": "",
+                    "TimeUniform": "",
+                    "ExposedDataMapping": [],
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
-                    "SelectedColor": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0
-                    },
-                    "BlinkFrequency": 1.0,
                     "ReservedVertexCount": 16,
                     "ShowTextLabel": true
                 },
@@ -1045,25 +1043,11 @@
                     "Visible": true,
                     "CameraTransformComponent": "../../camera/CameraTransformComponent",
                     "MaterialInstance": {
-                        "Material": "ConstantMaterial",
-                        "Uniforms": [
-                            {
-                                "Type": "nap::UniformStruct",
-                                "mID": "UniformStruct_c7715f91",
-                                "Name": "UBO",
-                                "Uniforms": [
-                                    {
-                                        "Type": "nap::UniformFloat",
-                                        "mID": "UniformFloat_d7d414c6",
-                                        "Name": "alpha",
-                                        "Value": 1.0
-                                    }
-                                ]
-                            }
-                        ],
+                        "Material": "PointParticleMaterial",
+                        "Uniforms": [],
                         "Samplers": [],
-                        "BlendMode": "Opaque",
-                        "DepthMode": "ReadWrite"
+                        "BlendMode": "NotSet",
+                        "DepthMode": "NotSet"
                     },
                     "Mesh": "SphereMesh",
                     "UBO": "UBO",
@@ -1072,9 +1056,9 @@
                     "Positions": [],
                     "Scales": [
                         {
-                            "x": 0.029999999329447748,
-                            "y": 0.029999999329447748,
-                            "z": 0.029999999329447748
+                            "x": 0.05000000074505806,
+                            "y": 0.05000000074505806,
+                            "z": 0.05000000074505806
                         }
                     ],
                     "Rotations": [],
@@ -1094,7 +1078,7 @@
                     "MonitorVisibilityProperty": "particlePoints",
                     "MonitorLabelVisibilityProperty": "particleLabels",
                     "ColorUniform": "color",
-                    "ScaleUniform": "",
+                    "ScaleUniform": "scale",
                     "LevelUniform": "",
                     "SelectedUniform": "",
                     "TimeUniform": "",
@@ -1567,7 +1551,7 @@
                     "ShowLabels": false,
                     "ControlScales": true,
                     "ControlRotations": true,
-                    "LevelSmoothTime": 0.05000000074505806
+                    "LevelSmoothTime": 1.0
                 },
                 {
                     "Type": "nap::spatial::RenderableMeshCopyComponent",
@@ -1634,7 +1618,7 @@
                     "TransformComponent": "./SoundObjectVisualizationTransform",
                     "CameraTransformComponent": "../../camera/CameraTransformComponent",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
-                    "ExposedDataComponent": "",
+                    "ExposedDataComponent": "../ExposedDataComponent",
                     "MonitorVisibilityProperty": "shapePointCloud",
                     "MonitorLabelVisibilityProperty": "",
                     "Rendertarget": "",
@@ -2781,6 +2765,21 @@
         },
         {
             "Type": "nap::Material",
+            "mID": "PointParticleMaterial",
+            "Uniforms": [],
+            "Samplers": [],
+            "Shader": "PointParticleShader",
+            "VertexAttributeBindings": [
+                {
+                    "MeshAttributeID": "Position",
+                    "ShaderAttributeID": "in_Position"
+                }
+            ],
+            "BlendMode": "Opaque",
+            "DepthMode": "InheritFromBlendMode"
+        },
+        {
+            "Type": "nap::Material",
             "mID": "SolidMaterial",
             "Uniforms": [
                 {
@@ -3178,6 +3177,12 @@
             "mID": "ParticlePointCloudShader",
             "VertShader": "shaders/monitor/particlepointcloud.vert",
             "FragShader": "shaders/monitor/pointcloud.frag"
+        },
+        {
+            "Type": "nap::ShaderFromFile",
+            "mID": "PointParticleShader",
+            "VertShader": "shaders/monitor/point.vert",
+            "FragShader": "shaders/monitor/point.frag"
         },
         {
             "Type": "nap::ShaderFromFile",
