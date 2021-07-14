@@ -72,14 +72,15 @@ void main(void)
     vec3 randomDisplacement = in_Normal * randomAmplitude * noise(vec2(in_UV1.x * randomDetail + 1, in_UV1.y * randomDetail + 1)) * max(0, 0.6 - distance(vec3(in_UV1.x, in_UV1.y, 0), vec3(0.5, 0.5, 0)));
 
     float modulationAmplitude = pow(ubovert.spatialDelay_noiseDepth/1000, 0.3) * 3;
-    float modulationDetail = (1 - ubovert.spatialDelay_smooth) * 20;
-    vec3 modulationDisplacement = in_Normal * modulationAmplitude * noise(vec2(in_UV1.x * modulationDetail + ubovert.spatialDelay_modulationTimePassed, in_UV1.y * modulationDetail)) * max(0, 0.6 - distance(vec3(in_UV1.x, in_UV1.y, 0), vec3(0.5, 0.5, 0)));
+    float modulationDetail = 2 + ubovert.spatialDelay_noiseSpeed * (1 - ubovert.spatialDelay_smooth) * 2;
+    float modulationNoise = noise(vec2(in_UV1.x * modulationDetail + ubovert.spatialDelay_modulationTimePassed, in_UV1.y * modulationDetail));
+    vec3 modulationDisplacement = in_Normal * modulationAmplitude * modulationNoise * max(0, 0.6 - distance(vec3(in_UV1.x, in_UV1.y, 0), vec3(0.5, 0.5, 0)));
 
     float peripheralDistance = distance(vec3(0, 0, 0), 0.5f * ubovert.scale) - distance(vec3(0, 0, 0), in_Position);
     float peripheralScale = ubovert.spatialDelay_peripheralScale * 0.07;
 
-    float feedbackRand = (in_Index % 100)/100.0 * ubovert.spatialDelay_feedback;
-    feedbackRand = pow(feedbackRand, 2.0);
+    float feedbackRand = (in_Index % 100)/100.0 * (ubovert.spatialDelay_feedback * 0.8);
+    feedbackRand = pow(feedbackRand, 1);
     float feedbackMultiplier = int(feedbackRand * 5) / 5.0;
     vec3 feedbackPosition = in_Position * (1. - feedbackMultiplier);
 
