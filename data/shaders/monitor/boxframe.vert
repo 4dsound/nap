@@ -36,7 +36,7 @@ void main(void)
     if(ubovert.selected >= 0.f)
         selectedMultiplier = 2.f;
     
-    vec3 displacement = in_Displacement * selectedMultiplier * 0.02f;
+    vec3 displacement = in_Displacement * selectedMultiplier * 0.04f;
     displacement = vec3(vec4(displacement, 1.) * inverse(mvp.modelMatrix));
     gl_Position = mvp.projectionMatrix * mvp.viewMatrix * mvp.modelMatrix * vec4(in_Position + displacement, 1.0);
 
