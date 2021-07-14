@@ -1021,21 +1021,20 @@
                     "ExposedDataComponent": "",
                     "MonitorVisibilityProperty": "soundObjectShapes",
                     "MonitorLabelVisibilityProperty": "soundObjectNames",
+                    "Rendertarget": "",
                     "UBO": "UBO",
                     "UBOVert": "UBOVert",
                     "ColorUniform": "color",
                     "CameraPositionUniform": "cameraPosition",
+                    "ScaleUniform": "",
+                    "RenderTargetSizeUniform": "",
+                    "TimeUniform": "",
+                    "ExposedDataMapping": [],
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
                         "z": 0.20000000298023225
                     },
-                    "SelectedColor": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 1.0
-                    },
-                    "BlinkFrequency": 1.0,
                     "ReservedVertexCount": 16,
                     "ShowTextLabel": true
                 },
@@ -1780,6 +1779,12 @@
                             "mID": "ExposedFloatUniformMapping_5e31993e",
                             "ExposedDataName": "effect/spatialDelay/noiseModulationSpeed",
                             "UniformName": "spatialDelay_noiseSpeed"
+                        },
+                        {
+                            "Type": "nap::spatial::ExposedFloatUniformMapping",
+                            "mID": "ExposedFloatUniformMapping_82dff971",
+                            "ExposedDataName": "effect/spatialDelay/feedback",
+                            "UniformName": "spatialDelay_feedback"
                         }
                     ],
                     "DimmedColor": {
@@ -2738,6 +2743,10 @@
                 {
                     "MeshAttributeID": "UV1",
                     "ShaderAttributeID": "in_UV1"
+                },
+                {
+                    "MeshAttributeID": "Index",
+                    "ShaderAttributeID": "in_Index"
                 }
             ],
             "BlendMode": "Opaque",
