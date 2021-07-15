@@ -1074,7 +1074,7 @@
                     "ColorUniform": "color",
                     "ScaleUniform": "scale",
                     "LevelUniform": "",
-                    "SelectedUniform": "",
+                    "SelectedUniform": "selected",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
