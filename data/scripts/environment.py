@@ -96,11 +96,12 @@ def createSoundObjects(environment, count, connect, simple, maxParticleCount):
             uniqueID = i + 1
             category = 3
         else:
-            uniqueID = settings.SPACES_COUNT + i + 1
             if simple:
+                uniqueID = settings.SPACES_COUNT + i + 1
                 prefix = "simplesource"
                 category = 1
             else:
+                uniqueID = settings.SPACES_COUNT + settings.SIMPLE_SOURCES_COUNT + i + 1
                 prefix = "source"
                 category = 2
 
@@ -115,6 +116,7 @@ def createSoundObjects(environment, count, connect, simple, maxParticleCount):
         properties.addInt("nap::spatial::DisplaySettingsComponent", "DisplayIndex", index)
         properties.addInt("nap::spatial::DisplaySettingsComponent", "UniqueId", uniqueID)
         properties.addInt("nap::spatial::DisplaySettingsComponent", "Category", category)
+        properties.addBool("nap::spatial::DisplaySettingsComponent", "Visible", True)
 
         soundObject = environment.createEntity("SoundObject", properties)
         controlComponent = soundObject.findComponent("nap::spatial::EnvironmentControlComponentInstance")
@@ -188,7 +190,7 @@ def createReverbs(environment, count, maxParticleCount):
     for i in range(count):
         index = i + 1
         name = "spatialverb" + str(index)
-        uniqueID = settings.SOURCES_COUNT + settings.SPACES_COUNT + i
+        uniqueID = settings.SIMPLE_SOURCES_COUNT + settings.SOURCES_COUNT + settings.SPACES_COUNT + i + 1
 
         # create reverb sound objects
         properties = nap.EnvironmentInstanceProperties()
@@ -198,6 +200,7 @@ def createReverbs(environment, count, maxParticleCount):
         properties.addInt("nap::spatial::DisplaySettingsComponent", "DisplayIndex", index)
         properties.addInt("nap::spatial::DisplaySettingsComponent", "UniqueId", uniqueID)
         properties.addInt("nap::spatial::DisplaySettingsComponent", "Category", 4)
+        properties.addBool("nap::spatial::DisplaySettingsComponent", "Visible", False)
 
         soundObject = environment.createEntity("SoundObject", properties)
         controlComponent = soundObject.findComponent("nap::spatial::EnvironmentControlComponentInstance")
