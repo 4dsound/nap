@@ -16,11 +16,14 @@ def createGroups(environment, count):
         groupTransformations.append(groupObject.findComponentByID("shapeTransformationChain"))
         particleLevelGroupTransformations.append(groupObject.findComponentByID("particleTransformationChain"))
 
+def createSimpleSources(environment, count):
+    createSoundObjects(environment, count, False, True, 8)
+
 def createSources(environment, count):
-    createSoundObjects(environment, count, False, settings.SOURCES_MAX_PARTICLE_COUNT)
+    createSoundObjects(environment, count, False, False, settings.SOURCES_MAX_PARTICLE_COUNT)
 
 def createSpaces(environment, count):
-    createSoundObjects(environment, count, True, settings.SPACES_MAX_PARTICLE_COUNT)
+    createSoundObjects(environment, count, True, False, settings.SPACES_MAX_PARTICLE_COUNT)
 
 
 # define effects outside of the python function scope, so they remain alive (necessary if new effectprocessors are added later).
@@ -81,23 +84,27 @@ distanceDiffusion.Name = "distanceDiffusion"
 
 # count (int): the number of sound objects to create
 # connect (bool): whether the newly created sound objects should be connected to all other sound objects
-def createSoundObjects(environment, count, connect, maxParticleCount):
+def createSoundObjects(environment, count, connect, simple, maxParticleCount):
     addedSoundObjects = []
 
     # create sources.
     for i in range(count):
-        # name sources 'source' and spaces 'space'
-        if connect:
-            prefix = "space"
-        else:
-            prefix = "source"
-
         index = i + 1
 
         if connect:
+            prefix = "space"
             uniqueID = i + 1
+            category = 3
         else:
-            uniqueID = settings.SPACES_COUNT + i + 1
+            if simple:
+                uniqueID = settings.SPACES_COUNT + i + 1
+                prefix = "simplesource"
+                category = 1
+            else:
+                uniqueID = settings.SPACES_COUNT + settings.SIMPLE_SOURCES_COUNT + i + 1
+                prefix = "source"
+                category = 2
+
 
         name = prefix + str(index)
 
@@ -108,7 +115,8 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
         properties.addString("nap::spatial::DisplaySettingsComponent", "DisplayName", name)
         properties.addInt("nap::spatial::DisplaySettingsComponent", "DisplayIndex", index)
         properties.addInt("nap::spatial::DisplaySettingsComponent", "UniqueId", uniqueID)
-        properties.addInt("nap::spatial::DisplaySettingsComponent", "Category", 2 if connect else 1)
+        properties.addInt("nap::spatial::DisplaySettingsComponent", "Category", category)
+        properties.addBool("nap::spatial::DisplaySettingsComponent", "Visible", True)
 
         soundObject = environment.createEntity("SoundObject", properties)
         controlComponent = soundObject.findComponent("nap::spatial::EnvironmentControlComponentInstance")
@@ -132,11 +140,13 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
             controlComponent.addEffect(elevationFilterDown)
             controlComponent.addEffect(distanceDiffusion)
         else: # source sound objects
-            controlComponent.addEffect(granulator)
-            controlComponent.addEffect(spatialDelay)
+            if not simple:
+                controlComponent.addEffect(granulator)
+                controlComponent.addEffect(spatialDelay)
             controlComponent.addEffect(doppler)
-            controlComponent.addEffect(gainScaling)
-            controlComponent.addEffect(reverb)
+            if not simple:
+                controlComponent.addEffect(gainScaling)
+                controlComponent.addEffect(reverb)
             controlComponent.addEffect(distanceIntensity)
             controlComponent.addEffect(distanceDamping)
             controlComponent.addEffect(elevationFilterUp)
@@ -160,7 +170,8 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
         # soundObject.findComponent("nap::spatial::SpatialAudioComponentInstance").addTestSignal()
 
         # enable gainscaling by default
-        controlComponent.setParameterBool("effect/gainScaling/enable", True)
+        if not simple:
+            controlComponent.setParameterBool("effect/gainScaling/enable", True)
 
         # append to list
         soundObjects.append(soundObject)
@@ -179,7 +190,7 @@ def createReverbs(environment, count, maxParticleCount):
     for i in range(count):
         index = i + 1
         name = "spatialverb" + str(index)
-        uniqueID = settings.SOURCES_COUNT + settings.SPACES_COUNT + i
+        uniqueID = settings.SIMPLE_SOURCES_COUNT + settings.SOURCES_COUNT + settings.SPACES_COUNT + i + 1
 
         # create reverb sound objects
         properties = nap.EnvironmentInstanceProperties()
@@ -188,7 +199,8 @@ def createReverbs(environment, count, maxParticleCount):
         properties.addString("nap::spatial::DisplaySettingsComponent", "DisplayName", name)
         properties.addInt("nap::spatial::DisplaySettingsComponent", "DisplayIndex", index)
         properties.addInt("nap::spatial::DisplaySettingsComponent", "UniqueId", uniqueID)
-        properties.addInt("nap::spatial::DisplaySettingsComponent", "Category", 3)
+        properties.addInt("nap::spatial::DisplaySettingsComponent", "Category", 4)
+        properties.addBool("nap::spatial::DisplaySettingsComponent", "Visible", False)
 
         soundObject = environment.createEntity("SoundObject", properties)
         controlComponent = soundObject.findComponent("nap::spatial::EnvironmentControlComponentInstance")
@@ -237,6 +249,7 @@ def init(entity):
     environment = entity.findComponent("nap::spatial::EnvironmentComponentInstance")
 
     environment.setCurrentState("starting")
+    createSimpleSources(environment, settings.SIMPLE_SOURCES_COUNT)
     createSources(environment, settings.SOURCES_COUNT)
     createSpaces(environment, settings.SPACES_COUNT)
     createReverbs(environment, settings.REVERB_COUNT, settings.REVERB_MAX_PARTICLE_COUNT)

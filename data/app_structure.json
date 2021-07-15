@@ -1758,6 +1758,12 @@
                             "mID": "ExposedFloatUniformMapping_5e31993e",
                             "ExposedDataName": "effect/spatialDelay/noiseModulationSpeed",
                             "UniformName": "spatialDelay_noiseSpeed"
+                        },
+                        {
+                            "Type": "nap::spatial::ExposedFloatUniformMapping",
+                            "mID": "ExposedFloatUniformMapping_82dff971",
+                            "ExposedDataName": "effect/spatialDelay/feedback",
+                            "UniformName": "spatialDelay_feedback"
                         }
                     ],
                     "DimmedColor": {
@@ -2716,6 +2722,10 @@
                 {
                     "MeshAttributeID": "UV1",
                     "ShaderAttributeID": "in_UV1"
+                },
+                {
+                    "MeshAttributeID": "Index",
+                    "ShaderAttributeID": "in_Index"
                 }
             ],
             "BlendMode": "Opaque",
