@@ -1069,7 +1069,7 @@
                     "MeasurementComponent": "../MeasurementComponent",
                     "SpatialAudioComponent": "../SpatialAudioComponent",
                     "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
-                    "MonitorVisibilityProperty": "particlePoints",
+                    "MonitorVisibilityProperty": "particleFrames",
                     "MonitorLabelVisibilityProperty": "particleLabels",
                     "ColorUniform": "color",
                     "ScaleUniform": "scale",
