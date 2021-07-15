@@ -4143,19 +4143,13 @@
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "soundObjectShapes",
                     "Title": "Shapes",
-                    "Value": true
+                    "Value": false
                 },
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "soundObjectNames",
                     "Title": "Names",
                     "Value": false
-                },
-                {
-                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
-                    "mID": "particlePoints",
-                    "Title": "P. Points",
-                    "Value": true
                 },
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
@@ -4185,6 +4179,12 @@
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "particleFrames",
                     "Title": "P. Frames",
+                    "Value": true
+                },
+                {
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "cloudbox",
+                    "Title": "P. Cl. B.",
                     "Value": true
                 },
                 {
@@ -4221,18 +4221,12 @@
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "effectLabels",
                     "Title": "Effects",
-                    "Value": true
+                    "Value": false
                 },
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "paths",
                     "Title": "Paths",
-                    "Value": true
-                },
-                {
-                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
-                    "mID": "cloudbox",
-                    "Title": "P. Cl. B.",
                     "Value": true
                 },
                 {
