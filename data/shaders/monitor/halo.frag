@@ -63,6 +63,6 @@ void main()
     
     float cloudValue = 1.f;
 
-    out_Color = vec4(ubo.color, distanceValue * distanceValue * pow(pass_Level, 0.75) * 0.9 * (1. - 0.5 * cloudValue)) +   vec4(ubo.color + vec3(0.2, 0.2, 0.2), extraValue * pow(pass_Level, 0.75) * 0.1);
+    out_Color = vec4(ubo.color, distanceValue * distanceValue * pow(pass_Level, 0.75) * 0.9 * (1. - 0.5 * cloudValue)) + vec4(ubo.color, extraValue * pow(pass_Level, 0.75) * 0.1);
 ;
 }
