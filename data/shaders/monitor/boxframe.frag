@@ -44,13 +44,14 @@ void main(void)
     
     // depth buffer blend
     vec3 linearColor = ubo.color.rgb;
-    float depthThreshold = 10.;
-    float depthValue = 0.f;
-    vec3 depthColor = mix(ubo.depthColor, linearColor, 0.4);
-    if(pass_Selected < 0.f)
-        depthValue = pow(min(1.0, length(ubo.cameraLocation - frag_position) / ubo.depthThreshold), ubo.depthCurvature);
-    vec3 finalColor = depthValue * depthColor + (1. - depthValue) * linearColor;
-
+//    float depthThreshold = 10.;
+//    float depthValue = 0.f;
+//    vec3 depthColor = mix(ubo.depthColor, linearColor, 0.4);
+//    if(pass_Selected < 0.f)
+//        depthValue = pow(min(1.0, length(ubo.cameraLocation - frag_position) / ubo.depthThreshold), ubo.depthCurvature);
+//    vec3 finalColor = depthValue * depthColor + (1. - depthValue) * linearColor;
+    vec3 finalColor = linearColor;
+    
     // if selected, display in white.
     if(pass_Selected > 0.f)
         finalColor = vec3(1, 1, 1);
