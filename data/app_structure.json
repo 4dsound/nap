@@ -1054,13 +1054,7 @@
                     "UBOVert": "UBOVert",
                     "TranformComponent": "./SoundObjectVisualizationTransform",
                     "Positions": [],
-                    "Scales": [
-                        {
-                            "x": 0.05000000074505806,
-                            "y": 0.05000000074505806,
-                            "z": 0.05000000074505806
-                        }
-                    ],
+                    "Scales": [],
                     "Rotations": [],
                     "CameraPositionUniform": "",
                     "UniformFloatValues": [],
@@ -1088,7 +1082,7 @@
                         "z": 0.20000000298023225
                     },
                     "ShowLabels": true,
-                    "ControlScales": false,
+                    "ControlScales": true,
                     "ControlRotations": true,
                     "LevelSmoothTime": 0.05000000074505806
                 },
@@ -1539,7 +1533,7 @@
                     "MonitorVisibilityProperty": "cloudbox",
                     "MonitorLabelVisibilityProperty": "",
                     "ColorUniform": "color",
-                    "ScaleUniform": "",
+                    "ScaleUniform": "scale",
                     "LevelUniform": "level",
                     "SelectedUniform": "",
                     "TimeUniform": "time",
@@ -3207,7 +3201,7 @@
             "mID": "SphereMesh",
             "Usage": "Static",
             "CullMode": "Back",
-            "Radius": 1.0,
+            "Radius": 0.5,
             "Rings": 25.0,
             "Sectors": 25.0,
             "Color": {
