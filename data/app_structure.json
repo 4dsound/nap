@@ -1014,7 +1014,6 @@
                     "MeshComponent": "./ShapeLineMeshComponent",
                     "SpatialTransformationComponent": "../SpatialTransformationComponent",
                     "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
-                    "ShapeComponent": "../ShapeComponent",
                     "TransformComponent": "./SoundObjectVisualizationTransform",
                     "CameraTransformComponent": "../../camera/CameraTransformComponent",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
@@ -1030,6 +1029,7 @@
                     "RenderTargetSizeUniform": "",
                     "TimeUniform": "",
                     "ExposedDataMapping": [],
+                    "EnableData": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
@@ -1645,6 +1645,7 @@
                     "RenderTargetSizeUniform": "",
                     "TimeUniform": "time",
                     "ExposedDataMapping": [],
+                    "EnableData": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
@@ -1695,8 +1696,8 @@
                         "Material": "PlaneCloudMaterial",
                         "Uniforms": [],
                         "Samplers": [],
-                        "BlendMode": "Opaque",
-                        "DepthMode": "ReadWrite"
+                        "BlendMode": "AlphaBlend",
+                        "DepthMode": "ReadOnly"
                     },
                     "LineWidth": 1.0,
                     "ClipRect": {
@@ -1727,7 +1728,7 @@
                     "UBO": "UBO",
                     "UBOVert": "UBOVert",
                     "ColorUniform": "color",
-                    "CameraPositionUniform": "",
+                    "CameraPositionUniform": "cameraPosition",
                     "ScaleUniform": "scale",
                     "RenderTargetSizeUniform": "renderTargetSize",
                     "TimeUniform": "time",
@@ -1787,6 +1788,7 @@
                             "UniformName": "spatialDelay_feedback"
                         }
                     ],
+                    "EnableData": "effect/spatialDelay/enable",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
                         "y": 0.20000000298023225,
@@ -1801,8 +1803,8 @@
                     "SpatialTransformationComponent": "../SpatialTransformationComponent",
                     "ShapeComponent": "../ShapeComponent",
                     "ParticleType": "Planes",
-                    "MaxParticleCount": 50000,
-                    "ParticleDensity": 150.0
+                    "MaxParticleCount": 5000,
+                    "ParticleDensity": 200.0
                 }
             ],
             "Children": []

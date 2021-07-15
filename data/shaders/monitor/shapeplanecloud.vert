@@ -12,6 +12,7 @@ uniform UBOVert
     uniform vec3 scale;
     uniform vec2 renderTargetSize;
     uniform float time;
+    uniform vec3 cameraPosition;
     uniform int spatialDelay_enable;
     uniform float spatialDelay_dryWet;
     uniform float spatialDelay_peripheralScale;
@@ -32,6 +33,9 @@ in vec3 in_UV1;
 in int in_Index;
 
 out vec3 pass_UV0;
+out vec3 pass_Position;
+out vec3 pass_CameraPosition;
+out vec3 pass_Scale;
 
 // By Inigo Quilez.
 vec2 grad(ivec2 z)
@@ -62,8 +66,11 @@ float noise( in vec2 p )
 void main(void)
 {
     pass_UV0 = in_UV0;
+    pass_Position = in_Position;
+    pass_CameraPosition = ubovert.cameraPosition;
+    pass_Scale = ubovert.scale;
     float aspectRatio = ubovert.renderTargetSize.y / ubovert.renderTargetSize.x;
-    vec3 size = vec3(in_RelativePosition.x * aspectRatio, in_RelativePosition.y, 0) * 0.05;
+    vec3 size = vec3(in_RelativePosition.x * aspectRatio, in_RelativePosition.y, 0) * 0.08;
 
     float spatialDelayAmount = ubovert.spatialDelay_dryWet * ubovert.spatialDelay_enable;
 
@@ -87,5 +94,6 @@ void main(void)
 //    vec3 feedbackPosition = in_Position * (1 - ((in_Index % int(ubovert.spatialDelay_feedback * 5)) * 0.2 * ubovert.spatialDelay_feedback));
     vec3 peripheralPosition = mix(feedbackPosition, vec3(0, 0, 0), peripheralDistance * peripheralScale * spatialDelayAmount / ubovert.scale);
     vec3 position = peripheralPosition + ubovert.scale * spatialDelayAmount * (randomDisplacement + modulationDisplacement);
-    gl_Position = (mvp.projectionMatrix * mvp.viewMatrix * mvp.modelMatrix * vec4(position, 1.0)) + vec4(size, 0);
+    float pointScale = (ubovert.scale.x + ubovert.scale.y + ubovert.scale.z)/3.0;
+    gl_Position = (mvp.projectionMatrix * mvp.viewMatrix * mvp.modelMatrix * vec4(position, 1.0)) + vec4(size * max(vec3(10, 10, 10), pointScale) * 0.15, 0);
 }
