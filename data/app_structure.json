@@ -1044,38 +1044,18 @@
                     "Visible": true,
                     "CameraTransformComponent": "../../camera/CameraTransformComponent",
                     "MaterialInstance": {
-                        "Material": "ConstantMaterial",
-                        "Uniforms": [
-                            {
-                                "Type": "nap::UniformStruct",
-                                "mID": "UniformStruct_c7715f91",
-                                "Name": "UBO",
-                                "Uniforms": [
-                                    {
-                                        "Type": "nap::UniformFloat",
-                                        "mID": "UniformFloat_d7d414c6",
-                                        "Name": "alpha",
-                                        "Value": 1.0
-                                    }
-                                ]
-                            }
-                        ],
+                        "Material": "PointParticleMaterial",
+                        "Uniforms": [],
                         "Samplers": [],
-                        "BlendMode": "Opaque",
-                        "DepthMode": "ReadWrite"
+                        "BlendMode": "NotSet",
+                        "DepthMode": "NotSet"
                     },
                     "Mesh": "SphereMesh",
                     "UBO": "UBO",
                     "UBOVert": "UBOVert",
                     "TranformComponent": "./SoundObjectVisualizationTransform",
                     "Positions": [],
-                    "Scales": [
-                        {
-                            "x": 0.029999999329447748,
-                            "y": 0.029999999329447748,
-                            "z": 0.029999999329447748
-                        }
-                    ],
+                    "Scales": [],
                     "Rotations": [],
                     "CameraPositionUniform": "",
                     "UniformFloatValues": [],
@@ -1090,12 +1070,12 @@
                     "MeasurementComponent": "../MeasurementComponent",
                     "SpatialAudioComponent": "../SpatialAudioComponent",
                     "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
-                    "MonitorVisibilityProperty": "particlePoints",
+                    "MonitorVisibilityProperty": "particleFrames",
                     "MonitorLabelVisibilityProperty": "particleLabels",
                     "ColorUniform": "color",
-                    "ScaleUniform": "",
+                    "ScaleUniform": "scale",
                     "LevelUniform": "",
-                    "SelectedUniform": "",
+                    "SelectedUniform": "selected",
                     "TimeUniform": "",
                     "DimmedColor": {
                         "x": 0.20000000298023225,
@@ -1103,7 +1083,7 @@
                         "z": 0.20000000298023225
                     },
                     "ShowLabels": true,
-                    "ControlScales": false,
+                    "ControlScales": true,
                     "ControlRotations": true,
                     "LevelSmoothTime": 0.05000000074505806
                 },
@@ -1554,7 +1534,7 @@
                     "MonitorVisibilityProperty": "cloudbox",
                     "MonitorLabelVisibilityProperty": "",
                     "ColorUniform": "color",
-                    "ScaleUniform": "",
+                    "ScaleUniform": "scale",
                     "LevelUniform": "level",
                     "SelectedUniform": "",
                     "TimeUniform": "time",
@@ -1566,7 +1546,7 @@
                     "ShowLabels": false,
                     "ControlScales": true,
                     "ControlRotations": true,
-                    "LevelSmoothTime": 0.05000000074505806
+                    "LevelSmoothTime": 1.0
                 },
                 {
                     "Type": "nap::spatial::RenderableMeshCopyComponent",
@@ -1633,7 +1613,7 @@
                     "TransformComponent": "./SoundObjectVisualizationTransform",
                     "CameraTransformComponent": "../../camera/CameraTransformComponent",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
-                    "ExposedDataComponent": "",
+                    "ExposedDataComponent": "../ExposedDataComponent",
                     "MonitorVisibilityProperty": "shapePointCloud",
                     "MonitorLabelVisibilityProperty": "",
                     "Rendertarget": "",
@@ -2792,6 +2772,21 @@
         },
         {
             "Type": "nap::Material",
+            "mID": "PointParticleMaterial",
+            "Uniforms": [],
+            "Samplers": [],
+            "Shader": "PointParticleShader",
+            "VertexAttributeBindings": [
+                {
+                    "MeshAttributeID": "Position",
+                    "ShaderAttributeID": "in_Position"
+                }
+            ],
+            "BlendMode": "Opaque",
+            "DepthMode": "InheritFromBlendMode"
+        },
+        {
+            "Type": "nap::Material",
             "mID": "SolidMaterial",
             "Uniforms": [
                 {
@@ -3192,6 +3187,12 @@
         },
         {
             "Type": "nap::ShaderFromFile",
+            "mID": "PointParticleShader",
+            "VertShader": "shaders/monitor/point.vert",
+            "FragShader": "shaders/monitor/point.frag"
+        },
+        {
+            "Type": "nap::ShaderFromFile",
             "mID": "ShapePlaneCloudShader",
             "VertShader": "shaders/monitor/shapeplanecloud.vert",
             "FragShader": "shaders/monitor/planecloud.frag"
@@ -3213,7 +3214,7 @@
             "mID": "SphereMesh",
             "Usage": "Static",
             "CullMode": "Back",
-            "Radius": 1.0,
+            "Radius": 0.5,
             "Rings": 25.0,
             "Sectors": 25.0,
             "Color": {
@@ -4155,19 +4156,13 @@
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "soundObjectShapes",
                     "Title": "Shapes",
-                    "Value": true
+                    "Value": false
                 },
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "soundObjectNames",
                     "Title": "Names",
                     "Value": false
-                },
-                {
-                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
-                    "mID": "particlePoints",
-                    "Title": "P. Points",
-                    "Value": true
                 },
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
@@ -4197,6 +4192,12 @@
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "particleFrames",
                     "Title": "P. Frames",
+                    "Value": true
+                },
+                {
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "cloudbox",
+                    "Title": "P. Cl. B.",
                     "Value": true
                 },
                 {
@@ -4233,18 +4234,12 @@
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "effectLabels",
                     "Title": "Effects",
-                    "Value": true
+                    "Value": false
                 },
                 {
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "paths",
                     "Title": "Paths",
-                    "Value": true
-                },
-                {
-                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
-                    "mID": "cloudbox",
-                    "Title": "P. Cl. B.",
                     "Value": true
                 },
                 {
