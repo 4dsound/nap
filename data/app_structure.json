@@ -1783,8 +1783,8 @@
                     "SpatialTransformationComponent": "../SpatialTransformationComponent",
                     "ShapeComponent": "../ShapeComponent",
                     "ParticleType": "Planes",
-                    "MaxParticleCount": 5000,
-                    "ParticleDensity": 200.0
+                    "MaxParticleCount": 100000,
+                    "ParticleDensity": 20.0
                 }
             ],
             "Children": []

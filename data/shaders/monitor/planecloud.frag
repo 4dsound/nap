@@ -16,8 +16,7 @@ void main()
     float distanceToCenter = distance(pass_UV0, vec3(0.5, 0.5, 0));
     float distanceToCamera = distance(pass_Position, pass_CameraPosition);
     float scaleFactor = (pass_Scale.x + pass_Scale.y + pass_Scale.z)/3.0;
-    float alpha = max(0.2, (distanceToCamera * 0.5) / max(20, scaleFactor));
-    if (distanceToCenter > 0.5)
-        alpha = 0;
+//    float alpha = (distanceToCenter * 0.0) / max(20, scaleFactor);
+    float alpha = pow(max(0, 0.5 - distanceToCenter), 1) * 0.1;
     out_Color = vec4(ubo.color, alpha);
 }

@@ -82,7 +82,7 @@ void main(void)
     vec3 randomDisplacement = in_Normal * randomAmplitude * noise(vec2(in_UV1.x * randomDetail + 1, in_UV1.y * randomDetail + 1)) * max(0, 0.6 - distance(vec3(in_UV1.x, in_UV1.y, 0), vec3(0.5, 0.5, 0)));
 
     // calculate noise displacement for the noise modulation
-    float modulationAmplitude = pow(ubovert.spatialDelay_noiseDepth/1000, 0.3) * 3;
+    float modulationAmplitude = pow(ubovert.spatialDelay_noiseDepth/1000, 0.3) * 6;
     float modulationDetail = 2 + ubovert.spatialDelay_noiseSpeed * (1 - ubovert.spatialDelay_smooth) * 2;
     float modulationNoise = noise(vec2(in_UV1.x * modulationDetail + ubovert.spatialDelay_modulationTimePassed, in_UV1.y * modulationDetail));
     vec3 modulationDisplacement = in_Normal * modulationAmplitude * modulationNoise * max(0, 0.6 - distance(vec3(in_UV1.x, in_UV1.y, 0), vec3(0.5, 0.5, 0)));
@@ -106,9 +106,9 @@ void main(void)
     // Calculate the point plane size
     float aspectRatio = ubovert.renderTargetSize.y / ubovert.renderTargetSize.x;
     vec3 size = vec3(in_RelativePosition.x * aspectRatio, in_RelativePosition.y, 0);
+//
+//    // Adjust point size for overal sound object scale, with a maximum of 10
+//    float pointScaleMultiplier = max(10, (ubovert.scale.x + ubovert.scale.y + ubovert.scale.z)/3.0) * 0.012;
 
-    // Adjust point size for overal sound object scale, with a maximum of 10
-    float pointScaleMultiplier = max(10, (ubovert.scale.x + ubovert.scale.y + ubovert.scale.z)/3.0);
-
-    gl_Position = (mvp.projectionMatrix * mvp.viewMatrix * mvp.modelMatrix * vec4(position, 1.0)) + vec4(size * pointScaleMultiplier * 0.012, 0);
+    gl_Position = (mvp.projectionMatrix * mvp.viewMatrix * mvp.modelMatrix * vec4(position, 1.0)) + vec4(size * 3, 0);
 }
