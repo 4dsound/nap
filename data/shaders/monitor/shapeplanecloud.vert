@@ -9,7 +9,7 @@ uniform nap
 
 uniform UBOVert
 {
-    uniform vec3 scale;
+    uniform vec3 scale; // Sound object scale
     uniform vec2 renderTargetSize;
     uniform float time;
     uniform vec3 cameraPosition;
@@ -25,12 +25,12 @@ uniform UBOVert
 } ubovert;
 
 
-in vec3 in_Position;
+in vec3 in_Position; // Point center position
 in vec3 in_Normal;
-in vec3 in_RelativePosition;
-in vec3	in_UV0;
-in vec3 in_UV1;
-in int in_Index;
+in vec3 in_RelativePosition; // Position of the plane vertex relative to the point center
+in vec3	in_UV0; // UV on the point plane
+in vec3 in_UV1; // UV on the shape surface
+in int in_Index; // Vertex index
 
 out vec3 pass_UV0;
 out vec3 pass_Position;
@@ -65,35 +65,48 @@ float noise( in vec2 p )
 
 void main(void)
 {
+    // Pass UV coordinates to frag shader
     pass_UV0 = in_UV0;
+    // Pass point position to frag shader
     pass_Position = in_Position;
+    // Pass camera position to frag shader
     pass_CameraPosition = ubovert.cameraPosition;
+    // Pass sound object scale to frag shader
     pass_Scale = ubovert.scale;
-    float aspectRatio = ubovert.renderTargetSize.y / ubovert.renderTargetSize.x;
-    vec3 size = vec3(in_RelativePosition.x * aspectRatio, in_RelativePosition.y, 0) * 0.08;
 
     float spatialDelayAmount = ubovert.spatialDelay_dryWet * ubovert.spatialDelay_enable;
 
+    // calculate noise displacement for the spatiald delay random parameter
     float randomAmplitude = pow(ubovert.spatialDelay_random/30.0, 0.3) * 3;
     float randomDetail = 2;
     vec3 randomDisplacement = in_Normal * randomAmplitude * noise(vec2(in_UV1.x * randomDetail + 1, in_UV1.y * randomDetail + 1)) * max(0, 0.6 - distance(vec3(in_UV1.x, in_UV1.y, 0), vec3(0.5, 0.5, 0)));
 
+    // calculate noise displacement for the noise modulation
     float modulationAmplitude = pow(ubovert.spatialDelay_noiseDepth/1000, 0.3) * 3;
     float modulationDetail = 2 + ubovert.spatialDelay_noiseSpeed * (1 - ubovert.spatialDelay_smooth) * 2;
     float modulationNoise = noise(vec2(in_UV1.x * modulationDetail + ubovert.spatialDelay_modulationTimePassed, in_UV1.y * modulationDetail));
     vec3 modulationDisplacement = in_Normal * modulationAmplitude * modulationNoise * max(0, 0.6 - distance(vec3(in_UV1.x, in_UV1.y, 0), vec3(0.5, 0.5, 0)));
 
-    float peripheralDistance = distance(vec3(0, 0, 0), 0.5f * ubovert.scale) - distance(vec3(0, 0, 0), in_Position);
+    // Calculate the relative proximity to the sound object center
+    float peripheralProximity = distance(vec3(0, 0, 0), 0.5f * ubovert.scale) - distance(vec3(0, 0, 0), in_Position);
     float peripheralScale = ubovert.spatialDelay_peripheralScale * 0.07;
 
+    // MOdulate the input position for the feedback effect
     float feedbackRand = (in_Index % 100)/100.0 * (ubovert.spatialDelay_feedback * 0.8);
     feedbackRand = pow(feedbackRand, 1);
     float feedbackMultiplier = int(feedbackRand * 5) / 5.0;
     vec3 feedbackPosition = in_Position * (1. - feedbackMultiplier);
 
-//    vec3 feedbackPosition = in_Position * (1 - ((in_Index % int(ubovert.spatialDelay_feedback * 5)) * 0.2 * ubovert.spatialDelay_feedback));
-    vec3 peripheralPosition = mix(feedbackPosition, vec3(0, 0, 0), peripheralDistance * peripheralScale * spatialDelayAmount / ubovert.scale);
+    // Modulate the input position for the peripheral effect
+    vec3 peripheralPosition = mix(feedbackPosition, vec3(0, 0, 0), peripheralProximity * peripheralScale * spatialDelayAmount / ubovert.scale);
+
+    // Calculate final point position
     vec3 position = peripheralPosition + ubovert.scale * spatialDelayAmount * (randomDisplacement + modulationDisplacement);
-    float pointScale = (ubovert.scale.x + ubovert.scale.y + ubovert.scale.z)/3.0;
-    gl_Position = (mvp.projectionMatrix * mvp.viewMatrix * mvp.modelMatrix * vec4(position, 1.0)) + vec4(size * max(vec3(10, 10, 10), pointScale) * 0.15, 0);
+
+    // Calculate the point plane size
+    float aspectRatio = ubovert.renderTargetSize.y / ubovert.renderTargetSize.x;
+    vec3 size = vec3(in_RelativePosition.x * aspectRatio, in_RelativePosition.y, 0) * 0.08;
+    float pointScalar = (ubovert.scale.x + ubovert.scale.y + ubovert.scale.z)/3.0;
+
+    gl_Position = (mvp.projectionMatrix * mvp.viewMatrix * mvp.modelMatrix * vec4(position, 1.0)) + vec4(size * max(vec3(10, 10, 10), pointScalar) * 0.15, 0);
 }
