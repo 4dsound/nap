@@ -105,8 +105,10 @@ void main(void)
 
     // Calculate the point plane size
     float aspectRatio = ubovert.renderTargetSize.y / ubovert.renderTargetSize.x;
-    vec3 size = vec3(in_RelativePosition.x * aspectRatio, in_RelativePosition.y, 0) * 0.08;
-    float pointScalar = (ubovert.scale.x + ubovert.scale.y + ubovert.scale.z)/3.0;
+    vec3 size = vec3(in_RelativePosition.x * aspectRatio, in_RelativePosition.y, 0);
 
-    gl_Position = (mvp.projectionMatrix * mvp.viewMatrix * mvp.modelMatrix * vec4(position, 1.0)) + vec4(size * max(vec3(10, 10, 10), pointScalar) * 0.15, 0);
+    // Adjust point size for overal sound object scale, with a maximum of 10
+    float pointScaleMultiplier = max(10, (ubovert.scale.x + ubovert.scale.y + ubovert.scale.z)/3.0);
+
+    gl_Position = (mvp.projectionMatrix * mvp.viewMatrix * mvp.modelMatrix * vec4(position, 1.0)) + vec4(size * pointScaleMultiplier * 0.012, 0);
 }
