@@ -1262,7 +1262,7 @@
                     "ShowLabels": false,
                     "ControlScales": false,
                     "ControlRotations": false,
-                    "LevelSmoothTime": 0.05000000074505806
+                    "LevelSmoothTime": 0.5
                 },
                 {
                     "Type": "nap::spatial::RenderableMeshCopyComponent",
