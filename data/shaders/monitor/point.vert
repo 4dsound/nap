@@ -11,6 +11,7 @@ uniform nap
 uniform UBOVert
 {
     uniform vec3 scale;
+    uniform float selected;
 } ubovert;
 
 // Input Vertex Attributes
@@ -22,12 +23,17 @@ void main(void)
     float multiplier = 0.;
     if(ubovert.scale.x < 0.101 && ubovert.scale.y < 0.101 && ubovert.scale.z < 0.101)
         multiplier = 1.;
+
+    float selectedMultiplier = 1.f;
+    if(ubovert.selected > 0.f)
+        selectedMultiplier = 2.f;
+
     
     // Create a matrix with a static scale of 0.1, taking the translation from the model matrix.
     mat4 matrix;
-    matrix[0] = vec4(0.2, 0.0, 0.0, 0.0); // first column
-    matrix[1] = vec4(0.0, 0.2, 0.0, 0.0); // second column
-    matrix[2] = vec4(0.0, 0.0, 0.2, 0.0); // third column
+    matrix[0] = vec4(0.15 * selectedMultiplier, 0.0, 0.0, 0.0); // first column
+    matrix[1] = vec4(0.0, 0.15 * selectedMultiplier, 0.0, 0.0); // second column
+    matrix[2] = vec4(0.0, 0.0, 0.15 * selectedMultiplier, 0.0); // third column
     matrix[3] = vec4(mvp.modelMatrix[3][0], mvp.modelMatrix[3][1], mvp.modelMatrix[3][2], 1.0); // fourth column
     
     // Calculate frag position

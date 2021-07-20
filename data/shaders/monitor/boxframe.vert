@@ -42,7 +42,7 @@ void main(void)
         selectedMultiplier = 2.f;
 
 
-    vec3 displacement = in_Displacement * selectedMultiplier * 0.04f;
+    vec3 displacement = in_Displacement * selectedMultiplier * 0.03f;
 		displacement *= vec3(1./ubovert.scale.x, 1./ubovert.scale.y, 1./ubovert.scale.z);
     gl_Position = mvp.projectionMatrix * mvp.viewMatrix * modelMatrix * vec4(in_Position + displacement, 1.0);
 
