@@ -1665,7 +1665,7 @@
                     "ShapeComponent": "../ShapeComponent",
                     "ParticleType": "Points",
                     "MaxParticleCount": 10000,
-                    "ParticleDensity": 50.0
+                    "ParticleDensity": 250.0
                 },
                 {
                     "Type": "nap::RenderableMeshComponent",
@@ -1783,8 +1783,8 @@
                     "SpatialTransformationComponent": "../SpatialTransformationComponent",
                     "ShapeComponent": "../ShapeComponent",
                     "ParticleType": "Planes",
-                    "MaxParticleCount": 100000,
-                    "ParticleDensity": 20.0
+                    "MaxParticleCount": 50000,
+                    "ParticleDensity": 500.0
                 }
             ],
             "Children": []
