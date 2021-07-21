@@ -795,6 +795,11 @@
                             "Type": "nap::spatial::QuadShape",
                             "mID": "QuadShape",
                             "Name": "quad"
+                        },
+                        {
+                            "Type": "nap::spatial::BasicCubeShape",
+                            "mID": "BasicCubeShape",
+                            "Name": "basicCube"
                         }
                     ],
                     "ShapeTransformations": [
