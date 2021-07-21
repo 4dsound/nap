@@ -1008,6 +1008,12 @@
             "mID": "SoundObjectVisualization",
             "Components": [
                 {
+                    "Type": "nap::spatial::TransformController",
+                    "mID": "TransformController",
+                    "SpatialTransformationComponent": "../SpatialTransformationComponent",
+                    "TransformComponent": "./SoundObjectVisualizationTransform"
+                },
+                {
                     "Type": "nap::spatial::ShapeVisualizationController",
                     "mID": "ShapeVisualizationController",
                     "RenderableMeshComponent": "./ShapeVisualization",
@@ -1434,6 +1440,7 @@
                     "Type": "nap::ControlSchedulerComponent",
                     "mID": "ControlSchedulerComponent",
                     "Components": [
+                        "./TransformController",
                         "./ShapeVisualizationController",
                         "./PathVisualizationController",
                         "./EnabledEffectDisplay",
