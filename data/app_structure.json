@@ -790,6 +790,11 @@
                             "Name": "speakerSetup",
                             "MultiSpeakerSetup": "multiSetup",
                             "GridIndex": 1
+                        },
+                        {
+                            "Type": "nap::spatial::QuadShape",
+                            "mID": "QuadShape",
+                            "Name": "quad"
                         }
                     ],
                     "ShapeTransformations": [
