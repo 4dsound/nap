@@ -37,6 +37,12 @@ out vec3 pass_Position;
 out vec3 pass_CameraPosition;
 out vec3 pass_Scale;
 
+out vec2 pass_Direction;
+
+out float pass_DryWet;
+
+out float pass_Intensity;
+
 // By Inigo Quilez.
 vec2 grad(ivec2 z)
 {
@@ -63,6 +69,7 @@ float noise( in vec2 p )
     dot( grad( i+ivec2(1,1) ), f-vec2(1.0,1.0) ), u.x), u.y);
 }
 
+
 void main(void)
 {
     // Pass UV coordinates to frag shader
@@ -74,41 +81,50 @@ void main(void)
     // Pass sound object scale to frag shader
     pass_Scale = ubovert.scale;
 
-    float spatialDelayAmount = ubovert.spatialDelay_dryWet * ubovert.spatialDelay_enable;
+    pass_DryWet = ubovert.spatialDelay_dryWet;
 
-    // calculate noise displacement for the spatiald delay random parameter
-    float randomAmplitude = pow(ubovert.spatialDelay_random/30.0, 0.3) * 3;
-    float randomDetail = 2;
-    vec3 randomDisplacement = in_Normal * randomAmplitude * noise(vec2(in_UV1.x * randomDetail + 1, in_UV1.y * randomDetail + 1)) * max(0, 0.6 - distance(vec3(in_UV1.x, in_UV1.y, 0), vec3(0.5, 0.5, 0)));
+    float spatialDelayAmount = ubovert.spatialDelay_enable;
 
-    // calculate noise displacement for the noise modulation
-    float modulationAmplitude = pow(ubovert.spatialDelay_noiseDepth/1000, 0.3) * 3;
-    float modulationDetail = 2 + ubovert.spatialDelay_noiseSpeed * (1 - ubovert.spatialDelay_smooth) * 2;
-    float modulationNoise = noise(vec2(in_UV1.x * modulationDetail + ubovert.spatialDelay_modulationTimePassed, in_UV1.y * modulationDetail));
-    vec3 modulationDisplacement = in_Normal * modulationAmplitude * modulationNoise * max(0, 0.6 - distance(vec3(in_UV1.x, in_UV1.y, 0), vec3(0.5, 0.5, 0)));
 
-    // Calculate the relative proximity to the sound object center
-    float peripheralProximity = distance(vec3(0, 0, 0), 0.5f * ubovert.scale) - distance(vec3(0, 0, 0), in_Position);
-    float peripheralScale = ubovert.spatialDelay_peripheralScale * 0.07;
-
-    // MOdulate the input position for the feedback effect
+    // Modulate the input position for the feedback effect
     float feedbackRand = (in_Index % 100)/100.0 * (ubovert.spatialDelay_feedback * 0.8);
-    feedbackRand = pow(feedbackRand, 1);
-    float feedbackMultiplier = int(feedbackRand * 5) / 5.0;
-    vec3 feedbackPosition = in_Position * (1. - feedbackMultiplier);
+    float randRounded = int(feedbackRand * 5) / 5.0;
+    float feedbackMultiplier =  (1. - randRounded) * (1. + 0.5 * ubovert.spatialDelay_feedback);
 
-    // Modulate the input position for the peripheral effect
-    vec3 peripheralPosition = mix(feedbackPosition, vec3(0, 0, 0), peripheralProximity * peripheralScale * spatialDelayAmount / ubovert.scale);
+    // Peripheral multiplier
+    float peripheralProximity = distance(vec3(0, 0, 0), 0.5f * ubovert.scale) - distance(vec3(0, 0, 0), in_Position);
+    float peripheralMultiplier = 1. + ubovert.spatialDelay_peripheralScale * 0.04;
+
+    // Random noise displacement
+	float modulationAmplitude = ubovert.spatialDelay_noiseDepth * ubovert.spatialDelay_noiseDepth * 2.;
+	float modulationNoise = 0.5 + 1.5 * noise(vec2(in_UV1.x * 5 + in_UV1.z * 2 + ubovert.spatialDelay_modulationTimePassed / 4., in_UV1.y * 5 + in_UV1.z * 2)) * max(0, 1.0 - distance(vec3(in_UV1.x, in_UV1.y, 0), vec3(0.5, 0.5, 0)));
+	float modulationMultiplier = modulationNoise * modulationAmplitude;
+
 
     // Calculate final point position
-    vec3 position = peripheralPosition + ubovert.scale * spatialDelayAmount * (randomDisplacement + modulationDisplacement);
+	vec3 position = in_Position * feedbackMultiplier * peripheralMultiplier + in_Position * modulationMultiplier;  
 
     // Calculate the point plane size
     float aspectRatio = ubovert.renderTargetSize.y / ubovert.renderTargetSize.x;
-    vec3 size = vec3(in_RelativePosition.x * aspectRatio, in_RelativePosition.y, 0);
+    vec3 relativePosition = vec3(in_RelativePosition.x * aspectRatio, in_RelativePosition.y, 0);
 
-    // Adjust point size for overal sound object scale, with a maximum of 10
-    float pointScaleMultiplier = max(10, (ubovert.scale.x + ubovert.scale.y + ubovert.scale.z)/3.0);
+	// create new model matrix that only takes into account the translation.
+    mat4 matrix;
+    matrix[0] = vec4(1.0, 0.0, 0.0, 0.0); // first column
+    matrix[1] = vec4(0.0, 1.0, 0.0, 0.0); // second column
+    matrix[2] = vec4(0.0, 0.0, 1.0, 0.0); // third column
+    matrix[3] = vec4(mvp.modelMatrix[3][0], mvp.modelMatrix[3][1], mvp.modelMatrix[3][2], 1.0); // fourth column
 
-    gl_Position = (mvp.projectionMatrix * mvp.viewMatrix * mvp.modelMatrix * vec4(position, 1.0)) + vec4(size * pointScaleMultiplier * 0.012, 0);
+
+    // calculate scaling factor
+    float scaleAverage = (ubovert.scale.x + ubovert.scale.y + ubovert.scale.y) / 3.;
+    scaleAverage *= 0.66;
+    float boundScale = 1. + scaleAverage * 0.3;
+
+
+	// correctly position the SphereMesh around the sound object transform box
+	vec3 postScalePosition = boundScale * position;
+
+    // calculate gl_Position
+    gl_Position = mvp.projectionMatrix * mvp.viewMatrix * matrix * vec4(postScalePosition, 1) + vec4(relativePosition * 1. * boundScale, 0);
 }

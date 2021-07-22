@@ -1020,8 +1020,8 @@
                 {
                     "Type": "nap::spatial::TransformController",
                     "mID": "TransformController",
-                    "SpatialTransformationComponent": "../SpatialTransformationComponent",
-                    "TransformComponent": "./SoundObjectVisualizationTransform"
+                    "TransformComponent": "./SoundObjectVisualizationTransform",
+                    "SpatialTransformationComponent": "../SpatialTransformationComponent"
                 },
                 {
                     "Type": "nap::spatial::ShapeVisualizationController",
@@ -1278,7 +1278,7 @@
                     "ShowLabels": false,
                     "ControlScales": false,
                     "ControlRotations": false,
-                    "LevelSmoothTime": 0.05000000074505806
+                    "LevelSmoothTime": 0.5
                 },
                 {
                     "Type": "nap::spatial::RenderableMeshCopyComponent",
@@ -1463,7 +1463,7 @@
                         "./PointCloudShapeVisualizationController",
                         "./ShapePointCloudComponent",
                         "./PlaneCloudShapeVisualizationController",
-                        "./ShapePlaneCloudComponent",
+                        "./SpherePlaneCloudComponent",
                         "./PointParticleVisualizationController",
                         "./CloudBoxVisualizationController",
                         "./FlameVisualizationController",
@@ -1682,7 +1682,7 @@
                     "ShapeComponent": "../ShapeComponent",
                     "ParticleType": "Points",
                     "MaxParticleCount": 10000,
-                    "ParticleDensity": 50.0
+                    "ParticleDensity": 250.0
                 },
                 {
                     "Type": "nap::RenderableMeshComponent",
@@ -1712,7 +1712,7 @@
                     "Type": "nap::spatial::ShapeVisualizationController",
                     "mID": "PlaneCloudShapeVisualizationController",
                     "RenderableMeshComponent": "./PlaneCloudShapeVisualization",
-                    "MeshComponent": "./ShapePlaneCloudComponent",
+                    "MeshComponent": "./SpherePlaneCloudComponent",
                     "SpatialTransformationComponent": "../SpatialTransformationComponent",
                     "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
                     "TransformComponent": "./SoundObjectVisualizationTransform",
@@ -1795,13 +1795,12 @@
                     "ShowTextLabel": false
                 },
                 {
-                    "Type": "nap::spatial::ShapeCloudComponent",
-                    "mID": "ShapePlaneCloudComponent",
+                    "Type": "nap::spatial::SphereCloudComponent",
+                    "mID": "SpherePlaneCloudComponent",
                     "SpatialTransformationComponent": "../SpatialTransformationComponent",
-                    "ShapeComponent": "../ShapeComponent",
                     "ParticleType": "Planes",
-                    "MaxParticleCount": 5000,
-                    "ParticleDensity": 200.0
+                    "MaxParticleCount": 50000,
+                    "ParticleDensity": 500.0
                 }
             ],
             "Children": []
