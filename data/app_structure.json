@@ -1020,8 +1020,8 @@
                 {
                     "Type": "nap::spatial::TransformController",
                     "mID": "TransformController",
-                    "SpatialTransformationComponent": "../SpatialTransformationComponent",
-                    "TransformComponent": "./SoundObjectVisualizationTransform"
+                    "TransformComponent": "./SoundObjectVisualizationTransform",
+                    "SpatialTransformationComponent": "../SpatialTransformationComponent"
                 },
                 {
                     "Type": "nap::spatial::ShapeVisualizationController",
@@ -1463,7 +1463,7 @@
                         "./PointCloudShapeVisualizationController",
                         "./ShapePointCloudComponent",
                         "./PlaneCloudShapeVisualizationController",
-                        "./ShapePlaneCloudComponent",
+                        "./SpherePlaneCloudComponent",
                         "./PointParticleVisualizationController",
                         "./CloudBoxVisualizationController",
                         "./FlameVisualizationController",
@@ -1712,7 +1712,7 @@
                     "Type": "nap::spatial::ShapeVisualizationController",
                     "mID": "PlaneCloudShapeVisualizationController",
                     "RenderableMeshComponent": "./PlaneCloudShapeVisualization",
-                    "MeshComponent": "./ShapePlaneCloudComponent",
+                    "MeshComponent": "./SpherePlaneCloudComponent",
                     "SpatialTransformationComponent": "../SpatialTransformationComponent",
                     "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
                     "TransformComponent": "./SoundObjectVisualizationTransform",
@@ -1795,10 +1795,9 @@
                     "ShowTextLabel": false
                 },
                 {
-                    "Type": "nap::spatial::ShapeCloudComponent",
-                    "mID": "ShapePlaneCloudComponent",
+                    "Type": "nap::spatial::SphereCloudComponent",
+                    "mID": "SpherePlaneCloudComponent",
                     "SpatialTransformationComponent": "../SpatialTransformationComponent",
-                    "ShapeComponent": "../ShapeComponent",
                     "ParticleType": "Planes",
                     "MaxParticleCount": 50000,
                     "ParticleDensity": 500.0
