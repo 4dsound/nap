@@ -119,7 +119,7 @@ void main(void)
     // calculate scaling factor
     float scaleAverage = (ubovert.scale.x + ubovert.scale.y + ubovert.scale.y) / 3.;
     scaleAverage *= 0.66;
-    float boundScale = 1. + scaleAverage * 0.2;
+    float boundScale = 1. + scaleAverage * 0.3;
 
 
 	// correctly position the SphereMesh around the sound object transform box
