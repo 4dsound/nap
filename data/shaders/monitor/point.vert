@@ -29,7 +29,7 @@ void main(void)
         selectedMultiplier = 2.f;
 
     
-    // Create a matrix with a static scale of 0.1, taking the translation from the model matrix.
+    // Create a matrix with a static scale, taking the translation from the model matrix.
     mat4 matrix;
     matrix[0] = vec4(0.15 * selectedMultiplier, 0.0, 0.0, 0.0); // first column
     matrix[1] = vec4(0.0, 0.15 * selectedMultiplier, 0.0, 0.0); // second column
