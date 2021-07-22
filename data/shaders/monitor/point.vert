@@ -17,6 +17,8 @@ uniform UBOVert
 // Input Vertex Attributes
 in vec3 in_Position;
 
+out float pass_Selected;
+
 void main(void)
 {
     // Invisible if the dimensions are too high.
@@ -26,8 +28,9 @@ void main(void)
 
     float selectedMultiplier = 1.f;
     if(ubovert.selected > 0.f)
-        selectedMultiplier = 2.f;
+        selectedMultiplier = 1.5f;
 
+    pass_Selected = ubovert.selected;
     
     // Create a matrix with a static scale, taking the translation from the model matrix.
     mat4 matrix;
