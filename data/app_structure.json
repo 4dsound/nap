@@ -790,6 +790,16 @@
                             "Name": "speakerSetup",
                             "MultiSpeakerSetup": "multiSetup",
                             "GridIndex": 1
+                        },
+                        {
+                            "Type": "nap::spatial::QuadShape",
+                            "mID": "QuadShape",
+                            "Name": "quad"
+                        },
+                        {
+                            "Type": "nap::spatial::BasicCubeShape",
+                            "mID": "BasicCubeShape",
+                            "Name": "basicCube"
                         }
                     ],
                     "ShapeTransformations": [
@@ -1007,6 +1017,12 @@
             "Type": "nap::Entity",
             "mID": "SoundObjectVisualization",
             "Components": [
+                {
+                    "Type": "nap::spatial::TransformController",
+                    "mID": "TransformController",
+                    "SpatialTransformationComponent": "../SpatialTransformationComponent",
+                    "TransformComponent": "./SoundObjectVisualizationTransform"
+                },
                 {
                     "Type": "nap::spatial::ShapeVisualizationController",
                     "mID": "ShapeVisualizationController",
@@ -1434,6 +1450,7 @@
                     "Type": "nap::ControlSchedulerComponent",
                     "mID": "ControlSchedulerComponent",
                     "Components": [
+                        "./TransformController",
                         "./ShapeVisualizationController",
                         "./PathVisualizationController",
                         "./EnabledEffectDisplay",
