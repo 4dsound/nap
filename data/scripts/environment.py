@@ -244,8 +244,6 @@ def addFollowAndGroupTransformationsToAllSoundObjects():
 
 
 def init(entity):
-    print("environment init")
-
     environment = entity.findComponent("nap::spatial::EnvironmentComponentInstance")
 
     environment.setCurrentState("starting")

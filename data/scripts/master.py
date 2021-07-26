@@ -2,7 +2,6 @@ import nap
 
 class SatelliteMaster:
     def __init__(self, parameters, dsp):
-        print("ctor satellite")
         self.compressor = dsp.getObject("SatelliteCompressor").getChannel(0)
         parameters.connect("masterLimiterRatio", self.compressor.setRatio)
         parameters.connect("masterLimiterAttack", self.compressor.setAttack)
@@ -11,7 +10,6 @@ class SatelliteMaster:
 
 class SubMaster:
     def __init__(self, parameters, dsp):
-        print("ctor sub")
         self.compressor = dsp.getObject("SubCompressor").getChannel(0)
         parameters.connect("masterLimiterRatio", self.compressor.setRatio)
         parameters.connect("masterLimiterAttack", self.compressor.setAttack)
