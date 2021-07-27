@@ -3512,13 +3512,6 @@
                             "MonitorController": "MonitorController"
                         },
                         {
-                            "Type": "nap::spatial::OSCSenderGui",
-                            "mID": "OSCSenderGui_52ad2274",
-                            "Title": "",
-                            "Style": "",
-                            "OSCSender": "OSCSender"
-                        },
-                        {
                             "Type": "nap::spatial::InputVUMeters",
                             "mID": "InputVUMeters_ac2f6b4d",
                             "Title": "InputVUMeters",
@@ -3548,6 +3541,29 @@
                             "HeadphonesSetup": "headphonesSetup"
                         }
                     ]
+                }
+            ]
+        },
+        {
+            "Type": "nap::gui::Layout",
+            "mID": "DataLayout",
+            "Title": "",
+            "Style": "",
+            "Separators": true,
+            "Content": [
+                {
+                    "Type": "nap::spatial::ExposedDataGui",
+                    "mID": "ExposedDataGui_8d65cecd",
+                    "Title": "ExposedDataGui",
+                    "Style": "",
+                    "Scene": "Scene"
+                },
+                {
+                    "Type": "nap::spatial::OSCSenderGui",
+                    "mID": "OSCSenderGui_d671dfd8",
+                    "Title": "OSCSenderGui",
+                    "Style": "",
+                    "OSCSender": "OSCSender"
                 }
             ]
         },
@@ -4031,13 +4047,13 @@
                             "HorizontalScrollBar": false
                         },
                         "Alpha": 0.0,
-                        "Border": true,
+                        "Border": false,
                         "Content": {
-                            "Type": "nap::spatial::ExposedDataGui",
-                            "mID": "ExposedDataGui_8b723989",
-                            "Title": "Exposed Data",
+                            "Type": "nap::gui::GuiLink",
+                            "mID": "DataGuiLink",
+                            "Title": "DataGuiLink",
                             "Style": "",
-                            "Scene": "Scene"
+                            "Link": "DataLayout"
                         }
                     }
                 },
