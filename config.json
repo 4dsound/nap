@@ -47,64 +47,6 @@
                     160
                 ]
             }
-        },
-        {
-            "Type": "nap::ParameterServiceConfiguration",
-            "mID": "nap::ParameterServiceConfiguration",
-            "PresetsDirectory": "Presets"
-        },
-        {
-            "Type": "nap::RenderServiceConfiguration",
-            "mID": "nap::RenderServiceConfiguration",
-            "Headless": false,
-            "PreferredGPU": "Discrete",
-            "Layers": [
-                "VK_LAYER_KHRONOS_validation"
-            ],
-            "Extensions": [],
-            "VulkanMajor": 1,
-            "VulkanMinor": 0,
-            "EnableHighDPI": true,
-            "ShowLayers": false,
-            "ShowExtensions": false,
-            "AnisotropicSamples": 8
-        },
-        {
-            "Type": "nap::audio::AudioServiceConfiguration",
-            "mID": "nap::audio::AudioServiceConfiguration",
-            "HostApi": "",
-            "InputDevice": "",
-            "OutputDevice": "",
-            "InputChannelCount": 1,
-            "OutputChannelCount": 2,
-            "AllowChannelCountFailure": true,
-            "AllowDeviceFailure": true,
-            "DisableInput": false,
-            "SampleRate": 44100.0,
-            "BufferSize": 1024,
-            "InternalBufferSize": 1024
-        },
-        {
-            "Type": "nap::spatial::HeadphonesServiceConfiguration",
-            "mID": "nap::spatial::HeadphonesServiceConfiguration",
-            "Routing": [
-                0,
-                1
-            ],
-            "BinauralSamplingMode": "nearest",
-            "BinauralSampleSet": "cipic_165",
-            "BinauralCrossOverThreshold": 2.0,
-            "StereoCrossOverThreshold": 10.0,
-            "StereoCrossOverCurvature": 0.0
-        },
-        {
-            "Type": "nap::spatial::MultiSpeakerServiceConfiguration",
-            "mID": "nap::spatial::MultiSpeakerServiceConfiguration",
-            "Routing": [1,2,3,4,5,6,7,8],
-            "SpeakerSetupFile": "setups/Cube.xml",
-            "Active": false,
-            "MasterVolume": -48.0,
-            "MasterSettings": []
         }
     ]
 }
