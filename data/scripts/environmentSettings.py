@@ -5,10 +5,10 @@ GROUPS_COUNT = 3
 SIMPLE_SOURCES_COUNT = 8
 
 # The number of sound objects that do not receive from other sound objects.
-SOURCES_COUNT = 8
+SOURCES_COUNT = 4
 
 # The number of sound objects that receive from all other sound objects.
-SPACES_COUNT = 8
+SPACES_COUNT = 4
 
 # Number of sound objects with spatial delay and reverb47 mapped to speaker
 REVERB_COUNT = 1
