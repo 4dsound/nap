@@ -3615,7 +3615,8 @@
                             "Style": "",
                             "MonitorController": "MonitorController",
                             "GuiWindow": "GuiWindow",
-                            "DetachedGuiWindow": "DetachedGuiWindow"
+                            "DetachedGuiWindow": "DetachedGuiWindow",
+                            "VisibilityWindow": "VisibilityPanelWindow"
                         }
                     }
                 },
@@ -3835,6 +3836,44 @@
                         "Title": "Watermark",
                         "Style": "",
                         "Image": "WatermarkImage"
+                    }
+                },
+                {
+                    "Type": "nap::gui::GuiWindow",
+                    "mID": "VisibilityPanelWindow",
+                    "Title": "VisibilityPanelWindow",
+                    "Style": "",
+                    "Position": {
+                        "x": -130.0,
+                        "y": 30.0
+                    },
+                    "Size": {
+                        "x": 130.0,
+                        "y": 500.0
+                    },
+                    "Flags": {
+                        "NoTitleBar": true,
+                        "NoResize": true,
+                        "NoMove": true,
+                        "NoScrollBar": false,
+                        "NoScrollWithMouse": false,
+                        "NoCollapse": true,
+                        "AlwaysAutoResize": true,
+                        "NoSavedSettings": true,
+                        "MenuBar": false,
+                        "HorizontalScrollBar": false,
+                        "CanClose": false
+                    },
+                    "Alpha": 0.699999988079071,
+                    "Open": false,
+                    "Border": true,
+                    "RenderWindow": "Window",
+                    "Content": {
+                        "Type": "nap::spatial::VisibilityPanel",
+                        "mID": "VisibilityPanel_270a4d4c",
+                        "Title": "VisibilityPanel",
+                        "Style": "",
+                        "MonitorController": "MonitorController"
                     }
                 }
             ]
