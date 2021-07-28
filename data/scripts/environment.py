@@ -180,7 +180,7 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
 def createSpaces(environment, count, maxParticleCount):
     for i in range(count):
         index = i + 1
-        name = "spatialverb" + str(index)
+        name = "space" + str(index)
         uniqueID = settings.SOURCES_COUNT + settings.SPACES_COUNT + i + 1
 
         # create reverb sound objects
