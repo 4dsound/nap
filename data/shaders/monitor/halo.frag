@@ -46,7 +46,7 @@ void main()
     int rayCount = 5;
     float angleValue = max(0, sin((angleToCenter) * rayCount));
 
-    float distanceToCenter = min(1, distance(pass_UV0, vec3(0.5, 0.5, 0.)) * 2. * 0.5);
+    float distanceToCenter = min(1, distance(pass_UV0, vec3(0.5, 0.5, 0.)));
     float distanceValue = (1. - distanceToCenter) * (1. - distanceToCenter) * (1. - distanceToCenter);
 
     float extraValue = (1. - distanceToCenter) * (1. - distanceToCenter) * (1. - angleValue * 0.5) - distanceToCenter * distanceToCenter;
