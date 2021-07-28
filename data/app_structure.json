@@ -805,6 +805,11 @@
                             "Type": "nap::spatial::RowShape",
                             "mID": "RowShape",
                             "Name": "row"
+                        },
+                        {
+                            "Type": "nap::spatial::BasicCircleShape",
+                            "mID": "BasicCircleShape",
+                            "Name": "basicCircle"
                         }
                     ],
                     "ShapeTransformations": [
