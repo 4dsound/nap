@@ -32,6 +32,8 @@ void main()
     float cameraDistanceMultiplier = 0.5 + distance(pass_CameraPosition, pass_Position) / 50.f;
     alpha *= cameraDistanceMultiplier;
 
+    alpha *= 2.;
+
 	vec3 color = mix(vec3(0.2, 0.2, 0.2), ubo.color, pass_DryWet);
     out_Color = vec4(color, alpha);
 
