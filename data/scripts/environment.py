@@ -19,8 +19,8 @@ def createGroups(environment, count):
 def createSources(environment, count):
     createSoundObjects(environment, count, False, 8)
 
-def createSpaces(environment, count):
-    createSoundObjects(environment, count, True, settings.SPACES_MAX_PARTICLE_COUNT)
+def createSoundEntities(environment, count):
+    createSoundObjects(environment, count, True, settings.SOUND_ENTITIES_MAX_PARTICLE_COUNT)
 
 
 # define effects outside of the python function scope, so they remain alive (necessary if new effectprocessors are added later).
@@ -89,14 +89,13 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
         index = i + 1
 
         if connect:
-            prefix = "space"
+            prefix = "soundentity"
             uniqueID = i + 1
             category = 2
         else:
             uniqueID = settings.SPACES_COUNT + i + 1
             prefix = "source"
             category = 1
-
 
         name = prefix + str(index)
 
@@ -178,7 +177,7 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
                     addedSoundObjects[i].findComponent("nap::spatial::EnvironmentControlComponentInstance").connectInput(soundObjects[j].findComponent("nap::spatial::EnvironmentControlComponentInstance"))
 
 
-def createReverbs(environment, count, maxParticleCount):
+def createSpaces(environment, count, maxParticleCount):
     for i in range(count):
         index = i + 1
         name = "spatialverb" + str(index)
@@ -240,8 +239,8 @@ def init(entity):
 
     environment.setCurrentState("starting")
     createSources(environment, settings.SOURCES_COUNT)
-    createSpaces(environment, settings.SPACES_COUNT)
-    createReverbs(environment, settings.REVERB_COUNT, settings.REVERB_MAX_PARTICLE_COUNT)
+    createSoundEntities(environment, settings.SOUND_ENTITIES_COUNT)
+    createSpaces(environment, settings.SPACES_COUNT, settings.SPACES_MAX_PARTICLE_COUNT)
     createGroups(environment, settings.GROUPS_COUNT)
     addFollowAndGroupTransformationsToAllSoundObjects()
 
