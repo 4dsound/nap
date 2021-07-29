@@ -3622,63 +3622,6 @@
             ]
         },
         {
-            "Type": "nap::gui::Panel",
-            "mID": "LicensePanel",
-            "Title": "License",
-            "Style": "",
-            "Position": {
-                "x": 11.0,
-                "y": 50.0
-            },
-            "Size": {
-                "x": -21.0,
-                "y": -60.0
-            },
-            "Flags": {
-                "NoScrollBar": false,
-                "NoScrollWithMouse": false,
-                "HorizontalScrollBar": false
-            },
-            "Alpha": 0.0,
-            "Border": true,
-            "Content": {
-                "Type": "nap::spatial::LicensingGui",
-                "mID": "LicensingGui_e46af14c",
-                "Title": "",
-                "Style": "",
-                "License": "Licensing"
-            }
-        },
-        {
-            "Type": "nap::gui::Panel",
-            "mID": "MonitorVisibilityPanel",
-            "Title": "Monitor Visibility",
-            "Style": "",
-            "Position": {
-                "x": 11.0,
-                "y": 50.0
-            },
-            "Size": {
-                "x": -21.0,
-                "y": -60.0
-            },
-            "Flags": {
-                "NoScrollBar": false,
-                "NoScrollWithMouse": false,
-                "HorizontalScrollBar": false
-            },
-            "Alpha": 0.0,
-            "Border": true,
-            "Content": {
-                "Type": "nap::spatial::MonitorVisibilityGui",
-                "mID": "MonitorVisibilityGui_cc8310f7",
-                "Title": "MonitorVisibilityGui",
-                "Style": "",
-                "MonitorController": "MonitorController",
-                "ShowVisibilityProperties": false
-            }
-        },
-        {
             "Type": "nap::gui::Style",
             "mID": "HeaderFooterGuiStyle",
             "FloatSettings": [],
@@ -3716,29 +3659,6 @@
             ],
             "ColorSettings": [],
             "FontScaling": 0.8999999761581421
-        },
-        {
-            "Type": "nap::gui::Style",
-            "mID": "SidePanelStyle",
-            "FloatSettings": [],
-            "SizeSettings": [
-                {
-                    "Variable": "WindowPadding (size)",
-                    "Value": {
-                        "x": 20.0,
-                        "y": 10.0
-                    }
-                },
-                {
-                    "Variable": "ItemSpacing (size)",
-                    "Value": {
-                        "x": 5.0,
-                        "y": 0.0
-                    }
-                }
-            ],
-            "ColorSettings": [],
-            "FontScaling": 0.800000011920929
         },
         {
             "Type": "nap::gui::TabbedLayout",
