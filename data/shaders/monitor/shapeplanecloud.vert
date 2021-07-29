@@ -85,7 +85,6 @@ void main(void)
 
     float spatialDelayAmount = ubovert.spatialDelay_enable;
 
-
     // Modulate the input position for the feedback effect
     float feedbackRand = (in_Index % 100)/100.0 * (ubovert.spatialDelay_feedback * 0.8);
     float randRounded = int(feedbackRand * 5) / 5.0;
@@ -106,7 +105,7 @@ void main(void)
 
     // Calculate the point plane size
     float aspectRatio = ubovert.renderTargetSize.y / ubovert.renderTargetSize.x;
-    vec3 relativePosition = vec3(in_RelativePosition.x * aspectRatio, in_RelativePosition.y, 0);
+    vec3 relativePosition = vec3(in_RelativePosition.x * aspectRatio * 0.1, in_RelativePosition.y, 0);
 
 	// create new model matrix that only takes into account the translation.
     mat4 matrix;

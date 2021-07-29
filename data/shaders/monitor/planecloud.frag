@@ -19,6 +19,7 @@ out vec4 out_Color;
 
 void main()
 {
+    out_Color = vec4(ubo.color, 0.5);
 
     // -- V1 --
     float distanceToCenter = distance(pass_UV0, vec3(0.5, 0.5, 0));
@@ -26,7 +27,7 @@ void main()
     float yDistance = abs(pass_UV0.y - 0.5);
     float distanceToCamera = distance(pass_Position, pass_CameraPosition);
     float scaleFactor = (pass_Scale.x + pass_Scale.y + pass_Scale.z)/3.0;
-    float alpha = max(0, 0.5 - distanceToCenter) * 0.3 * 1.0 - xDistance * 5.;
+    float alpha = max(0, 0.5 - distanceToCenter) * 0.3 * 1.0 - xDistance;
     alpha *= pow(1.0 - yDistance, 0.5);
 
     float cameraDistanceMultiplier = 0.5 + distance(pass_CameraPosition, pass_Position) / 50.f;
@@ -34,7 +35,7 @@ void main()
 
     alpha *= 2.;
 
-	vec3 color = mix(vec3(0.2, 0.2, 0.2), ubo.color, pass_DryWet);
+    vec3 color = mix(vec3(0.2, 0.2, 0.2), ubo.color, pass_DryWet);
     out_Color = vec4(color, alpha);
 
 
