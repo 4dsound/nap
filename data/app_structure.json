@@ -3482,8 +3482,7 @@
                             "Title": "MonitorSidePanel",
                             "Style": "",
                             "MoitorController": "MonitorController",
-                            "SoundObjectInpectorWindow": "SoundObjectInspectorWindow",
-                            "LogoImage": ""
+                            "SoundObjectInpectorWindow": "SoundObjectInspectorWindow"
                         }
                     }
                 },
@@ -3611,8 +3610,73 @@
                     "Title": "Framerate",
                     "Style": "",
                     "MonitorController": "MonitorController"
+                },
+                {
+                    "Type": "nap::spatial::MonitorVisibilityGui",
+                    "mID": "MonitorVisibilityGui_2be55fca",
+                    "Title": "Visibility",
+                    "Style": "",
+                    "MonitorController": "MonitorController",
+                    "ShowVisibilityProperties": false
                 }
             ]
+        },
+        {
+            "Type": "nap::gui::Panel",
+            "mID": "LicensePanel",
+            "Title": "License",
+            "Style": "",
+            "Position": {
+                "x": 11.0,
+                "y": 50.0
+            },
+            "Size": {
+                "x": -21.0,
+                "y": -60.0
+            },
+            "Flags": {
+                "NoScrollBar": false,
+                "NoScrollWithMouse": false,
+                "HorizontalScrollBar": false
+            },
+            "Alpha": 0.0,
+            "Border": true,
+            "Content": {
+                "Type": "nap::spatial::LicensingGui",
+                "mID": "LicensingGui_e46af14c",
+                "Title": "",
+                "Style": "",
+                "License": "Licensing"
+            }
+        },
+        {
+            "Type": "nap::gui::Panel",
+            "mID": "MonitorVisibilityPanel",
+            "Title": "Monitor Visibility",
+            "Style": "",
+            "Position": {
+                "x": 11.0,
+                "y": 50.0
+            },
+            "Size": {
+                "x": -21.0,
+                "y": -60.0
+            },
+            "Flags": {
+                "NoScrollBar": false,
+                "NoScrollWithMouse": false,
+                "HorizontalScrollBar": false
+            },
+            "Alpha": 0.0,
+            "Border": true,
+            "Content": {
+                "Type": "nap::spatial::MonitorVisibilityGui",
+                "mID": "MonitorVisibilityGui_cc8310f7",
+                "Title": "MonitorVisibilityGui",
+                "Style": "",
+                "MonitorController": "MonitorController",
+                "ShowVisibilityProperties": false
+            }
         },
         {
             "Type": "nap::gui::Style",
@@ -3836,68 +3900,6 @@
                             "Title": "PerformanceLink",
                             "Style": "",
                             "Link": "PerformanceLayout"
-                        }
-                    }
-                },
-                {
-                    "Visible": true,
-                    "Content": {
-                        "Type": "nap::gui::Panel",
-                        "mID": "MonitorVisibilityPanel",
-                        "Title": "Monitor Visibility",
-                        "Style": "",
-                        "Position": {
-                            "x": 11.0,
-                            "y": 50.0
-                        },
-                        "Size": {
-                            "x": -21.0,
-                            "y": -60.0
-                        },
-                        "Flags": {
-                            "NoScrollBar": false,
-                            "NoScrollWithMouse": false,
-                            "HorizontalScrollBar": false
-                        },
-                        "Alpha": 0.0,
-                        "Border": true,
-                        "Content": {
-                            "Type": "nap::spatial::MonitorVisibilityGui",
-                            "mID": "MonitorVisibilityGui_cc8310f7",
-                            "Title": "MonitorVisibilityGui",
-                            "Style": "",
-                            "MonitorController": "MonitorController"
-                        }
-                    }
-                },
-                {
-                    "Visible": true,
-                    "Content": {
-                        "Type": "nap::gui::Panel",
-                        "mID": "LicensePanel",
-                        "Title": "License",
-                        "Style": "",
-                        "Position": {
-                            "x": 11.0,
-                            "y": 50.0
-                        },
-                        "Size": {
-                            "x": -21.0,
-                            "y": -60.0
-                        },
-                        "Flags": {
-                            "NoScrollBar": false,
-                            "NoScrollWithMouse": false,
-                            "HorizontalScrollBar": false
-                        },
-                        "Alpha": 0.0,
-                        "Border": true,
-                        "Content": {
-                            "Type": "nap::spatial::LicensingGui",
-                            "mID": "LicensingGui_e46af14c",
-                            "Title": "",
-                            "Style": "",
-                            "License": "Licensing"
                         }
                     }
                 }
