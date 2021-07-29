@@ -3106,7 +3106,7 @@
                     "mID": "GuiLink_52cb0c14",
                     "Title": "",
                     "Style": "",
-                    "Link": "Gui"
+                    "Link": "ControlPanelGui"
                 }
             }
         },
@@ -3172,7 +3172,7 @@
                             "mID": "GuiLink_fa0485a7",
                             "Title": "GuiLink",
                             "Style": "",
-                            "Link": "Gui"
+                            "Link": "ControlPanelGui"
                         }
                     }
                 ]
@@ -3238,19 +3238,6 @@
                             "Title": "Audio Device Settings",
                             "Style": "",
                             "ShowInputs": true
-                        },
-                        {
-                            "Type": "nap::spatial::ParallelProcessingGui",
-                            "mID": "ParallelProcessingGui_e8f8af45",
-                            "Title": "Parallel Processing",
-                            "Style": ""
-                        },
-                        {
-                            "Type": "nap::spatial::FrameRateGui",
-                            "mID": "FrameRateGui_b8b35f95",
-                            "Title": "FrameRate",
-                            "Style": "",
-                            "MonitorController": "MonitorController"
                         },
                         {
                             "Type": "nap::spatial::InputVUMeters",
@@ -3495,7 +3482,8 @@
                             "Title": "MonitorSidePanel",
                             "Style": "",
                             "MoitorController": "MonitorController",
-                            "SoundObjectInpectorWindow": "SoundObjectInspectorWindow"
+                            "SoundObjectInpectorWindow": "SoundObjectInspectorWindow",
+                            "LogoImage": ""
                         }
                     }
                 },
@@ -3599,6 +3587,34 @@
             ]
         },
         {
+            "Type": "nap::gui::Layout",
+            "mID": "PerformanceLayout",
+            "Title": "Performance",
+            "Style": "",
+            "Separators": true,
+            "Content": [
+                {
+                    "Type": "nap::spatial::StatisticsGui",
+                    "mID": "StatisticsGui_836b9879",
+                    "Title": "Statistics",
+                    "Style": ""
+                },
+                {
+                    "Type": "nap::spatial::ParallelProcessingGui",
+                    "mID": "ParallelProcessingGui_d3538864",
+                    "Title": "Parallel processing",
+                    "Style": ""
+                },
+                {
+                    "Type": "nap::spatial::FrameRateGui",
+                    "mID": "FrameRateGui_3bb28372",
+                    "Title": "Framerate",
+                    "Style": "",
+                    "MonitorController": "MonitorController"
+                }
+            ]
+        },
+        {
             "Type": "nap::gui::Style",
             "mID": "HeaderFooterGuiStyle",
             "FloatSettings": [],
@@ -3662,7 +3678,7 @@
         },
         {
             "Type": "nap::gui::TabbedLayout",
-            "mID": "Gui",
+            "mID": "ControlPanelGui",
             "Title": "Gui",
             "Style": "",
             "Tabs": [
@@ -3797,7 +3813,7 @@
                     "Content": {
                         "Type": "nap::gui::Panel",
                         "mID": "Panel_066020e1",
-                        "Title": "Statistics",
+                        "Title": "Performance",
                         "Style": "",
                         "Position": {
                             "x": 11.0,
@@ -3815,10 +3831,11 @@
                         "Alpha": 0.0,
                         "Border": true,
                         "Content": {
-                            "Type": "nap::spatial::StatisticsGui",
-                            "mID": "StatisticsGui_f828b741",
-                            "Title": "Statistics Gui",
-                            "Style": ""
+                            "Type": "nap::gui::GuiLink",
+                            "mID": "GuiLink_fa7c4dd4",
+                            "Title": "PerformanceLink",
+                            "Style": "",
+                            "Link": "PerformanceLayout"
                         }
                     }
                 },
