@@ -148,9 +148,10 @@ namespace nap
 		if (!error.check(mDetachedGuiWindow != nullptr, "DetachedGuiWindow not found"))
 			return false;
 
-		// Get the loading gui window
-		mLoadingGuiWindow = mResourceManager->findObject<gui::Gui>("LoadingGuiWindow");
-		if (!error.check(mLoadingGuiWindow != nullptr, "unable to find gui window with name: %s", "LoadingGuiWindow"))
+		// Get the splash screen gui
+		mSplashScreenGui = mResourceManager->findObject<gui::Gui>("SplashScreenGui");
+//        mSplashScreenGui->show(); // show on startup
+		if (!error.check(mSplashScreenGui != nullptr, "Splash Screen Gui not found"))
 			return false;
 
 		mMonitorGui = mResourceManager->findObject<gui::Gui>("MonitorGui");
@@ -177,6 +178,8 @@ namespace nap
 		spatial::GuiStyle guiStyle;
 		guiStyle.apply(&mGuiService->getContext(mSecondaryWindow)->Style);
 		guiStyle.apply(&mGuiService->getContext(mWindow)->Style);
+        guiStyle.apply(&mGuiService->getContext(mStartupWindow)->Style);
+
 
 		// Turn framerate capping on
 		capFramerate(true);
@@ -199,7 +202,7 @@ namespace nap
 		{
 			if (!mStartupVideoPlayer->isPlaying())
 				mStartupVideoPlayer->play();
-			mLoadingGuiWindow->show();
+            mSplashScreenGui->show();
 			return;
 		}
         
@@ -235,7 +238,7 @@ namespace nap
 				mSecondaryWindowVisible = false;
 			}
 		}
-
+        
 		// Show the Monitor Gui
 		if (mMonitorController->isRenderingEnabled())
 			mMonitorGui->show();
@@ -257,13 +260,12 @@ namespace nap
 			mRenderService->beginHeadlessRecording();
 			mStartupVideoComponent->draw();
 			mRenderService->endHeadlessRecording();
-
+            
             // Render the floor wireframe.
 			if (mRenderService->beginRecording(*mStartupWindow))
 			{
 				mStartupWindow->beginRendering();
 				mGuiService->draw();
-				mRenderService->renderObjects(*mStartupWindow, *mCamera, { mFloorWireFrame.get() });
 				mStartupWindow->endRendering();
 				mRenderService->endRecording();
 			}

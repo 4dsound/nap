@@ -118,7 +118,7 @@ namespace nap
 		ObjectPtr<spatial::TextOverlayControllerInstance> mTextOverlayController = nullptr;
 		ObjectPtr<gui::GuiWindow> mGuiWindow = nullptr;
 		ObjectPtr<gui::GuiWindow> mDetachedGuiWindow = nullptr;
-		ObjectPtr<gui::GuiWindow> mLoadingGuiWindow = nullptr;
+		ObjectPtr<gui::Gui> mSplashScreenGui = nullptr;
 		ObjectPtr<gui::Gui> mMonitorGui = nullptr;
 		ObjectPtr<spatial::MonitorController> mMonitorController = nullptr;
 		ObjectPtr<VideoPlayer> mStartupVideoPlayer = nullptr;
