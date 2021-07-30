@@ -228,11 +228,13 @@ def addFollowAndGroupTransformationsToAllSoundObjects():
         for k in range(len(groupTransformations)):
             controlComponent.addExternalTransformation("group" + str(k+1), groupTransformations[k], True, True)
 
-        shapeComponent = soundObjects[i].findComponentByID("ShapeComponent")
-
         for l in range(len(particleLevelGroupTransformations)):
             controlComponent.addExternalShapeTransformation("group" + str(l+1), particleLevelGroupTransformations[l], True, True)
 
+def sendOSC(environment, tag, argument):
+    oscInitMessage = nap.EnvironmentOSCMessage(tag)
+    oscInitMessage.addValue(argument)
+    environment.sendOSC(oscInitMessage)
 
 def init(entity):
     environment = entity.findComponent("nap::spatial::EnvironmentComponentInstance")
@@ -244,13 +246,12 @@ def init(entity):
     createGroups(environment, settings.GROUPS_COUNT)
     addFollowAndGroupTransformationsToAllSoundObjects()
 
-    # send the environment initialized OSC message
-#    oscInitMessage = nap.EnvironmentOSCMessage("/environment/init")
-#    oscInitMessage.addValue(settings.SOURCES_COUNT)
-#    oscInitMessage.addValue(settings.SPACES_COUNT)
-#    oscInitMessage.addValue(settings.GROUPS_COUNT)
-#    oscInitMessage.addValue(settings.SOURCES_MAX_PARTICLE_COUNT)
-#    oscInitMessage.addValue(settings.SPACES_MAX_PARTICLE_COUNT)
-#    environment.sendOSC(oscInitMessage)
+    # send the environment initialized OSC messages
+    sendOSC(environment, "/from_4dengine/groupsCount", settings.GROUPS_COUNT)
+    sendOSC(environment, "/from_4dengine/sourcesCount", settings.SOURCES_COUNT)
+    sendOSC(environment, "/from_4dengine/soundentitiesCount", settings.SOUND_ENTITIES_COUNT)
+    sendOSC(environment, "/from_4dengine/spacesCount", settings.SPACES_COUNT)
+    sendOSC(environment, "/from_4dengine/soundentitiesMaxParticleCount", settings.SOUND_ENTITIES_MAX_PARTICLE_COUNT)
+    sendOSC(environment, "/from_4dengine/spacesMaxParticleCount", settings.SPACES_MAX_PARTICLE_COUNT)
 
     environment.setCurrentState("running")
