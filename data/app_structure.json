@@ -1593,28 +1593,6 @@
         },
         {
             "Type": "nap::Entity",
-            "mID": "StartupVideo",
-            "Components": [
-                {
-                    "Type": "nap::RenderVideoComponent",
-                    "mID": "nap::RenderVideoComponent_1dc7a6b1",
-                    "Visible": true,
-                    "OutputTexture": "StartupVideoTexture",
-                    "VideoPlayer": "StartupVideoPlayer",
-                    "Samples": "One",
-                    "ClearColor": {
-                        "Values": [
-                            255,
-                            255,
-                            255
-                        ]
-                    }
-                }
-            ],
-            "Children": []
-        },
-        {
-            "Type": "nap::Entity",
             "mID": "SubsVisualization",
             "Components": [
                 {
@@ -2754,24 +2732,6 @@
             "Path": "scripts/shapes/precalculatedVesicaEye2D.py"
         },
         {
-            "Type": "nap::RenderTexture2D",
-            "mID": "StartupVideoTexture",
-            "Usage": "Static",
-            "Fill": true,
-            "Width": 640,
-            "Height": 360,
-            "Format": "RGBA8",
-            "ColorSpace": "Linear",
-            "ClearColor": {
-                "Values": [
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ]
-            }
-        },
-        {
             "Type": "nap::RenderWindow",
             "mID": "SecondaryWindow",
             "Borderless": false,
@@ -2884,10 +2844,6 @@
                 },
                 {
                     "Entity": "SideFillsVisualization",
-                    "InstanceProperties": []
-                },
-                {
-                    "Entity": "StartupVideo",
                     "InstanceProperties": []
                 }
             ]
@@ -3019,20 +2975,6 @@
                     "Name": "running"
                 }
             ]
-        },
-        {
-            "Type": "nap::VideoPlayer",
-            "mID": "StartupVideoPlayer",
-            "Loop": true,
-            "VideoFiles": [
-                {
-                    "Type": "nap::VideoFile",
-                    "mID": "VideoFile_241c0472",
-                    "Path": "videos/4DSplash.mov"
-                }
-            ],
-            "VideoIndex": 0,
-            "Speed": 1.0
         },
         {
             "Type": "nap::audio::Graph",

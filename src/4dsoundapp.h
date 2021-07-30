@@ -121,8 +121,6 @@ namespace nap
 		ObjectPtr<gui::Gui> mSplashScreenGui = nullptr;
 		ObjectPtr<gui::Gui> mMonitorGui = nullptr;
 		ObjectPtr<spatial::MonitorController> mMonitorController = nullptr;
-		ObjectPtr<VideoPlayer> mStartupVideoPlayer = nullptr;
-		ObjectPtr<RenderVideoComponentInstance> mStartupVideoComponent = nullptr;
 		ObjectPtr<RenderWindow> mStartupWindow = nullptr;
 
 		bool mSecondaryWindowVisible = false;     		// Is the GUI window currently visible?
