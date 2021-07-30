@@ -131,11 +131,6 @@ namespace nap
 		if (mEnvironment == nullptr)
 			return false;
 
-		// Find the startup video component
-		mStartupVideoComponent = findComponentInScene<RenderVideoComponentInstance>(*mScene, "StartupVideo", error);
-		if (mStartupVideoComponent == nullptr)
-			return false;
-
 		// Set the environment script to the command line argument (if any)
         if (!mCommandLineArgs.empty())
 			mEnvironment->setScriptPath(mCommandLineArgs[0]);
@@ -148,9 +143,10 @@ namespace nap
 		if (!error.check(mDetachedGuiWindow != nullptr, "DetachedGuiWindow not found"))
 			return false;
 
-		// Get the loading gui window
-		mLoadingGuiWindow = mResourceManager->findObject<gui::Gui>("LoadingGuiWindow");
-		if (!error.check(mLoadingGuiWindow != nullptr, "unable to find gui window with name: %s", "LoadingGuiWindow"))
+		// Get the splash screen gui
+		mSplashScreenGui = mResourceManager->findObject<gui::Gui>("SplashScreenGui");
+//        mSplashScreenGui->show(); // show on startup
+		if (!error.check(mSplashScreenGui != nullptr, "Splash Screen Gui not found"))
 			return false;
 
 		mMonitorGui = mResourceManager->findObject<gui::Gui>("MonitorGui");
@@ -169,14 +165,12 @@ namespace nap
 		if (!error.check(mEnvironmentStateMachine != nullptr, "EnvironmentStateMachine state startupState not found"))
 			return false;
 
-		mStartupVideoPlayer = mResourceManager->findObject<VideoPlayer>("StartupVideoPlayer");
-		if (!error.check(mStartupVideoPlayer != nullptr, "mStartupVideoPlayer not found"))
-			return false;
-
 		// Apply hard-coded ImGui style to both windows
 		spatial::GuiStyle guiStyle;
 		guiStyle.apply(&mGuiService->getContext(mSecondaryWindow)->Style);
 		guiStyle.apply(&mGuiService->getContext(mWindow)->Style);
+        guiStyle.apply(&mGuiService->getContext(mStartupWindow)->Style);
+
 
 		// Turn framerate capping on
 		capFramerate(true);
@@ -197,13 +191,10 @@ namespace nap
 		// Don't show GUIs while in loading state. Doing so will lock the main thread as the control thread is busy
 		if (mEnvironmentStateMachine->getCurrentState().get() == mEnvironmentStartupState.get())
 		{
-			if (!mStartupVideoPlayer->isPlaying())
-				mStartupVideoPlayer->play();
-			mLoadingGuiWindow->show();
+            mSplashScreenGui->show();
 			return;
 		}
         
-        mStartupVideoPlayer->stopPlayback();
         if (mStartupWindowVisible)
         {
             mStartupWindow->hide();
@@ -235,7 +226,7 @@ namespace nap
 				mSecondaryWindowVisible = false;
 			}
 		}
-
+        
 		// Show the Monitor Gui
 		if (mMonitorController->isRenderingEnabled())
 			mMonitorGui->show();
@@ -252,18 +243,12 @@ namespace nap
 
 		if (mEnvironmentStateMachine->getCurrentState().get() == mEnvironmentStartupState.get())
 		{
-            
-            // Render the startup video.
-			mRenderService->beginHeadlessRecording();
-			mStartupVideoComponent->draw();
-			mRenderService->endHeadlessRecording();
-
+                        
             // Render the floor wireframe.
 			if (mRenderService->beginRecording(*mStartupWindow))
 			{
 				mStartupWindow->beginRendering();
 				mGuiService->draw();
-				mRenderService->renderObjects(*mStartupWindow, *mCamera, { mFloorWireFrame.get() });
 				mStartupWindow->endRendering();
 				mRenderService->endRecording();
 			}

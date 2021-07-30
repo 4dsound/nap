@@ -1593,28 +1593,6 @@
         },
         {
             "Type": "nap::Entity",
-            "mID": "StartupVideo",
-            "Components": [
-                {
-                    "Type": "nap::RenderVideoComponent",
-                    "mID": "nap::RenderVideoComponent_1dc7a6b1",
-                    "Visible": true,
-                    "OutputTexture": "StartupVideoTexture",
-                    "VideoPlayer": "StartupVideoPlayer",
-                    "Samples": "One",
-                    "ClearColor": {
-                        "Values": [
-                            255,
-                            255,
-                            255
-                        ]
-                    }
-                }
-            ],
-            "Children": []
-        },
-        {
-            "Type": "nap::Entity",
             "mID": "SubsVisualization",
             "Components": [
                 {
@@ -1963,6 +1941,13 @@
             "mID": "LogoSmall",
             "Usage": "Static",
             "ImagePath": "img/logo-4d-small.png",
+            "GenerateLods": true
+        },
+        {
+            "Type": "nap::ImageFromFile",
+            "mID": "SplashScreenImage",
+            "Usage": "Static",
+            "ImagePath": "img/splash.png",
             "GenerateLods": true
         },
         {
@@ -2747,24 +2732,6 @@
             "Path": "scripts/shapes/precalculatedVesicaEye2D.py"
         },
         {
-            "Type": "nap::RenderTexture2D",
-            "mID": "StartupVideoTexture",
-            "Usage": "Static",
-            "Fill": false,
-            "Width": 1236,
-            "Height": 1100,
-            "Format": "RGBA8",
-            "ColorSpace": "Linear",
-            "ClearColor": {
-                "Values": [
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ]
-            }
-        },
-        {
             "Type": "nap::RenderWindow",
             "mID": "SecondaryWindow",
             "Borderless": false,
@@ -2789,12 +2756,12 @@
             "Type": "nap::RenderWindow",
             "mID": "StartupWindow",
             "Borderless": true,
-            "Resizable": false,
+            "Resizable": true,
             "Visible": true,
             "SampleShading": true,
             "Title": "",
-            "Width": 512,
-            "Height": 512,
+            "Width": 700,
+            "Height": 415,
             "Mode": "Immediate",
             "ClearColor": {
                 "x": 0.0,
@@ -2877,10 +2844,6 @@
                 },
                 {
                     "Entity": "SideFillsVisualization",
-                    "InstanceProperties": []
-                },
-                {
-                    "Entity": "StartupVideo",
                     "InstanceProperties": []
                 }
             ]
@@ -3012,20 +2975,6 @@
                     "Name": "running"
                 }
             ]
-        },
-        {
-            "Type": "nap::VideoPlayer",
-            "mID": "StartupVideoPlayer",
-            "Loop": true,
-            "VideoFiles": [
-                {
-                    "Type": "nap::VideoFile",
-                    "mID": "VideoFile_241c0472",
-                    "Path": "videos/4dlogo_orbit.mov"
-                }
-            ],
-            "VideoIndex": 0,
-            "Speed": 1.0
         },
         {
             "Type": "nap::audio::Graph",
@@ -3186,45 +3135,6 @@
                         }
                     }
                 ]
-            }
-        },
-        {
-            "Type": "nap::gui::GuiWindow",
-            "mID": "LoadingGuiWindow",
-            "Title": "LoadingGuiWindow",
-            "Style": "",
-            "Position": {
-                "x": 0.0,
-                "y": 0.0
-            },
-            "Size": {
-                "x": 0.0,
-                "y": 0.0
-            },
-            "Flags": {
-                "NoTitleBar": true,
-                "NoResize": true,
-                "NoMove": true,
-                "NoScrollBar": true,
-                "NoScrollWithMouse": true,
-                "NoCollapse": true,
-                "AlwaysAutoResize": true,
-                "NoSavedSettings": false,
-                "MenuBar": false,
-                "HorizontalScrollBar": false,
-                "CanClose": false
-            },
-            "Alpha": 0.0,
-            "Open": true,
-            "Border": false,
-            "RenderWindow": "StartupWindow",
-            "Content": {
-                "Type": "nap::spatial::StartupGui",
-                "mID": "LoadingGui_9bee8e51",
-                "Title": "",
-                "Style": "",
-                "Image": "StartupVideoTexture",
-                "Text": "Starting engine..."
             }
         },
         {
@@ -3632,6 +3542,75 @@
             ]
         },
         {
+            "Type": "nap::gui::Layout",
+            "mID": "SplashScreenGui",
+            "Title": "",
+            "Style": "LoadingStyle",
+            "Separators": false,
+            "Content": [
+                {
+                    "Type": "nap::gui::GuiWindow",
+                    "mID": "GuiWindow_f6303ae1",
+                    "Title": "StartupGuiWindow",
+                    "Style": "",
+                    "Position": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "Size": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "Flags": {
+                        "NoTitleBar": true,
+                        "NoResize": true,
+                        "NoMove": true,
+                        "NoScrollBar": true,
+                        "NoScrollWithMouse": true,
+                        "NoCollapse": true,
+                        "AlwaysAutoResize": false,
+                        "NoSavedSettings": true,
+                        "MenuBar": false,
+                        "HorizontalScrollBar": false,
+                        "CanClose": false
+                    },
+                    "Alpha": 1.0,
+                    "Open": true,
+                    "Border": true,
+                    "RenderWindow": "StartupWindow",
+                    "Content": {
+                        "Type": "nap::gui::Panel",
+                        "mID": "StartupPanel",
+                        "Title": "StartupPanel",
+                        "Style": "LoadingStyle",
+                        "Position": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Size": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "Flags": {
+                            "NoScrollBar": true,
+                            "NoScrollWithMouse": true,
+                            "HorizontalScrollBar": false
+                        },
+                        "Alpha": 0.0,
+                        "Border": true,
+                        "Content": {
+                            "Type": "nap::spatial::StartupGui",
+                            "mID": "StartupGui_8f8f0528",
+                            "Title": "Splash",
+                            "Style": "",
+                            "Image": "SplashScreenImage",
+                            "Text": ""
+                        }
+                    }
+                }
+            ]
+        },
+        {
             "Type": "nap::gui::Style",
             "mID": "HeaderFooterGuiStyle",
             "FloatSettings": [],
@@ -3653,6 +3632,14 @@
             ],
             "ColorSettings": [],
             "FontScaling": 0.8999999761581421
+        },
+        {
+            "Type": "nap::gui::Style",
+            "mID": "LoadingStyle",
+            "FloatSettings": [],
+            "SizeSettings": [],
+            "ColorSettings": [],
+            "FontScaling": 1.0
         },
         {
             "Type": "nap::gui::Style",
