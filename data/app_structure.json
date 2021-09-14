@@ -114,6 +114,79 @@
         },
         {
             "Type": "nap::Entity",
+            "mID": "Camera",
+            "Components": [
+                {
+                    "Type": "nap::PerspCameraComponent",
+                    "mID": "PerspCameraComponent",
+                    "Properties": {
+                        "FieldOfView": 50.0,
+                        "NearClippingPlane": 0.10000000149011612,
+                        "FarClippingPlane": 2000.0,
+                        "GridDimensions": {
+                            "x": 1,
+                            "y": 1
+                        },
+                        "GridLocation": {
+                            "x": 0,
+                            "y": 0
+                        }
+                    }
+                },
+                {
+                    "Type": "nap::KeyInputComponent",
+                    "mID": "nap::KeyInputComponent"
+                },
+                {
+                    "Type": "nap::PointerInputComponent",
+                    "mID": "nap::PointerInputComponent"
+                },
+                {
+                    "Type": "nap::TransformComponent",
+                    "mID": "CameraTransformComponent",
+                    "Properties": {
+                        "Translate": {
+                            "x": 0.0,
+                            "y": 10.0,
+                            "z": 15.0
+                        },
+                        "Rotate": {
+                            "x": -20.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "Scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "UniformScale": 1.0
+                    }
+                },
+                {
+                    "Type": "nap::SpatialOrbitController",
+                    "mID": "nap::SpatialOrbitController_68c3fe87",
+                    "MovementSpeed": 0.5,
+                    "RotateSpeed": 0.004999999888241291,
+                    "PerspCameraComponent": "./PerspCameraComponent",
+                    "LookAtPosition": {
+                        "x": 0.0,
+                        "y": 2.0,
+                        "z": 0.0
+                    }
+                },
+                {
+                    "Type": "nap::FirstPersonController",
+                    "mID": "nap::FirstPersonController_831c1b6e",
+                    "MovementSpeed": 14.0,
+                    "RotateSpeed": 0.004999999888241291,
+                    "PerspCameraComponent": "./PerspCameraComponent"
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Type": "nap::Entity",
             "mID": "Environment",
             "Components": [
                 {
@@ -400,7 +473,7 @@
                     "Type": "nap::spatial::RenderableMeshCopyComponent",
                     "mID": "nap::spatial::RenderableMeshCopyComponent_22059036",
                     "Visible": true,
-                    "CameraTransformComponent": "../camera/CameraTransformComponent",
+                    "CameraTransformComponent": "../Camera/CameraTransformComponent",
                     "MaterialInstance": {
                         "Material": "SolidMaterial",
                         "Uniforms": [
@@ -507,7 +580,7 @@
                     "Type": "nap::spatial::RenderableMeshCopyComponent",
                     "mID": "SideFillnap::spatial::RenderableMeshCopyComponent_1a32303f",
                     "Visible": true,
-                    "CameraTransformComponent": "../camera/CameraTransformComponent",
+                    "CameraTransformComponent": "../Camera/CameraTransformComponent",
                     "MaterialInstance": {
                         "Material": "SolidMaterial",
                         "Uniforms": [
@@ -1041,7 +1114,7 @@
                     "SpatialTransformationComponent": "../SpatialTransformationComponent",
                     "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
                     "TransformComponent": "./SoundObjectVisualizationTransform",
-                    "CameraTransformComponent": "../../camera/CameraTransformComponent",
+                    "CameraTransformComponent": "../../Camera/CameraTransformComponent",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
                     "SpatialAudioComponent": "../SpatialAudioComponent",
                     "ExposedDataComponent": "",
@@ -1069,7 +1142,7 @@
                     "Type": "nap::spatial::RenderableMeshCopyComponent",
                     "mID": "PointParticleVisualization",
                     "Visible": true,
-                    "CameraTransformComponent": "../../camera/CameraTransformComponent",
+                    "CameraTransformComponent": "../../Camera/CameraTransformComponent",
                     "MaterialInstance": {
                         "Material": "PointParticleMaterial",
                         "Uniforms": [],
@@ -1164,7 +1237,7 @@
                     "Type": "nap::spatial::RenderableMeshCopyComponent",
                     "mID": "HaloParticleVisualization",
                     "Visible": true,
-                    "CameraTransformComponent": "../../camera/CameraTransformComponent",
+                    "CameraTransformComponent": "../../Camera/CameraTransformComponent",
                     "MaterialInstance": {
                         "Material": "HaloMaterial",
                         "Uniforms": [],
@@ -1260,7 +1333,7 @@
                     "Type": "nap::spatial::RenderableMeshCopyComponent",
                     "mID": "BoxWireframeParticleVisualization",
                     "Visible": true,
-                    "CameraTransformComponent": "../../camera/CameraTransformComponent",
+                    "CameraTransformComponent": "../../Camera/CameraTransformComponent",
                     "MaterialInstance": {
                         "Material": "BoxFrameMaterial",
                         "Uniforms": [
@@ -1387,7 +1460,7 @@
                     "Type": "nap::spatial::RenderableMeshCopyComponent",
                     "mID": "CloudBoxVisualization",
                     "Visible": true,
-                    "CameraTransformComponent": "../../camera/CameraTransformComponent",
+                    "CameraTransformComponent": "../../Camera/CameraTransformComponent",
                     "MaterialInstance": {
                         "Material": "CloudBoxMaterial",
                         "Uniforms": [],
@@ -1470,7 +1543,7 @@
                     "SpatialTransformationComponent": "../SpatialTransformationComponent",
                     "TextOverlayController": "../../MonitorTextOverlay/nap::spatial::TextOverlayController_01e4425f",
                     "TransformComponent": "./SoundObjectVisualizationTransform",
-                    "CameraTransformComponent": "../../camera/CameraTransformComponent",
+                    "CameraTransformComponent": "../../Camera/CameraTransformComponent",
                     "DisplaySettingsComponent": "../nap::spatial::DisplaySettingsComponent_0e53f7b6",
                     "SpatialAudioComponent": "../SpatialAudioComponent",
                     "ExposedDataComponent": "../ExposedDataComponent",
@@ -1621,7 +1694,7 @@
                     "Type": "nap::spatial::RenderableMeshCopyComponent",
                     "mID": "nap::spatial::RenderableMeshCopyComponent_1a32303f",
                     "Visible": true,
-                    "CameraTransformComponent": "../camera/CameraTransformComponent",
+                    "CameraTransformComponent": "../Camera/CameraTransformComponent",
                     "MaterialInstance": {
                         "Material": "SolidMaterial",
                         "Uniforms": [
@@ -1738,72 +1811,6 @@
                     "mID": "binauralExposedDataComponent",
                     "OscSender": "OSCSender",
                     "SettingsFile": "SettingsFile"
-                }
-            ],
-            "Children": []
-        },
-        {
-            "Type": "nap::Entity",
-            "mID": "camera",
-            "Components": [
-                {
-                    "Type": "nap::PerspCameraComponent",
-                    "mID": "PerspCameraComponent",
-                    "Properties": {
-                        "FieldOfView": 50.0,
-                        "NearClippingPlane": 0.10000000149011612,
-                        "FarClippingPlane": 2000.0,
-                        "GridDimensions": {
-                            "x": 1,
-                            "y": 1
-                        },
-                        "GridLocation": {
-                            "x": 0,
-                            "y": 0
-                        }
-                    }
-                },
-                {
-                    "Type": "nap::KeyInputComponent",
-                    "mID": "nap::KeyInputComponent"
-                },
-                {
-                    "Type": "nap::PointerInputComponent",
-                    "mID": "nap::PointerInputComponent"
-                },
-                {
-                    "Type": "nap::TransformComponent",
-                    "mID": "CameraTransformComponent",
-                    "Properties": {
-                        "Translate": {
-                            "x": 0.0,
-                            "y": 10.0,
-                            "z": 10.0
-                        },
-                        "Rotate": {
-                            "x": -15.0,
-                            "y": 0.0,
-                            "z": 0.0
-                        },
-                        "Scale": {
-                            "x": 1.0,
-                            "y": 1.0,
-                            "z": 1.0
-                        },
-                        "UniformScale": 1.0
-                    }
-                },
-                {
-                    "Type": "nap::SpatialOrbitController",
-                    "mID": "nap::SpatialOrbitController_68c3fe87",
-                    "MovementSpeed": 0.5,
-                    "RotateSpeed": 0.004999999888241291,
-                    "PerspCameraComponent": "./PerspCameraComponent",
-                    "LookAtPosition": {
-                        "x": 0.0,
-                        "y": 5.0,
-                        "z": 0.0
-                    }
                 }
             ],
             "Children": []
@@ -2799,7 +2806,7 @@
             "mID": "Scene",
             "Entities": [
                 {
-                    "Entity": "camera",
+                    "Entity": "Camera",
                     "InstanceProperties": []
                 },
                 {
@@ -3943,6 +3950,12 @@
                     "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
                     "mID": "axesHelpers",
                     "Title": "Axes",
+                    "Value": false
+                },
+                {
+                    "Type": "nap::spatial::MonitorController::MonitorVisibilityProperty",
+                    "mID": "firstPersonCameraMode",
+                    "Title": "First Person Mode",
                     "Value": false
                 }
             ],
