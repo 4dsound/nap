@@ -77,7 +77,8 @@ distanceDiffusion = nap.DistanceDiffusionEffect()
 distanceDiffusion.Name = "distanceDiffusion"
 
 
-
+# keep global unique id count
+uniqueID = 0
 
 # count (int): the number of sound objects to create
 # connect (bool): whether the newly created sound objects should be connected to all other sound objects
@@ -90,16 +91,15 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
 
         if connect:
             prefix = "soundentity"
-            uniqueID = i + 1
             category = 2
         else:
-            uniqueID = settings.SPACES_COUNT + i + 1
             prefix = "source"
             category = 1
 
         name = prefix + str(index)
 
         # create sound objects
+        global uniqueID
         properties = nap.EnvironmentInstanceProperties()
         properties.addString("nap::ParameterComponent", "Name", name)
         properties.addInt("nap::spatial::SpatialAudioComponent", "MaxParticleCount", maxParticleCount)
@@ -108,6 +108,7 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
         properties.addInt("nap::spatial::DisplaySettingsComponent", "UniqueId", uniqueID)
         properties.addInt("nap::spatial::DisplaySettingsComponent", "Category", category)
         properties.addBool("nap::spatial::DisplaySettingsComponent", "Visible", True)
+        uniqueID = uniqueID + 1 # increment global unique ID counter
 
         soundObject = environment.createEntity("SoundObject", properties)
         controlComponent = soundObject.findComponent("nap::spatial::EnvironmentControlComponentInstance")
@@ -181,9 +182,9 @@ def createSpaces(environment, count, maxParticleCount):
     for i in range(count):
         index = i + 1
         name = "space" + str(index)
-        uniqueID = settings.SOURCES_COUNT + settings.SPACES_COUNT + i + 1
 
         # create reverb sound objects
+        global uniqueID
         properties = nap.EnvironmentInstanceProperties()
         properties.addString("nap::ParameterComponent", "Name", name)
         properties.addInt("nap::spatial::SpatialAudioComponent", "MaxParticleCount", maxParticleCount)
@@ -192,6 +193,7 @@ def createSpaces(environment, count, maxParticleCount):
         properties.addInt("nap::spatial::DisplaySettingsComponent", "UniqueId", uniqueID)
         properties.addInt("nap::spatial::DisplaySettingsComponent", "Category", 3)
         properties.addBool("nap::spatial::DisplaySettingsComponent", "Visible", False)
+        uniqueID = uniqueID + 1 # increment global unique ID counter
 
         soundObject = environment.createEntity("SoundObject", properties)
         controlComponent = soundObject.findComponent("nap::spatial::EnvironmentControlComponentInstance")
