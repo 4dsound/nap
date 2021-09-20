@@ -91,9 +91,25 @@ namespace nap
             return false;
 
 		// Find the camera
-		mCamera = findComponentInScene<PerspCameraComponentInstance>(*mScene, "camera", error);
+		mCamera = findComponentInScene<PerspCameraComponentInstance>(*mScene, "Camera", error);
 		if (mCamera == nullptr)
 			return false;
+
+		// Find orbit camera controller
+		mSpatialOrbitController = findComponentInScene<SpatialOrbitControllerInstance>(*mScene, "Camera", error);
+		if (mSpatialOrbitController == nullptr)
+			return false;
+
+		// Find first person camera controller
+		mFirstPersonController = findComponentInScene<FirstPersonControllerInstance>(*mScene, "Camera", error);
+		if (mFirstPersonController == nullptr)
+			return false;
+
+		auto cameraTransform = findComponentInScene<TransformComponentInstance>(*mScene, "Camera", error);
+		if (cameraTransform == nullptr)
+			return false;
+		mInitialCameraPosition = cameraTransform->getTranslate();
+		mInitialCameraRotation = cameraTransform->getRotate();
 
 		// Find floor wireframe
 		mFloorWireFrame = findComponentInScene<RenderableComponentInstance>(*mScene, "MonitorFloorWireFrame", error);
@@ -157,6 +173,10 @@ namespace nap
 		if (!error.check(mMonitorController != nullptr, "MonitorController not found"))
 			return false;
 
+		mFirstPersonCameraModeProperty = mMonitorController->findVisibilityProperty("firstPersonCameraMode");
+		if (!error.check(mFirstPersonCameraModeProperty != nullptr, "First person camera mode property not found"))
+			return false;
+
 		mEnvironmentStateMachine = mResourceManager->findObject<StateMachine>("EnvironmentState");
 		if (!error.check(mEnvironmentStateMachine != nullptr, "EnvironmentState not found"))
 			return false;
@@ -170,7 +190,6 @@ namespace nap
 		guiStyle.apply(&mGuiService->getContext(mSecondaryWindow)->Style);
 		guiStyle.apply(&mGuiService->getContext(mWindow)->Style);
         guiStyle.apply(&mGuiService->getContext(mStartupWindow)->Style);
-
 
 		// Turn framerate capping on
 		capFramerate(true);
@@ -234,6 +253,17 @@ namespace nap
 		// Control framerate
 		if (mMonitorController->getFrameRate() != getRequestedFramerate())
 			setFramerate(mMonitorController->getFrameRate());
+
+		// Control camera control selection
+		if (mFirstPersonCameraModeProperty->mValue)
+		{
+			mFirstPersonController->enable();
+			mSpatialOrbitController->disable();
+		}
+		else {
+			mFirstPersonController->disable();
+			mSpatialOrbitController->enable(mSpatialOrbitController->getLookAtPos());
+		}
     }
 
 
@@ -319,6 +349,15 @@ namespace nap
 			if (press_event->mKey == nap::EKeyCode::KEY_q)
 				if (mCtrlKeyPressed)
 					quit();
+
+			// reset the camera position and orientation using the active controller
+			if (press_event->mKey == nap::EKeyCode::KEY_r)
+			{
+				if (mFirstPersonCameraModeProperty->mValue)
+					mFirstPersonController->enable(mInitialCameraPosition, mInitialCameraRotation);
+				else
+					mSpatialOrbitController->set(mInitialCameraPosition, mSpatialOrbitController->getLookAtPos());
+			}
 		}
 
 		if (inputEvent->get_type().is_derived_from(RTTI_OF(nap::KeyReleaseEvent)))

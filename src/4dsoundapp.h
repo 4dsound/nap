@@ -3,6 +3,7 @@
 // Spatial includes
 #include <Spatial/Monitor/TextOverlayController.h>
 #include <Spatial/Monitor/MonitorController.h>
+#include <Spatial/Monitor/SpatialOrbitController.h>
 #include <Spatial/Core/EnvironmentComponent.h>
 #include <Spatial/Core/StateMachine.h>
 
@@ -25,6 +26,7 @@
 #include <scene.h>
 #include <renderwindow.h>
 #include <perspcameracomponent.h>
+#include <firstpersoncontroller.h>
 #include <entity.h>
 #include <rendercomponent.h>
 #include <app.h>
@@ -108,6 +110,8 @@ namespace nap
 		ResourcePtr<StateMachine::State> mEnvironmentStartupState = nullptr; // State indicating the environment is starting up
 
 		ObjectPtr<PerspCameraComponentInstance> mCamera = nullptr;
+		ObjectPtr<FirstPersonControllerInstance> mFirstPersonController = nullptr;
+		ObjectPtr<SpatialOrbitControllerInstance> mSpatialOrbitController = nullptr;
 		ObjectPtr<RenderableComponentInstance> mFloorWireFrame = nullptr;
 		ObjectPtr<RenderableComponentInstance> mFloor = nullptr;
 		ObjectPtr<RenderableComponentInstance> mAxesHelpers = nullptr;
@@ -121,12 +125,15 @@ namespace nap
 		ObjectPtr<gui::Gui> mSplashScreenGui = nullptr;
 		ObjectPtr<gui::Gui> mMonitorGui = nullptr;
 		ObjectPtr<spatial::MonitorController> mMonitorController = nullptr;
+		ObjectPtr<spatial::MonitorController::MonitorVisibilityProperty> mFirstPersonCameraModeProperty = nullptr;
 		ObjectPtr<RenderWindow> mStartupWindow = nullptr;
 
 		bool mSecondaryWindowVisible = false;     		// Is the GUI window currently visible?
 		bool mPrimaryWindowVisible = false;			// Is the main window visible?
 		bool mStartupWindowVisible = true;			// Is the startup window visible?
 		bool mCtrlKeyPressed = false; 				// Indicates wether the ctrl key is pressed
+		glm::vec3 mInitialCameraPosition;			// Read from app structure on init, for reset purpose
+		glm::quat mInitialCameraRotation;			// Read from app structure on init, for reset purpose
 
 		std::string mFileName = "app_structure.json"; 	// The JSON file that is loaded on initialization
         std::vector<std::string> mCommandLineArgs;		// List with command line arguments
