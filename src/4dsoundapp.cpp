@@ -14,7 +14,8 @@
 
 // Spatial includes.
 #include <Spatial/Core/EnvironmentComponent.h>
-#include <Spatial/Gui/GuiStyle.h>
+
+#include "GuiStyle.h"
 
 RTTI_BEGIN_CLASS_NO_DEFAULT_CONSTRUCTOR(nap::SpatialSoundApp)
 	RTTI_CONSTRUCTOR(nap::Core&)
@@ -186,7 +187,7 @@ namespace nap
 			return false;
 
 		// Apply hard-coded ImGui style to both windows
-		spatial::GuiStyle guiStyle;
+		GuiStyle guiStyle;
 		guiStyle.apply(&mGuiService->getContext(mSecondaryWindow)->Style);
 		guiStyle.apply(&mGuiService->getContext(mWindow)->Style);
         guiStyle.apply(&mGuiService->getContext(mStartupWindow)->Style);
