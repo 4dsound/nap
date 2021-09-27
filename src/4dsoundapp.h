@@ -30,7 +30,6 @@
 #include <entity.h>
 #include <rendercomponent.h>
 #include <app.h>
-#include <rendervideocomponent.h>
 
 namespace nap
 {

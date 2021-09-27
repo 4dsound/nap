@@ -17,7 +17,7 @@
     "mod_napparameter",
     "mod_napcameracontrol",
     "mod_napsettings",
-    "mod_napvideo"
+    "mod_theworks"
   ],
   "Data": "data/app_structure.json",
   "ServiceConfig": "config.json",
