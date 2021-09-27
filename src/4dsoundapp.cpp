@@ -10,7 +10,6 @@
 #include <Gui/GuiFunctions.h>
 #include <imgui/imgui_internal.h>
 #include <imguiutils.h>
-#include <videoplayer.h>
 
 // Spatial includes.
 #include <Spatial/Core/EnvironmentComponent.h>
