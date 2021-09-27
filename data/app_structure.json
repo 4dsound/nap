@@ -1,6 +1,129 @@
 {
     "Objects": [
         {
+            "Type": "nap::spatial::InputPositionTransformation",
+            "mID": "InputPositionTransformation",
+            "Name": "position"
+        },
+        {
+            "Type": "nap::spatial::InputPositionTransformation",
+            "mID": "InputPositionOffsetTransformation",
+            "Name": "positionOffset"
+        },
+        {
+            "Type": "nap::spatial::InputDimensionsTransformation",
+            "mID": "InputDimensionsTransformation",
+            "Name": "dimensions",
+            "DefaultValue": 1.0
+        },
+        {
+            "Type": "nap::spatial::InputScaleTransformation",
+            "mID": "InputScaleTransformation",
+            "Name": "scale",
+            "DefaultValue": 1.0
+        },
+        {
+            "Type": "nap::spatial::PositionRotationTransformation",
+            "mID": "PositionRotationTransformation",
+            "Name": "positionRotation"
+        },
+        {
+            "Type": "nap::spatial::InvertTransformation",
+            "mID": "InvertTransformation",
+            "Name": "invert"
+        },
+        {
+            "Type": "nap::spatial::PathTransformation",
+            "mID": "PathTransformation",
+            "Name": "path"
+        },
+        {
+            "Type": "nap::spatial::ModulationTransformation",
+            "mID": "ModulationTransformation",
+            "Name": "modulation"
+        },
+        {
+            "Type": "nap::spatial::ShakeTransformation",
+            "mID": "ShakeTransformation",
+            "Name": "shake"
+        },
+        {
+            "Type": "nap::spatial::SpasmTransformation",
+            "mID": "SpasmTransformation",
+            "Name": "spasm"
+        },
+        {
+            "Type": "nap::spatial::PlasmaTransformation",
+            "mID": "PlasmaTransformation",
+            "Name": "plasma"
+        },
+        {
+            "Type": "nap::spatial::OrientationTransformation",
+            "mID": "OrientationTransformation",
+            "Name": "orientation"
+        },
+        {
+            "Type": "nap::spatial::SpatialDynamicsTransformation",
+            "mID": "SpatialDynamicsTransformation",
+            "Name": "spatialDynamics"
+        },
+        {
+            "Type": "nap::spatial::WaveShapeTransformation",
+            "mID": "WaveShapeTransformation",
+            "Name": "wave"
+        },
+        {
+            "Type": "nap::spatial::VibrateShapeTransformation",
+            "mID": "VibrateShapeTransformation",
+            "Name": "vibrate"
+        },
+        {
+            "Type": "nap::spatial::BuzzShapeTransformation",
+            "mID": "BuzzShapeTransformation",
+            "Name": "buzz"
+        },
+        {
+            "Type": "nap::spatial::ShakeShapeTransformation",
+            "mID": "ShakeShapeTransformation",
+            "Name": "shake"
+        },
+        {
+            "Type": "nap::spatial::AttractShapeTransformation",
+            "mID": "AttractShapeTransformation",
+            "Name": "bend"
+        },
+        {
+            "Type": "nap::spatial::ParallelShapeTransformation",
+            "mID": "ParticleDimensionsShapeTransformation",
+            "Name": "particleDimensions",
+            "Transformation": {
+                "Type": "nap::spatial::InputDimensionsTransformation",
+                "mID": "InputDimensionsTransformation_5fe94920",
+                "Name": "",
+                "DefaultValue": 1.0
+            }
+        },
+        {
+            "Type": "nap::spatial::ParallelShapeTransformation",
+            "mID": "ParticleScaleShapeTransformation",
+            "Name": "particleScale",
+            "Transformation": {
+                "Type": "nap::spatial::InputScaleTransformation",
+                "mID": "InputScaleTransformation_91c91f26",
+                "Name": "",
+                "DefaultValue": 1.0
+            }
+        },
+        {
+            "Type": "nap::spatial::ParallelShapeTransformation",
+            "mID": "ParticleSpatialDynamicsShapeTransformation",
+            "Name": "particleSpatialDynamics",
+            "Transformation": {
+                "Type": "nap::spatial::SpatialDynamicsTransformation",
+                "mID": "SpatialDynamicsTransformation_436556fa",
+                "Name": ""
+            }
+        },        {
             "Type": "nap::BinauralSampleSetResource",
             "mID": "binauralSampleSet",
             "Path": "binaural"
@@ -710,239 +833,8 @@
                 {
                     "Type": "nap::spatial::ShapeComponent",
                     "mID": "ShapeComponent",
-                    "Shapes": [
-                        {
-                            "Type": "nap::spatial::PointShape",
-                            "mID": "PointShape",
-                            "Name": "point"
-                        },
-                        {
-                            "Type": "nap::spatial::CircleShape",
-                            "mID": "CircleShape",
-                            "Name": "circle"
-                        },
-                        {
-                            "Type": "nap::spatial::LineShape",
-                            "mID": "LineShape",
-                            "Name": "line"
-                        },
-                        {
-                            "Type": "nap::spatial::TriangleShape",
-                            "mID": "TriangleShape",
-                            "Name": "triangle"
-                        },
-                        {
-                            "Type": "nap::spatial::SquareShape",
-                            "mID": "SquareShape",
-                            "Name": "square"
-                        },
-                        {
-                            "Type": "nap::spatial::PentagonShape",
-                            "mID": "PentagonShape",
-                            "Name": "pentagon"
-                        },
-                        {
-                            "Type": "nap::spatial::HexagonShape",
-                            "mID": "HexagonShape",
-                            "Name": "hexagon"
-                        },
-                        {
-                            "Type": "nap::spatial::TetrahedronShape",
-                            "mID": "TetrahedronShape",
-                            "Name": "tetrahedron"
-                        },
-                        {
-                            "Type": "nap::spatial::OctahedronShape",
-                            "mID": "OctahedronShape",
-                            "Name": "octahedron"
-                        },
-                        {
-                            "Type": "nap::spatial::CubeShape",
-                            "mID": "CubeShape",
-                            "Name": "cube"
-                        },
-                        {
-                            "Type": "nap::spatial::IcosahedronShape",
-                            "mID": "IcosahedronShape",
-                            "Name": "icosahedron"
-                        },
-                        {
-                            "Type": "nap::spatial::DodecahedronShape",
-                            "mID": "DodecahedronShape",
-                            "Name": "dodecahedron"
-                        },
-                        {
-                            "Type": "nap::spatial::CircleTorusShape",
-                            "mID": "CircleTorusShape",
-                            "Name": "circleTorus"
-                        },
-                        {
-                            "Type": "nap::spatial::SpiralTorusShape",
-                            "mID": "SpiralTorusShape",
-                            "Name": "spiralTorus"
-                        },
-                        {
-                            "Type": "nap::spatial::ArchimedeanSpiralShape",
-                            "mID": "ArchimedeanSpiralShape",
-                            "Name": "archimedeanSpiral"
-                        },
-                        {
-                            "Type": "nap::spatial::DoubleSpiralShape",
-                            "mID": "DoubleSpiralShape",
-                            "Name": "doubleSpiral"
-                        },
-                        {
-                            "Type": "nap::spatial::TripleSpiralShape",
-                            "mID": "TripleSpiralShape",
-                            "Name": "tripleSpiral"
-                        },
-                        {
-                            "Type": "nap::spatial::InfiniteSpiralShape",
-                            "mID": "InfiniteSpiralShape",
-                            "Name": "infiniteSpiral"
-                        },
-                        {
-                            "Type": "nap::spatial::HelixShape",
-                            "mID": "HelixShape",
-                            "Name": "helix"
-                        },
-                        {
-                            "Type": "nap::spatial::PrecalculatedPythonTheWorksShape",
-                            "mID": "PrecalculatedPythonTheWorksShape_2",
-                            "Name": "sphere",
-                            "PythonScript": "ShapeGoldbergSphere",
-                            "Sort": true
-                        },
-                        {
-                            "Type": "nap::spatial::PrecalculatedPythonTheWorksShape",
-                            "mID": "PrecalculatedPythonTheWorksShape_3",
-                            "Name": "pyramid",
-                            "PythonScript": "ShapePyramid",
-                            "Sort": true
-                        },
-                        {
-                            "Type": "nap::spatial::WallsShape",
-                            "mID": "WallsShape",
-                            "Name": "walls"
-                        },
-                        {
-                            "Type": "nap::spatial::StereoShape",
-                            "mID": "StereoShape",
-                            "Name": "stereo"
-                        },
-                        {
-                            "Type": "nap::spatial::MonoShape",
-                            "mID": "MonoShape",
-                            "Name": "mono"
-                        },
-                        {
-                            "Type": "nap::spatial::SolidCubeShape",
-                            "mID": "SolidCubeShape",
-                            "Name": "solidCube"
-                        },
-                        {
-                            "Type": "nap::spatial::AdaptiveCubeShape",
-                            "mID": "AdaptiveCubeShape",
-                            "Name": "adaptiveCube"
-                        },
-                        {
-                            "Type": "nap::spatial::PythonShape",
-                            "mID": "TestLineShape",
-                            "Name": "testline",
-                            "PythonScript": "ShapeTestLine",
-                            "Class": "Shape"
-                        },
-                        {
-                            "Type": "nap::spatial::FibonacciSphereShape",
-                            "mID": "FibonacciSphereShape",
-                            "Name": "fibonacciSphere"
-                        },
-                        {
-                            "Type": "nap::spatial::SpeakerSetupShape",
-                            "mID": "SpeakerSetupShape_9cf4f774",
-                            "Name": "speakerSetup",
-                            "MultiSpeakerSetup": "multiSetup",
-                            "GridIndex": 1
-                        },
-                        {
-                            "Type": "nap::spatial::QuadShape",
-                            "mID": "QuadShape",
-                            "Name": "quad"
-                        },
-                        {
-                            "Type": "nap::spatial::BasicCubeShape",
-                            "mID": "BasicCubeShape",
-                            "Name": "basicCube"
-                        },
-                        {
-                            "Type": "nap::spatial::RowShape",
-                            "mID": "RowShape",
-                            "Name": "row"
-                        },
-                        {
-                            "Type": "nap::spatial::BasicCircleShape",
-                            "mID": "BasicCircleShape",
-                            "Name": "basicCircle"
-                        }
-                    ],
+                    "Shapes": [],
                     "ShapeTransformations": [
-                        {
-                            "Type": "nap::spatial::WaveShapeTransformation",
-                            "mID": "Wave",
-                            "Name": "wave"
-                        },
-                        {
-                            "Type": "nap::spatial::VibrateShapeTransformation",
-                            "mID": "Vibrate",
-                            "Name": "vibrate"
-                        },
-                        {
-                            "Type": "nap::spatial::BuzzShapeTransformation",
-                            "mID": "Buzz",
-                            "Name": "buzz"
-                        },
-                        {
-                            "Type": "nap::spatial::ShakeShapeTransformation",
-                            "mID": "Shake",
-                            "Name": "shake"
-                        },
-                        {
-                            "Type": "nap::spatial::AttractShapeTransformation",
-                            "mID": "Attract",
-                            "Name": "bend"
-                        },
-                        {
-                            "Type": "nap::spatial::ParallelShapeTransformation",
-                            "mID": "ParticleDimensionsShapeTransformation",
-                            "Name": "particleDimensions",
-                            "Transformation": {
-                                "Type": "nap::spatial::InputDimensionsTransformation",
-                                "mID": "InputDimensionsTransformation_5fe94920",
-                                "Name": "",
-                                "DefaultValue": 1.0
-                            }
-                        },
-                        {
-                            "Type": "nap::spatial::ParallelShapeTransformation",
-                            "mID": "ParticleScaleShapeTransformation",
-                            "Name": "particleScale",
-                            "Transformation": {
-                                "Type": "nap::spatial::InputScaleTransformation",
-                                "mID": "InputScaleTransformation_91c91f26",
-                                "Name": "",
-                                "DefaultValue": 1.0
-                            }
-                        },
-                        {
-                            "Type": "nap::spatial::ParallelShapeTransformation",
-                            "mID": "ParallelShapeTransformation_5f7e4363",
-                            "Name": "particleSpatialDynamics",
-                            "Transformation": {
-                                "Type": "nap::spatial::SpatialDynamicsTransformation",
-                                "mID": "SpatialDynamicsTransformation_436556fa",
-                                "Name": ""
-                            }
-                        }
                     ]
                 },
                 {
@@ -954,73 +846,6 @@
                     "Type": "nap::spatial::TransformationChainComponent",
                     "mID": "SoundObjectTransformationChainComponent",
                     "Transformations": [
-                        {
-                            "Type": "nap::spatial::InputPositionTransformation",
-                            "mID": "InputPositionTransformation",
-                            "Name": "position"
-                        },
-                        {
-                            "Type": "nap::spatial::InputPositionTransformation",
-                            "mID": "InputPositionTransformation_3",
-                            "Name": "positionOffset"
-                        },
-                        {
-                            "Type": "nap::spatial::InputDimensionsTransformation",
-                            "mID": "InputDimensionsTransformation",
-                            "Name": "dimensions",
-                            "DefaultValue": 1.0
-                        },
-                        {
-                            "Type": "nap::spatial::InputScaleTransformation",
-                            "mID": "InputScaleTransformation",
-                            "Name": "scale",
-                            "DefaultValue": 1.0
-                        },
-                        {
-                            "Type": "nap::spatial::PositionRotationTransformation",
-                            "mID": "PositionRotationTransformation",
-                            "Name": "positionRotation"
-                        },
-                        {
-                            "Type": "nap::spatial::InvertTransformation",
-                            "mID": "InvertTransformation",
-                            "Name": "invert"
-                        },
-                        {
-                            "Type": "nap::spatial::PathTransformation",
-                            "mID": "PathTransformation",
-                            "Name": "path"
-                        },
-                        {
-                            "Type": "nap::spatial::ModulationTransformation",
-                            "mID": "ModulationTransformation",
-                            "Name": "modulation"
-                        },
-                        {
-                            "Type": "nap::spatial::ShakeTransformation",
-                            "mID": "ShakeTransformation",
-                            "Name": "shake"
-                        },
-                        {
-                            "Type": "nap::spatial::SpasmTransformation",
-                            "mID": "SpasmTransformation",
-                            "Name": "spasm"
-                        },
-                        {
-                            "Type": "nap::spatial::PlasmaTransformation",
-                            "mID": "PlasmaTransformation",
-                            "Name": "plasma"
-                        },
-                        {
-                            "Type": "nap::spatial::OrientationTransformation",
-                            "mID": "OrientationTransformation",
-                            "Name": "orientation"
-                        },
-                        {
-                            "Type": "nap::spatial::SpatialDynamicsTransformation",
-                            "mID": "SpatialDynamicsTransformation",
-                            "Name": "spatialDynamics"
-                        }
                     ],
                     "Name": "transformation"
                 },
@@ -3830,17 +3655,47 @@
             ]
         },
         {
+            "Type": "nap::spatial::AdaptiveCubeShape",
+            "mID": "AdaptiveCubeShape",
+            "Name": "adaptiveCube"
+        },
+        {
             "Type": "nap::spatial::AnchorMesh",
             "mID": "AnchorMesh"
+        },
+        {
+            "Type": "nap::spatial::ArchimedeanSpiralShape",
+            "mID": "ArchimedeanSpiralShape",
+            "Name": "archimedeanSpiral"
         },
         {
             "Type": "nap::spatial::AxesHelperMesh",
             "mID": "AxesHelperMesh"
         },
         {
+            "Type": "nap::spatial::BasicCircleShape",
+            "mID": "BasicCircleShape",
+            "Name": "basicCircle"
+        },
+        {
+            "Type": "nap::spatial::BasicCubeShape",
+            "mID": "BasicCubeShape",
+            "Name": "basicCube"
+        },
+        {
             "Type": "nap::spatial::BoxFrameMesh",
             "mID": "BoxFrameMesh",
             "Displacement": 1.0
+        },
+        {
+            "Type": "nap::spatial::CircleShape",
+            "mID": "CircleShape",
+            "Name": "circle"
+        },
+        {
+            "Type": "nap::spatial::CircleTorusShape",
+            "mID": "CircleTorusShape",
+            "Name": "circleTorus"
         },
         {
             "Type": "nap::spatial::ConfigurableOSCSender",
@@ -3851,6 +3706,70 @@
             "IpSettingName": "oscSenderIp",
             "PortSettingName": "oscSenderPort",
             "SettingsFile": "SettingsFile"
+        },
+        {
+            "Type": "nap::spatial::CubeShape",
+            "mID": "CubeShape",
+            "Name": "cube"
+        },
+        {
+            "Type": "nap::spatial::DistanceDampingEffect",
+            "mID": "DistanceDampingEffect",
+            "Name": "distanceDamping"
+        },
+        {
+            "Type": "nap::spatial::DistanceDiffusionEffect",
+            "mID": "DistanceDiffusionEffect",
+            "Name": "distanceDiffusionEffect"
+        },
+        {
+            "Type": "nap::spatial::DistanceIntensityEffect",
+            "mID": "DistanceIntensityEffect",
+            "Name": "distanceAttenuation"
+        },
+        {
+            "Type": "nap::spatial::DodecahedronShape",
+            "mID": "DodecahedronShape",
+            "Name": "dodecahedron"
+        },
+        {
+            "Type": "nap::spatial::DopplerEffect",
+            "mID": "DopplerEffect",
+            "Name": "doppler"
+        },
+        {
+            "Type": "nap::spatial::DoubleSpiralShape",
+            "mID": "DoubleSpiralShape",
+            "Name": "doubleSpiral"
+        },
+        {
+            "Type": "nap::spatial::ElevationFilterDownEffect",
+            "mID": "ElevationFilterDownEffect",
+            "Name": "elevationFilterBelow"
+        },
+        {
+            "Type": "nap::spatial::ElevationFilterUpEffect",
+            "mID": "ElevationFilterUpEffect",
+            "Name": "elevationFilterAbove"
+        },
+        {
+            "Type": "nap::spatial::FibonacciSphereShape",
+            "mID": "FibonacciSphereShape",
+            "Name": "fibonacciSphere"
+        },
+        {
+            "Type": "nap::spatial::GainScalingEffect",
+            "mID": "GainScalingEffect",
+            "Name": "gainScaling"
+        },
+        {
+            "Type": "nap::spatial::GranulatorEffect",
+            "mID": "GranulatorEffect",
+            "Name": "granulator",
+            "CircularBufferSize": 524288,
+            "CircularBufferChannelCount": 8,
+            "InternalBufferSize": 32,
+            "VoiceCount": 50
         },
         {
             "Type": "nap::spatial::HeadphonesSpeakerSetup",
@@ -3865,10 +3784,45 @@
             }
         },
         {
+            "Type": "nap::spatial::HelixShape",
+            "mID": "HelixShape",
+            "Name": "helix"
+        },
+        {
+            "Type": "nap::spatial::HexagonShape",
+            "mID": "HexagonShape",
+            "Name": "hexagon"
+        },
+        {
+            "Type": "nap::spatial::IcosahedronShape",
+            "mID": "IcosahedronShape",
+            "Name": "icosahedron"
+        },
+        {
+            "Type": "nap::spatial::InfiniteSpiralShape",
+            "mID": "InfiniteSpiralShape",
+            "Name": "infiniteSpiral"
+        },
+        {
+            "Type": "nap::spatial::InputDistanceDampingEffect",
+            "mID": "InputDistanceDampingEffect",
+            "Name": "inputDistanceDamping"
+        },
+        {
+            "Type": "nap::spatial::InputDistanceIntensityEffect",
+            "mID": "InputDistanceIntensityEffect",
+            "Name": "inputDistanceAttenuation"
+        },
+        {
             "Type": "nap::spatial::LinePlaneMesh",
             "mID": "LinePlaneMesh_2baa8e75",
             "Columns": 200,
             "Rows": 200
+        },
+        {
+            "Type": "nap::spatial::LineShape",
+            "mID": "LineShape",
+            "Name": "line"
         },
         {
             "Type": "nap::spatial::MonitorController",
@@ -3963,6 +3917,11 @@
             "RenderingEnabledSettingName": "RenderingEnabled"
         },
         {
+            "Type": "nap::spatial::MonoShape",
+            "mID": "MonoShape",
+            "Name": "mono"
+        },
+        {
             "Type": "nap::spatial::MultiSpeakerSetup",
             "mID": "multiSetup",
             "SpeakerTypeMasters": [
@@ -3997,6 +3956,124 @@
         {
             "Type": "nap::spatial::OSCLogger",
             "mID": "OSCLogger"
+        },
+        {
+            "Type": "nap::spatial::OctahedronShape",
+            "mID": "OctahedronShape",
+            "Name": "octahedron"
+        },
+        {
+            "Type": "nap::spatial::PentagonShape",
+            "mID": "PentagonShape",
+            "Name": "pentagon"
+        },
+        {
+            "Type": "nap::spatial::PointShape",
+            "mID": "PointShape",
+            "Name": "point"
+        },
+        {
+            "Type": "nap::spatial::PrecalculatedPythonTheWorksShape",
+            "mID": "GoldbergSphereShape",
+            "Name": "sphere",
+            "PythonScript": "ShapeGoldbergSphere",
+            "Sort": true
+        },
+        {
+            "Type": "nap::spatial::PrecalculatedPythonTheWorksShape",
+            "mID": "PyramidShape",
+            "Name": "pyramid",
+            "PythonScript": "ShapePyramid",
+            "Sort": true
+        },
+        {
+            "Type": "nap::spatial::PythonShape",
+            "mID": "TestLineShape",
+            "Name": "testline",
+            "PythonScript": "ShapeTestLine",
+            "Class": "Shape"
+        },
+        {
+            "Type": "nap::spatial::QuadShape",
+            "mID": "QuadShape",
+            "Name": "quad"
+        },
+        {
+            "Type": "nap::spatial::ReverbEffect",
+            "mID": "ReverbEffect",
+            "Name": "reverb",
+            "PredelayBufferSize": 32768,
+            "LPFType": "LowPass6dB",
+            "HPFType": "HighPass6dB"
+        },
+        {
+            "Type": "nap::spatial::ReverbEffect47",
+            "mID": "ReverbEffect47",
+            "Name": "reverb"
+        },
+        {
+            "Type": "nap::spatial::RowShape",
+            "mID": "RowShape",
+            "Name": "row"
+        },
+        {
+            "Type": "nap::spatial::SolidCubeShape",
+            "mID": "SolidCubeShape",
+            "Name": "solidCube"
+        },
+        {
+            "Type": "nap::spatial::SpatialDelayEffect",
+            "mID": "SpatialDelayEffect",
+            "Name": "spatialDelay"
+        },
+        {
+            "Type": "nap::spatial::SpatialPhaserEffect",
+            "mID": "SpatialPhaserEffect",
+            "Name": "spatialPhaser",
+            "DelayLineSize": 16384,
+            "ParallelDelayCount": 8
+        },
+        {
+            "Type": "nap::spatial::SpeakerSetupShape",
+            "mID": "SpeakerSetupShape",
+            "Name": "speakerSetup",
+            "MultiSpeakerSetup": "multiSetup",
+            "GridIndex": 1
+        },
+        {
+            "Type": "nap::spatial::SpiralTorusShape",
+            "mID": "SpiralTorusShape",
+            "Name": "spiralTorus"
+        },
+        {
+            "Type": "nap::spatial::SquareShape",
+            "mID": "SquareShape",
+            "Name": "square"
+        },
+        {
+            "Type": "nap::spatial::StereoShape",
+            "mID": "StereoShape",
+            "Name": "stereo"
+        },
+        {
+            "Type": "nap::spatial::TetrahedronShape",
+            "mID": "TetrahedronShape",
+            "Name": "tetrahedron"
+        },
+        {
+            "Type": "nap::spatial::TriangleShape",
+            "mID": "TriangleShape",
+            "Name": "triangle"
+        },
+        {
+            "Type": "nap::spatial::TripleSpiralShape",
+            "mID": "TripleSpiralShape",
+            "Name": "tripleSpiral"
+        },
+        {
+            "Type": "nap::spatial::WallsShape",
+            "mID": "WallsShape",
+            "Name": "walls"
         },
         {
             "Type": "nap::turboactivate::Licensing",

@@ -23,60 +23,6 @@ def createSoundEntities(environment, count):
     createSoundObjects(environment, count, True, settings.SOUND_ENTITIES_MAX_PARTICLE_COUNT)
 
 
-# define effects outside of the python function scope, so they remain alive (necessary if new effectprocessors are added later).
-granulator = nap.GranulatorEffect()
-granulator.Name = "granulator"
-granulator.CircularBufferSize = 524288
-granulator.CircularBufferChannelCount = 8
-granulator.InternalBufferSize = 32
-granulator.VoiceCount = 50
-
-inputDistanceIntensity = nap.InputDistanceIntensityEffect()
-inputDistanceIntensity.Name = "inputDistanceAttenuation"
-
-inputDistanceDamping = nap.InputDistanceDampingEffect()
-inputDistanceDamping.Name = "inputDistanceDamping"
-
-spatialDelay = nap.SpatialDelayEffect()
-spatialDelay.Name = "spatialDelay"
-
-doppler = nap.DopplerEffect()
-doppler.Name = "doppler"
-
-spatialPhaser = nap.SpatialPhaserEffect()
-spatialPhaser.Name = "spatialPhaser"
-spatialPhaser.DelayLineSize = 16384
-spatialPhaser.ParallelDelayCount = 8
-
-gainScaling = nap.GainScalingEffect()
-gainScaling.Name = "gainScaling"
-
-reverb47 = nap.ReverbEffect47()
-reverb47.Name = "reverb"
-
-reverb = nap.ReverbEffect()
-reverb.Name = "reverb"
-reverb.PredelayBufferSize = 32768
-# reverb.LPFType = nap.FilterChainType.LowPass6dB
-# reverb.HPFType = nap.FilterChainType.HighPass6dB
-# Note: enum properties can't be overwritten from python. Fortunately, the default values (6dB filters) are desired here.
-
-distanceIntensity = nap.DistanceIntensityEffect()
-distanceIntensity.Name = "distanceAttenuation"
-
-distanceDamping = nap.DistanceDampingEffect()
-distanceDamping.Name = "distanceDamping"
-
-elevationFilterUp = nap.ElevationFilterUpEffect()
-elevationFilterUp.Name = "elevationFilterAbove"
-
-elevationFilterDown = nap.ElevationFilterDownEffect()
-elevationFilterDown.Name = "elevationFilterBelow"
-
-distanceDiffusion = nap.DistanceDiffusionEffect()
-distanceDiffusion.Name = "distanceDiffusion"
-
-
 # keep global unique id count
 uniqueID = 0
 
@@ -117,33 +63,87 @@ def createSoundObjects(environment, count, connect, maxParticleCount):
         controlComponent.setParameterFloat("hue", 0)
 
         # add effects
-        if connect: # space sound objects
-            controlComponent.addInputEffect(granulator)
-            controlComponent.addInputEffect(inputDistanceIntensity)
-            controlComponent.addInputEffect(inputDistanceDamping)
-            controlComponent.addInputEffect(spatialDelay)
-            controlComponent.addEffect(doppler)
-            controlComponent.addEffect(spatialPhaser)
-            controlComponent.addEffect(gainScaling)
-            controlComponent.addEffect(reverb)
-            controlComponent.addEffect(distanceIntensity)
-            controlComponent.addEffect(distanceDamping)
-            controlComponent.addEffect(elevationFilterUp)
-            controlComponent.addEffect(elevationFilterDown)
-            controlComponent.addEffect(distanceDiffusion)
-        else: # source sound objects
-            if connect:
-                controlComponent.addEffect(granulator)
-                controlComponent.addEffect(spatialDelay)
-            controlComponent.addEffect(doppler)
-            if connect:
-                controlComponent.addEffect(gainScaling)
-                controlComponent.addEffect(reverb)
-            controlComponent.addEffect(distanceIntensity)
-            controlComponent.addEffect(distanceDamping)
-            controlComponent.addEffect(elevationFilterUp)
-            controlComponent.addEffect(elevationFilterDown)
-            controlComponent.addEffect(distanceDiffusion)
+        if connect: # sound entities
+            controlComponent.addInputEffect(environment.findResource("GranulatorEffect"))
+            controlComponent.addInputEffect(environment.findResource("InputDistanceIntensityEffect"))
+            controlComponent.addInputEffect(environment.findResource("InputDistanceDampingEffect"))
+            controlComponent.addInputEffect(environment.findResource("SpatialDelayEffect"))
+            controlComponent.addEffect(environment.findResource("DopplerEffect"))
+            controlComponent.addEffect(environment.findResource("SpatialPhaserEffect"))
+            controlComponent.addEffect(environment.findResource("GainScalingEffect"))
+            controlComponent.addEffect(environment.findResource("ReverbEffect"))
+            controlComponent.addEffect(environment.findResource("DistanceIntensityEffect"))
+            controlComponent.addEffect(environment.findResource("DistanceDampingEffect"))
+            controlComponent.addEffect(environment.findResource("ElevationFilterUpEffect"))
+            controlComponent.addEffect(environment.findResource("ElevationFilterDownEffect"))
+            controlComponent.addEffect(environment.findResource("DistanceDiffusionEffect"))
+        else: # sources
+            controlComponent.addEffect(environment.findResource("DopplerEffect"))
+            controlComponent.addEffect(environment.findResource("DistanceIntensityEffect"))
+            controlComponent.addEffect(environment.findResource("DistanceDampingEffect"))
+            controlComponent.addEffect(environment.findResource("ElevationFilterUpEffect"))
+            controlComponent.addEffect(environment.findResource("ElevationFilterDownEffect"))
+            controlComponent.addEffect(environment.findResource("DistanceDiffusionEffect"))
+
+        # add shapes
+        controlComponent.addShape(environment.findResource("PointShape"))
+        controlComponent.addShape(environment.findResource("CircleShape"))
+        controlComponent.addShape(environment.findResource("LineShape"))
+        controlComponent.addShape(environment.findResource("TriangleShape"))
+        controlComponent.addShape(environment.findResource("SquareShape"))
+        controlComponent.addShape(environment.findResource("PentagonShape"))
+        controlComponent.addShape(environment.findResource("HexagonShape"))
+        controlComponent.addShape(environment.findResource("TetrahedronShape"))
+        controlComponent.addShape(environment.findResource("OctahedronShape"))
+        controlComponent.addShape(environment.findResource("CubeShape"))
+        controlComponent.addShape(environment.findResource("IcosahedronShape"))
+        controlComponent.addShape(environment.findResource("DodecahedronShape"))
+        controlComponent.addShape(environment.findResource("CircleTorusShape"))
+        controlComponent.addShape(environment.findResource("SpiralTorusShape"))
+        controlComponent.addShape(environment.findResource("ArchimedeanSpiralShape"))
+        controlComponent.addShape(environment.findResource("DoubleSpiralShape"))
+        controlComponent.addShape(environment.findResource("TripleSpiralShape"))
+        controlComponent.addShape(environment.findResource("InfiniteSpiralShape"))
+        controlComponent.addShape(environment.findResource("HelixShape"))
+        controlComponent.addShape(environment.findResource("GoldbergSphereShape"))
+        controlComponent.addShape(environment.findResource("PyramidShape"))
+        controlComponent.addShape(environment.findResource("WallsShape"))
+        controlComponent.addShape(environment.findResource("StereoShape"))
+        controlComponent.addShape(environment.findResource("MonoShape"))
+        controlComponent.addShape(environment.findResource("SolidCubeShape"))
+        controlComponent.addShape(environment.findResource("AdaptiveCubeShape"))
+        controlComponent.addShape(environment.findResource("TestLineShape"))
+        controlComponent.addShape(environment.findResource("FibonacciSphereShape"))
+        controlComponent.addShape(environment.findResource("SpeakerSetupShape"))
+        controlComponent.addShape(environment.findResource("QuadShape"))
+        controlComponent.addShape(environment.findResource("BasicCubeShape"))
+        controlComponent.addShape(environment.findResource("RowShape"))
+        controlComponent.addShape(environment.findResource("BasicCircleShape"))
+
+        # add shape transformations
+        controlComponent.addShapeTransformation(environment.findResource("WaveShapeTransformation"))
+        controlComponent.addShapeTransformation(environment.findResource("VibrateShapeTransformation"))
+        controlComponent.addShapeTransformation(environment.findResource("BuzzShapeTransformation"))
+        controlComponent.addShapeTransformation(environment.findResource("ShakeShapeTransformation"))
+        controlComponent.addShapeTransformation(environment.findResource("AttractShapeTransformation"))
+        controlComponent.addShapeTransformation(environment.findResource("ParticleDimensionsShapeTransformation"))
+        controlComponent.addShapeTransformation(environment.findResource("ParticleScaleShapeTransformation"))
+        controlComponent.addShapeTransformation(environment.findResource("ParticleSpatialDynamicsShapeTransformation"))
+
+        # add transformations
+        controlComponent.addTransformation(environment.findResource("InputPositionTransformation"))
+        controlComponent.addTransformation(environment.findResource("InputPositionOffsetTransformation"))
+        controlComponent.addTransformation(environment.findResource("InputDimensionsTransformation"))
+        controlComponent.addTransformation(environment.findResource("InputScaleTransformation"))
+        controlComponent.addTransformation(environment.findResource("PositionRotationTransformation"))
+        controlComponent.addTransformation(environment.findResource("InvertTransformation"))
+        controlComponent.addTransformation(environment.findResource("PathTransformation"))
+        controlComponent.addTransformation(environment.findResource("ModulationTransformation"))
+        controlComponent.addTransformation(environment.findResource("ShakeTransformation"))
+        controlComponent.addTransformation(environment.findResource("SpasmTransformation"))
+        controlComponent.addTransformation(environment.findResource("PlasmaTransformation"))
+        controlComponent.addTransformation(environment.findResource("OrientationTransformation"))
+        controlComponent.addTransformation(environment.findResource("SpatialDynamicsTransformation"))
 
         # add external input
         controlComponent.addExternalInput()
@@ -203,10 +203,10 @@ def createSpaces(environment, count, maxParticleCount):
         controlComponent.setParameterOption("shapeType", "speakerSetup")
 
         # add effects
-        controlComponent.addInputEffect(inputDistanceIntensity)
-        controlComponent.addInputEffect(inputDistanceDamping)
-        controlComponent.addInputEffect(spatialDelay)
-        controlComponent.addEffect(reverb47)
+        controlComponent.addInputEffect(environment.findResource("InputDistanceIntensityEffect"))
+        controlComponent.addInputEffect(environment.findResource("InputDistanceDampingEffect"))
+        controlComponent.addInputEffect(environment.findResource("SpatialDelayEffect"))
+        controlComponent.addEffect(environment.findResource("ReverbEffect47"))
 
         for j in range(len(soundObjects)):
             input = soundObjects[j].findComponent("nap::spatial::EnvironmentControlComponentInstance")
