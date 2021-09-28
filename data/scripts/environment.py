@@ -16,6 +16,7 @@ def createSources(environment, count):
     effects.append("DistanceIntensityEffect")
     effects.append("DistanceDampingEffect")
     effects.append("ElevationFilterUpEffect")
+    effects.append("ElevationFilterDownEffect")
     effects.append("DistanceDiffusionEffect")
 
     shapes.append("MonoShape")
@@ -64,6 +65,7 @@ def createSoundEntities(environment, count, particleCount):
     effects.append("DistanceIntensityEffect")
     effects.append("DistanceDampingEffect")
     effects.append("ElevationFilterUpEffect")
+    effects.append("ElevationFilterDownEffect")
     effects.append("DistanceDiffusionEffect")
 
     shapes.append("MonoShape")
