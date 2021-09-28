@@ -196,7 +196,7 @@ def createSoundObject(environment, prefix, index, category, visible, externalInp
     return soundObject
 
 
-# Connects all objects in list a to all objects in list b, unless a == b.
+# Connects all objects in list a to all objects in list b, unless the objects are equal.
 def connect(environment, a, b):
     for objectA in a:
         for objectB in b:
