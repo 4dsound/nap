@@ -1,10 +1,6 @@
 import nap
 import environmentSettings as settings
 
-# the transformation chains of group transformation objects.
-groupTransformations = []
-particleLevelGroupTransformations = []
-
 # all sound objects and their names, for follow and group transformations
 soundObjects = []
 soundObjectNames = []
@@ -204,16 +200,19 @@ def connect(environment, a, b):
                 objectB.findComponent("nap::spatial::EnvironmentControlComponentInstance").connectInput(objectA.findComponent("nap::spatial::EnvironmentControlComponentInstance"))
 
 
-def createGroups(environment, count):
-    for i in range(count):
+def addFollowAndGroupTransformationsToAllSoundObjects(environment, groupsCount):
+
+    groupTransformations = []
+    particleLevelGroupTransformations = []
+
+    # create group objects
+    for i in range(groupsCount):
         properties = nap.EnvironmentInstanceProperties()
         properties.addString("nap::ParameterComponent", "Name", "group" + str(i+1))
         groupObject = environment.createEntity("groupTransformationObject", properties)
         groupTransformations.append(groupObject.findComponentByID("shapeTransformationChain"))
         particleLevelGroupTransformations.append(groupObject.findComponentByID("particleTransformationChain"))
 
-
-def addFollowAndGroupTransformationsToAllSoundObjects():
     # add switchexternaltransformation for follow transformations and an externaltransformation for group transformations to all sound objects
     for i in range(len(soundObjects)):
 
@@ -266,8 +265,7 @@ def init(entity):
     connect(environment, soundentities, spaces)
 
     # add group and follow transformations
-    createGroups(environment, settings.GROUPS_COUNT)
-    addFollowAndGroupTransformationsToAllSoundObjects()
+    addFollowAndGroupTransformationsToAllSoundObjects(environment, settings.GROUPS_COUNT)
 
     sendInitMessage(environment)
 
