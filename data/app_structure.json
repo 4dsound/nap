@@ -1635,15 +1635,6 @@
             "Font": "fonts/Montserrat-Light.otf"
         },
         {
-            "Type": "nap::Font",
-            "mID": "GuiFont",
-            "Properties": {
-                "Size": 12,
-                "DPI": 96
-            },
-            "Font": "fonts/MuseoSans_500.otf"
-        },
-        {
             "Type": "nap::ImageFromFile",
             "mID": "LogoSmall",
             "Usage": "Static",
@@ -1655,13 +1646,6 @@
             "mID": "SplashScreenImage",
             "Usage": "Static",
             "ImagePath": "img/splash.png",
-            "GenerateLods": true
-        },
-        {
-            "Type": "nap::ImageFromFile",
-            "mID": "WatermarkImage",
-            "Usage": "Static",
-            "ImagePath": "img/watermark.png",
             "GenerateLods": true
         },
         {
@@ -2377,12 +2361,6 @@
             "mID": "HaloShader",
             "VertShader": "shaders/monitor/halo.vert",
             "FragShader": "shaders/monitor/halo.frag"
-        },
-        {
-            "Type": "nap::ShaderFromFile",
-            "mID": "LightingShader",
-            "VertShader": "shaders/monitor/lighting.vert",
-            "FragShader": "shaders/monitor/lighting.frag"
         },
         {
             "Type": "nap::ShaderFromFile",
