@@ -1635,15 +1635,6 @@
             "Font": "fonts/Montserrat-Light.otf"
         },
         {
-            "Type": "nap::Font",
-            "mID": "GuiFont",
-            "Properties": {
-                "Size": 12,
-                "DPI": 96
-            },
-            "Font": "fonts/MuseoSans_500.otf"
-        },
-        {
             "Type": "nap::ImageFromFile",
             "mID": "LogoSmall",
             "Usage": "Static",
@@ -1655,13 +1646,6 @@
             "mID": "SplashScreenImage",
             "Usage": "Static",
             "ImagePath": "img/splash.png",
-            "GenerateLods": true
-        },
-        {
-            "Type": "nap::ImageFromFile",
-            "mID": "WatermarkImage",
-            "Usage": "Static",
-            "ImagePath": "img/watermark.png",
             "GenerateLods": true
         },
         {
@@ -1860,25 +1844,6 @@
         },
         {
             "Type": "nap::Material",
-            "mID": "FlameMaterial",
-            "Uniforms": [],
-            "Samplers": [],
-            "Shader": "FlameShader",
-            "VertexAttributeBindings": [
-                {
-                    "MeshAttributeID": "UV0",
-                    "ShaderAttributeID": "in_UV0"
-                },
-                {
-                    "MeshAttributeID": "Position",
-                    "ShaderAttributeID": "in_Position"
-                }
-            ],
-            "BlendMode": "Additive",
-            "DepthMode": "InheritFromBlendMode"
-        },
-        {
-            "Type": "nap::Material",
             "mID": "FloorWireFrameMaterial",
             "Uniforms": [],
             "Samplers": [],
@@ -1956,102 +1921,6 @@
         },
         {
             "Type": "nap::Material",
-            "mID": "LightingMaterial",
-            "Uniforms": [
-                {
-                    "Type": "nap::UniformStruct",
-                    "mID": "UniformStruct_84b9404b",
-                    "Name": "UBO",
-                    "Uniforms": [
-                        {
-                            "Type": "nap::UniformFloat",
-                            "mID": "UniformFloat_47b5876b",
-                            "Name": "ambientIntensity",
-                            "Value": 0.4000000059604645
-                        },
-                        {
-                            "Type": "nap::UniformFloat",
-                            "mID": "UniformFloat_5479166a",
-                            "Name": "shininess",
-                            "Value": 10.0
-                        },
-                        {
-                            "Type": "nap::UniformFloat",
-                            "mID": "UniformFloat_09afcd98",
-                            "Name": "specularIntensity",
-                            "Value": 0.4000000059604645
-                        },
-                        {
-                            "Type": "nap::UniformFloat",
-                            "mID": "UniformFloat_c9d1d3e2",
-                            "Name": "attenuationScale",
-                            "Value": 0.0
-                        },
-                        {
-                            "Type": "nap::UniformVec3Array",
-                            "mID": "UniformVec3Array_fbeb2d50",
-                            "Name": "lightPositions",
-                            "Values": [
-                                {
-                                    "x": -10.0,
-                                    "y": 10.0,
-                                    "z": -10.0
-                                },
-                                {
-                                    "x": 10.0,
-                                    "y": 10.0,
-                                    "z": 10.0
-                                }
-                            ]
-                        },
-                        {
-                            "Type": "nap::UniformInt",
-                            "mID": "UniformInt_05631af5",
-                            "Name": "lightCount",
-                            "Value": 2
-                        },
-                        {
-                            "Type": "nap::UniformFloat",
-                            "mID": "UniformFloat_b0358fed",
-                            "Name": "lightIntensity",
-                            "Value": 1.0
-                        },
-                        {
-                            "Type": "nap::UniformFloat",
-                            "mID": "UniformFloat_3ba96d66",
-                            "Name": "lineWidth",
-                            "Value": 0.0020000000949949028
-                        },
-                        {
-                            "Type": "nap::UniformInt",
-                            "mID": "UniformInt_08a584df",
-                            "Name": "wireframe",
-                            "Value": 0
-                        }
-                    ]
-                }
-            ],
-            "Samplers": [],
-            "Shader": "LightingShader",
-            "VertexAttributeBindings": [
-                {
-                    "MeshAttributeID": "Position",
-                    "ShaderAttributeID": "in_Position"
-                },
-                {
-                    "MeshAttributeID": "Normal",
-                    "ShaderAttributeID": "in_Normal"
-                },
-                {
-                    "MeshAttributeID": "UV0",
-                    "ShaderAttributeID": "in_UVs"
-                }
-            ],
-            "BlendMode": "Opaque",
-            "DepthMode": "InheritFromBlendMode"
-        },
-        {
-            "Type": "nap::Material",
             "mID": "LinesMaterial",
             "Uniforms": [],
             "Samplers": [],
@@ -2059,64 +1928,6 @@
             "VertexAttributeBindings": [],
             "BlendMode": "Opaque",
             "DepthMode": "InheritFromBlendMode"
-        },
-        {
-            "Type": "nap::Material",
-            "mID": "ParticlePointCloudMaterial",
-            "Uniforms": [
-                {
-                    "Type": "nap::UniformStruct",
-                    "mID": "UniformStruct_74f6b0c7",
-                    "Name": "UBO",
-                    "Uniforms": [
-                        {
-                            "Type": "nap::UniformVec3",
-                            "mID": "UniformVec3_65c5da15",
-                            "Name": "color",
-                            "Value": {
-                                "x": 1.0,
-                                "y": 0.0,
-                                "z": 0.0
-                            }
-                        }
-                    ]
-                },
-                {
-                    "Type": "nap::UniformStruct",
-                    "mID": "UniformStruct_b4f2b081",
-                    "Name": "UBOVert",
-                    "Uniforms": [
-                        {
-                            "Type": "nap::UniformVec3",
-                            "mID": "UniformVec3_be22bfe8",
-                            "Name": "scale",
-                            "Value": {
-                                "x": 1.0,
-                                "y": 1.0,
-                                "z": 1.0
-                            }
-                        }
-                    ]
-                }
-            ],
-            "Samplers": [],
-            "Shader": "ParticlePointCloudShader",
-            "VertexAttributeBindings": [
-                {
-                    "MeshAttributeID": "Index",
-                    "ShaderAttributeID": "in_Index"
-                },
-                {
-                    "MeshAttributeID": "Position",
-                    "ShaderAttributeID": "in_Position"
-                },
-                {
-                    "MeshAttributeID": "Normal",
-                    "ShaderAttributeID": "in_Normal"
-                }
-            ],
-            "BlendMode": "Opaque",
-            "DepthMode": "ReadWrite"
         },
         {
             "Type": "nap::Material",
@@ -2192,42 +2003,6 @@
                 {
                     "MeshAttributeID": "Index",
                     "ShaderAttributeID": "in_Index"
-                }
-            ],
-            "BlendMode": "Opaque",
-            "DepthMode": "InheritFromBlendMode"
-        },
-        {
-            "Type": "nap::Material",
-            "mID": "PointCloudMaterial",
-            "Uniforms": [
-                {
-                    "Type": "nap::UniformStruct",
-                    "mID": "UniformStruct_f7ae580b",
-                    "Name": "UBO",
-                    "Uniforms": []
-                },
-                {
-                    "Type": "nap::UniformStruct",
-                    "mID": "UniformStruct_0460e832",
-                    "Name": "UBOVert",
-                    "Uniforms": []
-                }
-            ],
-            "Samplers": [],
-            "Shader": "ShapePointCloudShader",
-            "VertexAttributeBindings": [
-                {
-                    "MeshAttributeID": "Position",
-                    "ShaderAttributeID": "in_Position"
-                },
-                {
-                    "MeshAttributeID": "Normal",
-                    "ShaderAttributeID": "in_Normal"
-                },
-                {
-                    "MeshAttributeID": "UV0",
-                    "ShaderAttributeID": "in_UV0"
                 }
             ],
             "BlendMode": "Opaque",
@@ -2571,12 +2346,6 @@
         },
         {
             "Type": "nap::ShaderFromFile",
-            "mID": "FlameShader",
-            "VertShader": "shaders/monitor/flame.vert",
-            "FragShader": "shaders/monitor/flame.frag"
-        },
-        {
-            "Type": "nap::ShaderFromFile",
             "mID": "FloorWireFrameShader",
             "VertShader": "shaders/monitor/grid.vert",
             "FragShader": "shaders/monitor/grid.frag"
@@ -2595,21 +2364,9 @@
         },
         {
             "Type": "nap::ShaderFromFile",
-            "mID": "LightingShader",
-            "VertShader": "shaders/monitor/lighting.vert",
-            "FragShader": "shaders/monitor/lighting.frag"
-        },
-        {
-            "Type": "nap::ShaderFromFile",
             "mID": "LinesShader",
             "VertShader": "shaders/monitor/lines.vert",
             "FragShader": "shaders/monitor/lines.frag"
-        },
-        {
-            "Type": "nap::ShaderFromFile",
-            "mID": "ParticlePointCloudShader",
-            "VertShader": "shaders/monitor/particlepointcloud.vert",
-            "FragShader": "shaders/monitor/pointcloud.frag"
         },
         {
             "Type": "nap::ShaderFromFile",
@@ -2622,12 +2379,6 @@
             "mID": "ShapePlaneCloudShader",
             "VertShader": "shaders/monitor/shapeplanecloud.vert",
             "FragShader": "shaders/monitor/planecloud.frag"
-        },
-        {
-            "Type": "nap::ShaderFromFile",
-            "mID": "ShapePointCloudShader",
-            "VertShader": "shaders/monitor/shapepointcloud.vert",
-            "FragShader": "shaders/monitor/pointcloud.frag"
         },
         {
             "Type": "nap::ShaderFromFile",
