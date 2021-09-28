@@ -1,219 +1,220 @@
 import nap
-import math
-
 import environmentSettings as settings
 
-groupTransformations = []
-particleLevelGroupTransformations = []
+# all sound objects and their names, for follow and group transformations
 soundObjects = []
 soundObjectNames = []
 
-def createGroups(environment, count):
+# unique id count
+uniqueID = 0
+
+
+def createSources(environment, count):
+    inputEffects = []; effects = []; perceptionEffects = []; shapes = []; shapeTransformations = []; transformations = []
+
+    effects.append("DopplerEffect")
+    effects.append("DistanceIntensityEffect")
+    effects.append("DistanceDampingEffect")
+    effects.append("ElevationFilterUpEffect")
+    effects.append("ElevationFilterDownEffect")
+    effects.append("DistanceDiffusionEffect")
+
+    shapes.append("MonoShape")
+    shapes.append("StereoShape")
+    shapes.append("RowShape")
+    shapes.append("QuadShape")
+    shapes.append("BasicCircleShape")
+    shapes.append("BasicCubeShape")
+
+    shapeTransformations.append("VibrateShapeTransformation")
+    shapeTransformations.append("ShakeShapeTransformation")
+    shapeTransformations.append("ParticleDimensionsShapeTransformation")
+    shapeTransformations.append("ParticleScaleShapeTransformation")
+    shapeTransformations.append("ParticleSpatialDynamicsShapeTransformation")
+
+    transformations.append("InputPositionTransformation")
+    transformations.append("InputPositionOffsetTransformation")
+    transformations.append("InputDimensionsTransformation")
+    transformations.append("InputScaleTransformation")
+    transformations.append("PositionRotationTransformation")
+    transformations.append("InvertTransformation")
+    transformations.append("PathTransformation")
+    transformations.append("ModulationTransformation")
+    transformations.append("OrientationTransformation")
+    transformations.append("SpatialDynamicsTransformation")
+
+    objects = []
+
     for i in range(count):
+        objects.append(createSoundObject(environment, "source", i + 1, 1, True, True, 8, inputEffects, effects, perceptionEffects, shapes, shapeTransformations, transformations))
+
+    return objects
+
+
+def createSoundEntities(environment, count, particleCount):
+    inputEffects = []; effects = []; perceptionEffects = []; shapes = []; shapeTransformations = []; transformations = []
+
+    inputEffects.append("GranulatorEffect")
+    inputEffects.append("InputDistanceIntensityEffect")
+    inputEffects.append("InputDistanceDampingEffect")
+    inputEffects.append("SpatialDelayEffect")
+
+    effects.append("DopplerEffect")
+    effects.append("GainScalingEffect")
+    effects.append("ReverbEffect")
+    effects.append("DistanceIntensityEffect")
+    effects.append("DistanceDampingEffect")
+    effects.append("ElevationFilterUpEffect")
+    effects.append("ElevationFilterDownEffect")
+    effects.append("DistanceDiffusionEffect")
+
+    shapes.append("MonoShape")
+    shapes.append("StereoShape")
+    shapes.append("RowShape")
+    shapes.append("QuadShape")
+    shapes.append("BasicCircleShape")
+    shapes.append("BasicCubeShape")
+    shapes.append("AdaptiveCubeShape")
+    shapes.append("FibonacciSphereShape")
+    shapes.append("SpeakerSetupShape")
+
+    shapeTransformations.append("WaveShapeTransformation")
+    shapeTransformations.append("VibrateShapeTransformation")
+    shapeTransformations.append("BuzzShapeTransformation")
+    shapeTransformations.append("ShakeShapeTransformation")
+    shapeTransformations.append("AttractShapeTransformation")
+    shapeTransformations.append("ParticleDimensionsShapeTransformation")
+    shapeTransformations.append("ParticleScaleShapeTransformation")
+    shapeTransformations.append("ParticleSpatialDynamicsShapeTransformation")
+
+    transformations.append("InputPositionTransformation")
+    transformations.append("InputPositionOffsetTransformation")
+    transformations.append("InputDimensionsTransformation")
+    transformations.append("InputScaleTransformation")
+    transformations.append("PositionRotationTransformation")
+    transformations.append("InvertTransformation")
+    transformations.append("PathTransformation")
+    transformations.append("ModulationTransformation")
+    transformations.append("ShakeTransformation")
+    transformations.append("SpasmTransformation")
+    transformations.append("PlasmaTransformation")
+    transformations.append("OrientationTransformation")
+    transformations.append("SpatialDynamicsTransformation")
+
+    objects = []
+
+    for i in range(count):
+        objects.append(createSoundObject(environment, "soundentity", i + 1, 2, True, True, particleCount, inputEffects, effects, perceptionEffects, shapes, shapeTransformations, transformations))
+
+    return objects
+
+
+def createSpaces(environment, count, particleCount):
+    inputEffects = []; effects = []; perceptionEffects = []; shapes = []; shapeTransformations = []; transformations = []
+
+    inputEffects.append("InputDistanceIntensityEffect")
+    inputEffects.append("InputDistanceDampingEffect")
+    inputEffects.append("SpatialDelayEffect")
+
+    effects.append("ReverbEffect47")
+
+    shapes.append("SpeakerSetupShape")
+
+    objects = []
+
+    for i in range(count):
+        objects.append(createSoundObject(environment, "space", i + 1, 3, False, False, particleCount, inputEffects, effects, perceptionEffects, shapes, shapeTransformations, transformations))
+
+    return objects
+
+
+# Creates a sound object.
+# prefix (string): the prefix of the sound objects
+# index (int): the index of the sound objects
+# category (int): the display category
+# visible (bool): whether the sound object is visible by default
+# externalInput (bool): whether the newly created sound object has external input
+# maxParticleCount (int): the maximum particle count
+# inputEffects (list of strings): the chain of input effects
+# effects (list of strings): the chain of effects
+# perceptionEffects (list of strings): the chain of perceptionEffects
+# shapes (list of strings): the list of shapes
+# shapeTransformations (list of resourceptrs): the list of shapeTransformations
+# transformations (list of resourceptrs): the list of transformations
+def createSoundObject(environment, prefix, index, category, visible, externalInput, maxParticleCount, inputEffects, effects, perceptionEffects, shapes, shapeTransformations, transformations):
+
+    # Create sound objects.
+    name = prefix + str(index)
+    global uniqueID
+    properties = nap.EnvironmentInstanceProperties()
+    properties.addString("nap::ParameterComponent", "Name", name)
+    properties.addInt("nap::spatial::SpatialAudioComponent", "MaxParticleCount", maxParticleCount)
+    properties.addString("nap::spatial::DisplaySettingsComponent", "DisplayName", name)
+    properties.addInt("nap::spatial::DisplaySettingsComponent", "DisplayIndex", index)
+    properties.addInt("nap::spatial::DisplaySettingsComponent", "UniqueId", uniqueID)
+    properties.addInt("nap::spatial::DisplaySettingsComponent", "Category", category)
+    properties.addBool("nap::spatial::DisplaySettingsComponent", "Visible", visible)
+    uniqueID = uniqueID + 1 # increment global unique ID counter
+
+    # Create sound object.
+    soundObject = environment.createEntity("SoundObject", properties)
+
+    # Find the control component.
+    controlComponent = soundObject.findComponent("nap::spatial::EnvironmentControlComponentInstance")
+
+    # Add effects, shapes, shapetransformations and transforamtions.
+    for inputEffect in inputEffects:
+        controlComponent.addInputEffect(environment.findResource(inputEffect))
+
+    for effect in effects:
+        controlComponent.addEffect(environment.findResource(effect))
+
+    for perceptionEffect in perceptionEffects:
+        controlComponent.addPerceptionEffect(environment.findResource(perceptionEffect))
+
+    for shape in shapes:
+        controlComponent.addShape(environment.findResource(shape))
+
+    for shapeTransformation in shapeTransformations:
+        controlComponent.addShapeTransformation(environment.findResource(shapeTransformation))
+
+    for transformation in transformations:
+        controlComponent.addTransformation(environment.findResource(transformation))
+
+    # Add external input and set default settings.
+    if externalInput:
+        controlComponent.addExternalInput()
+        controlComponent.setParameterBool("externalInputEnable", True)
+        controlComponent.setParameterInt("externalInputStartChannel", index)
+
+    # Append to lists.
+    soundObjects.append(soundObject)
+    soundObjectNames.append(name)
+
+    return soundObject
+
+
+# Connects all objects in list a to all objects in list b, unless the objects are equal.
+def connect(environment, a, b):
+    for objectA in a:
+        for objectB in b:
+            if objectA is not objectB:
+                objectB.findComponent("nap::spatial::EnvironmentControlComponentInstance").connectInput(objectA.findComponent("nap::spatial::EnvironmentControlComponentInstance"))
+
+
+def addFollowAndGroupTransformationsToAllSoundObjects(environment, groupsCount):
+
+    groupTransformations = []
+    particleLevelGroupTransformations = []
+
+    # create group objects
+    for i in range(groupsCount):
         properties = nap.EnvironmentInstanceProperties()
         properties.addString("nap::ParameterComponent", "Name", "group" + str(i+1))
         groupObject = environment.createEntity("groupTransformationObject", properties)
         groupTransformations.append(groupObject.findComponentByID("shapeTransformationChain"))
         particleLevelGroupTransformations.append(groupObject.findComponentByID("particleTransformationChain"))
 
-def createSources(environment, count):
-    createSoundObjects(environment, count, False, 8)
-
-def createSoundEntities(environment, count):
-    createSoundObjects(environment, count, True, settings.SOUND_ENTITIES_MAX_PARTICLE_COUNT)
-
-
-# keep global unique id count
-uniqueID = 0
-
-# count (int): the number of sound objects to create
-# connect (bool): whether the newly created sound objects should be connected to all other sound objects
-def createSoundObjects(environment, count, connect, maxParticleCount):
-    addedSoundObjects = []
-
-    # create sources.
-    for i in range(count):
-        index = i + 1
-
-        if connect:
-            prefix = "soundentity"
-            category = 2
-        else:
-            prefix = "source"
-            category = 1
-
-        name = prefix + str(index)
-
-        # create sound objects
-        global uniqueID
-        properties = nap.EnvironmentInstanceProperties()
-        properties.addString("nap::ParameterComponent", "Name", name)
-        properties.addInt("nap::spatial::SpatialAudioComponent", "MaxParticleCount", maxParticleCount)
-        properties.addString("nap::spatial::DisplaySettingsComponent", "DisplayName", name)
-        properties.addInt("nap::spatial::DisplaySettingsComponent", "DisplayIndex", index)
-        properties.addInt("nap::spatial::DisplaySettingsComponent", "UniqueId", uniqueID)
-        properties.addInt("nap::spatial::DisplaySettingsComponent", "Category", category)
-        properties.addBool("nap::spatial::DisplaySettingsComponent", "Visible", True)
-        uniqueID = uniqueID + 1 # increment global unique ID counter
-
-        soundObject = environment.createEntity("SoundObject", properties)
-        controlComponent = soundObject.findComponent("nap::spatial::EnvironmentControlComponentInstance")
-
-        # set hue
-        controlComponent.setParameterFloat("hue", 0)
-
-        # add effects
-        if connect: # sound entities
-            controlComponent.addInputEffect(environment.findResource("GranulatorEffect"))
-            controlComponent.addInputEffect(environment.findResource("InputDistanceIntensityEffect"))
-            controlComponent.addInputEffect(environment.findResource("InputDistanceDampingEffect"))
-            controlComponent.addInputEffect(environment.findResource("SpatialDelayEffect"))
-            controlComponent.addEffect(environment.findResource("DopplerEffect"))
-            controlComponent.addEffect(environment.findResource("SpatialPhaserEffect"))
-            controlComponent.addEffect(environment.findResource("GainScalingEffect"))
-            controlComponent.addEffect(environment.findResource("ReverbEffect"))
-            controlComponent.addEffect(environment.findResource("DistanceIntensityEffect"))
-            controlComponent.addEffect(environment.findResource("DistanceDampingEffect"))
-            controlComponent.addEffect(environment.findResource("ElevationFilterUpEffect"))
-            controlComponent.addEffect(environment.findResource("ElevationFilterDownEffect"))
-            controlComponent.addEffect(environment.findResource("DistanceDiffusionEffect"))
-        else: # sources
-            controlComponent.addEffect(environment.findResource("DopplerEffect"))
-            controlComponent.addEffect(environment.findResource("DistanceIntensityEffect"))
-            controlComponent.addEffect(environment.findResource("DistanceDampingEffect"))
-            controlComponent.addEffect(environment.findResource("ElevationFilterUpEffect"))
-            controlComponent.addEffect(environment.findResource("ElevationFilterDownEffect"))
-            controlComponent.addEffect(environment.findResource("DistanceDiffusionEffect"))
-
-        # add shapes
-        controlComponent.addShape(environment.findResource("PointShape"))
-        controlComponent.addShape(environment.findResource("CircleShape"))
-        controlComponent.addShape(environment.findResource("LineShape"))
-        controlComponent.addShape(environment.findResource("TriangleShape"))
-        controlComponent.addShape(environment.findResource("SquareShape"))
-        controlComponent.addShape(environment.findResource("PentagonShape"))
-        controlComponent.addShape(environment.findResource("HexagonShape"))
-        controlComponent.addShape(environment.findResource("TetrahedronShape"))
-        controlComponent.addShape(environment.findResource("OctahedronShape"))
-        controlComponent.addShape(environment.findResource("CubeShape"))
-        controlComponent.addShape(environment.findResource("IcosahedronShape"))
-        controlComponent.addShape(environment.findResource("DodecahedronShape"))
-        controlComponent.addShape(environment.findResource("CircleTorusShape"))
-        controlComponent.addShape(environment.findResource("SpiralTorusShape"))
-        controlComponent.addShape(environment.findResource("ArchimedeanSpiralShape"))
-        controlComponent.addShape(environment.findResource("DoubleSpiralShape"))
-        controlComponent.addShape(environment.findResource("TripleSpiralShape"))
-        controlComponent.addShape(environment.findResource("InfiniteSpiralShape"))
-        controlComponent.addShape(environment.findResource("HelixShape"))
-        controlComponent.addShape(environment.findResource("GoldbergSphereShape"))
-        controlComponent.addShape(environment.findResource("PyramidShape"))
-        controlComponent.addShape(environment.findResource("WallsShape"))
-        controlComponent.addShape(environment.findResource("StereoShape"))
-        controlComponent.addShape(environment.findResource("MonoShape"))
-        controlComponent.addShape(environment.findResource("SolidCubeShape"))
-        controlComponent.addShape(environment.findResource("AdaptiveCubeShape"))
-        controlComponent.addShape(environment.findResource("TestLineShape"))
-        controlComponent.addShape(environment.findResource("FibonacciSphereShape"))
-        controlComponent.addShape(environment.findResource("SpeakerSetupShape"))
-        controlComponent.addShape(environment.findResource("QuadShape"))
-        controlComponent.addShape(environment.findResource("BasicCubeShape"))
-        controlComponent.addShape(environment.findResource("RowShape"))
-        controlComponent.addShape(environment.findResource("BasicCircleShape"))
-
-        # add shape transformations
-        controlComponent.addShapeTransformation(environment.findResource("WaveShapeTransformation"))
-        controlComponent.addShapeTransformation(environment.findResource("VibrateShapeTransformation"))
-        controlComponent.addShapeTransformation(environment.findResource("BuzzShapeTransformation"))
-        controlComponent.addShapeTransformation(environment.findResource("ShakeShapeTransformation"))
-        controlComponent.addShapeTransformation(environment.findResource("AttractShapeTransformation"))
-        controlComponent.addShapeTransformation(environment.findResource("ParticleDimensionsShapeTransformation"))
-        controlComponent.addShapeTransformation(environment.findResource("ParticleScaleShapeTransformation"))
-        controlComponent.addShapeTransformation(environment.findResource("ParticleSpatialDynamicsShapeTransformation"))
-
-        # add transformations
-        controlComponent.addTransformation(environment.findResource("InputPositionTransformation"))
-        controlComponent.addTransformation(environment.findResource("InputPositionOffsetTransformation"))
-        controlComponent.addTransformation(environment.findResource("InputDimensionsTransformation"))
-        controlComponent.addTransformation(environment.findResource("InputScaleTransformation"))
-        controlComponent.addTransformation(environment.findResource("PositionRotationTransformation"))
-        controlComponent.addTransformation(environment.findResource("InvertTransformation"))
-        controlComponent.addTransformation(environment.findResource("PathTransformation"))
-        controlComponent.addTransformation(environment.findResource("ModulationTransformation"))
-        controlComponent.addTransformation(environment.findResource("ShakeTransformation"))
-        controlComponent.addTransformation(environment.findResource("SpasmTransformation"))
-        controlComponent.addTransformation(environment.findResource("PlasmaTransformation"))
-        controlComponent.addTransformation(environment.findResource("OrientationTransformation"))
-        controlComponent.addTransformation(environment.findResource("SpatialDynamicsTransformation"))
-
-        # add external input
-        controlComponent.addExternalInput()
-
-        # set input channel
-        controlComponent.setParameterBool("externalInputEnable", True)
-        controlComponent.setParameterInt("externalInputStartChannel", index)
-
-        # add granulator source
-        # granulator = nap.GranulatorSource()
-        # granulator.Name = "granulatorSource"
-        # granulator.AudioFiles = [ "audio/bronsbow.wav", "audio/hang.wav" ]
-        # soundObject.findComponent("nap::spatial::SpatialAudioComponentInstance").addSource(granulator)
-
-        # add test source
-        # soundObject.findComponent("nap::spatial::SpatialAudioComponentInstance").addTestSignal()
-
-        # enable gainscaling by default for spaces
-        if connect:
-            controlComponent.setParameterBool("effect/gainScaling/enable", True)
-
-        # append to list
-        soundObjects.append(soundObject)
-        addedSoundObjects.append(soundObject)
-        soundObjectNames.append(name)
-
-    # connect every added soundobjects to all other soundobjects.
-    if connect:
-        for i in range(len(addedSoundObjects)):
-            for j in range(len(soundObjects)):
-                if addedSoundObjects[i] is not soundObjects[j]:
-                    addedSoundObjects[i].findComponent("nap::spatial::EnvironmentControlComponentInstance").connectInput(soundObjects[j].findComponent("nap::spatial::EnvironmentControlComponentInstance"))
-
-
-def createSpaces(environment, count, maxParticleCount):
-    for i in range(count):
-        index = i + 1
-        name = "space" + str(index)
-
-        # create reverb sound objects
-        global uniqueID
-        properties = nap.EnvironmentInstanceProperties()
-        properties.addString("nap::ParameterComponent", "Name", name)
-        properties.addInt("nap::spatial::SpatialAudioComponent", "MaxParticleCount", maxParticleCount)
-        properties.addString("nap::spatial::DisplaySettingsComponent", "DisplayName", name)
-        properties.addInt("nap::spatial::DisplaySettingsComponent", "DisplayIndex", index)
-        properties.addInt("nap::spatial::DisplaySettingsComponent", "UniqueId", uniqueID)
-        properties.addInt("nap::spatial::DisplaySettingsComponent", "Category", 3)
-        properties.addBool("nap::spatial::DisplaySettingsComponent", "Visible", False)
-        uniqueID = uniqueID + 1 # increment global unique ID counter
-
-        soundObject = environment.createEntity("SoundObject", properties)
-        controlComponent = soundObject.findComponent("nap::spatial::EnvironmentControlComponentInstance")
-
-        # set hue
-        controlComponent.setParameterFloat("hue", 0)
-        controlComponent.setParameterOption("shapeType", "speakerSetup")
-
-        # add effects
-        controlComponent.addInputEffect(environment.findResource("InputDistanceIntensityEffect"))
-        controlComponent.addInputEffect(environment.findResource("InputDistanceDampingEffect"))
-        controlComponent.addInputEffect(environment.findResource("SpatialDelayEffect"))
-        controlComponent.addEffect(environment.findResource("ReverbEffect47"))
-
-        for j in range(len(soundObjects)):
-            input = soundObjects[j].findComponent("nap::spatial::EnvironmentControlComponentInstance")
-            controlComponent.connectInput(input)
-
-
-def addFollowAndGroupTransformationsToAllSoundObjects():
     # add switchexternaltransformation for follow transformations and an externaltransformation for group transformations to all sound objects
     for i in range(len(soundObjects)):
 
@@ -233,27 +234,41 @@ def addFollowAndGroupTransformationsToAllSoundObjects():
         for l in range(len(particleLevelGroupTransformations)):
             controlComponent.addExternalShapeTransformation("group" + str(l+1), particleLevelGroupTransformations[l], True, True)
 
+
 def sendOSC(environment, tag, argument):
     oscInitMessage = nap.EnvironmentOSCMessage(tag)
     oscInitMessage.addValue(argument)
     environment.sendOSC(oscInitMessage)
 
-def init(entity):
-    environment = entity.findComponent("nap::spatial::EnvironmentComponentInstance")
 
-    environment.setCurrentState("starting")
-    createSources(environment, settings.SOURCES_COUNT)
-    createSoundEntities(environment, settings.SOUND_ENTITIES_COUNT)
-    createSpaces(environment, settings.SPACES_COUNT, settings.SPACES_MAX_PARTICLE_COUNT)
-    createGroups(environment, settings.GROUPS_COUNT)
-    addFollowAndGroupTransformationsToAllSoundObjects()
-
-    # send the environment initialized OSC messages
+def sendInitMessage(environment):
     sendOSC(environment, "/from_4dengine/groupsCount", settings.GROUPS_COUNT)
     sendOSC(environment, "/from_4dengine/sourcesCount", settings.SOURCES_COUNT)
     sendOSC(environment, "/from_4dengine/soundentitiesCount", settings.SOUND_ENTITIES_COUNT)
     sendOSC(environment, "/from_4dengine/spacesCount", settings.SPACES_COUNT)
     sendOSC(environment, "/from_4dengine/soundentitiesMaxParticleCount", settings.SOUND_ENTITIES_MAX_PARTICLE_COUNT)
     sendOSC(environment, "/from_4dengine/spacesMaxParticleCount", settings.SPACES_MAX_PARTICLE_COUNT)
+
+
+def init(entity):
+    environment = entity.findComponent("nap::spatial::EnvironmentComponentInstance")
+
+    environment.setCurrentState("starting")
+
+    # create objects
+    sources = createSources(environment, settings.SOURCES_COUNT)
+    soundentities = createSoundEntities(environment, settings.SOUND_ENTITIES_COUNT, settings.SOUND_ENTITIES_MAX_PARTICLE_COUNT)
+    spaces = createSpaces(environment, settings.SPACES_COUNT, settings.SPACES_MAX_PARTICLE_COUNT)
+
+    # connect objects
+    connect(environment, sources, soundentities)
+    connect(environment, soundentities, soundentities)
+    connect(environment, sources, spaces)
+    connect(environment, soundentities, spaces)
+
+    # add group and follow transformations
+    addFollowAndGroupTransformationsToAllSoundObjects(environment, settings.GROUPS_COUNT)
+
+    sendInitMessage(environment)
 
     environment.setCurrentState("running")
