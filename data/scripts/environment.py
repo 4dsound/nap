@@ -8,6 +8,7 @@ soundObjectNames = []
 # unique id count
 uniqueID = 0
 
+inputSource = nap.SoundObjectSource()
 
 def createSources(environment, count):
     inputEffects = []; effects = []; perceptionEffects = []; shapes = []; shapeTransformations = []; transformations = []
@@ -199,7 +200,7 @@ def connect(environment, a, b):
     for objectA in a:
         for objectB in b:
             if objectA is not objectB:
-                objectB.findComponent("nap::spatial::EnvironmentControlComponentInstance").connectInput(objectA.findComponent("nap::spatial::EnvironmentControlComponentInstance"))
+                objectB.findComponent("nap::spatial::EnvironmentControlComponentInstance").connectInput(inputSource, objectA.findComponent("nap::spatial::EnvironmentControlComponentInstance"))
 
 
 def addFollowAndGroupTransformationsToAllSoundObjects(environment, groupsCount):
