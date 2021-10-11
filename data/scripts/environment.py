@@ -200,7 +200,7 @@ def connect(environment, a, b):
     for objectA in a:
         for objectB in b:
             if objectA is not objectB:
-                objectB.findComponent("nap::spatial::EnvironmentControlComponentInstance").connectInput(inputSource, objectA.findComponent("nap::spatial::EnvironmentControlComponentInstance"))
+                objectB.findComponent("nap::spatial::EnvironmentControlComponentInstance").addSoundObjectSource(inputSource, objectA.findComponent("nap::spatial::EnvironmentControlComponentInstance"))
 
 
 def addFollowAndGroupTransformationsToAllSoundObjects(environment, groupsCount):
