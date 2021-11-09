@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<setup>
+
+      <speaker id="s0" ch="0" x="-2" y="0" z="-2" speakerType="satellite" />
+      <speaker id="s1" ch="1" x="2" y="0" z="-2" speakerType="satellite" />
+      <speaker id="s2" ch="2" x="-2" y="4" z="-2" speakerType="satellite" />
+      <speaker id="s3" ch="3" x="2" y="4" z="-2" speakerType="satellite" />
+      <speaker id="s4" ch="4" x="-2" y="0" z="2" speakerType="satellite" />
+      <speaker id="s5" ch="5" x="2" y="0" z="2" speakerType="satellite" />
+      <speaker id="s6" ch="6" x="-2" y="4" z="2" speakerType="satellite" />
+      <speaker id="s7" ch="7" x="2" y="4" z="2" speakerType="satellite" />
+      <speaker id="sub1" ch="8" x="-2" y="0" z="0" speakerType="sub" />
+      <speaker id="sub2" ch="9" x="2" y="0" z="0" speakerType="sub" />
+
+
+
+      <grid name="satellites" speakerType="satellite">
+
+          <shape type="cube" speakers="s0 s1 s2 s3 s4 s5 s6 s7" />
+
+          <shape type="projectionPlane" speakers="s1 s0 s3 s2" />
+          <shape type="projectionPlane" speakers="s5 s1 s7 s3" />
+          <shape type="projectionPlane" speakers="s4 s5 s6 s7" />
+          <shape type="projectionPlane" speakers="s0 s4 s2 s6" />
+          <shape type="projectionPlane" speakers="s2 s6 s3 s7" />
+          <shape type="projectionPlane" speakers="s1 s5 s0 s4" />
+
+      </grid>
+      
+      <grid name="subs" speakerType="sub">
+          
+          <shape type="xStartPoint" speakers="sub1" />
+          <shape type="xLine" speakers="sub1 sub2" />
+          <shape type="xEndPoint" speakers="sub2" />
+          
+      </grid>
+
+      <group name="Bottom Speakers" channels="0 1 4 5" />
+      <group name="Top Speakers" channels="2 3 6 7" />
+      <group name="Column 1" channels="0 2" />
+      <group name="Column 2" channels="1 3" />
+      <group name="Column 3" channels="4 6" />
+      <group name="Column 4" channels="5 7" />
+
+</setup>
