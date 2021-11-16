@@ -1,57 +1,7 @@
 import nap
 import math
 
-maxParticleCount = 128
-
-# define effects outside of the python function scope, so they remain alive (necessary if new effectprocessors are added later).
-granulator = nap.GranulatorEffect()
-granulator.Name = "granulator"
-granulator.CircularBufferSize = 524288
-granulator.CircularBufferChannelCount = 8
-granulator.InternalBufferSize = 32
-granulator.VoiceCount = 50
-
-inputDistanceIntensity = nap.InputDistanceIntensityEffect()
-inputDistanceIntensity.Name = "inputDistanceAttenuation"
-
-inputDistanceDamping = nap.InputDistanceDampingEffect()
-inputDistanceDamping.Name = "inputDistanceDamping"
-
-spatialDelay = nap.SpatialDelayEffect()
-spatialDelay.Name = "spatialDelay"
-
-doppler = nap.DopplerEffect()
-doppler.Name = "doppler"
-
-spatialPhaser = nap.SpatialPhaserEffect()
-spatialPhaser.Name = "spatialPhaser"
-spatialPhaser.DelayLineSize = 16384
-spatialPhaser.ParallelDelayCount = 8
-
-gainScaling = nap.GainScalingEffect()
-gainScaling.Name = "gainScaling"
-
-reverb = nap.ReverbEffect()
-reverb.Name = "reverb"
-reverb.PredelayBufferSize = 32768
-# reverb.LPFType = nap.FilterChainType.LowPass6dB
-# reverb.HPFType = nap.FilterChainType.HighPass6dB
-# Note: enum properties can't be overwritten from python. Fortunately, the default values (6dB filters) are desired here.
-
-distanceIntensity = nap.DistanceIntensityEffect()
-distanceIntensity.Name = "distanceIntensity"
-
-distanceDamping = nap.DistanceDampingEffect()
-distanceDamping.Name = "distanceDamping"
-
-elevationFilterUp = nap.ElevationFilterUpEffect()
-elevationFilterUp.Name = "elevationFilterAbove"
-
-elevationFilterDown = nap.ElevationFilterDownEffect()
-elevationFilterDown.Name = "elevationFilterBelow"
-
-distanceDiffusion = nap.DistanceDiffusionEffect()
-distanceDiffusion.Name = "distanceDiffusion"
+maxParticleCount = 1024
 
 
 def addTestLine(environment, enableEffects, name):
@@ -66,19 +16,21 @@ def addTestLine(environment, enableEffects, name):
     controlComponent.setParameterBool("receives/testSignal/enable", True)
 
     # add effects
-    controlComponent.addInputEffect(granulator)
-    controlComponent.addInputEffect(inputDistanceIntensity)
-    controlComponent.addInputEffect(inputDistanceDamping)
-    controlComponent.addInputEffect(spatialDelay)
-    controlComponent.addEffect(doppler)
-    controlComponent.addEffect(spatialPhaser)
-    controlComponent.addEffect(gainScaling)
-    controlComponent.addEffect(reverb)
-    controlComponent.addPerceptionEffect(distanceIntensity)
-    controlComponent.addPerceptionEffect(distanceDamping)
-    controlComponent.addPerceptionEffect(elevationFilterUp)
-    controlComponent.addPerceptionEffect(elevationFilterDown)
-    controlComponent.addPerceptionEffect(distanceDiffusion)
+    controlComponent.addInputEffect(environment.findResource("GranulatorEffect"))
+    controlComponent.addInputEffect(environment.findResource("InputDistanceIntensityEffect"))
+    controlComponent.addInputEffect(environment.findResource("InputDistanceDampingEffect"))
+    controlComponent.addInputEffect(environment.findResource("SpatialDelayEffect"))
+    controlComponent.addEffect(environment.findResource("DopplerEffect"))
+    controlComponent.addEffect(environment.findResource("GainScalingEffect"))
+    controlComponent.addEffect(environment.findResource("ReverbEffect"))
+    controlComponent.addEffect(environment.findResource("DistanceIntensityEffect"))
+    controlComponent.addEffect(environment.findResource("DistanceDampingEffect"))
+    controlComponent.addEffect(environment.findResource("ElevationFilterUpEffect"))
+    controlComponent.addEffect(environment.findResource("ElevationFilterDownEffect"))
+    controlComponent.addEffect(environment.findResource("DistanceDiffusionEffect"))
+
+    # add shape
+    controlComponent.addShape(environment.findResource("TestLineShape"))
 
     # enable effects
     if (enableEffects == True):
@@ -89,11 +41,11 @@ def addTestLine(environment, enableEffects, name):
         controlComponent.setParameterBool("effect/doppler/enable", True)
         controlComponent.setParameterBool("effect/gainScaling/enable", True)
         controlComponent.setParameterBool("effect/reverb/enable", True)
-        controlComponent.setParameterBool("effect/distanceIntensity/enable", True)
+        controlComponent.setParameterBool("effect/distanceAttenuation/enable", True)
         controlComponent.setParameterBool("effect/distanceDamping/enable", True)
         controlComponent.setParameterBool("effect/elevationFilterAbove/enable", True)
         controlComponent.setParameterBool("effect/elevationFilterBelow/enable", True)
-        controlComponent.setParameterBool("effect/distanceDiffusion/enable", True)
+        controlComponent.setParameterBool("effect/distanceDiffusionEffect/enable", True)
 
         controlComponent.setParameterFloat("effect/granulator/dryWet", 1)
         controlComponent.setParameterFloat("effect/spatialDelay/dryWet", 1)
