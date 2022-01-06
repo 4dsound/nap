@@ -2844,7 +2844,7 @@
                             "mID": "MonitorSidePanel_fa2a12da",
                             "Title": "MonitorSidePanel",
                             "Style": "",
-                            "MoitorController": "MonitorController",
+                            "MonitorController": "MonitorController",
                             "SoundObjectInpectorWindow": "SoundObjectInspectorWindow"
                         }
                     }
@@ -3666,13 +3666,6 @@
             "Type": "nap::spatial::SpatialDynamicsTransformation",
             "mID": "SpatialDynamicsTransformation",
             "Name": "spatialDynamics"
-        },
-        {
-            "Type": "nap::spatial::SpatialPhaserEffect",
-            "mID": "SpatialPhaserEffect",
-            "Name": "spatialPhaser",
-            "DelayLineSize": 16384,
-            "ParallelDelayCount": 8
         },
         {
             "Type": "nap::spatial::SpeakerSetupShape",
