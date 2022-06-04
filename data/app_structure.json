@@ -2845,7 +2845,13 @@
                             "Title": "MonitorSidePanel",
                             "Style": "",
                             "MonitorController": "MonitorController",
-                            "SoundObjectInpectorWindow": "SoundObjectInspectorWindow"
+                            "SoundObjectInpectorWindow": "SoundObjectInspectorWindow",
+                            "CategoryNames": [
+                                "Sources",
+                                "Sound Entities",
+                                "Spaces",
+                                "Reverbs"
+                            ]
                         }
                     }
                 },
@@ -3321,7 +3327,7 @@
         {
             "Type": "nap::spatial::DistanceDiffusionEffect",
             "mID": "DistanceDiffusionEffect",
-            "Name": "distanceDiffusionEffect"
+            "Name": "distanceDiffusion"
         },
         {
             "Type": "nap::spatial::DistanceIntensityEffect",
