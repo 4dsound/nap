@@ -7,20 +7,23 @@ namespace nap
 
     void GuiStyle::apply(ImGuiStyle * style, float scaling)
     {
+		
+		float mp = 2 * mGuiScale / 2.75;
+		
         style->WindowPadding = ImVec2(0, 0);
-        style->WindowRounding = 3.0f * 2;
-        style->WindowMinSize = ImVec2(20 * 2, 20 * 2);
-        style->FramePadding = ImVec2(2 * 2, 2 * 2);
-        style->FrameRounding = 1.f * 2;
-        style->WindowBorderSize = 0.f * 2;
-        style->ItemSpacing = ImVec2(12 * 2, 6 * 2);
-        style->ItemInnerSpacing = ImVec2(4 * 2, 6 * 2);
-        style->IndentSpacing = 25.0f * 2;
-        style->ScrollbarSize = 15.0f * 2;
-        style->ScrollbarRounding = 1.f * 2;
-        style->GrabMinSize = 5.f * 2;
-        style->GrabRounding = 0.f * 2;
-        style->ColumnsMinSpacing = 1.0f * 2;
+        style->WindowRounding = 3.0f * mp;
+        style->WindowMinSize = ImVec2(20 * mp, 20 * mp);
+        style->FramePadding = ImVec2(2 * mp, 2 * mp);
+        style->FrameRounding = 1.f * mp;
+        style->WindowBorderSize = 0.f * mp;
+        style->ItemSpacing = ImVec2(12 * mp, 6 * mp);
+        style->ItemInnerSpacing = ImVec2(4 * mp, 6 * mp);
+        style->IndentSpacing = 25.0f * mp;
+        style->ScrollbarSize = 15.0f * mp;
+        style->ScrollbarRounding = 1.f * mp;
+        style->GrabMinSize = 5.f * mp;
+        style->GrabRounding = 0.f * mp;
+        style->ColumnsMinSpacing = 1.0f * mp;
 
         applyColors(style);
 
