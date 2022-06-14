@@ -2709,7 +2709,7 @@
                     },
                     "Size": {
                         "x": 0.0,
-                        "y": 28.0
+                        "y": 20.0
                     },
                     "Flags": {
                         "NoTitleBar": true,
@@ -2953,12 +2953,12 @@
                     "Title": "VisibilityPanelWindow",
                     "Style": "",
                     "Position": {
-                        "x": -130.0,
-                        "y": 30.0
+                        "x": -100.0,
+                        "y": 20.0
                     },
                     "Size": {
-                        "x": 130.0,
-                        "y": 360.0
+                        "x": 100.0,
+                        "y": 291.0
                     },
                     "Flags": {
                         "NoTitleBar": true,
