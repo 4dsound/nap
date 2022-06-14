@@ -8,19 +8,19 @@ namespace nap
     void GuiStyle::apply(ImGuiStyle * style, float scaling)
     {
         style->WindowPadding = ImVec2(0, 0);
-        style->WindowRounding = 3.0f;
-        style->WindowMinSize = ImVec2(20, 20);
-        style->FramePadding = ImVec2(2, 2);
-        style->FrameRounding = 1.f;
-        style->WindowBorderSize = 0.f;
-        style->ItemSpacing = ImVec2(12, 6);
-        style->ItemInnerSpacing = ImVec2(4, 6);
-        style->IndentSpacing = 25.0f;
-        style->ScrollbarSize = 15.0f;
-        style->ScrollbarRounding = 1.f;
-        style->GrabMinSize = 5.f;
-        style->GrabRounding = 0.f;
-        style->ColumnsMinSpacing = 1.0f;
+        style->WindowRounding = 3.0f * 2;
+        style->WindowMinSize = ImVec2(20 * 2, 20 * 2);
+        style->FramePadding = ImVec2(2 * 2, 2 * 2);
+        style->FrameRounding = 1.f * 2;
+        style->WindowBorderSize = 0.f * 2;
+        style->ItemSpacing = ImVec2(12 * 2, 6 * 2);
+        style->ItemInnerSpacing = ImVec2(4 * 2, 6 * 2);
+        style->IndentSpacing = 25.0f * 2;
+        style->ScrollbarSize = 15.0f * 2;
+        style->ScrollbarRounding = 1.f * 2;
+        style->GrabMinSize = 5.f * 2;
+        style->GrabRounding = 0.f * 2;
+        style->ColumnsMinSpacing = 1.0f * 2;
 
         applyColors(style);
 
