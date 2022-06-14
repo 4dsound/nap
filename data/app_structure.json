@@ -2520,7 +2520,7 @@
                 "Type": "nap::gui::Panel",
                 "mID": "Panel_87622b03",
                 "Title": "Main Panel",
-                "Style": "MainGuiStyle",
+                "Style": "",
                 "Position": {
                     "x": 1.0,
                     "y": 5.0
@@ -3027,7 +3027,7 @@
             "Type": "nap::gui::Layout",
             "mID": "SplashScreenGui",
             "Title": "",
-            "Style": "LoadingStyle",
+            "Style": "",
             "Separators": false,
             "Content": [
                 {
@@ -3064,7 +3064,7 @@
                         "Type": "nap::gui::Panel",
                         "mID": "StartupPanel",
                         "Title": "StartupPanel",
-                        "Style": "LoadingStyle",
+                        "Style": "",
                         "Position": {
                             "x": 0.0,
                             "y": 0.0
@@ -3113,7 +3113,7 @@
                 }
             ],
             "ColorSettings": [],
-            "FontScaling": 0.8999999761581421
+			"FontScaling": 1.0
         },
         {
             "Type": "nap::gui::Style",
@@ -3137,13 +3137,13 @@
                 }
             ],
             "ColorSettings": [],
-            "FontScaling": 0.8999999761581421
+            "FontScaling": 1.0
         },
         {
             "Type": "nap::gui::TabbedLayout",
             "mID": "ControlPanelGui",
             "Title": "Gui",
-            "Style": "",
+            "Style": "MainGuiStyle",
             "Tabs": [
                 {
                     "Visible": true,
