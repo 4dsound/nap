@@ -3113,7 +3113,7 @@
                 }
             ],
             "ColorSettings": [],
-			"FontScaling": 1.0
+			"FontScaling": 0.9
         },
         {
             "Type": "nap::gui::Style",
