@@ -2768,11 +2768,11 @@
                     "Style": "",
                     "Position": {
                         "x": 0.0,
-                        "y": -26.0
+                        "y": -20.0
                     },
                     "Size": {
                         "x": 0.0,
-                        "y": 25.0
+                        "y": 20.0
                     },
                     "Flags": {
                         "NoTitleBar": true,
@@ -3113,7 +3113,7 @@
                 }
             ],
             "ColorSettings": [],
-			"FontScaling": 0.9
+            "FontScaling": 0.8999999761581421
         },
         {
             "Type": "nap::gui::Style",
