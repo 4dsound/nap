@@ -186,7 +186,7 @@ namespace nap
 			return false;
 
 		// Apply hard-coded ImGui style to both windows
-		GuiStyle guiStyle;
+		GuiStyle guiStyle(mGuiService->getScale());
 		guiStyle.apply(&mGuiService->getContext(mSecondaryWindow)->Style);
 		guiStyle.apply(&mGuiService->getContext(mWindow)->Style);
         guiStyle.apply(&mGuiService->getContext(mStartupWindow)->Style);
@@ -274,7 +274,7 @@ namespace nap
 		if (mEnvironmentStateMachine->getCurrentState().get() == mEnvironmentStartupState.get())
 		{
                         
-            // Render the floor wireframe.
+            // Render the startup window.
 			if (mRenderService->beginRecording(*mStartupWindow))
 			{
 				mStartupWindow->beginRendering();

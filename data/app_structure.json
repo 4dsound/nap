@@ -2520,7 +2520,7 @@
                 "Type": "nap::gui::Panel",
                 "mID": "Panel_87622b03",
                 "Title": "Main Panel",
-                "Style": "",
+                "Style": "MainGuiStyle",
                 "Position": {
                     "x": 1.0,
                     "y": 5.0
