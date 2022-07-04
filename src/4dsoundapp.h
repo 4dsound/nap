@@ -6,6 +6,7 @@
 #include <Spatial/Monitor/SpatialOrbitController.h>
 #include <Spatial/Core/EnvironmentComponent.h>
 #include <Spatial/Core/StateMachine.h>
+#include <Spatial/Headphones/HeadphonesSpeakerSetup.h>
 
 // Gui Layout includes
 #include <Gui/Gui.h>
@@ -109,6 +110,7 @@ namespace nap
 		ResourcePtr<StateMachine::State> mEnvironmentStartupState = nullptr; // State indicating the environment is starting up
 
 		ObjectPtr<PerspCameraComponentInstance> mCamera = nullptr;
+        ObjectPtr<TransformComponentInstance> mCameraTransform = nullptr;
 		ObjectPtr<FirstPersonControllerInstance> mFirstPersonController = nullptr;
 		ObjectPtr<SpatialOrbitControllerInstance> mSpatialOrbitController = nullptr;
 		ObjectPtr<RenderableComponentInstance> mFloorWireFrame = nullptr;
@@ -126,6 +128,7 @@ namespace nap
 		ObjectPtr<spatial::MonitorController> mMonitorController = nullptr;
 		ObjectPtr<spatial::MonitorController::MonitorVisibilityProperty> mFirstPersonCameraModeProperty = nullptr;
 		ObjectPtr<RenderWindow> mStartupWindow = nullptr;
+		ResourcePtr<spatial::HeadphonesSpeakerSetup> mHeadphonesSetup = nullptr;
 
 		bool mSecondaryWindowVisible = false;     		// Is the GUI window currently visible?
 		bool mPrimaryWindowVisible = false;			// Is the main window visible?

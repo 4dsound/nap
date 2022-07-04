@@ -13,6 +13,7 @@
 
 // Spatial includes.
 #include <Spatial/Core/EnvironmentComponent.h>
+#include <Spatial/Core/MeasurementComponent.h>
 
 #include "GuiStyle.h"
 
@@ -95,7 +96,12 @@ namespace nap
 		if (mCamera == nullptr)
 			return false;
 
-		// Find orbit camera controller
+        // Find the camera transform
+        mCameraTransform = findComponentInScene<TransformComponentInstance>(*mScene, "Camera", error);
+        if (mCameraTransform == nullptr)
+            return false;
+
+        // Find orbit camera controller
 		mSpatialOrbitController = findComponentInScene<SpatialOrbitControllerInstance>(*mScene, "Camera", error);
 		if (mSpatialOrbitController == nullptr)
 			return false;
@@ -185,6 +191,10 @@ namespace nap
 		if (!error.check(mEnvironmentStateMachine != nullptr, "EnvironmentStateMachine state startupState not found"))
 			return false;
 
+		mHeadphonesSetup = mResourceManager->findObject<spatial::HeadphonesSpeakerSetup>("headphonesSetup");
+        if (!error.check(mHeadphonesSetup != nullptr, "HeadphonesSpeakerSetup headPhonesSetup not found"))
+            return false;
+
 		// Apply hard-coded ImGui style to both windows
 		GuiStyle guiStyle(mGuiService->getScale());
 		guiStyle.apply(&mGuiService->getContext(mSecondaryWindow)->Style);
@@ -259,10 +269,16 @@ namespace nap
 		{
 			mFirstPersonController->enable();
 			mSpatialOrbitController->disable();
+            auto rotate = mCameraTransform->getRotate();
+			mHeadphonesSetup->setListenerPosition(mCameraTransform->getTranslate(), glm::vec4(rotate.x, rotate.y, rotate.z, rotate.w));
+			for (auto& soundObject : mMonitorController->getSoundObjects())
+			    soundObject.mMeasurementComponent->setVantagePoint(mCameraTransform->getTranslate());
 		}
 		else {
 			mFirstPersonController->disable();
 			mSpatialOrbitController->enable(mSpatialOrbitController->getLookAtPos());
+            for (auto& soundObject : mMonitorController->getSoundObjects())
+                soundObject.mMeasurementComponent->useVantagePointParameter();
 		}
     }
 
