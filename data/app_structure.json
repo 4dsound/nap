@@ -2757,7 +2757,8 @@
                             "GuiWindow": "GuiWindow",
                             "DetachedGuiWindow": "DetachedGuiWindow",
                             "VisibilityWindow": "VisibilityPanelWindow",
-                            "MultiSpeakerSetup": "multiSetup"
+                            "MultiSpeakerSetup": "multiSetup",
+                            "HeadphonesSetup": "headphonesSetup"
                         }
                     }
                 },
