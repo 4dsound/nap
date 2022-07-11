@@ -192,7 +192,7 @@ namespace nap
 			return false;
 
 		mHeadphonesSetup = mResourceManager->findObject<spatial::HeadphonesSpeakerSetup>("headphonesSetup");
-        if (!error.check(mHeadphonesSetup != nullptr, "HeadphonesSpeakerSetup headPhonesSetup not found"))
+        if (!error.check(mHeadphonesSetup != nullptr, "HeadphonesSpeakerSetup not found"))
             return false;
 
 		// Apply hard-coded ImGui style to both windows
@@ -269,7 +269,6 @@ namespace nap
 		{
 			mFirstPersonController->enable();
 			mSpatialOrbitController->disable();
-            auto rotate = mCameraTransform->getRotate();
 			mHeadphonesSetup->setListenerTransform(mCameraTransform->getLocalTransform());
 			for (auto& soundObject : mMonitorController->getSoundObjects())
 			    soundObject.mMeasurementComponent->setVantagePoint(mCameraTransform->getTranslate());
