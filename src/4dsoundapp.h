@@ -139,5 +139,7 @@ namespace nap
 
 		std::string mFileName = "app_structure.json"; 	// The JSON file that is loaded on initialization
         std::vector<std::string> mCommandLineArgs;		// List with command line arguments
+		
+		glm::mat4x4 identityMatrix = glm::mat4x4(1.f); // Used to reset listener position.
 	};
 }

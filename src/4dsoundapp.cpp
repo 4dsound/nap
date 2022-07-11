@@ -270,13 +270,14 @@ namespace nap
 			mFirstPersonController->enable();
 			mSpatialOrbitController->disable();
             auto rotate = mCameraTransform->getRotate();
-			mHeadphonesSetup->setListenerPosition(mCameraTransform->getTranslate(), glm::vec4(rotate.x, rotate.y, rotate.z, rotate.w));
+			mHeadphonesSetup->setListenerTransform(mCameraTransform->getLocalTransform());
 			for (auto& soundObject : mMonitorController->getSoundObjects())
 			    soundObject.mMeasurementComponent->setVantagePoint(mCameraTransform->getTranslate());
 		}
 		else {
 			mFirstPersonController->disable();
 			mSpatialOrbitController->enable(mSpatialOrbitController->getLookAtPos());
+			mHeadphonesSetup->setListenerTransform(identityMatrix);
             for (auto& soundObject : mMonitorController->getSoundObjects())
                 soundObject.mMeasurementComponent->useVantagePointParameter();
 		}
