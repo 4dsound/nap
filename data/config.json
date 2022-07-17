@@ -4,7 +4,7 @@
             "Type": "nap::IMGuiServiceConfiguration",
             "mID": "nap::IMGuiServiceConfiguration",
             "ColorScheme": "Dark",
-            "FontSize": 11.0,
+            "FontSize": 14.0,
             "GlobalScale": 1.0,
             "FontFile": "fonts/SuisseIntl-Regular.otf",
             "FontSampling": {
