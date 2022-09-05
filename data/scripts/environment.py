@@ -38,7 +38,6 @@ def createSources(environment, count):
     transformations.append("InputDimensionsTransformation")
     transformations.append("InputScaleTransformation")
     transformations.append("PositionRotationTransformation")
-    transformations.append("InvertTransformation")
     transformations.append("PathTransformation")
     transformations.append("ModulationTransformation")
     transformations.append("OrientationTransformation")
@@ -93,7 +92,6 @@ def createSoundEntities(environment, count, particleCount):
     transformations.append("InputDimensionsTransformation")
     transformations.append("InputScaleTransformation")
     transformations.append("PositionRotationTransformation")
-    transformations.append("InvertTransformation")
     transformations.append("PathTransformation")
     transformations.append("ModulationTransformation")
     transformations.append("ShakeTransformation")
@@ -228,6 +226,7 @@ def addFollowAndGroupTransformationsToAllSoundObjects(environment, groupsCount):
 
         controlComponent = soundObjects[i].findComponent("nap::spatial::EnvironmentControlComponentInstance")
         controlComponent.addSwitchExternalTransformation("follow", followTransformations, followNames)
+        controlComponent.addTransformation(environment.findResource("InvertTransformation"))
 
         for k in range(len(groupTransformations)):
             controlComponent.addExternalTransformation("group" + str(k+1), groupTransformations[k], True, True)
