@@ -13,6 +13,7 @@
 
 // Spatial includes.
 #include <Spatial/Core/EnvironmentComponent.h>
+#include <Spatial/Core/MeasurementComponent.h>
 
 #include "GuiStyle.h"
 
@@ -95,7 +96,12 @@ namespace nap
 		if (mCamera == nullptr)
 			return false;
 
-		// Find orbit camera controller
+        // Find the camera transform
+        mCameraTransform = findComponentInScene<TransformComponentInstance>(*mScene, "Camera", error);
+        if (mCameraTransform == nullptr)
+            return false;
+
+        // Find orbit camera controller
 		mSpatialOrbitController = findComponentInScene<SpatialOrbitControllerInstance>(*mScene, "Camera", error);
 		if (mSpatialOrbitController == nullptr)
 			return false;
@@ -185,8 +191,12 @@ namespace nap
 		if (!error.check(mEnvironmentStateMachine != nullptr, "EnvironmentStateMachine state startupState not found"))
 			return false;
 
+		mHeadphonesSetup = mResourceManager->findObject<spatial::HeadphonesSpeakerSetup>("headphonesSetup");
+        if (!error.check(mHeadphonesSetup != nullptr, "HeadphonesSpeakerSetup not found"))
+            return false;
+
 		// Apply hard-coded ImGui style to both windows
-		GuiStyle guiStyle;
+		GuiStyle guiStyle(mGuiService->getScale());
 		guiStyle.apply(&mGuiService->getContext(mSecondaryWindow)->Style);
 		guiStyle.apply(&mGuiService->getContext(mWindow)->Style);
         guiStyle.apply(&mGuiService->getContext(mStartupWindow)->Style);
@@ -259,10 +269,16 @@ namespace nap
 		{
 			mFirstPersonController->enable();
 			mSpatialOrbitController->disable();
+			mHeadphonesSetup->setListenerTransform(mCameraTransform->getLocalTransform());
+			for (auto& soundObject : mMonitorController->getSoundObjects())
+			    soundObject.mMeasurementComponent->setVantagePoint(mCameraTransform->getTranslate());
 		}
 		else {
 			mFirstPersonController->disable();
 			mSpatialOrbitController->enable(mSpatialOrbitController->getLookAtPos());
+			mHeadphonesSetup->setListenerTransform(identityMatrix);
+            for (auto& soundObject : mMonitorController->getSoundObjects())
+                soundObject.mMeasurementComponent->useVantagePointParameter();
 		}
     }
 
@@ -274,7 +290,7 @@ namespace nap
 		if (mEnvironmentStateMachine->getCurrentState().get() == mEnvironmentStartupState.get())
 		{
                         
-            // Render the floor wireframe.
+            // Render the startup window.
 			if (mRenderService->beginRecording(*mStartupWindow))
 			{
 				mStartupWindow->beginRendering();

@@ -8,9 +8,11 @@ namespace nap
     /**
      * Class used to apply hard-coded ImGui style with 4DSOUND color scheme.
      */
-    class NAPAPI GuiStyle
+    class GuiStyle
     {
     public:
+        GuiStyle() = default;
+		GuiStyle(float guiScale) : mGuiScale(guiScale) { }
         /**
          * Applies the 4DSOUND ImGui style to the provided ImGuiStyle struct
          * @param style struct containing all ImGui style variables.
@@ -20,6 +22,8 @@ namespace nap
 
     private:
         void applyColors(ImGuiStyle* style);
+		
+		float mGuiScale = 1.0;
     };
 
 }
