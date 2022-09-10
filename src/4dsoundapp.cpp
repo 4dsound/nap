@@ -15,8 +15,6 @@
 #include <Spatial/Core/EnvironmentComponent.h>
 #include <Spatial/Core/MeasurementComponent.h>
 
-#include "GuiStyle.h"
-
 RTTI_BEGIN_CLASS_NO_DEFAULT_CONSTRUCTOR(nap::SpatialSoundApp)
 	RTTI_CONSTRUCTOR(nap::Core&)
 RTTI_END_CLASS
@@ -194,12 +192,6 @@ namespace nap
 		mHeadphonesSetup = mResourceManager->findObject<spatial::HeadphonesSpeakerSetup>("headphonesSetup");
         if (!error.check(mHeadphonesSetup != nullptr, "HeadphonesSpeakerSetup not found"))
             return false;
-
-		// Apply hard-coded ImGui style to both windows
-		GuiStyle guiStyle(mGuiService->getScale());
-		guiStyle.apply(&mGuiService->getContext(mSecondaryWindow)->Style);
-		guiStyle.apply(&mGuiService->getContext(mWindow)->Style);
-        guiStyle.apply(&mGuiService->getContext(mStartupWindow)->Style);
 
 		// Turn framerate capping on
 		capFramerate(true);
