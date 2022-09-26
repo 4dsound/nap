@@ -2709,7 +2709,7 @@
                     },
                     "Size": {
                         "x": 0.0,
-                        "y": 20.0
+                        "y": 23.0
                     },
                     "Flags": {
                         "NoTitleBar": true,
@@ -2769,11 +2769,11 @@
                     "Style": "",
                     "Position": {
                         "x": 0.0,
-                        "y": -20.0
+                        "y": -23.0
                     },
                     "Size": {
                         "x": 0.0,
-                        "y": 20.0
+                        "y": 23.0
                     },
                     "Flags": {
                         "NoTitleBar": true,
@@ -2830,11 +2830,11 @@
                     "Style": "",
                     "Position": {
                         "x": 0.0,
-                        "y": 20.0
+                        "y": 23.0
                     },
                     "Size": {
-                        "x": 75.0,
-                        "y": -40.0
+                        "x": 85.0,
+                        "y": -46.0
                     },
                     "Flags": {
                         "NoTitleBar": true,
@@ -2954,12 +2954,12 @@
                     "Title": "VisibilityPanelWindow",
                     "Style": "",
                     "Position": {
-                        "x": -110.0,
-                        "y": 20.0
+                        "x": -121.0,
+                        "y": 23.0
                     },
                     "Size": {
-                        "x": 110.0,
-                        "y": 327.0
+                        "x": 121.0,
+                        "y": 310.0
                     },
                     "Flags": {
                         "NoTitleBar": true,
@@ -3114,7 +3114,7 @@
                 }
             ],
             "ColorSettings": [],
-            "FontScaling": 0.8999999761581421
+            "FontScaling": 1.0
         },
         {
             "Type": "nap::gui::Style",
