@@ -383,7 +383,10 @@ namespace nap
     int SpatialSoundApp::shutdown()
     {
         utility::ErrorState errorState;
-        if (!getCore().writeConfigFile(errorState))
+        auto configPath = getCore().getProjectInfo()->mServiceConfigFilename;
+        if (configPath.empty())
+            configPath = "config.json";
+        if (!getCore().writeConfigFile(configPath, errorState))
             Logger::warn("Failed to write configuration file: %s", errorState.toString().c_str());
         return 0;
     }
