@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.19)
-set(CMAKE_OSX_ARCHITECTURES arm64;x86_64)
+#set(CMAKE_OSX_ARCHITECTURES arm64;x86_64)
 project(NAP)
 
 set(NAP_ROOT ${CMAKE_CURRENT_LIST_DIR})
@@ -31,6 +31,14 @@ add_subdirectory(system_modules/napudp)
 add_subdirectory(system_modules/napasio)
 add_subdirectory(system_modules/napapi)
 
+
+# for checking the sequencer
+add_subdirectory(system_modules/napsequence)
+add_subdirectory(system_modules/napsequenceaudio)
+add_subdirectory(system_modules/napsequenceaudiogui)
+add_subdirectory(system_modules/napsequencegui)
+
+
 set(NAP_BUILD_CONTEXT source) # This is here just to guarantee backwards compatibility with 0.6 style NAP modules
 add_subdirectory_modules(modules)
 add_subdirectory_apps(apps)
@@ -41,6 +49,10 @@ add_subdirectory(demos/audioanalysis)
 add_subdirectory(demos/oscmidi)
 add_subdirectory(demos/udpsend)
 add_subdirectory(demos/udpreceive)
+
+# for checking the sequencer
+add_subdirectory(demos/sequencer)
+
 
 add_subdirectory(tools/fbxconverter)
 add_subdirectory(qt)
