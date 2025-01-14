@@ -47,18 +47,17 @@ namespace nap
 		mColorOne = { mColorTwo[0] * 0.9f, mColorTwo[1] * 0.9f, mColorTwo[2] };
 		mHaloColor = mGuiService->getPalette().mFront4Color.convert<RGBColorFloat>();
 		mTextColor = mGuiService->getPalette().mFront4Color.convert<RGBColorFloat>();
-		
-		mParameter = mResourceManager->findObject<nap::ParameterFloat>("Parameter");
-		if (!error.check(mParameter != nullptr, "unable to find parameter"))
-			return false;
-
-		
+				
 		mParameterGUI = mResourceManager->findObject<ParameterGUI>("ParameterGUI");
 		if (!error.check(mParameterGUI != nullptr, "unable to find parameter GUI"))
 			return false;
 
-		mParameterRecorder = mResourceManager->findObject<nap::ParameterFloatRecorder>("ParameterRecorder");
-		if (!error.check(mParameterRecorder != nullptr, "unable to find parameter recorder"))
+		mParameterFloatRecorder = mResourceManager->findObject<nap::ParameterFloatRecorder>("ParameterFloatRecorder");
+		if (!error.check(mParameterFloatRecorder != nullptr, "unable to find parameter recorder"))
+			return false;
+		
+		mParameterVec3Recorder = mResourceManager->findObject<nap::ParameterVec3Recorder>("ParameterVec3Recorder");
+		if (!error.check(mParameterVec3Recorder != nullptr, "unable to find parameter recorder"))
 			return false;
 
 		capFramerate(true);		
@@ -85,17 +84,24 @@ namespace nap
 		
 		// Start / stop recording button
 		
-		if(mParameterRecorder->isRecording())
+		if(mParameterFloatRecorder->isRecording())
 		{
 			if(ImGui::Button("Stop recording"))
-			   mParameterRecorder->stop();
+			{
+				mParameterFloatRecorder->stop();
+				mParameterVec3Recorder->stop();
+			}
+
 		}
 		else
 		{
 			if(ImGui::Button("Start recording"))
-			   mParameterRecorder->start();
+			{
+				mParameterFloatRecorder->start();
+				mParameterVec3Recorder->start();
+			}
 		}
-		   
+		
 		// Show extra info
 		ImGui::Text(getCurrentDateTime().toString().c_str());
 		ImGui::TextColored(mGuiService->getPalette().mHighlightColor2, "left mouse button to rotate, right mouse button to zoom");

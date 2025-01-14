@@ -91,9 +91,9 @@ namespace nap
 		IMGuiService* mGuiService = nullptr;							//< Manages gui related update / draw calls
 		ObjectPtr<RenderWindow> mRenderWindow;							//< Pointer to the render window		
 
-		ObjectPtr<ParameterFloat> mParameter = nullptr;
 		ObjectPtr<ParameterGUI> mParameterGUI = nullptr;
-		ObjectPtr<ParameterFloatRecorder> mParameterRecorder = nullptr;
+		ObjectPtr<ParameterFloatRecorder> mParameterFloatRecorder = nullptr;
+		ObjectPtr<ParameterVec3Recorder> mParameterVec3Recorder = nullptr;
 
 		RGBColorFloat mColorOne;										//< First sphere blend color
 		RGBColorFloat mColorTwo;										//< Second sphere blend color

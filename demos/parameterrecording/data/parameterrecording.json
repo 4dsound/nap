@@ -6,8 +6,13 @@
 			"Parameters": [
 				{
 					"Type": "nap::ParameterFloat",
-					"mID": "Parameter",
-					"Name": "Parameter"
+					"mID": "ParameterFloat",
+					"Name": "ParameterFloat"
+				},
+				{
+					"Type": "nap::ParameterVec3",
+					"mID": "ParameterVec3",
+					"Name": "ParameterVec3"
 				}
 			],
 			"Groups": []
@@ -20,8 +25,13 @@
 		},
 		{
 			"Type": "nap::ParameterFloatRecorder",
-			"mID": "ParameterRecorder",
-			"Parameter": "Parameter"
+			"mID": "ParameterFloatRecorder",
+			"Parameter": "ParameterFloat"
+		},
+		{
+			"Type": "nap::ParameterVec3Recorder",
+			"mID": "ParameterVec3Recorder",
+			"Parameter": "ParameterVec3"
 		},
 		{
 			"Type": "nap::RenderWindow",
