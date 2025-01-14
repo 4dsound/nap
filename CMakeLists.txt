@@ -53,6 +53,9 @@ add_subdirectory(demos/udpreceive)
 # for checking the sequencer
 add_subdirectory(demos/sequencer)
 
+# parameter recording demo
+add_subdirectory(demos/parameterrecording)
+
 
 add_subdirectory(tools/fbxconverter)
 add_subdirectory(qt)
