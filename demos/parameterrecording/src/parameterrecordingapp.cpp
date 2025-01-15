@@ -91,7 +91,10 @@ namespace nap
 				mParametersRecorder->startRecording();
 			
 			if(ImGui::Button("Save sequence"))
-				mParametersRecorder->saveSequence();
+			{
+				utility::ErrorState e;
+				mParametersRecorder->saveSequence("sequencetest.json", e);
+			}
 		}
 		
 		// Show framerate

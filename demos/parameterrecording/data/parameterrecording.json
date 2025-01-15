@@ -31,16 +31,6 @@
 				]
 		},
 		{
-			"Type": "nap::ParameterFloatRecorder",
-			"mID": "ParameterFloatRecorder",
-			"Parameter": "ParameterFloat"
-		},
-		{
-			"Type": "nap::ParameterVec3Recorder",
-			"mID": "ParameterVec3Recorder",
-			"Parameter": "ParameterVec3"
-		},
-		{
 			"Type": "nap::RenderWindow",
 			"mID": "Window0",
 			"Borderless": false,
