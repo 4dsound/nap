@@ -20,7 +20,10 @@
 #include <parameternumeric.h>
 #include <parametergui.h>
 
-#include <ParameterRecorder.h>
+//#include <ParameterRecorder.h>
+
+#include <ParametersRecorder.h>
+
 
 namespace nap
 {
@@ -92,8 +95,7 @@ namespace nap
 		ObjectPtr<RenderWindow> mRenderWindow;							//< Pointer to the render window		
 
 		ObjectPtr<ParameterGUI> mParameterGUI = nullptr;
-		ObjectPtr<ParameterFloatRecorder> mParameterFloatRecorder = nullptr;
-		ObjectPtr<ParameterVec3Recorder> mParameterVec3Recorder = nullptr;
+		ObjectPtr<ParametersRecorder> mParametersRecorder = nullptr;
 
 		RGBColorFloat mColorOne;										//< First sphere blend color
 		RGBColorFloat mColorTwo;										//< Second sphere blend color

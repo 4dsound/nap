@@ -51,13 +51,9 @@ namespace nap
 		mParameterGUI = mResourceManager->findObject<ParameterGUI>("ParameterGUI");
 		if (!error.check(mParameterGUI != nullptr, "unable to find parameter GUI"))
 			return false;
-
-		mParameterFloatRecorder = mResourceManager->findObject<nap::ParameterFloatRecorder>("ParameterFloatRecorder");
-		if (!error.check(mParameterFloatRecorder != nullptr, "unable to find parameter recorder"))
-			return false;
 		
-		mParameterVec3Recorder = mResourceManager->findObject<nap::ParameterVec3Recorder>("ParameterVec3Recorder");
-		if (!error.check(mParameterVec3Recorder != nullptr, "unable to find parameter recorder"))
+		mParametersRecorder = mResourceManager->findObject<ParametersRecorder>("ParametersRecorder");
+		if (!error.check(mParameterGUI != nullptr, "unable to find ParametersRecorder"))
 			return false;
 
 		capFramerate(true);		
@@ -84,29 +80,22 @@ namespace nap
 		
 		// Start / stop recording button
 		
-		if(mParameterFloatRecorder->isRecording())
+		if(mParametersRecorder->isRecording())
 		{
 			if(ImGui::Button("Stop recording"))
-			{
-				mParameterFloatRecorder->stop();
-				mParameterVec3Recorder->stop();
-			}
-
+				mParametersRecorder->stopRecording();
 		}
 		else
 		{
 			if(ImGui::Button("Start recording"))
-			{
-				mParameterFloatRecorder->start();
-				mParameterVec3Recorder->start();
-			}
+				mParametersRecorder->startRecording();
+			
+			if(ImGui::Button("Save sequence"))
+				mParametersRecorder->saveSequence();
 		}
 		
-		// Show extra info
-		ImGui::Text(getCurrentDateTime().toString().c_str());
-		ImGui::TextColored(mGuiService->getPalette().mHighlightColor2, "left mouse button to rotate, right mouse button to zoom");
+		// Show framerate
 		ImGui::Text(utility::stringFormat("Framerate: %.02f", getCore().getFramerate()).c_str());
-		ImGui::Text(utility::stringFormat("Frametime: %.02fms", deltaTime * 1000.0).c_str());
 		
 		ImGui::End();
 
