@@ -15,7 +15,25 @@
 					"Name": "ParameterVec3"
 				}
 			],
-			"Groups": []
+			"Groups": [
+				{
+					"Type": "nap::ParameterGroup",
+					"mID": "ParametersInner",
+					"Parameters": [
+						{
+							"Type": "nap::ParameterFloat",
+							"mID": "ParameterFloatInner",
+							"Name": "ParameterFloatInner"
+						},
+						{
+							"Type": "nap::ParameterVec3",
+							"mID": "ParameterVec3Inner",
+							"Name": "ParameterVec3Inner"
+						}
+					],
+					"Groups": []
+				}
+			]
 		},
 		{
 			"Type": "nap::ParameterGUI",
@@ -26,9 +44,8 @@
 		{
 			"Type": "nap::ParametersRecorder",
 			"mID": "ParametersRecorder",
-			"Parameters": [
-				"ParameterFloat", "ParameterVec3"
-				]
+			"ParameterGroups": [ "Parameters" ],
+			"Parameters": []
 		},
 		{
 			"Type": "nap::RenderWindow",
