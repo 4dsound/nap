@@ -53,9 +53,14 @@ namespace nap
 			return false;
 		
 		mParametersRecorder = mResourceManager->findObject<ParametersRecorder>("ParametersRecorder");
-		if (!error.check(mParameterGUI != nullptr, "unable to find ParametersRecorder"))
+		if (!error.check(mParametersRecorder != nullptr, "unable to find ParametersRecorder"))
 			return false;
 
+		mParametersSequenceExporter = mResourceManager->findObject<ParametersSequenceExporter>("ParametersSequenceExporter");
+		if (!error.check(mParametersSequenceExporter != nullptr, "unable to find ParametersSequenceExporter"))
+			return false;
+
+		
 		capFramerate(true);		
 
 		return true;
@@ -93,7 +98,8 @@ namespace nap
 			if(ImGui::Button("Save sequence"))
 			{
 				utility::ErrorState e;
-				mParametersRecorder->saveSequence("sequencetest.json", e);
+				// TODO: parameter exporter -> saveSequence
+				mParametersSequenceExporter->saveSequence("sequencetest.json", e);
 			}
 		}
 		

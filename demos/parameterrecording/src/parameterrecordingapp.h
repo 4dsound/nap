@@ -23,6 +23,7 @@
 //#include <ParameterRecorder.h>
 
 #include <ParametersRecorder.h>
+#include <ParametersSequenceExporter.h>
 
 
 namespace nap
@@ -96,7 +97,9 @@ namespace nap
 
 		ObjectPtr<ParameterGUI> mParameterGUI = nullptr;
 		ObjectPtr<ParametersRecorder> mParametersRecorder = nullptr;
+		ObjectPtr<ParametersSequenceExporter> mParametersSequenceExporter = nullptr;
 
+		
 		RGBColorFloat mColorOne;										//< First sphere blend color
 		RGBColorFloat mColorTwo;										//< Second sphere blend color
 		RGBColorFloat mHaloColor;										//< Sphere halo color
