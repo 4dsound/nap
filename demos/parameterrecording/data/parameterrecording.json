@@ -23,7 +23,13 @@
 					"Type": "nap::ParameterInt",
 					"mID": "ParameterInt",
 					"Name": "ParameterInt"
+				},
+				{
+					"Type": "nap::ParameterString",
+					"mID": "ParameterString",
+					"Name": "ParameterString"
 				}
+
 			],
 			"Groups": [
 				{
