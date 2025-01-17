@@ -13,6 +13,16 @@
 					"Type": "nap::ParameterVec3",
 					"mID": "ParameterVec3",
 					"Name": "ParameterVec3"
+				},
+				{
+					"Type": "nap::ParameterBool",
+					"mID": "ParameterBool",
+					"Name": "ParameterBool"
+				},
+				{
+					"Type": "nap::ParameterInt",
+					"mID": "ParameterInt",
+					"Name": "ParameterInt"
 				}
 			],
 			"Groups": [
