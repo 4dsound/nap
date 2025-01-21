@@ -60,6 +60,9 @@ namespace nap
 		if (!error.check(mParametersSequenceExporter != nullptr, "unable to find ParametersSequenceExporter"))
 			return false;
 
+		mParametersSimpleExporter = mResourceManager->findObject<SimpleJSONExporter>("ParametersSimpleJSONExporter");
+		if (!error.check(mParametersSimpleExporter != nullptr, "unable to find ParametersSimpleJSONExporter"))
+			return false;
 		
 		capFramerate(true);		
 
@@ -98,8 +101,8 @@ namespace nap
 			if(ImGui::Button("Save sequence"))
 			{
 				utility::ErrorState e;
-				// TODO: parameter exporter -> saveSequence
-				mParametersSequenceExporter->saveSequence("sequencetest.json", e);
+				mParametersSequenceExporter->save("sequenceExport.json", e);
+				mParametersSimpleExporter->save("simpleJSONExport.json", e);
 			}
 		}
 		

@@ -24,7 +24,7 @@
 
 #include <ParameterGroupRecorder.h>
 #include <SequenceExporter.h>
-
+#include <SimpleJSONExporter.h>
 
 namespace nap
 {
@@ -98,6 +98,7 @@ namespace nap
 		ObjectPtr<ParameterGUI> mParameterGUI = nullptr;
 		ObjectPtr<ParameterGroupRecorder> mParameterGroupRecorder = nullptr;
 		ObjectPtr<SequenceExporter> mParametersSequenceExporter = nullptr;
+		ObjectPtr<SimpleJSONExporter> mParametersSimpleExporter = nullptr;
 
 		
 		RGBColorFloat mColorOne;										//< First sphere blend color
