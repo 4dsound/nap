@@ -1,0 +1,1813 @@
+{
+    "Objects": [
+        {
+            "Type": "nap::Sequence",
+            "mID": "sequence",
+            "Sequence Tracks": [
+                {
+                    "Type": "nap::SequenceTrackCurveFloat",
+                    "mID": "ParameterFloatInner",
+                    "Segments": [
+                        {
+                            "Type": "nap::SequenceTrackSegmentCurveFloat",
+                            "mID": "ParameterFloatInner-segment",
+                            "Label": "default",
+                            "Start Time": 0.0,
+                            "Duration": 11.770808943,
+                            "Locked": true,
+                            "Color": {
+                                "Values": [
+                                    0.0,
+                                    0.0,
+                                    0.0,
+                                    0.0
+                                ]
+                            },
+                            "Curves": [
+                                "ParameterFloatInner-curve0"
+                            ],
+                            "Curve Types": [
+                                "Stepped"
+                            ],
+                            "Duration": 11.770808943
+                        }
+                    ],
+                    "Output ID": "",
+                    "Name": "ParameterFloatInner",
+                    "Height": 200.0,
+                    "Minimum": 0.0,
+                    "Maximum": 1.0
+                },
+                {
+                    "Type": "nap::SequenceTrackCurveVec3",
+                    "mID": "ParameterVec3Inner",
+                    "Segments": [
+                        {
+                            "Type": "nap::SequenceTrackSegmentCurveVec3",
+                            "mID": "ParameterVec3Inner-segment",
+                            "Label": "default",
+                            "Start Time": 0.0,
+                            "Duration": 11.770810506,
+                            "Locked": true,
+                            "Color": {
+                                "Values": [
+                                    0.0,
+                                    0.0,
+                                    0.0,
+                                    0.0
+                                ]
+                            },
+                            "Curves": [
+                                "ParameterVec3Inner-curve0",
+                                "ParameterVec3Inner-curve1",
+                                "ParameterVec3Inner-curve2"
+                            ],
+                            "Curve Types": [
+                                "Stepped",
+                                "Stepped",
+                                "Stepped"
+                            ],
+                            "Duration": 11.770810506
+                        }
+                    ],
+                    "Output ID": "",
+                    "Name": "ParameterVec3Inner",
+                    "Height": 200.0,
+                    "Minimum": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "Maximum": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    }
+                },
+                {
+                    "Type": "nap::SequenceTrackCurveFloat",
+                    "mID": "ParameterFloat",
+                    "Segments": [
+                        {
+                            "Type": "nap::SequenceTrackSegmentCurveFloat",
+                            "mID": "ParameterFloat-segment",
+                            "Label": "default",
+                            "Start Time": 0.0,
+                            "Duration": 11.770814232,
+                            "Locked": true,
+                            "Color": {
+                                "Values": [
+                                    0.0,
+                                    0.0,
+                                    0.0,
+                                    0.0
+                                ]
+                            },
+                            "Curves": [
+                                "ParameterFloat-curve0"
+                            ],
+                            "Curve Types": [
+                                "Stepped"
+                            ],
+                            "Duration": 11.770814232
+                        }
+                    ],
+                    "Output ID": "",
+                    "Name": "ParameterFloat",
+                    "Height": 200.0,
+                    "Minimum": 0.0,
+                    "Maximum": 1.0
+                },
+                {
+                    "Type": "nap::SequenceTrackCurveVec3",
+                    "mID": "ParameterVec3",
+                    "Segments": [
+                        {
+                            "Type": "nap::SequenceTrackSegmentCurveVec3",
+                            "mID": "ParameterVec3-segment",
+                            "Label": "default",
+                            "Start Time": 0.0,
+                            "Duration": 11.770813022,
+                            "Locked": true,
+                            "Color": {
+                                "Values": [
+                                    0.0,
+                                    0.0,
+                                    0.0,
+                                    0.0
+                                ]
+                            },
+                            "Curves": [
+                                "ParameterVec3-curve0",
+                                "ParameterVec3-curve1",
+                                "ParameterVec3-curve2"
+                            ],
+                            "Curve Types": [
+                                "Stepped",
+                                "Stepped",
+                                "Stepped"
+                            ],
+                            "Duration": 11.770813022
+                        }
+                    ],
+                    "Output ID": "",
+                    "Name": "ParameterVec3",
+                    "Height": 200.0,
+                    "Minimum": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "Maximum": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    }
+                },
+                {
+                    "Type": "nap::SequenceTrackEvent",
+                    "mID": "ParameterBool",
+                    "Segments": [
+                        {
+                            "Type": "nap::SequenceTrackSegmentEventInt",
+                            "mID": "ParameterBool-segment0",
+                            "Label": "default",
+                            "Start Time": 0.0,
+                            "Value": 0
+                        },
+                        {
+                            "Type": "nap::SequenceTrackSegmentEventInt",
+                            "mID": "ParameterBool-segment1",
+                            "Label": "default",
+                            "Start Time": 2.91943369,
+                            "Value": 1
+                        },
+                        {
+                            "Type": "nap::SequenceTrackSegmentEventInt",
+                            "mID": "ParameterBool-segment2",
+                            "Label": "default",
+                            "Start Time": 3.10376451,
+                            "Value": 0
+                        },
+                        {
+                            "Type": "nap::SequenceTrackSegmentEventInt",
+                            "mID": "ParameterBool-segment3",
+                            "Label": "default",
+                            "Start Time": 11.770810146,
+                            "Value": 0
+                        }
+                    ],
+                    "Output ID": "",
+                    "Name": "ParameterBool",
+                    "Height": 200.0
+                },
+                {
+                    "Type": "nap::SequenceTrackEvent",
+                    "mID": "ParameterInt",
+                    "Segments": [
+                        {
+                            "Type": "nap::SequenceTrackSegmentEventInt",
+                            "mID": "ParameterInt-segment0",
+                            "Label": "default",
+                            "Start Time": 0.0,
+                            "Value": 0
+                        },
+                        {
+                            "Type": "nap::SequenceTrackSegmentEventInt",
+                            "mID": "ParameterInt-segment1",
+                            "Label": "default",
+                            "Start Time": 7.575897208,
+                            "Value": 1
+                        },
+                        {
+                            "Type": "nap::SequenceTrackSegmentEventInt",
+                            "mID": "ParameterInt-segment2",
+                            "Label": "default",
+                            "Start Time": 8.146021534,
+                            "Value": 0
+                        },
+                        {
+                            "Type": "nap::SequenceTrackSegmentEventInt",
+                            "mID": "ParameterInt-segment3",
+                            "Label": "default",
+                            "Start Time": 11.770807677,
+                            "Value": 0
+                        }
+                    ],
+                    "Output ID": "",
+                    "Name": "ParameterInt",
+                    "Height": 200.0
+                },
+                {
+                    "Type": "nap::SequenceTrackEvent",
+                    "mID": "ParameterString",
+                    "Segments": [
+                        {
+                            "Type": "nap::SequenceTrackSegmentEventString",
+                            "mID": "ParameterString-segment0",
+                            "Label": "default",
+                            "Start Time": 0.0,
+                            "Value": ""
+                        },
+                        {
+                            "Type": "nap::SequenceTrackSegmentEventString",
+                            "mID": "ParameterString-segment1",
+                            "Label": "default",
+                            "Start Time": 9.545296216,
+                            "Value": "t"
+                        },
+                        {
+                            "Type": "nap::SequenceTrackSegmentEventString",
+                            "mID": "ParameterString-segment2",
+                            "Label": "default",
+                            "Start Time": 9.578969773,
+                            "Value": "tr"
+                        },
+                        {
+                            "Type": "nap::SequenceTrackSegmentEventString",
+                            "mID": "ParameterString-segment3",
+                            "Label": "default",
+                            "Start Time": 9.611695091,
+                            "Value": "tre"
+                        },
+                        {
+                            "Type": "nap::SequenceTrackSegmentEventString",
+                            "mID": "ParameterString-segment4",
+                            "Label": "default",
+                            "Start Time": 9.744759963,
+                            "Value": "tret"
+                        },
+                        {
+                            "Type": "nap::SequenceTrackSegmentEventString",
+                            "mID": "ParameterString-segment5",
+                            "Label": "default",
+                            "Start Time": 9.795834231,
+                            "Value": "trete"
+                        },
+                        {
+                            "Type": "nap::SequenceTrackSegmentEventString",
+                            "mID": "ParameterString-segment6",
+                            "Label": "default",
+                            "Start Time": 9.813276762,
+                            "Value": "tretea"
+                        },
+                        {
+                            "Type": "nap::SequenceTrackSegmentEventString",
+                            "mID": "ParameterString-segment7",
+                            "Label": "default",
+                            "Start Time": 9.863937224,
+                            "Value": "tretear"
+                        },
+                        {
+                            "Type": "nap::SequenceTrackSegmentEventString",
+                            "mID": "ParameterString-segment8",
+                            "Label": "default",
+                            "Start Time": 9.962858114,
+                            "Value": "treteart"
+                        },
+                        {
+                            "Type": "nap::SequenceTrackSegmentEventString",
+                            "mID": "ParameterString-segment9",
+                            "Label": "default",
+                            "Start Time": 11.770805131,
+                            "Value": "treteart"
+                        }
+                    ],
+                    "Output ID": "",
+                    "Name": "ParameterString",
+                    "Height": 200.0
+                }
+            ],
+            "Sequence Markers": [],
+            "Duration": 11.770814232
+        },
+        {
+            "Type": "nap::math::FloatFCurve",
+            "mID": "ParameterFloat-curve0",
+            "Points": [
+                {
+                    "Position": {
+                        "Time": 0.0,
+                        "Value": 0.0
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.0557389073073864,
+                        "Value": 0.02500000037252903
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.0657426044344902,
+                        "Value": 0.06599999964237213
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.0671139806509018,
+                        "Value": 0.2150000035762787
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.06851010024547577,
+                        "Value": 0.3479999899864197
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.06985656917095184,
+                        "Value": 0.46399998664855957
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.07121395319700241,
+                        "Value": 0.5360000133514404
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.07260316610336304,
+                        "Value": 0.6129999756813049
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.07404545694589615,
+                        "Value": 0.6660000085830688
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.07553175091743469,
+                        "Value": 0.7080000042915344
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.07689709216356277,
+                        "Value": 0.7289999723434448
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.07839356362819672,
+                        "Value": 0.746999979019165
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.07979316264390945,
+                        "Value": 0.7559999823570251
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.08126208186149597,
+                        "Value": 0.7590000033378601
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.085420161485672,
+                        "Value": 0.7379999756813049
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.08683513104915619,
+                        "Value": 0.675000011920929
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.08835794776678085,
+                        "Value": 0.5619999766349792
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.08980831503868103,
+                        "Value": 0.414000004529953
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.09128149598836899,
+                        "Value": 0.3100000023841858
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.09273660182952881,
+                        "Value": 0.23600000143051147
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.09414757788181305,
+                        "Value": 0.1850000023841858
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.09559804946184158,
+                        "Value": 0.164000004529953
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.0969708114862442,
+                        "Value": 0.16099999845027924
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.09984544664621353,
+                        "Value": 0.19099999964237213
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.10121435672044754,
+                        "Value": 0.33399999141693115
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.1025644987821579,
+                        "Value": 0.5
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.10401023924350739,
+                        "Value": 0.7200000286102295
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.10544972866773605,
+                        "Value": 0.8420000076293945
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.10693271458148956,
+                        "Value": 0.9129999876022339
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.10841793566942215,
+                        "Value": 0.9610000252723694
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.10983271896839142,
+                        "Value": 0.9750000238418579
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.11121300607919693,
+                        "Value": 0.9810000061988831
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.11415588855743408,
+                        "Value": 0.9779999852180481
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.11553758382797241,
+                        "Value": 0.9729999899864197
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.11690974235534668,
+                        "Value": 0.9549999833106995
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.11838281899690628,
+                        "Value": 0.9039999842643738
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.11986302584409714,
+                        "Value": 0.8059999942779541
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.12124328315258026,
+                        "Value": 0.6579999923706055
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.12264388799667358,
+                        "Value": 0.5479999780654907
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.12403939664363861,
+                        "Value": 0.4909999966621399
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.1255960613489151,
+                        "Value": 0.4580000042915344
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.12691815197467804,
+                        "Value": 0.44699999690055847
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.1297573447227478,
+                        "Value": 0.4819999933242798
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.1311572939157486,
+                        "Value": 0.6010000109672546
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.13256484270095825,
+                        "Value": 0.7559999823570251
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.13395611941814423,
+                        "Value": 0.8149999976158142
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.13533718883991241,
+                        "Value": 0.8830000162124634
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.1368955820798874,
+                        "Value": 0.9070000052452087
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.13831157982349396,
+                        "Value": 0.9100000262260437
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.14122629165649414,
+                        "Value": 0.8679999709129333
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.14268192648887634,
+                        "Value": 0.7229999899864197
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.1441989243030548,
+                        "Value": 0.5950000286102295
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.14559510350227356,
+                        "Value": 0.47600001096725464
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.14699877798557281,
+                        "Value": 0.4169999957084656
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.14834995567798615,
+                        "Value": 0.36899998784065247
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.14972421526908875,
+                        "Value": 0.3659999966621399
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.1525963395833969,
+                        "Value": 0.4259999990463257
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.15401923656463623,
+                        "Value": 0.5389999747276306
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.15548115968704224,
+                        "Value": 0.6309999823570251
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.15684488415718079,
+                        "Value": 0.7020000219345093
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.15829132497310638,
+                        "Value": 0.746999979019165
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.1597248762845993,
+                        "Value": 0.7639999985694885
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.16109110414981842,
+                        "Value": 0.7670000195503235
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.16390128433704376,
+                        "Value": 0.7639999985694885
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.16524726152420044,
+                        "Value": 0.7379999756813049
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.16675697267055511,
+                        "Value": 0.7200000286102295
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.16818451881408691,
+                        "Value": 0.7020000219345093
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.16964323818683624,
+                        "Value": 0.6899999976158142
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.17106591165065765,
+                        "Value": 0.6869999766349792
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 1.0,
+                        "Value": 0.6869999766349792
+                    },
+                    "InTangent": {
+                        "Time": -1.1877711289286477e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 5.500516862014204e-41,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                }
+            ]
+        },
+        {
+            "Type": "nap::math::FloatFCurve",
+            "mID": "ParameterFloatInner-curve0",
+            "Points": [
+                {
+                    "Position": {
+                        "Time": 0.0,
+                        "Value": 0.0
+                    },
+                    "InTangent": {
+                        "Time": 0.0,
+                        "Value": 0.0
+                    },
+                    "OutTangent": {
+                        "Time": 0.0,
+                        "Value": 0.0
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 1.0,
+                        "Value": 0.0
+                    },
+                    "InTangent": {
+                        "Time": 0.0,
+                        "Value": 0.0
+                    },
+                    "OutTangent": {
+                        "Time": 0.0,
+                        "Value": 0.0
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                }
+            ]
+        },
+        {
+            "Type": "nap::math::FloatFCurve",
+            "mID": "ParameterVec3-curve0",
+            "Points": [
+                {
+                    "Position": {
+                        "Time": 0.0,
+                        "Value": 0.0
+                    },
+                    "InTangent": {
+                        "Time": -1.1877681066140986e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 1.1210387714598537e-44,
+                        "Value": 0.0
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.40021875500679016,
+                        "Value": 0.5
+                    },
+                    "InTangent": {
+                        "Time": -1.1877681066140986e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 1.1210387714598537e-44,
+                        "Value": 0.0
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.5216360092163086,
+                        "Value": 0.5
+                    },
+                    "InTangent": {
+                        "Time": -1.1877681066140986e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 1.1210387714598537e-44,
+                        "Value": 0.0
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 1.0,
+                        "Value": 0.5
+                    },
+                    "InTangent": {
+                        "Time": -1.1877681066140986e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 1.1210387714598537e-44,
+                        "Value": 0.0
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                }
+            ]
+        },
+        {
+            "Type": "nap::math::FloatFCurve",
+            "mID": "ParameterVec3-curve1",
+            "Points": [
+                {
+                    "Position": {
+                        "Time": 0.0,
+                        "Value": 0.0
+                    },
+                    "InTangent": {
+                        "Time": -1.1877681066140986e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 1.1210387714598537e-44,
+                        "Value": 0.0
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.40021875500679016,
+                        "Value": 0.0
+                    },
+                    "InTangent": {
+                        "Time": -1.1877681066140986e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 1.1210387714598537e-44,
+                        "Value": 0.0
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.5216360092163086,
+                        "Value": 0.10000000149011612
+                    },
+                    "InTangent": {
+                        "Time": -1.1877681066140986e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 1.1210387714598537e-44,
+                        "Value": 0.0
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 1.0,
+                        "Value": 0.10000000149011612
+                    },
+                    "InTangent": {
+                        "Time": -1.1877681066140986e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 1.1210387714598537e-44,
+                        "Value": 0.0
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                }
+            ]
+        },
+        {
+            "Type": "nap::math::FloatFCurve",
+            "mID": "ParameterVec3-curve2",
+            "Points": [
+                {
+                    "Position": {
+                        "Time": 0.0,
+                        "Value": 0.0
+                    },
+                    "InTangent": {
+                        "Time": -1.1877681066140986e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 1.1210387714598537e-44,
+                        "Value": 0.0
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.40021875500679016,
+                        "Value": 0.0
+                    },
+                    "InTangent": {
+                        "Time": -1.1877681066140986e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 1.1210387714598537e-44,
+                        "Value": 0.0
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 0.5216360092163086,
+                        "Value": 0.0
+                    },
+                    "InTangent": {
+                        "Time": -1.1877681066140986e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 1.1210387714598537e-44,
+                        "Value": 0.0
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 1.0,
+                        "Value": 0.0
+                    },
+                    "InTangent": {
+                        "Time": -1.1877681066140986e29,
+                        "Value": 4.5914945482066956e-41
+                    },
+                    "OutTangent": {
+                        "Time": 1.1210387714598537e-44,
+                        "Value": 0.0
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                }
+            ]
+        },
+        {
+            "Type": "nap::math::FloatFCurve",
+            "mID": "ParameterVec3Inner-curve0",
+            "Points": [
+                {
+                    "Position": {
+                        "Time": 0.0,
+                        "Value": 0.0
+                    },
+                    "InTangent": {
+                        "Time": 2.588829748046625e-21,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "OutTangent": {
+                        "Time": 2.588829748046625e-21,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 1.0,
+                        "Value": 0.0
+                    },
+                    "InTangent": {
+                        "Time": 2.588829748046625e-21,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "OutTangent": {
+                        "Time": 2.588829748046625e-21,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                }
+            ]
+        },
+        {
+            "Type": "nap::math::FloatFCurve",
+            "mID": "ParameterVec3Inner-curve1",
+            "Points": [
+                {
+                    "Position": {
+                        "Time": 0.0,
+                        "Value": 0.0
+                    },
+                    "InTangent": {
+                        "Time": 2.588829748046625e-21,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "OutTangent": {
+                        "Time": 2.588829748046625e-21,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 1.0,
+                        "Value": 0.0
+                    },
+                    "InTangent": {
+                        "Time": 2.588829748046625e-21,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "OutTangent": {
+                        "Time": 2.588829748046625e-21,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                }
+            ]
+        },
+        {
+            "Type": "nap::math::FloatFCurve",
+            "mID": "ParameterVec3Inner-curve2",
+            "Points": [
+                {
+                    "Position": {
+                        "Time": 0.0,
+                        "Value": 0.0
+                    },
+                    "InTangent": {
+                        "Time": 2.588829748046625e-21,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "OutTangent": {
+                        "Time": 2.588829748046625e-21,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                },
+                {
+                    "Position": {
+                        "Time": 1.0,
+                        "Value": 0.0
+                    },
+                    "InTangent": {
+                        "Time": 2.588829748046625e-21,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "OutTangent": {
+                        "Time": 2.588829748046625e-21,
+                        "Value": 1.401298464324817e-45
+                    },
+                    "InterpolationType": "Stepped",
+                    "AlignedTangents": true
+                }
+            ]
+        }
+    ]
+}

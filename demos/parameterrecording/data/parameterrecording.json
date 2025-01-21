@@ -58,12 +58,12 @@
 			"Group": "Parameters"
 		},
 		{
-			"Type": "nap::ParametersSequenceExporter",
+			"Type": "nap::SequenceExporter",
 			"mID": "ParametersSequenceExporter",
 			"ParameterRecorder": "ParametersRecorder"
 		},
 		{
-			"Type": "nap::ParametersRecorder",
+			"Type": "nap::ParameterGroupRecorder",
 			"mID": "ParametersRecorder",
 			"ParameterGroups": [ "Parameters" ],
 			"Parameters": []

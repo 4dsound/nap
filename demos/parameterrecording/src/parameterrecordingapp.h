@@ -22,8 +22,8 @@
 
 //#include <ParameterRecorder.h>
 
-#include <ParametersRecorder.h>
-#include <ParametersSequenceExporter.h>
+#include <ParameterGroupRecorder.h>
+#include <SequenceExporter.h>
 
 
 namespace nap
@@ -96,8 +96,8 @@ namespace nap
 		ObjectPtr<RenderWindow> mRenderWindow;							//< Pointer to the render window		
 
 		ObjectPtr<ParameterGUI> mParameterGUI = nullptr;
-		ObjectPtr<ParametersRecorder> mParametersRecorder = nullptr;
-		ObjectPtr<ParametersSequenceExporter> mParametersSequenceExporter = nullptr;
+		ObjectPtr<ParameterGroupRecorder> mParameterGroupRecorder = nullptr;
+		ObjectPtr<SequenceExporter> mParametersSequenceExporter = nullptr;
 
 		
 		RGBColorFloat mColorOne;										//< First sphere blend color

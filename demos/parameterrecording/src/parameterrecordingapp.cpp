@@ -52,11 +52,11 @@ namespace nap
 		if (!error.check(mParameterGUI != nullptr, "unable to find parameter GUI"))
 			return false;
 		
-		mParametersRecorder = mResourceManager->findObject<ParametersRecorder>("ParametersRecorder");
-		if (!error.check(mParametersRecorder != nullptr, "unable to find ParametersRecorder"))
+		mParameterGroupRecorder = mResourceManager->findObject<ParameterGroupRecorder>("ParametersRecorder");
+		if (!error.check(mParameterGroupRecorder != nullptr, "unable to find ParametersRecorder"))
 			return false;
 
-		mParametersSequenceExporter = mResourceManager->findObject<ParametersSequenceExporter>("ParametersSequenceExporter");
+		mParametersSequenceExporter = mResourceManager->findObject<SequenceExporter>("ParametersSequenceExporter");
 		if (!error.check(mParametersSequenceExporter != nullptr, "unable to find ParametersSequenceExporter"))
 			return false;
 
@@ -85,15 +85,15 @@ namespace nap
 		
 		// Start / stop recording button
 		
-		if(mParametersRecorder->isRecording())
+		if(mParameterGroupRecorder->isRecording())
 		{
 			if(ImGui::Button("Stop recording"))
-				mParametersRecorder->stopRecording();
+				mParameterGroupRecorder->stopRecording();
 		}
 		else
 		{
 			if(ImGui::Button("Start recording"))
-				mParametersRecorder->startRecording();
+				mParameterGroupRecorder->startRecording();
 			
 			if(ImGui::Button("Save sequence"))
 			{
