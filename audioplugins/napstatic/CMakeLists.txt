@@ -6,7 +6,10 @@ project(napstatic)
 include(macros_and_functions.cmake)
 
 # Find RTTR library
-find_rttr()
+# Find RTTR::Core through its provided cmake files using the package finder
+set(RTTR_DIR "${NAP_ROOT}/thirdparty/rttr/${NAP_THIRDPARTY_PLATFORM_DIR}/${ARCH}/cmake")
+message(${RTTR_DIR})
+find_package(RTTR CONFIG REQUIRED Core_Lib)
 
 # Find rapidjson header only library
 set(rapidjson_FIND_QUIETLY TRUE)
@@ -34,9 +37,9 @@ add_napcore_static()
 target_include_directories(${PROJECT_NAME} PUBLIC ${RAPIDJSON_INCLUDE_DIRS} ${CMAKE_CURRENT_BINARY_DIR} ${GLM_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} PUBLIC naputility RTTR::Core_Lib)
 if(APPLE)
-    target_link_libraries(${PROJECT_NAME} "-framework CoreServices")
+    target_link_libraries(${PROJECT_NAME} PRIVATE "-framework CoreServices")
 elseif(UNIX)
-    target_link_libraries(${PROJECT_NAME} dl pthread)
+    target_link_libraries(${PROJECT_NAME} PRIVATE dl pthread)
 endif ()
 
 # Set compile definitions
