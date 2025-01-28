@@ -35,6 +35,10 @@ set(NAP_BUILD_CONTEXT source) # This is here just to guarantee backwards compati
 add_subdirectory_modules(modules)
 add_subdirectory_apps(apps)
 
+add_subdirectory(audioplugins/napstatic)
+add_subdirectory(audioplugins/ExampleAudioPlugin)
+
+# demo targets
 add_subdirectory(demos/helloworld)
 add_subdirectory(demos/audioplayback)
 add_subdirectory(demos/audioanalysis)
