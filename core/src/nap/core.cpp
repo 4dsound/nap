@@ -82,6 +82,16 @@ namespace nap
 	}
 
 
+	bool Core::initializeEngineWithoutProjectInfo(utility::ErrorState& error)
+	{
+		if (!createServicesFromRTTR(error))
+			return false;
+
+		mInitialized = true;
+		return true;
+	}
+
+
 	bool Core::initializeEngine(const std::string& projectInfofile, ProjectInfo::EContext context, utility::ErrorState& error)
 	{
 		// Load project information
@@ -294,6 +304,84 @@ namespace nap
 	}
 
 
+	bool Core::createServicesFromRTTR(utility::ErrorState& errorState)
+	{
+		// Gather all service configuration types
+		std::vector<rtti::TypeInfo> service_configuration_types;
+		rtti::getDerivedTypesRecursive(RTTI_OF(ServiceConfiguration), service_configuration_types);
+
+		// For any ServiceConfigurations which weren't present in the config file, construct a default version of it,
+		// so the service doesn't get a nullptr for its ServiceConfiguration if it depends on one
+		for (const rtti::TypeInfo& service_configuration_type : service_configuration_types)
+		{
+			// Skip base class, not associated with any service.
+			if (service_configuration_type == RTTI_OF(ServiceConfiguration))
+				continue;
+
+			assert(service_configuration_type.is_valid());
+			assert(service_configuration_type.can_create_instance());
+
+			// Construct the service configuration, store in unique ptr
+			std::unique_ptr<ServiceConfiguration> service_config(service_configuration_type.create<ServiceConfiguration>());
+			rtti::TypeInfo service_type = service_config->getServiceType();
+
+			// Check if the service associated with the configuration isn't already part of the map, if so add as default
+			// Config is automatically destructed otherwise.
+			if (findServiceConfig(service_type) == nullptr)
+				addServiceConfig(std::move(service_config));
+		}
+
+		// Gather all service types
+		std::vector<rtti::TypeInfo> service_types;
+		rtti::getDerivedTypesRecursive(RTTI_OF(Service), service_types);
+
+		// First create and add all the services (unsorted)
+		std::vector<Service*> services;
+		for (const auto& service_type : service_types)
+		{
+			// Skip base class, not associated with any service.
+			if (service_type == RTTI_OF(Service))
+				continue;
+
+			// Find the ServiceConfiguration that should be used to construct this service (if any)
+			ServiceConfiguration* configuration = findServiceConfig(service_type);
+
+			// Create the service
+			if (!addService(service_type, configuration, services, errorState))
+				return false;
+		}
+
+		// Create dependency graph
+		ObjectGraph<ServiceObjectGraphItem> graph;
+
+		// Build service dependency graph
+		bool success = graph.build(services, [&](Service* service)
+		{
+			return ServiceObjectGraphItem::create(service, &services);
+		}, errorState);
+
+		// Make sure the graph was successfully build
+		if (!errorState.check(success, "unable to build service dependency graph"))
+			return false;
+
+		// Add services in right order
+		for (auto& node : graph.getSortedNodes())
+		{
+			// Add the service to core
+			nap::Service* service = node->mItem.mObject;
+			mServices.emplace_back(std::unique_ptr<nap::Service>(service));
+
+			// This happens within this loop so services are able to query their dependencies while registering object creators
+			service->registerObjectCreators(mResourceManager->getFactory());
+
+			// Notify the service that is has been created and its core pointer is available
+			// We put this call here so the service's dependencies are present and can already be queried if necessary
+			service->created();
+		}
+		return true;
+	}
+
+
 	// Returns service that matches @type
 	Service* Core::getService(const rtti::TypeInfo& type)
 	{
@@ -332,6 +420,7 @@ namespace nap
 	bool Core::addService(const rtti::TypeInfo& type, ServiceConfiguration* configuration, std::vector<Service*>& outServices, utility::ErrorState& errorState)
 	{
 		assert(type.is_valid());
+		auto ctors = type.get_constructors();
 		assert(type.can_create_instance());
 		assert(type.is_derived_from<Service>());
 

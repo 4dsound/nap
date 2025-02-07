@@ -1,0 +1,12 @@
+{
+  "Type": "nap::ProjectInfo",
+  "mID": "ProjectInfo",
+  "Title": "AudioPluginExample",
+  "Version": "1.0.0",
+  "RequiredModules": [
+    "napaudio"
+  ],
+  "Data": "data/objects.json",
+  "ServiceConfig": "",
+  "PathMapping": ""
+}

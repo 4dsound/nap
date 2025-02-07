@@ -86,12 +86,9 @@ target_compile_definitions(AudioPluginExample
         JUCE_USE_CURL=0     # If you remove this, add `NEEDS_CURL TRUE` to the `juce_add_plugin` call
         JUCE_VST3_CAN_REPLACE_VST2=0)
 
-# NAP compile definitions
-if(MSVC)
-    target_compile_definitions(AudioPluginExample PUBLIC NOMINMAX)
-endif()
-target_compile_definitions(AudioPluginExample PRIVATE NAP_SHARED_LIBRARY)
-
+# Add the NAP module sources and dependencies statically
+include(${CMAKE_CURRENT_LIST_DIR}/../napstatic/macros_and_functions.cmake)
+add_napframework_static(AudioPluginExample)
 
 # If your target needs extra binary assets, you can add them here. The first argument is the name of
 # a new static library target that will include all the binary resources. There is an optional
@@ -112,7 +109,6 @@ target_link_libraries(AudioPluginExample
     PRIVATE
         # AudioPluginData           # If we'd created a binary data target, we'd link to it here
         juce::juce_audio_utils
-        napstatic
     PUBLIC
         juce::juce_recommended_config_flags
         juce::juce_recommended_lto_flags

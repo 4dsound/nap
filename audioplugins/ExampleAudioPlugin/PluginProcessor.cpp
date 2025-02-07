@@ -1,6 +1,9 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
+#include <utility/errorstate.h>
+#include <audio/service/audioservice.h>
+
 //==============================================================================
 AudioPluginAudioProcessor::AudioPluginAudioProcessor()
      : AudioProcessor (BusesProperties()
@@ -12,6 +15,9 @@ AudioPluginAudioProcessor::AudioPluginAudioProcessor()
                      #endif
                        )
 {
+
+	nap::utility::ErrorState errorState;
+	mCore.initializeEngineWithoutProjectInfo(errorState);
 }
 
 AudioPluginAudioProcessor::~AudioPluginAudioProcessor()

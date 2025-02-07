@@ -144,6 +144,8 @@ namespace nap
 		 */
 		bool initializeEngine(const std::string& projectInfofile, ProjectInfo::EContext context, utility::ErrorState& error);
 
+		bool initializeEngineWithoutProjectInfo(utility::ErrorState& error);
+
 		/**
 		 * Attempts to initialize all registered services. Call this after initializeEngine().
 		 * Initialization occurs based on service dependencies, this means that if service B depends on Service A,
@@ -360,6 +362,8 @@ namespace nap
 		 * @return if the services are created successfully
 		 */
 		bool createServices(const nap::ProjectInfo& projectInfo, utility::ErrorState& errorState);
+
+		bool createServicesFromRTTR(utility::ErrorState& errorState);
 
 		/**
 		* Adds a new service of type @type to @outServices
