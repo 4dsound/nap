@@ -5,9 +5,11 @@
 #include <utility/fileutils.h>
 #include <nap/logger.h>
 #include <audio/service/audioservice.h>
+#include "BinaryData.h"
 
 #define str(s) #s
 #define xstr(s) str(s)
+#define symbol(s) s
 
 //==============================================================================
 AudioPluginAudioProcessor::AudioPluginAudioProcessor()
@@ -48,15 +50,24 @@ bool AudioPluginAudioProcessor::initializeNAP(nap::utility::ErrorState& errorSta
 	mAudioService->getNodeManager().setInputChannelCount(getTotalNumInputChannels());
 	mAudioService->getNodeManager().setOutputChannelCount(getTotalNumOutputChannels());
 
-	std::string app_structure_filename = xstr(APP_STRUCTURE_FILENAME);
+	std::string app_structure_path = xstr(APP_STRUCTURE_PATH);
 	std::string data_dir = xstr(DATA_DIR);
 
-	nap::utility::changeDir(data_dir);
-	app_structure_filename = nap::utility::getFileName(app_structure_filename);
-	if (!mCore->getResourceManager()->loadFile(app_structure_filename, errorState))
-		return false;
+	if (nap::utility::fileExists(app_structure_path))
+	{
+		nap::utility::changeDir(data_dir);
+		app_structure_path = nap::utility::getFileName(app_structure_path);
+		if (!mCore->getResourceManager()->loadFile(app_structure_path, errorState))
+			return false;
+		mCore->getResourceManager()->watchDirectory(data_dir);
+	}
+	else {
+		std::string app_structure = symbol(APP_STRUCTURE_BINARY);
+		std::vector<nap::rtti::FileLink> fileLinks;
+		if (!mCore->getResourceManager()->loadJSON(app_structure, std::string(), fileLinks, errorState))
+			return false;
+	}
 
-	mCore->getResourceManager()->watchDirectory(data_dir);
 	mCore->start();
 	return true;
 }
