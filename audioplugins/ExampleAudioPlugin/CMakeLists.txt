@@ -99,9 +99,11 @@ juce_add_bundle_resources_directory(AudioPluginExample data)
 
 # Add the app structure path (for realtime editing)
 set(data_dir ${CMAKE_CURRENT_LIST_DIR}/data)
-set(app_structure_filename ${data_dir}/objects.json)
-target_compile_definitions(AudioPluginExample PUBLIC "APP_STRUCTURE_FILENAME=${app_structure_filename}")
+set(app_structure_filename objects.json)
+string(REPLACE "." "_" app_structure_binary ${app_structure_filename})
+target_compile_definitions(AudioPluginExample PUBLIC "APP_STRUCTURE_PATH=${data_dir}/${app_structure_filename}")
 target_compile_definitions(AudioPluginExample PUBLIC "DATA_DIR=${data_dir}")
+target_compile_definitions(AudioPluginExample PUBLIC "APP_STRUCTURE_BINARY=BinaryData::${app_structure_binary}")
 
 # If your target needs extra binary assets, you can add them here. The first argument is the name of
 # a new static library target that will include all the binary resources. There is an optional
@@ -110,7 +112,7 @@ target_compile_definitions(AudioPluginExample PUBLIC "DATA_DIR=${data_dir}")
 # static library. These source files can be of any kind (wav data, images, fonts, icons etc.).
 # Conversion to binary-data will happen when your target is built.
 
-juce_add_binary_data(AudioPluginData SOURCES ${app_structure_filename})
+juce_add_binary_data(AudioPluginData SOURCES ${data_dir}/${app_structure_filename})
 
 # `target_link_libraries` links libraries and JUCE modules to other libraries or executables. Here,
 # we're linking our executable target to the `juce::juce_audio_utils` module. Inter-module
@@ -120,7 +122,7 @@ juce_add_binary_data(AudioPluginData SOURCES ${app_structure_filename})
 
 target_link_libraries(AudioPluginExample
     PRIVATE
-        # AudioPluginData           # If we'd created a binary data target, we'd link to it here
+        AudioPluginData           # If we'd created a binary data target, we'd link to it here
         juce::juce_audio_utils
     PUBLIC
         juce::juce_recommended_config_flags

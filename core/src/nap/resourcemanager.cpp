@@ -300,16 +300,38 @@ namespace nap
 		// ExternalChangedFile should only be used if it's different from the file being reloaded
 		assert(utility::toComparableFilename(filename) != utility::toComparableFilename(externalChangedFile));
 
+		std::string buffer;
+		if (!utility::readFileToString(filename, buffer, errorState))
+		{
+			errorState.fail("Failed to load file: %s", filename.c_str());
+			return false;
+		}
+
+		std::vector<rtti::FileLink> file_links;
+		if (!loadJSON(buffer, externalChangedFile, file_links, errorState))
+		{
+			errorState.fail("Failed to deserialize file: %s", filename.c_str());
+			return false;
+		}
+
+		for (const FileLink& file_link : file_links)
+			addFileLink(filename, file_link.mTargetFile);
+
+		mFilesToWatch.insert(utility::toComparableFilename(filename));
+
+		return true;
+	}
+
+
+	bool ResourceManager::loadJSON(const std::string &json, const const std::string& externalChangedFile, std::vector<rtti::FileLink>& fileLinks, utility::ErrorState &errorState)
+	{
 		// Notify listeners
 		mPreResourcesLoadedSignal.trigger();
 
 		// Read objects from disk
 		DeserializeResult read_result;
-		if (!loadFileAndDeserialize(filename, read_result, errorState))
-		{
-			errorState.fail("Failed to load and deserialize %s", filename.c_str());
+		if (!deserialize(json, read_result, errorState))
 			return false;
-		}
 
 		// We instantiate a helper that will perform three things when an error occurs during loading:
 		// - Perform a rollback of any pointer patching that we have done. We only ever need to rollback the pointer patching, 
@@ -448,11 +470,8 @@ namespace nap
 		for (auto& kvp : objects_to_update)
 			mObjects[kvp.first] = std::move(kvp.second);
 
-		for (const FileLink& file_link : read_result.mFileLinks)
-			addFileLink(filename, file_link.mTargetFile);
+		fileLinks = read_result.mFileLinks;
 
-		mFilesToWatch.insert(utility::toComparableFilename(filename));
-		
 		// Everything was successful, don't rollback any changes that were made
 		rollback_helper.clear();
 

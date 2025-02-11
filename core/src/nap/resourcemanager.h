@@ -91,6 +91,8 @@ namespace nap
 		*/
 		bool loadFile(const std::string& filename, const std::string& externalChangedFile, utility::ErrorState& errorState);
 
+		bool loadJSON(const std::string& json, const std::string& externalChangedFile, std::vector<rtti::FileLink>& fileLinks, utility::ErrorState& errorState);
+
 		/**
 		 * Find an object by object ID. Returns null if not found.
 		 * @param id unique id of the object to find.
@@ -186,6 +188,7 @@ namespace nap
 		* Lower level platform dependent function used by loadFile that simply loads the file from disk and deserializes.
 		*/
 		bool loadFileAndDeserialize(const std::string& filename, rtti::DeserializeResult& readResult, utility::ErrorState& errorState);
+		bool deserialize(const std::string& json, rtti::DeserializeResult& readResult, utility::ErrorState& errorState);
 
 		void determineObjectsToInit(const RTTIObjectGraph& objectGraph, const ObjectByIDMap& objectsToUpdate, const std::string& externalChangedFile, std::vector<std::string>& objectsToInit);
 		void buildObjectGraph(const ObjectByIDMap& objectsToUpdate, RTTIObjectGraph& objectGraph);
