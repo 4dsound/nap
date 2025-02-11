@@ -323,7 +323,7 @@ namespace nap
 	}
 
 
-	bool ResourceManager::loadJSON(const std::string &json, const const std::string& externalChangedFile, std::vector<rtti::FileLink>& fileLinks, utility::ErrorState &errorState)
+	bool ResourceManager::loadJSON(const std::string &json, const std::string& externalChangedFile, std::vector<rtti::FileLink>& fileLinks, utility::ErrorState &errorState)
 	{
 		// Notify listeners
 		mPreResourcesLoadedSignal.trigger();
