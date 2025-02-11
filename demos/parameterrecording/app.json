@@ -7,7 +7,7 @@
     "PathMapping": "cache/path_mapping.json",
     "ServiceConfig": "",
     "RequiredModules": [
-        "naprecording",
+        "napparameterrecording",
         "napimgui",
 		"napparametergui",
 		"napparameter"
