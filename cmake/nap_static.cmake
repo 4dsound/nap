@@ -18,7 +18,7 @@ macro(add_napframework_static target_name)
     add_napmodule_static(${target_name} utility)
     add_napcore_static(${target_name})
     add_napmodule_static(${target_name} system_modules/napscene ".*mod_napscene.cpp")
-    add_napmodule_static(${target_name} system_modules/napmath ".*mod_napmapth.cpp")
+    add_napmodule_static(${target_name} system_modules/napmath ".*mod_napmath.cpp")
 
     # Link NAP thirdparty dependencies
     target_include_directories(${target_name} PUBLIC ${RAPIDJSON_INCLUDE_DIRS} ${CMAKE_CURRENT_BINARY_DIR} ${GLM_INCLUDE_DIRS})
