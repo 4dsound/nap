@@ -20,16 +20,6 @@ macro(add_napframework_static target_name)
     add_napmodule_static(${target_name} system_modules/napscene ".*mod_napscene.cpp")
     add_napmodule_static(${target_name} system_modules/napmath ".*mod_napmapth.cpp")
 
-    # Add NAP audio sources
-    set(AUDIO_FILE_SUPPORT_FILTER ".*audiofileutils.*" ".*audiofileresource.*")
-    add_source_dir(${target_name} "${NAP_ROOT}/system_modules/napaudio/src/audio/core")
-    add_source_dir(${target_name} "${NAP_ROOT}/system_modules/napaudio/src/audio/node")
-    add_source_dir(${target_name} "${NAP_ROOT}/system_modules/napaudio/src/audio/component")
-    add_source_dir(${target_name} "${NAP_ROOT}/system_modules/napaudio/src/audio/service")
-    add_source_dir(${target_name} "${NAP_ROOT}/system_modules/napaudio/src/audio/resource" ${AUDIO_FILE_SUPPORT_FILTER})
-    add_source_dir(${target_name} "${NAP_ROOT}/system_modules/napaudio/src/audio/utility" ${AUDIO_FILE_SUPPORT_FILTER})
-    target_include_directories(${target_name} PUBLIC ${NAP_ROOT}/system_modules/napaudio/src)
-
     # Link NAP thirdparty dependencies
     target_include_directories(${target_name} PUBLIC ${RAPIDJSON_INCLUDE_DIRS} ${CMAKE_CURRENT_BINARY_DIR} ${GLM_INCLUDE_DIRS})
     target_link_libraries(${target_name} PUBLIC naputility RTTR::Core_Lib)
@@ -57,7 +47,6 @@ macro(add_napmodule_static target_name module_name)
         list(FILTER SOURCES EXCLUDE REGEX ${element})
     endforeach()
 
-    message(STATUS ${SOURCES})
     target_sources(${target_name} PUBLIC ${SOURCES})
     target_include_directories(${target_name} PUBLIC ${source_dir})
 endmacro()
@@ -120,20 +109,3 @@ macro(add_napcore_static target_name)
     target_sources(${target_name} PUBLIC ${SOURCES})
     target_include_directories(${target_name} PUBLIC ${source_dir})
 endmacro()
-
-
-# Add a source directory to an already defined target
-# DIR directory of the source files relative to the project directory
-# ARGN additional optional arguments are regex expressions to filter from the file list
-function(add_source_dir target_name DIR)
-    # Collect source files in directory
-    file(GLOB SOURCES ${DIR}/*.cpp ${DIR}/*.h ${DIR}/*.hpp)
-
-    # Loop through optional arguments and exclude them from the sources list
-    foreach(element ${ARGN})
-        list(FILTER SOURCES EXCLUDE REGEX ${element})
-    endforeach()
-
-    # Add sources to target
-    target_sources(${target_name} PUBLIC ${SOURCES})
-endfunction()
