@@ -2,9 +2,10 @@
 
 #include <juce_audio_processors/juce_audio_processors.h>
 #include <nap/core.h>
+#include <audio/service/audioservice.h>
 
 //==============================================================================
-class AudioPluginAudioProcessor  : public juce::AudioProcessor
+class AudioPluginAudioProcessor  : public juce::AudioProcessor, public juce::Timer
 {
 public:
     //==============================================================================
@@ -43,9 +44,20 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+	nap::Core& getCore() { return *mCore; }
+
+	void timerCallback() override;
+	bool initializeNAP(nap::utility::ErrorState& errorState);
+
 private:
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioPluginAudioProcessor)
 
-    nap::Core mCore;
+    std::unique_ptr<nap::Core> mCore;
+	nap::audio::AudioService* mAudioService = nullptr;
+	nap::Core::ServicesHandle mServices;
+	nap::audio::MultiSampleBuffer mInputBuffer;
+	std::function<void(double)> mUpdateFunction = [](double){};
+	nap::utility::ErrorState mErrorState;
+	bool mInitialized = false;
 };

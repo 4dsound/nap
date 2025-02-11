@@ -2,7 +2,12 @@
 #include "PluginEditor.h"
 
 #include <utility/errorstate.h>
+#include <utility/fileutils.h>
+#include <nap/logger.h>
 #include <audio/service/audioservice.h>
+
+#define str(s) #s
+#define xstr(s) str(s)
 
 //==============================================================================
 AudioPluginAudioProcessor::AudioPluginAudioProcessor()
@@ -15,14 +20,47 @@ AudioPluginAudioProcessor::AudioPluginAudioProcessor()
                      #endif
                        )
 {
-
-	nap::utility::ErrorState errorState;
-	mCore.initializeEngineWithoutProjectInfo(errorState);
+	mInitialized = initializeNAP(mErrorState);
+	startTimerHz(60);
 }
+
 
 AudioPluginAudioProcessor::~AudioPluginAudioProcessor()
 {
 }
+
+
+bool AudioPluginAudioProcessor::initializeNAP(nap::utility::ErrorState& errorState)
+{
+	mCore = std::make_unique<nap::Core>();
+	if (!mCore->initializeEngineWithoutProjectInfo(errorState))
+		return false;
+	mAudioService = mCore->getService<nap::audio::AudioService>();
+	if (mAudioService == nullptr)
+	{
+		errorState.fail("No AudioService found");
+		return false;
+	}
+	mServices = mCore->initializeServices(errorState);
+	if (!mServices->initialized())
+		return false;
+
+	mAudioService->getNodeManager().setInputChannelCount(getTotalNumInputChannels());
+	mAudioService->getNodeManager().setOutputChannelCount(getTotalNumOutputChannels());
+
+	std::string app_structure_filename = xstr(APP_STRUCTURE_FILENAME);
+	std::string data_dir = xstr(DATA_DIR);
+
+	nap::utility::changeDir(data_dir);
+	app_structure_filename = nap::utility::getFileName(app_structure_filename);
+	if (!mCore->getResourceManager()->loadFile(app_structure_filename, errorState))
+		return false;
+
+	mCore->getResourceManager()->watchDirectory(data_dir);
+	mCore->start();
+	return true;
+}
+
 
 //==============================================================================
 const juce::String AudioPluginAudioProcessor::getName() const
@@ -92,9 +130,12 @@ void AudioPluginAudioProcessor::changeProgramName (int index, const juce::String
 //==============================================================================
 void AudioPluginAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
-    juce::ignoreUnused (sampleRate, samplesPerBlock);
+	if (!mInitialized)
+		return;
+
+	mAudioService->getNodeManager().setSampleRate(sampleRate);
+	mAudioService->getNodeManager().setInternalBufferSize(samplesPerBlock);
+	mInputBuffer.resize(getTotalNumInputChannels(), samplesPerBlock);
 }
 
 void AudioPluginAudioProcessor::releaseResources()
@@ -145,19 +186,32 @@ void AudioPluginAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
-    // This is the place where you'd normally do the guts of your plugin's
-    // audio processing...
-    // Make sure to reset the state if your inner loop is processing
-    // the samples and the outer loop is handling the channels.
-    // Alternatively, you can process the samples with the channels
-    // interleaved by keeping the same state.
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
+	if (!mInitialized)
+		return;
+
+	// Copy buffers to designated input buffer.
+	float* inWritePtr[mInputBuffer.getChannelCount()];
+	for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
-        auto* channelData = buffer.getWritePointer (channel);
-        juce::ignoreUnused (channelData);
-        // ..do something to the data...
+		auto* channelData = buffer.getReadPointer (channel);
+		memcpy(mInputBuffer[channel].data(), channelData, mInputBuffer.getSize());
+		inWritePtr[channel] = buffer.getArrayOfWritePointers()[channel];
     }
+
+	float* outWritePtr[buffer.getNumChannels()];
+	for (auto i = 0; i < buffer.getNumChannels(); ++i)
+		outWritePtr[i] = buffer.getArrayOfWritePointers()[i];
+
+	mAudioService->onAudioCallback(inWritePtr, outWritePtr, buffer.getNumSamples());
 }
+
+
+void AudioPluginAudioProcessor::timerCallback()
+{
+	if (mInitialized)
+		mCore->update(mUpdateFunction);
+}
+
 
 //==============================================================================
 bool AudioPluginAudioProcessor::hasEditor() const

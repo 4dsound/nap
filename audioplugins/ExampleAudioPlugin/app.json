@@ -4,9 +4,9 @@
   "Title": "AudioPluginExample",
   "Version": "1.0.0",
   "RequiredModules": [
-    "napaudio"
+    "napaudioadvanced"
   ],
   "Data": "data/objects.json",
   "ServiceConfig": "",
-  "PathMapping": ""
+  "PathMapping": "path_mapping.json"
 }

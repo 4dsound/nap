@@ -87,8 +87,21 @@ target_compile_definitions(AudioPluginExample
         JUCE_VST3_CAN_REPLACE_VST2=0)
 
 # Add the NAP module sources and dependencies statically
-include(${CMAKE_CURRENT_LIST_DIR}/../napstatic/macros_and_functions.cmake)
+include(${NAP_ROOT}/cmake/nap_static.cmake)
 add_napframework_static(AudioPluginExample)
+
+# Add NAP audio sources
+set(audio_file_support_filter ".*audiofileutils.*" ".*audiofileresource.*" ".*audiofile.*")
+add_napmodule_static(AudioPluginExample system_modules/napaudio ${audio_file_support_filter} ".*mod_napaudio")
+add_napmodule_static(AudioPluginExample modules/napaudioadvanced ${audio_file_support_filter} ".*mod_napaudioadvanced.cpp")
+
+juce_add_bundle_resources_directory(AudioPluginExample data)
+
+# Add the app structure path (for realtime editing)
+set(data_dir ${CMAKE_CURRENT_LIST_DIR}/data)
+set(app_structure_filename ${data_dir}/objects.json)
+target_compile_definitions(AudioPluginExample PUBLIC "APP_STRUCTURE_FILENAME=${app_structure_filename}")
+target_compile_definitions(AudioPluginExample PUBLIC "DATA_DIR=${data_dir}")
 
 # If your target needs extra binary assets, you can add them here. The first argument is the name of
 # a new static library target that will include all the binary resources. There is an optional
@@ -97,7 +110,7 @@ add_napframework_static(AudioPluginExample)
 # static library. These source files can be of any kind (wav data, images, fonts, icons etc.).
 # Conversion to binary-data will happen when your target is built.
 
-# juce_add_binary_data(AudioPluginData SOURCES ...)
+juce_add_binary_data(AudioPluginData SOURCES ${app_structure_filename})
 
 # `target_link_libraries` links libraries and JUCE modules to other libraries or executables. Here,
 # we're linking our executable target to the `juce::juce_audio_utils` module. Inter-module
