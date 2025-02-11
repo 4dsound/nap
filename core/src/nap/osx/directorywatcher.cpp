@@ -85,8 +85,8 @@ namespace nap {
 	DirectoryWatcher::DirectoryWatcher(const std::string& directory)
 	{
         mPImpl = std::unique_ptr<PImpl, PImpl_deleter>(new PImpl);
-        
-        mPImpl->watchThread = std::make_unique<std::thread>([&](){
+
+        mPImpl->watchThread = std::make_unique<std::thread>([&, directory](){
             
             // retain and release have to be set to NULL explicitly otherwise this causes irregular crashes
             mPImpl->context.version = 0;
@@ -151,6 +151,8 @@ namespace nap {
             
             for (auto& modified_file : mPImpl->callbackInfo.modifiedFiles)
             {
+				if (modified_file[modified_file.size() - 1] == '~')
+					continue;
                 std::string comparable_modified_file = std::filesystem::canonical(modified_file);
                 if (!std::filesystem::is_directory(modified_file))
                 {
