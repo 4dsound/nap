@@ -11,7 +11,6 @@ static std::unique_ptr<nap::Core> core;
 static nap::utility::ErrorState errorState;
 static nap::audio::AudioService* audioService = nullptr;
 static nap::Core::ServicesHandle services;
-static std::string errorString;
 static nap::audio::MultiSampleBuffer inputBuffer;
 static nap::audio::MultiSampleBuffer outputBuffer;
 static std::function<void(double)> updateFunction = [](double){};
@@ -107,5 +106,5 @@ void update()
 
 void uninitialize()
 {
-	core = nullptr;
+	services.reset(nullptr);
 }

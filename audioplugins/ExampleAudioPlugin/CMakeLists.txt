@@ -21,7 +21,7 @@ project(AUDIO_PLUGIN_EXAMPLE VERSION 0.0.1)
 # included JUCE directly in your source tree (perhaps as a submodule), you'll need to tell CMake to
 # include that subdirectory as part of the build.
 
-find_package(JUCE CONFIG REQUIRED)        # If you've installed JUCE to your system
+# find_package(JUCE CONFIG REQUIRED)        # If you've installed JUCE to your system
 # or
 # add_subdirectory(JUCE)                    # If you've put JUCE in a subdirectory called JUCE
 
