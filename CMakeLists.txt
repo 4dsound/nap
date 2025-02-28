@@ -41,7 +41,7 @@ add_subdirectory_apps(apps)
 
 add_subdirectory(audioplugins/napstatic)
 add_subdirectory(audioplugins/test)
-add_subdirectory(audioplugins/ExampleAudioPlugin)
+#add_subdirectory(audioplugins/ExampleAudioPlugin)
 
 # demo targets
 add_subdirectory(demos/helloworld)
