@@ -33,11 +33,6 @@ int main(int argc, char *argv[])
 	int bufferSize = 1024;
 	int channelCount = 2;
 	setAudioSettings(channelCount, channelCount, sampleRate, bufferSize);
-
-	
-	std::cout << "channelCount: " << channelCount << std::endl;
-	std::cout << "channelCount * bufferSize: " << (channelCount * bufferSize) << std::endl;
-
 	
 	std::vector<float> buffer;
 	buffer.resize(channelCount * bufferSize);
