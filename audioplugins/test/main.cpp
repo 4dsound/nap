@@ -26,23 +26,25 @@ int main(int argc, char *argv[])
 
 	if (!initialize(app_structure.c_str()))
 	{
-		char text[2048];
-		getError(text, 2048);
-		nap::Logger::error(text);
 		return -1;
 	}
 
 	int sampleRate = 44100;
-	int bufferSize = 256;
+	int bufferSize = 1024;
 	int channelCount = 2;
-	setAudioSettings(0, channelCount, sampleRate, bufferSize);
+	setAudioSettings(channelCount, channelCount, sampleRate, bufferSize);
 
+	
+	std::cout << "channelCount: " << channelCount << std::endl;
+	std::cout << "channelCount * bufferSize: " << (channelCount * bufferSize) << std::endl;
+
+	
 	std::vector<float> buffer;
 	buffer.resize(channelCount * bufferSize);
 	int i = 0;
 	for (i = 0; i < 256; ++i)
 	{
-		process(buffer.data(), bufferSize, channelCount);
+		process(buffer.data(), channelCount * bufferSize, channelCount);
 		update();
 	}
 	nap::Logger::info("Successfully processed %i buffers of data", i);
