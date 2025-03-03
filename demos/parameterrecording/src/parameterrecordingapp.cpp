@@ -17,6 +17,9 @@
 #include <uniforminstance.h>
 #include <imguiutils.h>
 
+#include <SimpleJSONExporting.h>
+#include <SequenceExporting.h>
+
 // Register this application with RTTI, this is required by the AppRunner to 
 // validate that this object is indeed an application
 RTTI_BEGIN_CLASS_NO_DEFAULT_CONSTRUCTOR(nap::ParameterRecordingApp)
@@ -54,14 +57,6 @@ namespace nap
 		
 		mParameterGroupRecorder = mResourceManager->findObject<ParameterGroupRecorder>("ParametersRecorder");
 		if (!error.check(mParameterGroupRecorder != nullptr, "unable to find ParametersRecorder"))
-			return false;
-
-		mParametersSequenceExporter = mResourceManager->findObject<SequenceExporter>("ParametersSequenceExporter");
-		if (!error.check(mParametersSequenceExporter != nullptr, "unable to find ParametersSequenceExporter"))
-			return false;
-
-		mParametersSimpleExporter = mResourceManager->findObject<SimpleJSONExporter>("ParametersSimpleJSONExporter");
-		if (!error.check(mParametersSimpleExporter != nullptr, "unable to find ParametersSimpleJSONExporter"))
 			return false;
 		
 		capFramerate(true);		
@@ -101,8 +96,8 @@ namespace nap
 			if(ImGui::Button("Save sequence"))
 			{
 				utility::ErrorState e;
-				mParametersSequenceExporter->save("sequenceExport.json", e);
-				mParametersSimpleExporter->save("simpleJSONExport.json", e);
+				exportParameterGroupRecordingsAsSequence(*mParameterGroupRecorder, "sequenceExport.json", e);
+				exportParameterGroupRecordingsAsSimpleJSON(*mParameterGroupRecorder, "simpleJSONExport.json", e);
 			}
 		}
 		
