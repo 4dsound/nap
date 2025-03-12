@@ -45,6 +45,8 @@ namespace nap
 
 			InputPin input = {this}; /**< The input for the audio signal that will be analyzed. */
 
+			OutputPin output = { this }; /**< If this output is connected the LevelMeterNode will output its input. */
+
 			/**
 			 * @return: The current level of the analyzed signal.
 			 */

@@ -50,9 +50,14 @@ namespace nap
 		{
 			auto inputBuffer = input.pull();
 
+			auto& outputBuffer = getOutputBuffer(output);
 			if (inputBuffer == nullptr)
+			{
+				std::fill(outputBuffer.begin(), outputBuffer.end(), 0.f);
 				return;
-            
+			}
+			outputBuffer = *inputBuffer;
+
 			switch (mType)
 			{
 				case EType::PEAK:
