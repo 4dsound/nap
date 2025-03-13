@@ -72,9 +72,15 @@ namespace nap
 		
 		void ParentProcess::addChild(Process& child)
 		{
-			auto childPtr = &child;
-			getNodeManager().enqueueTask([&, childPtr]() {
-				auto it = std::find(mChildren.begin(), mChildren.end(), childPtr);
+			auto childPtr = child.getSafe();
+			auto parentPtr = getSafe();
+			getNodeManager().enqueueTask([&, parentPtr, childPtr]() {
+				// Check if parent and child are still valid
+				if (parentPtr == nullptr || childPtr == nullptr)
+					return;
+
+				// Check for duplicates
+				auto it = std::find_if(mChildren.begin(), mChildren.end(), [&](auto& e){ return e.get() == childPtr.get(); });
 				if (it == mChildren.end())
 					mChildren.emplace_back(childPtr);
 			});
@@ -83,9 +89,14 @@ namespace nap
 		
 		void ParentProcess::removeChild(Process& child)
 		{
-			auto childPtr = &child;
-			getNodeManager().enqueueTask([&, childPtr]() {
-				auto it = std::find(mChildren.begin(), mChildren.end(), childPtr);
+			auto childPtr = child.getSafe();
+			auto parentPtr = getSafe();
+			getNodeManager().enqueueTask([&, parentPtr, childPtr]() {
+				// Check if parent and child are still valid
+				if (parentPtr == nullptr || childPtr == nullptr)
+					return;
+
+				auto it = std::find_if(mChildren.begin(), mChildren.end(), [&](auto& e){ return e.get() == childPtr.get(); });
 				if (it != mChildren.end())
 					mChildren.erase(it);
 			});
@@ -96,8 +107,7 @@ namespace nap
 		{
 			for (auto& child : mChildren)
 			{
-				if (child != nullptr)
-					child->update();
+				child->update();
 			}
 		}
 		
@@ -112,8 +122,7 @@ namespace nap
 					auto i = threadIndex;
 					while (i < mChildren.size()) {
 						auto& child = mChildren[i];
-						if (child != nullptr)
-							child->update();
+						child->update();
 						i += mThreadPool.getThreadCount();
 					}
 					mAsyncObserver.notifyBarrier();
@@ -125,6 +134,16 @@ namespace nap
 		
 		void ParentProcess::process()
 		{
+			// First remove children that are (being) deleted
+			auto it = mChildren.begin();
+			while (it != mChildren.end())
+			{
+				if ((*it) == nullptr)
+					it = mChildren.erase(it);
+				else
+					it++;
+			}
+
 			switch (mMode)
 			{
 				case Mode::Sequential:

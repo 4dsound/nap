@@ -186,23 +186,12 @@ namespace nap
 			void removeChild(Process& child);
 
 			/**
-			 * Directly triggers parallel processing of all child processes.
-			 * Child processes will be processed simultaneously on different threads in the ThreadPool.
-			 */
-			void processParallel();
-
-			/**
-			 * Directly triggers sequential (or serial) processing of all child processes.
-			 */
-			void processSequential();
-
-			/**
 			 * Process method chooses between parallel or sequential processing of the children according to mode specified by the setMode() method.
 			 */
 			void process() override;
 
 			/**
-			 * Specifies wether the child processes will be processed in parallel or sequential mode.
+			 * Specifies whether the child processes will be processed in parallel or sequential mode.
 			 * In case of parallel processing the child processes are triggered simultaneously on different threads in the ThreadPool.
 			 * In case of sequential processing they are processed one by one on the caller thread.
 			 */
@@ -214,9 +203,20 @@ namespace nap
 			Mode getMode() const { return mMode.load(); }
 
 		private:
+			/**
+			 * Directly triggers parallel processing of all child processes.
+			 * Child processes will be processed simultaneously on different threads in the ThreadPool.
+			 */
+			void processParallel();
+
+			/**
+			 * Directly triggers sequential (or serial) processing of all child processes.
+			 */
+			void processSequential();
+
 			ThreadPool& mThreadPool;
 			AsyncObserver& mAsyncObserver;
-			std::vector<Process*> mChildren;
+			std::vector<SafePtr<Process>> mChildren;
 			std::atomic<Mode> mMode = {Mode::Sequential};
 		};
 
