@@ -161,6 +161,12 @@ namespace nap
 			SafeOwner<T> makeSafe(Args&& ... args)
 			{
 				auto owner = SafeOwner<T>(mDeletionQueue, new T(std::forward<Args>(args)...));
+
+				// If the newly constructed object is a Process, set its internal SafePtr to itself.
+				Process* process = rtti_cast<Process>(owner.getRaw());
+				if (process != nullptr)
+					process->mSelf = owner.get();
+
 				return owner;
 			}
 
@@ -175,6 +181,12 @@ namespace nap
 			SafeOwner<T> makeSafe(T* ptr)
 			{
 				auto owner = SafeOwner<T>(mDeletionQueue, ptr);
+
+				// If the newly constructed object is a Process, set its internal SafePtr to itself.
+				Process* process = rtti_cast<Process>(owner.getRaw());
+				if (process != nullptr)
+					process->mSelf = owner.get();
+
 				return owner;
 			}
 

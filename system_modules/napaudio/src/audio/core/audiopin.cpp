@@ -45,42 +45,75 @@ namespace nap
 		}
 
 
-		void InputPinBase::connect(OutputPin& connection)
+		void InputPinBase::connect(OutputPin& pinToConnect)
 		{
-			auto connectionPtr = &connection;
+			auto outputPin = &pinToConnect;
+			auto inputPin = this;
+			auto inputNode = getNode().getSafe();
+			auto outputNode = outputPin->getNode().getSafe();
 
-			getNode().getNodeManager().enqueueTask([&, connectionPtr](){
-				connectNow(*connectionPtr);
+			getNode().getNodeManager().enqueueTask([inputPin, outputPin, inputNode, outputNode](){
+				if (inputNode != nullptr && outputNode != nullptr)
+				{
+					auto inputNodeRaw = rtti_cast<Node>(inputNode.get());
+					auto outputNodeRaw = rtti_cast<Node>(outputNode.get());
+					assert(inputNodeRaw != nullptr);
+					assert(outputNodeRaw != nullptr);
+					if (inputNodeRaw->mInputs.find(inputPin) != inputNodeRaw->mInputs.end() &&
+						outputNodeRaw->mOutputs.find(outputPin) != outputNodeRaw->mOutputs.end())
+						inputPin->connectNow(*outputPin);
+				}
 			});
 		}
 
 
-		void InputPinBase::disconnect(OutputPin& connection)
+		void InputPinBase::disconnect(OutputPin& pinToDisconnect)
 		{
-			auto connectionPtr = &connection;
+			auto outputPin = &pinToDisconnect;
+			auto inputPin = this;
+			auto inputNode = getNode().getSafe();
+			auto outputNode = outputPin->getNode().getSafe();
 
-			getNode().getNodeManager().enqueueTask([&, connectionPtr]() {
-				disconnectNow(*connectionPtr);
+			getNode().getNodeManager().enqueueTask([inputPin, outputPin, inputNode, outputNode]() {
+				if (inputNode != nullptr && outputNode != nullptr)
+				{
+					auto inputNodeRaw = rtti_cast<Node>(inputNode.get());
+					auto outputNodeRaw = rtti_cast<Node>(outputNode.get());
+					assert(inputNodeRaw != nullptr);
+					assert(outputNodeRaw != nullptr);
+					if (inputNodeRaw->mInputs.find(inputPin) != inputNodeRaw->mInputs.end() &&
+						outputNodeRaw->mOutputs.find(outputPin) != outputNodeRaw->mOutputs.end())
+						inputPin->disconnectNow(*outputPin);
+				}
 			});
 		}
 
 
 		void InputPinBase::disconnectAll()
 		{
-			getNode().getNodeManager().enqueueTask([&]() {
-				disconnectAllNow();
+			auto node = getNode().getSafe();
+			auto inputPin = this;
+
+			getNode().getNodeManager().enqueueTask([inputPin, node]() {
+				if (node != nullptr)
+				{
+					auto nodeRaw = rtti_cast<Node>(node.get());
+					assert(nodeRaw != nullptr);
+					if (nodeRaw->mInputs.find(inputPin) != nodeRaw->mInputs.end())
+						inputPin->disconnectAllNow();
+				}
 			});
 		}
 
 
 		// --- InputPin --- //
-		
+
 		InputPin::~InputPin()
 		{
 			disconnectAllNow();
 		}
-		
-		
+
+
 		SampleBuffer* InputPin::pull()
 		{
 			if (mInput)
@@ -88,8 +121,8 @@ namespace nap
 			else
 				return nullptr;
 		}
-		
-		
+
+
 		void InputPin::connectNow(OutputPin& connection)
 		{
 			// remove old connection
@@ -100,8 +133,8 @@ namespace nap
 			mInput = &connection;
 			mInput->mOutputs.emplace(this);
 		}
-		
-		
+
+
 		void InputPin::disconnectNow(OutputPin& connection)
 		{
 			if (&connection == mInput)
@@ -110,8 +143,8 @@ namespace nap
 				mInput = nullptr;
 			}
 		}
-		
-		
+
+
 		void InputPin::disconnectAllNow()
 		{
 			if (mInput)
@@ -120,33 +153,33 @@ namespace nap
 				mInput = nullptr;
 			}
 		}
-		
-		
+
+
 		// --- MultiInputPin ---- //
-		
+
 		MultiInputPin::MultiInputPin(Node* node, unsigned int reservedInputCount) : InputPinBase(node)
 		{
 			mInputsCache.reserve(reservedInputCount);
 		}
-		
-		
+
+
 		MultiInputPin::~MultiInputPin()
 		{
 			disconnectAllNow();
 		}
-		
-		
+
+
 		void MultiInputPin::pull(std::vector<SampleBuffer*>& result)
 		{
 			// Make a copy of mInputs because its contents can change while pulling its content.
 			mInputsCache = mInputs;
-			
+
 			result.resize(mInputsCache.size());
 			for (auto i = 0; i < mInputsCache.size(); ++i)
 				result[i] = mInputsCache[i]->pull();
 		}
-		
-		
+
+
 		void MultiInputPin::connectNow(OutputPin& connection)
 		{
 			auto it = std::find(mInputs.begin(), mInputs.end(), &connection);
@@ -154,8 +187,8 @@ namespace nap
 				mInputs.emplace_back(&connection);
 			connection.mOutputs.emplace(this);
 		}
-		
-		
+
+
 		void MultiInputPin::disconnectNow(OutputPin& connection)
 		{
 			auto it = std::find(mInputs.begin(), mInputs.end(), &connection);
@@ -177,42 +210,42 @@ namespace nap
 			}
 			mInputsCache.clear();
 		}
-		
-		
+
+
 		void MultiInputPin::reserveInputs(unsigned int inputCount)
 		{
 			mInputsCache.shrink_to_fit();
 			mInputsCache.reserve(inputCount);
 		}
-		
-		
-		
+
+
+
 		// --- OutputPin --- //
-		
-		
+
+
 		OutputPin::OutputPin(Node* node)
 		{
 			node->mOutputs.emplace(this);
 			mNode = node;
 			setBufferSize(mNode->getBufferSize());
 		}
-		
-		
+
+
 		OutputPin::~OutputPin()
 		{
 			mNode->mOutputs.erase(this);
 			disconnectAllNow();
 		}
-		
-		
+
+
 		void OutputPin::disconnectAll()
 		{
 			getNode().getNodeManager().enqueueTask([&]() {
 				disconnectAllNow();
 			});
 		}
-		
-		
+
+
 		SampleBuffer* OutputPin::pull()
 		{
 			mNode->update();

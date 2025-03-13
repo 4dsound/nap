@@ -467,13 +467,15 @@ namespace nap
 
 			T* get() const
 			{
-				assert(isValid());
+				if (!isValid())
+					return nullptr;
 				return static_cast<T*>((*mOwnerData)->mObject.get());
 			}
 
 			T* get()
 			{
-				assert(isValid());
+				if (!isValid())
+					return nullptr;
 				return static_cast<T*>((*mOwnerData)->mObject.get());
 			}
 

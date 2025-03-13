@@ -88,6 +88,11 @@ namespace nap
 			 */
 			DiscreteTimeValue getSampleTime() const;
 
+			/**
+			 * Returns SafePtr to this Process.
+			 */
+			SafePtr<Process> getSafe() { return mSelf; }
+
 		protected:
 			/**
 			 * Called whenever the sample rate that the node system runs on changes.
@@ -131,6 +136,8 @@ namespace nap
 
 			// Set to true when the node has made itself known with the node manager. This registration is deferred to the audio thread so it has to be tracked by this boolean.
 			std::atomic<bool> mRegisteredWithNodeManager = { false };
+
+			SafePtr<Process> mSelf = nullptr; // This is a safe pointer to self that is set by NodeManager::makeSafe(). It can be used to check whether the Process is not deleted or being deleted.
 		};
 
 
