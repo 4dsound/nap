@@ -481,7 +481,12 @@ namespace nap
 
 		private:
 			void* getOwnerData() const override
-			{ return *mOwnerData; }
+			{
+				if (mOwnerData != nullptr)
+					return *mOwnerData;
+				else
+					return nullptr;
+			}
 
 			void setOwnerData(void* ownerData) override
 			{

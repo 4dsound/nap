@@ -22,18 +22,22 @@ namespace nap
 
 		Process::Process(NodeManager& nodeManager) : mNodeManager(&nodeManager)
 		{
-			mNodeManager->registerProcess(*this);
 		}
 
 
 		Process::Process(ParentProcess& parent) : mNodeManager(&parent.getNodeManager())
 		{
-			mNodeManager->registerProcess(*this);
 		}
 
 
 		Process::~Process()
 		{
+			// Unregister as root process, if needed
+			auto it = std::find_if(getNodeManager().mRootProcesses.begin(), getNodeManager().mRootProcesses.end(), [&](auto& e){ return e.get() == this; });
+			if (it != getNodeManager().mRootProcesses.end())
+				getNodeManager().mRootProcesses.erase(it);
+
+			// Unregister as process
 			if (mRegisteredWithNodeManager.load())
 				getNodeManager().unregisterProcess(*this);
 		}

@@ -23,20 +23,15 @@ namespace nap
 	namespace audio
 	{
 
-		LevelMeterNode::LevelMeterNode(NodeManager& nodeManager, TimeValue analysisWindowSize, bool rootProcess) : Node(nodeManager), mRootProcess(rootProcess), mAnalysisWindowSize(analysisWindowSize)
+		LevelMeterNode::LevelMeterNode(NodeManager& nodeManager, TimeValue analysisWindowSize) : Node(nodeManager), mAnalysisWindowSize(analysisWindowSize)
 		{
 			mWindowSizeInSamples = getNodeManager().getSamplesPerMillisecond() * mAnalysisWindowSize;
 			mSquaredBuffer.resize(mWindowSizeInSamples);
-            
-			if (rootProcess)
-				getNodeManager().registerRootProcess(*this);
 		}
 
 
 		LevelMeterNode::~LevelMeterNode()
 		{
-			if (mRootProcess)
-				getNodeManager().unregisterRootProcess(*this);
 		}
 
 
