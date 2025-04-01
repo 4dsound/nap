@@ -4,12 +4,14 @@
 
 #include "audiopin.h"
 
-// Std includes
-#include <cassert>
-
 // Audio includes
 #include <audio/core/audionode.h>
 #include <audio/core/audionodemanager.h>
+
+#include <nap/logger.h>
+
+// Std includes
+#include <cassert>
 
 RTTI_BEGIN_CLASS_NO_DEFAULT_CONSTRUCTOR(nap::audio::InputPinBase)
 	RTTI_FUNCTION("connect", &nap::audio::InputPinBase::connect)
@@ -59,8 +61,16 @@ namespace nap
 					auto outputNodeRaw = rtti_cast<Node>(outputNode.get());
 					assert(inputNodeRaw != nullptr);
 					assert(outputNodeRaw != nullptr);
-					if (inputNodeRaw->mInputs.find(inputPin) != inputNodeRaw->mInputs.end() &&
-						outputNodeRaw->mOutputs.find(outputPin) != outputNodeRaw->mOutputs.end())
+					if (inputNodeRaw->mInputs.find(inputPin) == inputNodeRaw->mInputs.end())
+					{
+
+						Logger::warn("InputPinBase::connect(): Input pin not found for Node with type: %s", inputNodeRaw->get_type().get_name().to_string().c_str());
+					}
+					else if (outputNodeRaw->mOutputs.find(outputPin) == outputNodeRaw->mOutputs.end())
+					{
+						Logger::warn("InputPinBase::connect(): Output pin not found for Node with type: %s", outputNodeRaw->get_type().get_name().to_string().c_str());
+					}
+					else
 						inputPin->connectNow(*outputPin);
 				}
 			});
@@ -81,8 +91,16 @@ namespace nap
 					auto outputNodeRaw = rtti_cast<Node>(outputNode.get());
 					assert(inputNodeRaw != nullptr);
 					assert(outputNodeRaw != nullptr);
-					if (inputNodeRaw->mInputs.find(inputPin) != inputNodeRaw->mInputs.end() &&
-						outputNodeRaw->mOutputs.find(outputPin) != outputNodeRaw->mOutputs.end())
+					if (inputNodeRaw->mInputs.find(inputPin) == inputNodeRaw->mInputs.end())
+					{
+
+						Logger::warn("InputPinBase::disconnect(): Input pin not found for Node with type: %s", inputNodeRaw->get_type().get_name().to_string().c_str());
+					}
+					else if (outputNodeRaw->mOutputs.find(outputPin) == outputNodeRaw->mOutputs.end())
+					{
+						Logger::warn("InputPinBase::disconnect(): Output pin not found for Node with type: %s", outputNodeRaw->get_type().get_name().to_string().c_str());
+					}
+					else
 						inputPin->disconnectNow(*outputPin);
 				}
 			});
@@ -99,7 +117,12 @@ namespace nap
 				{
 					auto nodeRaw = rtti_cast<Node>(node.get());
 					assert(nodeRaw != nullptr);
-					if (nodeRaw->mInputs.find(inputPin) != nodeRaw->mInputs.end())
+					if (nodeRaw->mInputs.find(inputPin) == nodeRaw->mInputs.end())
+					{
+						Logger::warn("InputPinBase::disconnectAll(): Input pin not found for Node with type: %s", nodeRaw->get_type().get_name().to_string().c_str());
+
+					}
+					else
 						inputPin->disconnectAllNow();
 				}
 			});
