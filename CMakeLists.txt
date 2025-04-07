@@ -30,6 +30,7 @@ add_subdirectory(system_modules/napmidi)
 add_subdirectory(system_modules/napudp)
 add_subdirectory(system_modules/napasio)
 add_subdirectory(system_modules/napapi)
+add_subdirectory(system_modules/napsequence)
 
 set(NAP_BUILD_CONTEXT source) # This is here just to guarantee backwards compatibility with 0.6 style NAP modules
 add_subdirectory_modules(modules)
