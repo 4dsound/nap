@@ -77,18 +77,15 @@ else
     app_title=`jq -r '.Title' $build_directory/bin/$target.json`
     app_version=`jq -r '.Version' $build_directory/bin/$target.json`
     app_directory="$app_title.app"
-    app_zip="$app_title $app_version MacOS.zip"
   elif [ "$(uname)" = "Linux" ]; then
     app_title=`jq -r '.Title' $build_directory/bin/$target.json`
     app_version=`jq -r '.Version' $build_directory/bin/$target.json`
     app_directory=$app_title
-    app_zip="$app_title $app_version Linux.zip"
   else
     # Use bundled jq.exe
     app_title=`./thirdparty/jq/msvc/x86_64/jq.exe -r '.Title' $build_directory/bin/$target.json`
     app_version=`./thirdparty/jq/msvc/x86_64/jq.exe -r '.Version' $build_directory/bin/$target.json`
     app_directory=$app_title
-    app_zip="$app_title $app_version Win.zip"
   fi
   if ! [ $? -eq 0 ]; then
     exit 0
@@ -117,7 +114,18 @@ if [ "$(uname)" = "Darwin" ]; then
 fi
 
 # Zip the output directory
-zip -r "install/${app_zip}" "install/${app_directory}"
+if [ "$(uname)" = "Darwin" ]; then
+  app_zip="$app_title $app_version MacOS.zip"
+  zip -r "install/${app_zip}" "install/${app_directory}"
+elif [ "$(uname)" = "Linux" ]; then
+  app_zip="$app_title $app_version Linux.zip"
+  zip -r "install/${app_zip}" "install/${app_directory}"
+else
+  app_zip="$app_title $app_version Win.zip"
+  cd install
+  ../thirdparty/zip/msvc/zip -r "${app_zip}" "${app_directory}"
+  cd ..
+fi
 
 # Remove the build directory if it wasn't specified
 if [ $# = "1" ]; then
