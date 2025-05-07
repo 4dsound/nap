@@ -4,7 +4,6 @@
 
 #include "process.h"
 
-#include <audio/core/audionode.h>
 #include <audio/core/audionodemanager.h>
 #include <audio/core/audiopin.h>
 
@@ -111,6 +110,7 @@ namespace nap
 		{
 			for (auto& child : mChildren)
 			{
+				assert(child != nullptr);
 				child->update();
 			}
 		}
@@ -126,6 +126,7 @@ namespace nap
 					auto i = threadIndex;
 					while (i < mChildren.size()) {
 						auto& child = mChildren[i];
+						assert(child != nullptr);
 						child->update();
 						i += mThreadPool.getThreadCount();
 					}
