@@ -63,7 +63,7 @@ if ! [ $? -eq 0 ]; then
   exit 0
 fi
 
-# Read app Title from project json
+# Read app Title and Version from project json
 if [ "$target" = "napkin" ]; then
   if [ "$(uname)" = "Darwin" ]; then
     # Add app bundle file extension on MacOS
@@ -74,36 +74,57 @@ if [ "$target" = "napkin" ]; then
 else
   if [ "$(uname)" = "Darwin" ]; then
     # Add app bundle file extension on MacOS
-    app_title=`jq -r '.Title' $build_directory/bin/$target.json`.app
+    app_title=`jq -r '.Title' $build_directory/bin/$target.json`
+    app_version=`jq -r '.Version' $build_directory/bin/$target.json`
+    app_directory="$app_title.app"
   elif [ "$(uname)" = "Linux" ]; then
     app_title=`jq -r '.Title' $build_directory/bin/$target.json`
+    app_version=`jq -r '.Version' $build_directory/bin/$target.json`
+    app_directory=$app_title
   else
     # Use bundled jq.exe
     app_title=`./thirdparty/jq/msvc/x86_64/jq.exe -r '.Title' $build_directory/bin/$target.json`
+    app_version=`./thirdparty/jq/msvc/x86_64/jq.exe -r '.Version' $build_directory/bin/$target.json`
+    app_directory=$app_title
   fi
   if ! [ $? -eq 0 ]; then
     exit 0
   fi
 fi
 echo App title is: $app_title
+echo App version is: $app_version
 
 # Cleaning previous install, if any
 echo Cleaning previous install output...
-rm -rf "install/$app_title"
+rm -rf "install/$app_directory"
 
 # Rename output directory to app title
 if [ "$(uname)" = "Darwin" ]; then
-  mv "install/MyApp.app" "install/$app_title"
+  mv "install/MyApp.app" "install/$app_directory"
 else
-  mv "install/MyApp" "install/$app_title"
+  mv "install/MyApp" "install/$app_directory"
 fi
 
 # Codesign MacOS app bundle
 if [ "$(uname)" = "Darwin" ]; then
   if [ "$#" -gt "2" ]; then
     echo Codesigning MacOS bundle...
-    codesign --deep -s "$3" -f -i "com.$target.napframework.www" -f "install/$app_title"
+    codesign --deep -s "$3" -f -i "com.$target.napframework.www" -f "install/$app_directory"
   fi
+fi
+
+# Zip the output directory
+if [ "$(uname)" = "Darwin" ]; then
+  app_zip="$app_title $app_version MacOS.zip"
+  zip -r "install/${app_zip}" "install/${app_directory}"
+elif [ "$(uname)" = "Linux" ]; then
+  app_zip="$app_title $app_version Linux.zip"
+  zip -r "install/${app_zip}" "install/${app_directory}"
+else
+  app_zip="$app_title $app_version Win.zip"
+  cd install
+  ../thirdparty/zip/msvc/zip -r "${app_zip}" "${app_directory}"
+  cd ..
 fi
 
 # Remove the build directory if it wasn't specified
