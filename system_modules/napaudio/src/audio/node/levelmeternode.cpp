@@ -23,20 +23,15 @@ namespace nap
 	namespace audio
 	{
 
-		LevelMeterNode::LevelMeterNode(NodeManager& nodeManager, TimeValue analysisWindowSize, bool rootProcess) : Node(nodeManager), mRootProcess(rootProcess), mAnalysisWindowSize(analysisWindowSize)
+		LevelMeterNode::LevelMeterNode(NodeManager& nodeManager, TimeValue analysisWindowSize) : Node(nodeManager), mAnalysisWindowSize(analysisWindowSize)
 		{
 			mWindowSizeInSamples = getNodeManager().getSamplesPerMillisecond() * mAnalysisWindowSize;
 			mSquaredBuffer.resize(mWindowSizeInSamples);
-            
-			if (rootProcess)
-				getNodeManager().registerRootProcess(*this);
 		}
 
 
 		LevelMeterNode::~LevelMeterNode()
 		{
-			if (mRootProcess)
-				getNodeManager().unregisterRootProcess(*this);
 		}
 
 
@@ -50,9 +45,14 @@ namespace nap
 		{
 			auto inputBuffer = input.pull();
 
+			auto& outputBuffer = getOutputBuffer(output);
 			if (inputBuffer == nullptr)
+			{
+				std::fill(outputBuffer.begin(), outputBuffer.end(), 0.f);
 				return;
-            
+			}
+			outputBuffer = *inputBuffer;
+
 			switch (mType)
 			{
 				case EType::PEAK:
