@@ -51,6 +51,8 @@ namespace nap
 		{
 			auto outputPin = &pinToConnect;
 			auto inputPin = this;
+			
+			// Get the safeptrs of the nodes to pass to the lambda, so these ptrs can be checked before trying to make a connection (preventing calling connectNow() with Nodes that are (being) removed).
 			auto inputNode = getNode().getSafe();
 			auto outputNode = outputPin->getNode().getSafe();
 
