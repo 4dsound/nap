@@ -116,10 +116,14 @@ fi
 # Zip the output directory
 if [ "$(uname)" = "Darwin" ]; then
   app_zip="$app_title $app_version MacOS.zip"
-  zip -r "install/${app_zip}" "install/${app_directory}"
+  cd install
+  zip -r "${app_zip}" "${app_directory}"
+  cd ..
 elif [ "$(uname)" = "Linux" ]; then
   app_zip="$app_title $app_version Linux.zip"
-  zip -r "install/${app_zip}" "install/${app_directory}"
+  cd install
+  zip -r "${app_zip}" "${app_directory}"
+  cd ..
 else
   app_zip="$app_title $app_version Win.zip"
   cd install
