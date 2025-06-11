@@ -26,7 +26,7 @@ namespace nap
 		LevelMeterNode::LevelMeterNode(NodeManager& nodeManager, TimeValue analysisWindowSize) : Node(nodeManager), mAnalysisWindowSize(analysisWindowSize)
 		{
 			mWindowSizeInSamples = getNodeManager().getSamplesPerMillisecond() * mAnalysisWindowSize;
-			mSquaredBuffer.resize(mWindowSizeInSamples);
+			mSquaredBuffer.resize(mWindowSizeInSamples, 0.f);
 		}
 
 
@@ -90,9 +90,10 @@ namespace nap
 						mIndex++;
 						if (mIndex == mSquaredBuffer.size())
 						{
-							// if the sum is too small, it means that the signal is below -48dB, so we reset it to zero. This is to get rid of rounding errors in the sum.
-							if (mSquaredSum < 0.001f && mSquaredSum > -0.001f)
-								mSquaredSum = 0.f;
+							// Recalculate the squared sum and reset the index
+							mSquaredSum = 0.f;
+							for (auto& squaredSample : mSquaredBuffer)
+								mSquaredSum += squaredSample;
 							mIndex = 0;
 						}
 					}
