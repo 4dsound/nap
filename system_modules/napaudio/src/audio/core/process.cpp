@@ -110,8 +110,8 @@ namespace nap
 		{
 			for (auto& child : mChildren)
 			{
-				assert(child != nullptr);
-				child->update();
+				if (child != nullptr) // Check if the child is not enqueued for deletion in the meantime
+					child->update();
 			}
 		}
 		
@@ -126,8 +126,8 @@ namespace nap
 					auto i = threadIndex;
 					while (i < mChildren.size()) {
 						auto& child = mChildren[i];
-						assert(child != nullptr);
-						child->update();
+						if (child != nullptr) // Check if the child is not enqueued for deletion in the meantime
+							child->update();
 						i += mThreadPool.getThreadCount();
 					}
 					mAsyncObserver.notifyBarrier();
@@ -139,7 +139,7 @@ namespace nap
 		
 		void ParentProcess::process()
 		{
-			// First remove children that are (being) deleted
+			// First remove children that are (being) deleted or enqueued for deletion
 			auto it = mChildren.begin();
 			while (it != mChildren.end())
 			{
