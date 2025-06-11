@@ -89,7 +89,12 @@ namespace nap
 						// increment index
 						mIndex++;
 						if (mIndex == mSquaredBuffer.size())
+						{
+							// if the sum is too small, it means that the signal is below -48dB, so we reset it to zero. This is to get rid of rounding errors in the sum.
+							if (mSquaredSum < 0.001f && mSquaredSum > -0.001f)
+								mSquaredSum = 0.f;
 							mIndex = 0;
+						}
 					}
 					
 					mValue.store(mSquaredSum / (float)mSquaredBuffer.size());
