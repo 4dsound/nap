@@ -151,9 +151,7 @@ namespace nap
             assert(result != 0);
 #else
             sched_param schedParams;
-            auto priority = sched_get_priority_max(SCHED_FIFO);
-            
-            schedParams.sched_priority = priority;
+            schedParams.sched_priority = 99;
             auto result = pthread_setschedparam(thread.native_handle(), SCHED_FIFO, &schedParams);
             // If this assertion fails the thread failed to acquire realtime priority
             assert(result == 0);
