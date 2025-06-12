@@ -106,7 +106,7 @@ namespace nap
     /**
      * A pool of threads that can be used to perform multiple tasks at the same time
      */
-    class ThreadPool final
+    class ThreadPool
 	{
     public:
         ThreadPool(int numberOfThreads = 1, int maxQueueItems = 20, bool realTimePriority = false);
@@ -149,6 +149,16 @@ namespace nap
          * Returns whether this thread is shutting down.
          */
         bool isStopping() const { return (mStop == true); }
+
+        /**
+         * Override this funtion to add custom behaviour to the thread function.
+         * The default implementation just calls workLoop().
+         * This function is called from the thread function.
+         */
+        virtual void threadFunction();
+
+    protected:
+    	void workLoop();
 
     private:
         void addThread();

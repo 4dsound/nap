@@ -129,18 +129,28 @@ namespace nap
         for (auto i = 0; i < numberOfThreads; ++i)
             addThread();
     }
-    
-    
+
+
+    void ThreadPool::threadFunction()
+    {
+        workLoop();
+    }
+
+
+    void ThreadPool::workLoop()
+    {
+        TaskQueue::Task dequeuedTask;
+        while (!mStop)
+        {
+            mTaskQueue.wait_dequeue(dequeuedTask);
+            dequeuedTask();
+        }
+    }
+
+
     void ThreadPool::addThread()
     {
-        mThreads.emplace_back([&](){
-			TaskQueue::Task dequeuedTask;
-			while (!mStop)
-			{
-				mTaskQueue.wait_dequeue(dequeuedTask);
-				dequeuedTask();
-			}
-        });
+        mThreads.emplace_back([&](){ threadFunction(); });
 		auto& thread = mThreads.back();
 
 		if (mRealTimePriority)
