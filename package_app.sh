@@ -105,11 +105,20 @@ else
   mv "install/MyApp" "install/$app_directory"
 fi
 
+
+
 # Codesign MacOS app bundle
 if [ "$(uname)" = "Darwin" ]; then
   if [ "$#" -gt "2" ]; then
-    echo Codesigning MacOS bundle...
-    codesign --deep -s "$3" -f -i "com.$target.napframework.www" -f "install/$app_directory"
+  
+	echo "Codesigning dylibs inside-out..."
+	python3 signing_order.py "install/$app_directory/Contents/MacOS/lib" | while IFS= read -r lib_path; do
+		codesign -s "$3" -f "$lib_path" --verbose=1
+	done
+	
+    echo "Codesigning application..."
+    codesign --deep -s "$3" -f -i "com.$target.napframework.www" -f "install/$app_directory" --verbose=1
+    
   fi
 fi
 
