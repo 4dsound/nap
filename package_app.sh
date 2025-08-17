@@ -161,24 +161,6 @@ else
   cd ..
 fi
 
-# Zip the output directory
-if [ "$(uname)" = "Darwin" ]; then
-  app_zip="$app_title $app_version MacOS.zip"
-  cd install
-  zip -r "${app_zip}" "${app_directory}"
-  cd ..
-elif [ "$(uname)" = "Linux" ]; then
-  app_zip="$app_title $app_version Linux.zip"
-  cd install
-  zip -r "${app_zip}" "${app_directory}"
-  cd ..
-else
-  app_zip="$app_title $app_version Win.zip"
-  cd install
-  ../thirdparty/zip/msvc/zip -r "${app_zip}" "${app_directory}"
-  cd ..
-fi
-
 # Remove the build directory if it wasn't specified
 if [ $# = "1" ]; then
   echo Removing build directory...
