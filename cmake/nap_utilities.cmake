@@ -222,7 +222,6 @@ function(codesign_target target)
             set(signature $ENV{MACOS_CODE_SIGNATURE}) # If defined, use environment variable as signature
         endif ()
         # Codesign the target post build
-        message("Codesigning ${target} with signature ${signature}")
         add_custom_command(TARGET ${target} POST_BUILD
                 COMMAND codesign --force -s ${signature} $<TARGET_FILE:${target}>)
     endif ()
@@ -243,7 +242,6 @@ function(codesign path)
             set(signature $ENV{MACOS_CODE_SIGNATURE}) # If defined, use environment variable as signature
         endif ()
         # Codesign the file
-        message("Codesigning ${path} with signature ${signature}")
         execute_process(COMMAND codesign --force -s ${signature} ${path})
     endif ()
 endfunction()
