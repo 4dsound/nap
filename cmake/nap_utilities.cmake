@@ -70,17 +70,22 @@ function(add_import_library target_name implib dll include_dir)
     if (UNIX)
         get_filename_component(library_name ${dll} NAME)
         if (APPLE)
-# The library id needs to be set once on every dylib to @rpath/[library filename]:
-# install_name_tool -id @rpath/[library filename] [path to library]
-# The line below automates this, however when generating multiple configurations at the same time the processes clash.
-# Hence it is advised to instead call install_name_tool manually on every newly added external shared library.
-#            execute_process(COMMAND install_name_tool -id
-#                    @rpath/${library_name}
-#                    ${dll}
-#                    RESULT_VARIABLE EXIT_CODE)
-#            if(NOT ${EXIT_CODE} EQUAL 0)
-#                message(FATAL_ERROR "Failed to set RPATH on ${library_name} using install_name_tool -id.")
-#            endif()
+            # The library id needs to be set once on every dylib to @rpath/[library filename]:
+            # install_name_tool -id @rpath/[library filename] [path to library]
+            # The line below automates this, however when generating multiple configurations at the same time the processes clash.
+            # To avoid this issue it only operates on release configurations, which is the relevant configuration for packaged apps.
+            if (DEFINED CMAKE_BUILD_TYPE)
+                string(TOLOWER ${CMAKE_BUILD_TYPE} lowercase_build_type)
+                if (${lowercase_build_type} STREQUAL "release")
+                    execute_process(COMMAND install_name_tool -id
+                            @rpath/${library_name}
+                            ${dll}
+                            RESULT_VARIABLE EXIT_CODE)
+                    if(NOT ${EXIT_CODE} EQUAL 0)
+                        message(FATAL_ERROR "Failed to set RPATH on ${library_name} using install_name_tool -id.")
+                    endif()
+                endif()
+            endif()
 
             if (DEFINED ENV{MACOS_CODE_SIGNATURE})
                 # Codesign the executable with signature in environment variable
