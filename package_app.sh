@@ -129,12 +129,12 @@ if [ "$(uname)" = "Darwin" ]; then
     # Zip app bundle to upload for notarization
     notary_zip="${app_title}.zip"
     echo zipping "${notary_zip}" "${app_directory}"
-    zip -r "${notary_zip}" "${app_directory}"
+    zip -r -q "${notary_zip}" "${app_directory}"
     # Notarize
     xcrun notarytool submit "${notary_zip}" --keychain-profile "${notary_profile}" --wait
     # Remove original app bundle and unzip notarized bundle
     rm -rf "${app_directory}"
-    unzip "${notary_zip}"
+    unzip -q "${notary_zip}"
     rm "${notary_zip}"
     # Run stapler
     xcrun stapler staple "${app_directory}"
@@ -147,17 +147,17 @@ fi
 if [ "$(uname)" = "Darwin" ]; then
   app_zip="$app_title $app_version MacOS.zip"
   cd install
-  zip -r "${app_zip}" "${app_directory}"
+  zip -r -q "${app_zip}" "${app_directory}"
   cd ..
 elif [ "$(uname)" = "Linux" ]; then
   app_zip="$app_title $app_version Linux.zip"
   cd install
-  zip -r "${app_zip}" "${app_directory}"
+  zip -r -q "${app_zip}" "${app_directory}"
   cd ..
 else
   app_zip="$app_title $app_version Win.zip"
   cd install
-  ../thirdparty/zip/msvc/zip -r "${app_zip}" "${app_directory}"
+  ../thirdparty/zip/msvc/zip -r -q "${app_zip}" "${app_directory}"
   cd ..
 fi
 
