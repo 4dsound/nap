@@ -64,7 +64,7 @@ namespace nap
 							newValue = -newValue;
 						if (newValue > mPeakTemp)
 							mPeakTemp = newValue;
-						
+
 						// reset temp and update the output value once every 'window'
 						mIndex++;
 						if (mIndex == mWindowSizeInSamples)
@@ -74,7 +74,7 @@ namespace nap
 							mIndex = 0;
 						}
 					}
-					
+
 					mValue.store(mPeak);
 					break;
 
@@ -85,7 +85,7 @@ namespace nap
 						mSquaredSum -= mSquaredBuffer[mIndex];
 						mSquaredBuffer[mIndex] = sample * sample;
 						mSquaredSum += mSquaredBuffer[mIndex];
-						
+
 						// increment index
 						mIndex++;
 						if (mIndex == mSquaredBuffer.size())
@@ -97,16 +97,21 @@ namespace nap
 							mIndex = 0;
 						}
 					}
-					
+
 					mValue.store(mSquaredSum / (float)mSquaredBuffer.size());
 					break;
 			}
 		}
 
+
 		void LevelMeterNode::sampleRateChanged(float sampleRate)
 		{
 			mWindowSizeInSamples = getNodeManager().getSamplesPerMillisecond() * mAnalysisWindowSize;
-			mSquaredBuffer.resize(mWindowSizeInSamples);
+			mSquaredBuffer.resize(mWindowSizeInSamples, 0.f);
+			mIndex = 0;
+			mSquaredSum = 0.f;
+			mPeak = 0.f;
+			mPeakTemp = 0.f;
 		}
 
 	}
