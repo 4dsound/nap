@@ -35,7 +35,7 @@ namespace nap
 		}
 
 
-		float LevelMeterNode::getLevel()
+		float LevelMeterNode::getLevel() const
 		{
 			return mType == EType::RMS ? std::sqrt(mValue.load()) : mValue.load();
 		}
