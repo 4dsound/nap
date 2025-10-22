@@ -63,6 +63,15 @@ namespace nap
 			}
 			
 			/**
+			 * Used to access the samples in the buffer
+			 * example: myBuffer[channelNumber][sampleIndex]
+			 */
+			const SampleBuffer& operator[](std::size_t index) const
+			{
+				return channels[index];
+			}
+
+			/**
 			 * @return: number of channels in the buffer
 			 */
 			std::size_t getChannelCount() const { return channels.size(); }
@@ -103,7 +112,8 @@ namespace nap
 			{
 				channels.clear();
 			}
-			
+
+		private:
 			std::vector<SampleBuffer> channels;
 		};
 		
