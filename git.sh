@@ -8,15 +8,20 @@ fi
 
 command=$1
 
+echo "modules.."
 git $command # nap
 cd modules
 git $command # 4dsound_modules
+echo "napaudioadvanced.."
 cd napaudioadvanced # napaudioadvanced
 git $command
+echo "napvban.."
 cd ../napvban
 git $command # napvban
+echo "vban.."
 cd thirdparty/vban
 git $command # vban
 cd ../../../..
+echo "4dsound.."
 cd apps/4dsound # 4dsound
 git $command
