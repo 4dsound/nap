@@ -8,8 +8,9 @@ fi
 
 command=$1
 
-echo "modules.."
+echo "nap.."
 git $command # nap
+echo "modules.."
 cd modules
 git $command # 4dsound_modules
 echo "napaudioadvanced.."
