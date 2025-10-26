@@ -22,11 +22,7 @@ function(target_link_import_library target library)
     endif ()
 
     if (${library_type} STREQUAL SHARED_LIBRARY)
-        if(LINUX)
-            target_link_libraries(${target} ${library_path})
-        else ()
-            target_link_libraries(${target} ${library})
-        endif()
+        target_link_libraries(${target} ${library})
         add_custom_command(
                 TARGET ${target} POST_BUILD
                 COMMAND ${CMAKE_COMMAND} -E copy_if_different
@@ -74,20 +70,31 @@ function(add_import_library target_name implib dll include_dir)
     if (UNIX)
         get_filename_component(library_name ${dll} NAME)
         if (APPLE)
-# The library id needs to be set once on every dylib to @rpath/[library filename]:
-# install_name_tool -id @rpath/[library filename] [path to library]
-# The line below automates this, however when generating multiple configurations at the same time the processes clash.
-# Hence it is advised to instead call install_name_tool manually on every newly added external shared library.
-#            execute_process(COMMAND install_name_tool -id
-#                    @rpath/${library_name}
-#                    ${dll}
-#                    RESULT_VARIABLE EXIT_CODE)
-#            if(NOT ${EXIT_CODE} EQUAL 0)
-#                message(FATAL_ERROR "Failed to set RPATH on ${library_name} using install_name_tool -id.")
-#            endif()
+            # The library id needs to be set once on every dylib to @rpath/[library filename]:
+            # install_name_tool -id @rpath/[library filename] [path to library]
+            # The line below automates this, however when generating multiple configurations at the same time the processes clash.
+            # To avoid this issue it only operates on release configurations, which is the relevant configuration for packaged apps.
+            if (DEFINED CMAKE_BUILD_TYPE)
+                string(TOLOWER ${CMAKE_BUILD_TYPE} lowercase_build_type)
+                if (${lowercase_build_type} STREQUAL "release")
+                    execute_process(COMMAND install_name_tool -id
+                            @rpath/${library_name}
+                            ${dll}
+                            RESULT_VARIABLE EXIT_CODE)
+                    if(NOT ${EXIT_CODE} EQUAL 0)
+                        message(FATAL_ERROR "Failed to set RPATH on ${library_name} using install_name_tool -id.")
+                    endif()
+                endif()
+            endif()
 
-            # Codesign the library with an ad hoc sign
-            execute_process(COMMAND codesign --force -s - ${dll})
+            if (DEFINED ENV{MACOS_CODE_SIGNATURE})
+                # Codesign the executable with signature in environment variable
+                execute_process(COMMAND codesign --force -s $ENV{MACOS_CODE_SIGNATURE} ${dll})
+            else ()
+                # Perform ad hoc signing
+                execute_process(COMMAND codesign --force -s - ${dll})
+            endif ()
+
         else ()
             # Set so name or rpath for linux
             execute_process(COMMAND patchelf --set-soname
@@ -98,7 +105,6 @@ function(add_import_library target_name implib dll include_dir)
                 message(FATAL_ERROR "Failed to set RPATH on ${library_name} using patchelf. Is patchelf installed?")
             endif()
         endif()
-
     endif()
 endfunction()
 
@@ -210,4 +216,37 @@ function(add_license name license_path)
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different
             ${license_path}
             ${BIN_DIR}/license/${name}/${license_filename})
+endfunction()
+
+
+# Codesign the target's output file post build on MacOS
+function(codesign_target target)
+    if (APPLE)
+        set(signature "-") # Use add hoc sign as default
+        if (DEFINED ENV{MACOS_CODE_SIGNATURE})
+            set(signature $ENV{MACOS_CODE_SIGNATURE}) # If defined, use environment variable as signature
+        endif ()
+        # Codesign the target post build
+        add_custom_command(TARGET ${target} POST_BUILD
+                COMMAND codesign --force -s ${signature} $<TARGET_FILE:${target}>)
+    endif ()
+endfunction()
+
+
+## Codesign imported dynamic library
+#function(codesign_import_library library)
+#    codesign($<TARGET_FILE:${library}>)
+#endfunction()
+
+
+# Codesign imported dynamic library
+function(codesign path)
+    if (APPLE)
+        set(signature "-") # Use add hoc sign as default
+        if (DEFINED ENV{MACOS_CODE_SIGNATURE})
+            set(signature $ENV{MACOS_CODE_SIGNATURE}) # If defined, use environment variable as signature
+        endif ()
+        # Codesign the file
+        execute_process(COMMAND codesign --force -s ${signature} ${path})
+    endif ()
 endfunction()
