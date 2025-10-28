@@ -55,14 +55,6 @@ if [ "$(uname)" = "Darwin" ]; then
   "${dmg_filename}" \
   "${app_bundle}"
 
-  suite_dir="4DSOUND Suite MacOS"
-  suite_zip="4DSOUND Suite MacOS.zip"
-  mkdir "${suite_dir}"
-  cp -r "${m4l_directory}" "${suite_dir}"
-  cp "${dmg_filename}" "${suite_dir}/${dmg_filename}"
-  zip -r -q "${suite_zip}" "${suite_dir}"
-  rm -rf "${suite_dir}"
-
   cd ..
 
 elif [ "$(uname)" = "Linux" ]; then
@@ -77,17 +69,4 @@ else
   # Windows
   set QT_DIR=${qt_dir}
   sh package_app.sh 4dsound build
-
-  cd install
-
-  app_zip="${title} ${version} Win.zip"
-  suite_dir="4DSOUND Suite Win"
-  suite_zip="4DSOUND Suite Win.zip"
-  mkdir "${suite_dir}"
-  cp -r "${m4l_directory}" "${suite_dir}"
-  cp "${app_zip}" "${suite_dir}/${app_zip}"
-  zip -r -q "${suite_zip}" "${suite_dir}"
-  rm -rf "${suite_dir}"
-
-  cd ..
 fi
