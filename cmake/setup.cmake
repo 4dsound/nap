@@ -145,7 +145,7 @@ macro(bootstrap_environment)
     if(APPLE)
         message(STATUS "This is a NAP fork that supports macOS universal2 binary builds for Apple Silicon")
         #message(FATAL_ERROR "macOS is no longer supported as a target operating system. Our development focus has shifted to ensure compatibility with other open platforms.")
-        set(CMAKE_OSX_DEPLOYMENT_TARGET 10.15)
+        set(CMAKE_OSX_DEPLOYMENT_TARGET 11.00)
     endif()
 
     # We don't actively support and work on Python bindings anymore.

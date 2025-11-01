@@ -129,18 +129,28 @@ namespace nap
         for (auto i = 0; i < numberOfThreads; ++i)
             addThread();
     }
-    
-    
+
+
+    void ThreadPool::threadFunction()
+    {
+        workLoop();
+    }
+
+
+    void ThreadPool::workLoop()
+    {
+        TaskQueue::Task dequeuedTask;
+        while (!mStop)
+        {
+            mTaskQueue.wait_dequeue(dequeuedTask);
+            dequeuedTask();
+        }
+    }
+
+
     void ThreadPool::addThread()
     {
-        mThreads.emplace_back([&](){
-			TaskQueue::Task dequeuedTask;
-			while (!mStop)
-			{
-				mTaskQueue.wait_dequeue(dequeuedTask);
-				dequeuedTask();
-			}
-        });
+        mThreads.emplace_back([&](){ threadFunction(); });
 		auto& thread = mThreads.back();
 
 		if (mRealTimePriority)
@@ -151,9 +161,7 @@ namespace nap
             assert(result != 0);
 #else
             sched_param schedParams;
-            auto priority = sched_get_priority_max(SCHED_FIFO);
-            
-            schedParams.sched_priority = priority;
+            schedParams.sched_priority = sched_get_priority_max(SCHED_FIFO);
             auto result = pthread_setschedparam(thread.native_handle(), SCHED_FIFO, &schedParams);
             // If this assertion fails the thread failed to acquire realtime priority
             assert(result == 0);
