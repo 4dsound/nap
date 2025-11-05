@@ -1,28 +1,25 @@
 # Edit these values locally
-qt_dir="~/Qt/6.6.1/macos" # QT location
-m4l_directory="/Users/stijn/Documents/4DSOUND/4DS m4l"
 code_signature="4DSOUND Technologies BV" # MacOS code signature
 notary_profile="NotaryProfile" # Notarization credentials
-
-# Check if create-dmg tool is installed
-if ! [ -x "$(command -v create-dmg)" ]; then
-  echo create-dmg utility not found. To install from homebrew run:
-  echo brew install create-dmg
-  exit 0
-fi
 
 # Delete settings file
 rm apps/4dsound/data/settings.json
 
-# Grab the app title and version number
-title=`jq -r '.Title' apps/4dsound/app.json`
-version=`jq -r '.Version' apps/4dsound/app.json`
-
 if [ "$(uname)" = "Darwin" ]; then
   # MacOS
 
+  # Grab the app title and version number
+  title=`jq -r '.Title' apps/4dsound/app.json`
+  version=`jq -r '.Version' apps/4dsound/app.json`
+
+  # Check if create-dmg tool is installed
+  if ! [ -x "$(command -v create-dmg)" ]; then
+    echo create-dmg utility not found. To install from homebrew run:
+    echo brew install create-dmg
+    exit 0
+  fi
+
   # Package and codesign
-  export QT_DIR=${qt_dir}
   sh package_app.sh 4dsound build "${code_signature}" "${notary_profile}"
 
   cd install
@@ -59,14 +56,9 @@ if [ "$(uname)" = "Darwin" ]; then
 
 elif [ "$(uname)" = "Linux" ]; then
   # Linux
-  qt_dir="~/Qt/6.6.1/macos" # QT location
-  set QT_DIR=${qt_dir}
   sh package_app.sh 4dsound build
-
-  app_zip="${title} ${version} Linux.zip"
 
 else
   # Windows
-  set QT_DIR=${qt_dir}
   sh package_app.sh 4dsound build
 fi
