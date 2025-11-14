@@ -5,6 +5,14 @@ notary_profile="NotaryProfile" # Notarization credentials
 # Delete settings file
 rm apps/4dsound/data/settings.json
 
+# Read legacy option
+if [ "$#" -gt "0" ]; then
+  if [ "$1" = "-l" ]; then
+    echo "Building legacy version."
+    cp "apps/4dsound/legacysettings.json" "apps/4dsound/data/settings.json"
+  fi
+fi
+
 if [ "$(uname)" = "Darwin" ]; then
   # MacOS
 
@@ -62,3 +70,7 @@ else
   # Windows
   sh package_app.sh 4dsound build
 fi
+
+# Remove temporary settings file, if it exists
+rm apps/4dsound/data/settings.json
+
