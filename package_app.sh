@@ -1,7 +1,7 @@
 #!bin/sh
 
 echo Package NAP app.
-echo Usage: sh package_app.sh [target] [optional: build directory] [optional: MacOS code signature]
+echo Usage: sh package_app.sh [target] [optional: build directory] [optional: MacOS code signature] [optional: Entitlements file]
 
 # Check if target is specified
 if [ "$#" -lt "1" ]; then
@@ -47,6 +47,7 @@ if [ "$(uname)" = "Darwin" ]; then
     export MACOS_CODE_SIGNATURE="$3"
   fi
 fi
+
 
 # Remove bin directory from previous builds
 # This is important otherwise artifacts from previous builds could be included in the app installation
@@ -117,7 +118,14 @@ if [ "$(uname)" = "Darwin" ]; then
   # Codesign MacOS app bundle
   if [ "$#" -gt "2" ]; then
     echo Codesigning MacOS bundle...
-    codesign -s "$3" -f "install/$app_directory" --options runtime
+    
+    # Sign with entitlements file if it was given
+    if [ "$#" -gt "4" ]; then
+        echo Signing with entitlements file: $5
+        codesign -s "$3" -f "install/$app_directory" --options runtime --entitlements "$5"
+    else
+        codesign -s "$3" -f "install/$app_directory" --options runtime
+    fi
   fi
 
   # Perform notarization
