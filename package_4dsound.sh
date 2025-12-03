@@ -16,6 +16,13 @@ fi
 if [ "$(uname)" = "Darwin" ]; then
   # MacOS
 
+  # Check if jq tool is installed
+  if ! [ -x "$(command -v jq)" ]; then
+    echo jq utility not found. To install from homebrew run:
+    echo brew install jq
+    exit 0
+  fi
+
   # Grab the app title and version number
   title=`jq -r '.Title' apps/4dsound/app.json`
   version=`jq -r '.Version' apps/4dsound/app.json`
