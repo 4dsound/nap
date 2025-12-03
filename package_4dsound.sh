@@ -1,6 +1,7 @@
 # Edit these values locally
 code_signature="4DSOUND Technologies BV" # MacOS code signature
 notary_profile="NotaryProfile" # Notarization credentials
+entitlements_file="apps/4dsound/macos/Entitlements.entitlements" # Entitlements file
 
 # Delete settings file
 rm apps/4dsound/data/settings.json
@@ -18,7 +19,7 @@ if [ "$(uname)" = "Darwin" ]; then
 
   # Check if jq tool is installed
   if ! [ -x "$(command -v jq)" ]; then
-    echo jq utility not found. To install from homebrew run:
+    echo Jq json parser not found. To install from homebrew run:
     echo brew install jq
     exit 0
   fi
@@ -35,7 +36,7 @@ if [ "$(uname)" = "Darwin" ]; then
   fi
 
   # Package and codesign
-  sh package_app.sh 4dsound build "${code_signature}" "${notary_profile}"
+  sh package_app.sh 4dsound build "${code_signature}" "${notary_profile}" "${entitlements_file}"
 
   cd install
 
