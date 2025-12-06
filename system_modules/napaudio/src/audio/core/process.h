@@ -214,10 +214,19 @@ namespace nap
 			 */
 			void processSequential();
 
+			void sortChildrenByThread();
+
 			ThreadPool& mThreadPool;
 			AsyncObserver& mAsyncObserver;
 			std::vector<SafePtr<Process>> mChildren;
 			std::atomic<Mode> mMode = {Mode::Sequential};
+
+			struct ThreadData
+			{
+				std::vector<Process*> mChildren;
+				std::atomic<bool> mFinished = { false };
+			};
+			std::vector<std::unique_ptr<ThreadData>> mThreadData;
 		};
 
 
