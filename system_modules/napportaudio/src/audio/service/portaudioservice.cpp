@@ -52,8 +52,8 @@ namespace nap
 			float** out = (float**) outputBuffer;
 			float** in = (float**) inputBuffer;
 			
-			AudioService* service = (AudioService*) userData;
-			service->onAudioCallback(in, out, framesPerBuffer);
+			PortAudioService* service = (PortAudioService*) userData;
+			service->onAudioCallback(in, out, framesPerBuffer, timeInfo, statusFlags);
 			
 			return 0;
 		}
@@ -129,6 +129,31 @@ namespace nap
             auto result = _openStream(deviceSettings, errorState);
             mErrorMessage = errorState.toString();
             return result;
+        }
+
+
+        void PortAudioService::onAudioCallback(float **inputBuffer, float **outputBuffer, unsigned long framesPerBuffer,
+	        const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags flags)
+        {
+			mCallbackFlags = flags;
+			mLastOutputBufferDACTime = mCallbackTimeInfo.outputBufferDacTime;
+			mCallbackTimeInfo = *timeInfo;
+
+			const double bufferDuration = framesPerBuffer / getNodeManager().getSampleRate();
+			const double dt = getOutputBufferDacTime() - getLastOutputBufferDACTime();
+			if (dt > 1.5f * bufferDuration)
+			{
+				nap::Logger::info("PortAudio: Late callback detected.");
+				lateAudioCallback.trigger(dt);
+			}
+
+			if (checkOutputUnderflow())
+				nap::Logger::info("PortAudio: Output buffer underflow detected.");
+			if (checkInputUnderflow())
+				nap::Logger::info("PortAudio: Input buffer underflow detected.");
+
+
+			mAudioService->onAudioCallback(inputBuffer, outputBuffer, framesPerBuffer);
         }
 
 
@@ -291,7 +316,7 @@ namespace nap
 
 			beforeOpenStream(device_settings);
 
-            PaError error = Pa_OpenStream(&mStream, inputParamsPtr, outputParamsPtr, getNodeManager().getSampleRate(), device_settings.mBufferSize, paNoFlag, &audioCallback, mAudioService);
+            PaError error = Pa_OpenStream(&mStream, inputParamsPtr, outputParamsPtr, getNodeManager().getSampleRate(), device_settings.mBufferSize, paNoFlag, &audioCallback, this);
             if (error != paNoError)
             {
                 errorState.fail("Error opening audio stream: %s", Pa_GetErrorText(error));
@@ -582,7 +607,7 @@ namespace nap
 		}
 		
 		
-		bool PortAudioService::isActive()
+		bool PortAudioService::isActive() const
 		{
 			return Pa_IsStreamActive(mStream) == 1;
 		}
