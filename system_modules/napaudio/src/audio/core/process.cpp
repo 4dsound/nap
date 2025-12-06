@@ -141,6 +141,9 @@ namespace nap
 			if (parallelCount != mThreadData.size())
 				sortChildrenByThread();
 
+			for (auto& threadData : mThreadData)
+				threadData->mFinished.store(false);
+
 			auto first = mThreadData.begin();
 			for (auto& threadData : mThreadData)
 			{
@@ -148,7 +151,6 @@ namespace nap
 					continue;
 				auto threadDataPtr = threadData.get();
 				mThreadPool.execute([&, threadDataPtr]() {
-					threadDataPtr->mFinished.store(false);
 					for (auto child : threadDataPtr->mChildren)
 						if (child->getSafe() != nullptr)
 							child->update();
