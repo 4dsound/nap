@@ -91,7 +91,12 @@ namespace nap
 			/**
 			 * Returns SafePtr to this Process.
 			 */
-			SafePtr<Process> getSafe() { return mSelf; }
+			SafePtr<Process>& getSafe() { return mSelf; }
+
+			/**
+			 * Returns const SafePtr to this Process.
+			 */
+			const SafePtr<Process>& getSafe() const { return mSelf; }
 
 		protected:
 			/**
@@ -223,7 +228,7 @@ namespace nap
 
 			struct ThreadData
 			{
-				std::vector<Process*> mChildren;
+				std::vector<SafePtr<Process>> mChildren;
 				std::atomic<bool> mFinished = { false };
 			};
 			std::vector<std::unique_ptr<ThreadData>> mThreadData;

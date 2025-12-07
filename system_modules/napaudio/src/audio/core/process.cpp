@@ -127,7 +127,7 @@ namespace nap
 			int i = 0;
 			for (auto& child : mChildren)
 			{
-				mThreadData[i]->mChildren.emplace_back(child.get());
+				mThreadData[i]->mChildren.emplace_back(child);
 				i++;
 				if (i == parallelCount)
 					i = 0;
@@ -151,7 +151,7 @@ namespace nap
 					continue;
 				auto threadDataPtr = threadData.get();
 				mThreadPool.execute([&, threadDataPtr]() {
-					for (auto child : threadDataPtr->mChildren)
+					for (auto& child : threadDataPtr->mChildren)
 						if (child->getSafe() != nullptr)
 							child->update();
 					threadDataPtr->mFinished.store(true);
@@ -160,7 +160,7 @@ namespace nap
 
 			if (!mThreadData.empty())
 			{
-				for (auto child : (*first)->mChildren)
+				for (auto& child : (*first)->mChildren)
 					if (child->getSafe() != nullptr)
 						child->update();
 				(*first)->mFinished.store(true);
@@ -180,14 +180,20 @@ namespace nap
 		void ParentProcess::process()
 		{
 			// First remove children that are (being) deleted or enqueued for deletion
+			bool childRemoved = false;
 			auto it = mChildren.begin();
 			while (it != mChildren.end())
 			{
 				if ((*it) == nullptr)
+				{
 					it = mChildren.erase(it);
+					childRemoved = true;
+				}
 				else
 					it++;
 			}
+			if (childRemoved)
+				sortChildrenByThread();
 
 			switch (mMode)
 			{
