@@ -86,6 +86,7 @@ namespace nap
 				auto it = std::find_if(mChildren.begin(), mChildren.end(), [&](auto& e){ return e.get() == childPtr.get(); });
 				if (it == mChildren.end())
 					mChildren.emplace_back(childPtr);
+				sortChildrenByThread();
 			});
 		}
 		
@@ -102,6 +103,7 @@ namespace nap
 				auto it = std::find_if(mChildren.begin(), mChildren.end(), [&](auto& e){ return e.get() == childPtr.get(); });
 				if (it != mChildren.end())
 					mChildren.erase(it);
+				sortChildrenByThread();
 			});
 		}
 		
@@ -114,40 +116,85 @@ namespace nap
 					child->update();
 			}
 		}
-		
-		
+
+
+		void ParentProcess::sortChildrenByThread()
+		{
+			auto audioThreadCount = std::max<int>(mThreadPool.getThreadCount(), 1); // There is always at least one (device) audio thread.
+			auto parallelCount = std::min<int>(audioThreadCount, mChildren.size());
+			mThreadData.clear();
+			for (auto i = 0; i < parallelCount; ++i)
+				mThreadData.emplace_back(std::make_unique<ThreadData>());
+			int i = 0;
+			for (auto& child : mChildren)
+			{
+				mThreadData[i]->mChildren.emplace_back(child);
+				i++;
+				if (i == parallelCount)
+					i = 0;
+			}
+		}
+
+
 		void ParentProcess::processParallel()
 		{
 			auto parallelCount = std::min<int>(mThreadPool.getThreadCount(), mChildren.size());
-			mAsyncObserver.setBarrier(parallelCount);
-			for (auto threadIndex = 0; threadIndex < parallelCount; ++threadIndex)
+			if (parallelCount != mThreadData.size())
+				sortChildrenByThread();
+
+			for (auto& threadData : mThreadData)
+				threadData->mFinished.store(false);
+
+			auto first = mThreadData.begin();
+			for (auto& threadData : mThreadData)
 			{
-				mThreadPool.execute([&, threadIndex]() {
-					auto i = threadIndex;
-					while (i < mChildren.size()) {
-						auto& child = mChildren[i];
-						if (child != nullptr) // Check if the child is not enqueued for deletion in the meantime
+				if (threadData.get() == first->get())
+					continue;
+				auto threadDataPtr = threadData.get();
+				mThreadPool.execute([&, threadDataPtr]() {
+					for (auto& child : threadDataPtr->mChildren)
+						if (child->getSafe() != nullptr)
 							child->update();
-						i += mThreadPool.getThreadCount();
-					}
-					mAsyncObserver.notifyBarrier();
+					threadDataPtr->mFinished.store(true);
 				});
 			}
-			mAsyncObserver.waitForNotifications();
+
+			if (!mThreadData.empty())
+			{
+				for (auto& child : (*first)->mChildren)
+					if (child->getSafe() != nullptr)
+						child->update();
+				(*first)->mFinished.store(true);
+			}
+
+			bool finished = false;
+			while (!finished)
+			{
+				finished = true;
+				for (auto& threadData : mThreadData)
+					if (!threadData->mFinished.load())
+						finished = false;
+			}
 		}
 		
 		
 		void ParentProcess::process()
 		{
 			// First remove children that are (being) deleted or enqueued for deletion
+			bool childRemoved = false;
 			auto it = mChildren.begin();
 			while (it != mChildren.end())
 			{
 				if ((*it) == nullptr)
+				{
 					it = mChildren.erase(it);
+					childRemoved = true;
+				}
 				else
 					it++;
 			}
+			if (childRemoved)
+				sortChildrenByThread();
 
 			switch (mMode)
 			{

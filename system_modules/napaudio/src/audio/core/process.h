@@ -91,7 +91,12 @@ namespace nap
 			/**
 			 * Returns SafePtr to this Process.
 			 */
-			SafePtr<Process> getSafe() { return mSelf; }
+			SafePtr<Process>& getSafe() { return mSelf; }
+
+			/**
+			 * Returns const SafePtr to this Process.
+			 */
+			const SafePtr<Process>& getSafe() const { return mSelf; }
 
 		protected:
 			/**
@@ -162,17 +167,14 @@ namespace nap
 			 * Constructor
 			 * @param nodeManager the node manager the process runs on
 			 * @param threadPool the threadpool used for parallelization when the ParentProcess is set to parallel mode.
-			 * @param observer AsyncObserver object used to help the child processes signal the caller when they are done in the case of parallel processing mode.
 			 */
-			ParentProcess(NodeManager& nodeManager, ThreadPool& threadPool, AsyncObserver& observer) : Process(
-					nodeManager), mThreadPool(threadPool), mAsyncObserver(observer)
+			ParentProcess(NodeManager& nodeManager, ThreadPool& threadPool) : Process(nodeManager), mThreadPool(threadPool)
 			{}
 
 			/**
-			 * Constructor that takes the parent process of this process as argument in order to use its ThreadPool, AsyncObserver end NodeManager.
+			 * Constructor that takes the parent process of this process as argument in order to use its ThreadPool.
 			 */
-			ParentProcess(ParentProcess& parent) : Process(parent), mThreadPool(parent.mThreadPool),
-			                                       mAsyncObserver(parent.mAsyncObserver)
+			ParentProcess(ParentProcess& parent) : Process(parent), mThreadPool(parent.mThreadPool)
 			{ }
 
 			/**
@@ -214,10 +216,22 @@ namespace nap
 			 */
 			void processSequential();
 
+			/**
+			 * Creates the mThreadData vector that indicates which children are processed on which thread.
+			 */
+			void sortChildrenByThread();
+
 			ThreadPool& mThreadPool;
-			AsyncObserver& mAsyncObserver;
 			std::vector<SafePtr<Process>> mChildren;
 			std::atomic<Mode> mMode = {Mode::Sequential};
+
+			// The data structure that indicates which children are processed on which thread.
+			struct ThreadData
+			{
+				std::vector<SafePtr<Process>> mChildren;
+				std::atomic<bool> mFinished = { false };
+			};
+			std::vector<std::unique_ptr<ThreadData>> mThreadData;
 		};
 
 
