@@ -120,7 +120,8 @@ namespace nap
 
 		void ParentProcess::sortChildrenByThread()
 		{
-			auto parallelCount = std::min<int>(mThreadPool.getThreadCount(), mChildren.size());
+			auto audioThreadCount = std::max<int>(mThreadPool.getThreadCount(), 1); // There is always at least one (device) audio thread.
+			auto parallelCount = std::min<int>(audioThreadCount, mChildren.size());
 			mThreadData.clear();
 			for (auto i = 0; i < parallelCount; ++i)
 				mThreadData.emplace_back(std::make_unique<ThreadData>());
