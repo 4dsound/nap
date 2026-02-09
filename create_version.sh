@@ -17,7 +17,7 @@ cd ../..
 
 # Create tags
 sh git.sh "tag -a ${version} -m ${version}"
-sh git.sh "push origin ${version}"
+sh git.sh "push origin refs/tags/${version}"
 
 echo In order to remove all the created version tags run:
 echo sh git.sh \"tag -d [version]\"
