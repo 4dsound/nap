@@ -611,8 +611,29 @@ namespace nap
 		{
 			return Pa_IsStreamActive(mStream) == 1;
 		}
-		
-		
+
+
+		bool PortAudioService::isFormatSupported(int inputDeviceIndex, int outputDeviceIndex, int inputChannelCount,
+			int outputChannelCount, int sampleRate)
+		{
+			PaStreamParameters inputParameters;
+			PaStreamParameters outputParameters;
+			inputParameters.device = inputDeviceIndex;
+			outputParameters.device = outputDeviceIndex;
+			inputParameters.channelCount = inputChannelCount;
+			outputParameters.channelCount = outputChannelCount;
+			inputParameters.sampleFormat = paFloat32;
+			outputParameters.sampleFormat = paFloat32;
+			inputParameters.hostApiSpecificStreamInfo = nullptr;
+			outputParameters.hostApiSpecificStreamInfo = nullptr;
+			const auto result = Pa_IsFormatSupported(&inputParameters, &outputParameters, sampleRate);
+			if (result != 0)
+				return false;
+
+			return true;
+		}
+
+
 	}
 	
 }

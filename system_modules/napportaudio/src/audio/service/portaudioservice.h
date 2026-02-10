@@ -319,6 +319,17 @@ namespace nap
 			bool isActive() const;
 
 		    /**
+		     * Check if a certain channel count and sample rate are supported by a device.
+		     * @param inputDeviceIndex Index of the input device
+		     * @param outputDeviceIndex Index of the output device
+		     * @param inputChannelCount Number of input channels
+		     * @param outputChannelCount  Number of output channels
+		     * @param sampleRate Samplerate
+		     * @return True if the settings are supported.
+		     */
+		    static bool isFormatSupported(int inputDeviceIndex, int outputDeviceIndex, int inputChannelCount, int outputChannelCount, int sampleRate);
+
+		    /**
 		     * Call from the audio thread.
 		     * @return True if the last (or current) callback was late and caused a skipped buffer.
 		     */
