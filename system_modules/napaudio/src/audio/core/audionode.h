@@ -64,6 +64,13 @@ namespace nap
 			 */
 			void process() override { }
 
+			/**
+			 * Use this method to set the mLabel member variable to help debugging more complex node graphs.
+			 * In non debug builds this method does nothing.
+			 * @param label Value of the mLabel member.
+			 */
+			void setLabel(const std::string& label);
+
 		protected:
 			/**
 			 * Use this function within descendants @process() implementation to access the buffers that need to be filled with output.
@@ -80,6 +87,10 @@ namespace nap
 
 			std::set<OutputPin*> mOutputs; // Used internally by the node to keep track of all its outputs.
 			std::set<InputPinBase*> mInputs; // Used internally by the node to keep track of all its inputs.
+
+#if not NDEBUG
+			std::string mLabel; // Used for debugging purposes only.
+#endif
 		};
 
 

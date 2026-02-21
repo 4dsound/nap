@@ -18,8 +18,16 @@ namespace nap
 		Node::Node(NodeManager& manager) : Process(manager)
 		{
 		}
-		
-		
+
+
+		void Node::setLabel(const std::string &label)
+		{
+#if not NDEBUG
+			mLabel = label;
+#endif
+		}
+
+
 		SampleBuffer& Node::getOutputBuffer(OutputPin& output)
 		{
 			return output.mBuffer;
