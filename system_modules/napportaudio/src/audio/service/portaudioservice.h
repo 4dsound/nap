@@ -320,6 +320,7 @@ namespace nap
 
 		    /**
 		     * Check if a certain channel count and sample rate are supported by a device.
+		     * This method has to be called when the audio stream is not running.
 		     * @param inputDeviceIndex Index of the input device
 		     * @param outputDeviceIndex Index of the output device
 		     * @param inputChannelCount Number of input channels
