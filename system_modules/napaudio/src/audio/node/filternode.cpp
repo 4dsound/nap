@@ -5,6 +5,7 @@
 #include "filternode.h"
 
 #include <mathutils.h>
+#include <nap/logger.h>
 
 RTTI_BEGIN_ENUM(nap::audio::FilterNode::EMode)
 	RTTI_ENUM_VALUE(nap::audio::FilterNode::EMode::LowPass, "LowPass"),
@@ -132,7 +133,7 @@ namespace nap
 		{
 			mMode = mode;
 			mFrequency = frequency;
-			mResonance = resonance;
+			mResonance = pow(10., -(resonance * 0.1));
 			mBand = band;
 			mGain = gain;
 			calcCoeffs();
