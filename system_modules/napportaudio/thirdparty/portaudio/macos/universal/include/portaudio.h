@@ -174,8 +174,16 @@ const char *Pa_GetErrorText( PaError errorCode );
  Pairs of calls to Pa_Initialize() / Pa_Terminate() may overlap, and are not
  required to be fully nested.
 
- Note that if Pa_Initialize() returns an error code, Pa_Terminate() should
+ If Pa_Initialize() returns an error code, Pa_Terminate() should
  NOT be called.
+
+ @note The device list returned by Pa_GetDeviceCount() et al. is frozen
+ at the time Pa_Initialize() is called, and not updated dynamically, even if
+ hardware devices (e.g. USB or firewire devices) are connected or disconnected
+ during the course of the program's lifetime. If it is required to re-scan the
+ list of devices, one must call Pa_UpdateAvailableDeviceList() or, completely
+ uninitialize PortAudio using Pa_Terminate(), and then reinitialize it by calling
+ Pa_Initialize().
 
  @return paNoError if successful, otherwise an error code indicating the cause
  of failure.
@@ -453,6 +461,20 @@ PaDeviceIndex Pa_GetDefaultInputDevice( void );
 */
 PaDeviceIndex Pa_GetDefaultOutputDevice( void );
 
+/** Update the list of available devices to match currently available hardware devices.
+
+ PortAudio's list of available devices is usually frozen at the time Pa_Initialize() is
+ called. Pa_UpdateAvailableDeviceList() may be called to refresh PortAudio's list
+ of available devices at any time while PortAudio is initialized.
+
+ @note Open streams will not be affected by calls to this function, but
+ any previously returned PaDeviceInfo pointers are invalidated once this
+ function is called.
+
+ @return an error code indicating whether the device refresh was successful.
+ */
+PaError Pa_UpdateAvailableDeviceList( void );
+
 
 /** The type used to represent monotonic time in seconds. PaTime is
  used for the fields of the PaStreamCallbackTimeInfo argument to the
@@ -504,7 +526,7 @@ typedef unsigned long PaSampleFormat;
 */
 typedef struct PaDeviceInfo
 {
-    int structVersion;  /**< this is struct version 2 */
+    int structVersion;  /* this is struct version 3 */
 
     /** Human readable device name. Encoded as UTF-8. */
     const char *name;
@@ -523,6 +545,11 @@ typedef struct PaDeviceInfo
     PaTime defaultHighOutputLatency;
 
     double defaultSampleRate;
+
+    /*The transport type used by this device: USB, BuiltIn, Bluetooth, etc.*/
+    const char *transportType;
+    /*The unique identifier of this device (persistent across boots).*/
+    const char *deviceUID;
 } PaDeviceInfo;
 
 
@@ -1242,6 +1269,13 @@ PaError Pa_GetSampleSize( PaSampleFormat format );
  musical timing.
 */
 void Pa_Sleep( long msec );
+
+
+
+typedef void PaDevicesChangedCallback( void *userData );
+
+PaError Pa_SetDevicesChangedCallback( void *userData, PaStreamFinishedCallback* devicesChangedCallback );
+
 
 
 
