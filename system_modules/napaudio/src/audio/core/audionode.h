@@ -88,7 +88,7 @@ namespace nap
 			std::set<OutputPin*> mOutputs; // Used internally by the node to keep track of all its outputs.
 			std::set<InputPinBase*> mInputs; // Used internally by the node to keep track of all its inputs.
 
-#if not NDEBUG
+#if !NDEBUG
 			std::string mLabel; // Used for debugging purposes only.
 #endif
 		};

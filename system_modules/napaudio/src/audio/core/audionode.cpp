@@ -22,7 +22,7 @@ namespace nap
 
 		void Node::setLabel(const std::string &label)
 		{
-#if not NDEBUG
+#if !NDEBUG
 			mLabel = label;
 #endif
 		}
