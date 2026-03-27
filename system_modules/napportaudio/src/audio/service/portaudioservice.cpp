@@ -57,8 +57,16 @@ namespace nap
 			
 			return 0;
 		}
+
+
+		static void devicesChangedCallback(void *userData)
+		{
+			PortAudioService *service = (PortAudioService*)userData;
+			service->onAvailableDevicesChanged();
+		}
 		
-		
+
+
 		PortAudioService::PortAudioService(ServiceConfiguration* configuration) :
 				Service(configuration)
 		{
@@ -120,6 +128,9 @@ namespace nap
 			Logger::info("Samplerate: %i", int(getNodeManager().getSampleRate()));
 			Logger::info("Buffersize: %i", device_settings.mBufferSize);
 
+			// Set the callback called when devices are plugged in or out
+			Pa_SetDevicesChangedCallback(this, devicesChangedCallback);
+
 			return true;
 		}
 
@@ -157,14 +168,59 @@ namespace nap
         }
 
 
+		void PortAudioService::onAvailableDevicesChanged()
+		{
+			auto* configuration = getConfiguration<PortAudioServiceConfiguration>();
+			auto& settings = configuration->mDeviceSettings;
+
+			// Save current settings by name
+			std::string hostAPIName = isActive() ? settings.mHostApi : "";
+			std::string inputDeviceName = mInputDeviceIndex >= 0 ? settings.mInputDevice : "";
+			std::string outputDeviceName = mOutputDeviceIndex >= 0 ? settings.mOutputDevice : "";
+
+			// Update the available device list
+			auto error = Pa_UpdateAvailableDeviceList();
+			if (error != paNoError)
+			{
+				Logger::warn("Portaudio error: %s", Pa_GetErrorText(error));
+				return;
+			}
+
+			if (isActive())
+			{
+				// Update current stream settings
+				mHostApiIndex = getHostApiIndex(hostAPIName);
+				if (mHostApiIndex < 0)
+					mHostApiIndex = Pa_GetDefaultHostApi();
+				mInputDeviceIndex = getInputDeviceIndex(mHostApiIndex, inputDeviceName);
+				if (mInputDeviceIndex < 0)
+					mInputDeviceIndex = Pa_GetDefaultInputDevice();
+				mOutputDeviceIndex = getOutputDeviceIndex(mHostApiIndex, outputDeviceName);
+				if (mOutputDeviceIndex < 0)
+					mOutputDeviceIndex = Pa_GetDefaultOutputDevice();
+
+				// Save new settings in case port audio reverted to default settings after unplugging current device
+				settings.mHostApi = getHostApiName(mHostApiIndex);
+				settings.mOutputDevice = getDeviceInfo(mOutputDeviceIndex).name;
+				settings.mInputDevice = getDeviceInfo(mInputDeviceIndex).name;
+			}
+
+			// Emit the signal
+			availableDevicesChanged(*this);
+
+			// Print new available device list
+			printDevices();
+		}
+
+
         bool PortAudioService::_openStream(const PortAudioServiceConfiguration::DeviceSettings& deviceSettings, utility::ErrorState& errorState)
         {
-            // copy settings to configuration
-            auto* configuration = getConfiguration<PortAudioServiceConfiguration>();
-            configuration->mDeviceSettings = deviceSettings;
+			// Copy settings to configuration because openStream() will read it
+			auto* configuration = getConfiguration<PortAudioServiceConfiguration>();
+			configuration->mDeviceSettings = deviceSettings;
 
-            // close stream
-            if(isOpened())
+			// Close stream
+            if (isOpened())
             {
                 if(!closeStream(errorState))
                     return false;
@@ -228,10 +284,15 @@ namespace nap
             if (!checkChannelCounts(inputDeviceIndex, outputDeviceIndex, inputChannelCount, outputChannelCount, errorState))
                 return false;
 
-            mInputDeviceIndex = inputDeviceIndex;
-            mOutputDeviceIndex = outputDeviceIndex;
+			mInputDeviceIndex = inputDeviceIndex;
+			mOutputDeviceIndex = outputDeviceIndex;
 
-            return openStream(errorState);
+            if (openStream(errorState))
+            	return true;
+
+			mInputDeviceIndex = -1;
+			mOutputDeviceIndex = -1;
+			return false;
         }
 
 
@@ -442,12 +503,12 @@ namespace nap
 			for (auto hostApi = 0; hostApi < Pa_GetHostApiCount(); ++hostApi)
 			{
 				const PaHostApiInfo& hostApiInfo = *Pa_GetHostApiInfo(hostApi);
-				nap::Logger::info("%s:", hostApiInfo.name);
+				nap::Logger::info("%s (%i):", hostApiInfo.name, hostApi);
 				for (auto device = 0; device < hostApiInfo.deviceCount; ++device)
 				{
 					auto index = Pa_HostApiDeviceIndexToDeviceIndex(hostApi, device);
 					const PaDeviceInfo& info = *Pa_GetDeviceInfo(index);
-					nap::Logger::info("%i: %s, %i input(s), %i output(s)", device, info.name, info.maxInputChannels,
+					nap::Logger::info("%i: %s, %i input(s), %i output(s)", index, info.name, info.maxInputChannels,
 					                  info.maxOutputChannels);
 				}
 			}

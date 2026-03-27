@@ -375,6 +375,11 @@ namespace nap
 		    Signal<double> lateAudioCallback;
 
 			/**
+			 * Signal emitted when a new device is detected of an old one removed.
+			 */
+			Signal<PortAudioService&> availableDevicesChanged;
+
+			/**
 			 * Called directly by the portaudio callback function.
 			 * @param inputBuffer: an array of float arrays, representing one sample buffer for every channel
 			 * @param outputBuffer: an array of float arrays, representing one sample buffer for every channel
@@ -382,6 +387,11 @@ namespace nap
 			 * @param flags: flags passed by portaudio to report about the status of the audio stream.
 			 */
 			void onAudioCallback(float** inputBuffer, float** outputBuffer, unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags flags);
+
+			/**
+			 * Called directly by the callback function when a new device is detected or disappears.
+			 */
+			void onAvailableDevicesChanged();
 
 		private:
             /**
@@ -411,7 +421,6 @@ namespace nap
 			int mInputDeviceIndex = -1; // The actual input device being used, if any.
 			int mOutputDeviceIndex = -1; // The actual output device being used, if any.
 			bool mPortAudioInitialized = false; // If port audio is initialized
-			bool mMpg123Initialized	   = false;	// If mpg123 is initialized
 
 			PaStreamCallbackFlags mCallbackFlags;
 			PaStreamCallbackTimeInfo mCallbackTimeInfo;
