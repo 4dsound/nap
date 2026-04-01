@@ -175,8 +175,8 @@ namespace nap
 
 			// Save current settings by name
 			std::string hostAPIName = isActive() ? settings.mHostApi : "";
-			std::string inputDeviceName = mInputDeviceIndex >= 0 ? getDeviceInfo(mInputDeviceIndex).name : "";
-			std::string outputDeviceName = mOutputDeviceIndex >= 0 ? getDeviceInfo(mOutputDeviceIndex).name : "";
+			std::string inputDeviceName = mInputDeviceIndex >= 0 ? settings.mInputDevice : "";
+			std::string outputDeviceName = mOutputDeviceIndex >= 0 ? settings.mOutputDevice : "";
 
 			// Update the available device list
 			auto error = Pa_UpdateAvailableDeviceList();
