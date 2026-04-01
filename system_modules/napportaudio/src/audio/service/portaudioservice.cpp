@@ -697,7 +697,7 @@ namespace nap
 			outputParameters.sampleFormat = paFloat32;
 			inputParameters.hostApiSpecificStreamInfo = nullptr;
 			outputParameters.hostApiSpecificStreamInfo = nullptr;
-			const auto result = Pa_IsFormatSupported(&inputParameters, &outputParameters, sampleRate);
+			const auto result = Pa_IsFormatSupported(inputDeviceIndex < 0 ? nullptr : &inputParameters, outputDeviceIndex < 0 ? nullptr : &outputParameters, sampleRate);
 			if (result != 0)
 				return false;
 
