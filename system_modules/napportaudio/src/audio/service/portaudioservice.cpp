@@ -175,8 +175,8 @@ namespace nap
 
 			// Save current settings by name
 			std::string hostAPIName = isActive() ? settings.mHostApi : "";
-			std::string inputDeviceName = mInputDeviceIndex >= 0 ? settings.mInputDevice : "";
-			std::string outputDeviceName = mOutputDeviceIndex >= 0 ? settings.mOutputDevice : "";
+			std::string inputDeviceName = mInputDeviceIndex >= 0 ? getDeviceInfo(mInputDeviceIndex).name : "";
+			std::string outputDeviceName = mOutputDeviceIndex >= 0 ? getDeviceInfo(mOutputDeviceIndex).name : "";
 
 			// Update the available device list
 			auto error = Pa_UpdateAvailableDeviceList();
@@ -201,8 +201,18 @@ namespace nap
 
 				// Save new settings in case port audio reverted to default settings after unplugging current device
 				settings.mHostApi = getHostApiName(mHostApiIndex);
-				settings.mOutputDevice = getDeviceInfo(mOutputDeviceIndex).name;
-				settings.mInputDevice = getDeviceInfo(mInputDeviceIndex).name;
+				auto& outputDeviceInfo = getDeviceInfo(mOutputDeviceIndex);
+				auto& inputDeviceInfo = getDeviceInfo(mInputDeviceIndex);
+				settings.mOutputDevice = outputDeviceInfo.name;
+				settings.mInputDevice = inputDeviceInfo.name;
+				getNodeManager().setOutputChannelCount(outputDeviceInfo.maxOutputChannels);
+				getNodeManager().setInputChannelCount(inputDeviceInfo.maxInputChannels);
+			}
+			else
+			{
+				mHostApiIndex = -1;
+				mInputDeviceIndex = -1;
+				mOutputDeviceIndex = -1;
 			}
 
 			// Emit the signal
