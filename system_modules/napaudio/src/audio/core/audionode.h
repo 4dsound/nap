@@ -71,6 +71,8 @@ namespace nap
 			 */
 			void setLabel(const std::string& label);
 
+			const std::string& getLabel() const;
+
 		protected:
 			/**
 			 * Use this function within descendants @process() implementation to access the buffers that need to be filled with output.

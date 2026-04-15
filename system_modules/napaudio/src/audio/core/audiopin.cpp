@@ -56,7 +56,7 @@ namespace nap
 			auto inputNode = getNode().getSafe();
 			auto outputNode = outputPin->getNode().getSafe();
 
-			getNode().getNodeManager().enqueueTask([inputPin, outputPin, inputNode, outputNode](){
+			getNode().getNodeManager().enqueueTask([inputPin, outputPin, inputNode, outputNode]() {
 				if (inputNode != nullptr && outputNode != nullptr)
 				{
 					auto inputNodeRaw = rtti_cast<Node>(inputNode.get());
@@ -65,7 +65,6 @@ namespace nap
 					assert(outputNodeRaw != nullptr);
 					if (inputNodeRaw->mInputs.find(inputPin) == inputNodeRaw->mInputs.end())
 					{
-
 						Logger::warn("InputPinBase::connect(): Input pin not found for Node with type: %s", inputNodeRaw->get_type().get_name().to_string().c_str());
 					}
 					else if (outputNodeRaw->mOutputs.find(outputPin) == outputNodeRaw->mOutputs.end())
@@ -95,7 +94,6 @@ namespace nap
 					assert(outputNodeRaw != nullptr);
 					if (inputNodeRaw->mInputs.find(inputPin) == inputNodeRaw->mInputs.end())
 					{
-
 						Logger::warn("InputPinBase::disconnect(): Input pin not found for Node with type: %s", inputNodeRaw->get_type().get_name().to_string().c_str());
 					}
 					else if (outputNodeRaw->mOutputs.find(outputPin) == outputNodeRaw->mOutputs.end())

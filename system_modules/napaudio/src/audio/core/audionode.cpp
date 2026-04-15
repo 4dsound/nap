@@ -27,6 +27,16 @@ namespace nap
 #endif
 		}
 
+		
+		const std::string & Node::getLabel() const
+		{
+#if !NDEBUG
+			return mLabel;
+#else
+			return "NoLabel";
+#endif
+		}
+
 
 		SampleBuffer& Node::getOutputBuffer(OutputPin& output)
 		{
