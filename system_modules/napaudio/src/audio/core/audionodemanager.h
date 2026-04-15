@@ -252,7 +252,7 @@ namespace nap
 			std::vector<Process*> mProcesses; // all the audio processes managed by this node manager
 			std::vector<SafePtr<Process>> mRootProcesses; // the nodes that will be processed directly by the manager on every audio callback
 
-			nap::TaskQueue mTaskQueue = { 256 }; // Queue with lambda functions to be executed before processing the next internal buffer.
+			nap::TaskQueue mTaskQueue = { 4096 }; // Queue with lambda functions to be executed before processing the next internal buffer.
 			DeletionQueue& mDeletionQueue; // Deletion queue used to safely create and destruct nodes in a threadsafe manner.
 		};
 
