@@ -617,16 +617,24 @@ namespace nap
 			int outputChannelCount, int sampleRate)
 		{
 			PaStreamParameters inputParameters;
+			if (inputDeviceIndex >= 0)
+			{
+				inputParameters.device = inputDeviceIndex;
+				inputParameters.channelCount = inputChannelCount;
+				inputParameters.sampleFormat = paFloat32;
+				inputParameters.hostApiSpecificStreamInfo = nullptr;
+			}
+
 			PaStreamParameters outputParameters;
-			inputParameters.device = inputDeviceIndex;
-			outputParameters.device = outputDeviceIndex;
-			inputParameters.channelCount = inputChannelCount;
-			outputParameters.channelCount = outputChannelCount;
-			inputParameters.sampleFormat = paFloat32;
-			outputParameters.sampleFormat = paFloat32;
-			inputParameters.hostApiSpecificStreamInfo = nullptr;
-			outputParameters.hostApiSpecificStreamInfo = nullptr;
-			const auto result = Pa_IsFormatSupported(&inputParameters, &outputParameters, sampleRate);
+			if (outputDeviceIndex >= 0)
+			{
+				outputParameters.device = outputDeviceIndex;
+				outputParameters.channelCount = outputChannelCount;
+				outputParameters.sampleFormat = paFloat32;
+				outputParameters.hostApiSpecificStreamInfo = nullptr;
+			}
+
+			const auto result = Pa_IsFormatSupported(inputDeviceIndex >= 0 ? &inputParameters : nullptr, outputDeviceIndex >= 0 ? &outputParameters : nullptr, sampleRate);
 			if (result != 0)
 				return false;
 
