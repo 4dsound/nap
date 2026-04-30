@@ -34,6 +34,7 @@ namespace nap
 			RTTI_ENABLE()
 
 			friend class OutputPin;
+			friend class Node;
 
 		public:
 			InputPinBase(Node* node);

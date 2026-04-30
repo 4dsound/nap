@@ -13,6 +13,10 @@
 #include <utility/dllexport.h>
 #include <readerwriterqueue.h>
 
+#include "concurrentqueue.h"
+#include "rtti/rtticast.h"
+#include "rtti/typeinfo.h"
+
 namespace nap
 {
 
@@ -27,11 +31,27 @@ namespace nap
 		template<typename T>
 		class SafePtr;
 
+
+		class NAPAPI SafeObject
+		{
+			RTTI_ENABLE()
+
+		public:
+			SafeObject() = default;
+			virtual ~SafeObject() = default;
+			SafeObject(const SafeObject&) = delete;
+			SafeObject& operator=(const SafeObject&) = delete;
+
+			virtual void audioCleanup() { }
+		};
+
+
 		/**
 		 * Base class for SafeOwner<T> template
 		 */
 		class NAPAPI SafeOwnerBase
 		{
+			RTTI_ENABLE()
 			friend class DeletionQueue;
 
 		protected:
@@ -39,6 +59,7 @@ namespace nap
 			{
 			public:
 				virtual ~Data() = default;
+				virtual SafeObject* getSafeObject() const = 0;
 			};
 
 		public:
@@ -92,6 +113,13 @@ namespace nap
 				mQueue.enqueue(std::move(ownerData));
 			}
 
+			std::unique_ptr<SafeOwnerBase::Data> try_dequeue()
+			{
+				std::unique_ptr<SafeOwnerBase::Data> result = nullptr;
+				mQueue.try_dequeue(result);
+				return std::move(result);
+			}
+
 			/**
 			 * Clears the DeletionQueue by destructing the objects it contains.
 			 * It also clears all the SafePtrs that point to objects in the queue.
@@ -99,7 +127,7 @@ namespace nap
 			void clear();
 
 		private:
-			moodycamel::ReaderWriterQueue<std::unique_ptr<SafeOwnerBase::Data>> mQueue; // Lockfree queue that holds SafeOwner::Data objects to be deleted because the enclosing SafeOwner went out of scope.
+			moodycamel::ConcurrentQueue<std::unique_ptr<SafeOwnerBase::Data>> mQueue; // Lockfree queue that holds SafeOwner::Data objects to be deleted because the enclosing SafeOwner went out of scope.
 		};
 
 
@@ -133,6 +161,11 @@ namespace nap
 				~Data() override
 				{
 					*mSharedSafePtr = nullptr;
+				}
+
+				SafeObject *getSafeObject() const override
+				{
+					return rtti_cast<SafeObject>(mObject.get());
 				}
 
 			public:

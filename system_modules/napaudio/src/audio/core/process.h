@@ -33,9 +33,9 @@ namespace nap
 		 * Processes can be child processes to parent processes that run their child processes.
 		 * Base class to Node.
 		 */
-		class NAPAPI Process
+		class NAPAPI Process : public SafeObject
 		{
-			RTTI_ENABLE()
+			RTTI_ENABLE(SafeObject)
 
 			friend class NodeManager;
 
@@ -58,6 +58,8 @@ namespace nap
 			Process& operator=(const Process&) = delete;
 
 			virtual ~Process();
+
+			void audioCleanup() override;
 
 			/*
 			 * Invoked by OutputPin::pull() methods and by parent processes.

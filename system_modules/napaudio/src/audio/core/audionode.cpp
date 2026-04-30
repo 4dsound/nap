@@ -20,6 +20,16 @@ namespace nap
 		}
 
 
+		void Node::audioCleanup()
+		{
+			Process::audioCleanup();
+			for (auto& output : mOutputs)
+				output->disconnectAllNow();
+			for ( auto& input : mInputs)
+				input->disconnectAllNow();
+		}
+
+
 		void Node::setLabel(const std::string &label)
 		{
 #if !NDEBUG

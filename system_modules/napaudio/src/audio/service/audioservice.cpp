@@ -28,8 +28,13 @@ namespace nap
 		AudioService::AudioService(ServiceConfiguration* configuration) :
 				Service(configuration), mNodeManager(mDeletionQueue)
 		{ }
-		
-		
+
+
+		AudioService::~AudioService()
+		{
+		}
+
+
 		bool AudioService::init(nap::utility::ErrorState& errorState)
 		{
 #ifdef NAP_AUDIOFILE_SUPPORT
@@ -40,6 +45,13 @@ namespace nap
 			checkLockfreeTypes();
             return true;
 		}
+
+
+		void AudioService::update(double deltaTime)
+		{
+			mTrashBin.clear();
+		}
+
 
 
 		void AudioService::shutdown()
@@ -62,14 +74,20 @@ namespace nap
 
 		void AudioService::onAudioCallback(float** inputBuffer, float** outputBuffer, unsigned long framesPerBuffer)
 		{
-			// Lock the mutex used to lock the audio thread.
-			std::lock_guard<std::mutex> lock(mMutex);
-
 			// process the node manager
 			mNodeManager.process(inputBuffer, outputBuffer, framesPerBuffer);
 
-			// clean the trash bin with nodes and resources that are no longer used and scheduled for destruction
-			mDeletionQueue.clear();
+			// Move objects from the deletion queue to the trash bin.
+			// Execute audioCleanup() method for audio::SafeObject descendants.
+			auto deletedData = mDeletionQueue.try_dequeue();
+			while (deletedData != nullptr)
+			{
+				auto object = deletedData->getSafeObject();
+				if (object != nullptr)
+					object->audioCleanup();
+				mTrashBin.enqueue(std::move(deletedData));
+				deletedData = mDeletionQueue.try_dequeue();
+			}
 		}
 		
 

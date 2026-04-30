@@ -30,12 +30,14 @@ namespace nap
 		public:
 			AudioService(ServiceConfiguration* configuration);
 
-			~AudioService() = default;
+			~AudioService();
 
 			/**
 			 * Initializes portaudio.
 			 */
 			bool init(nap::utility::ErrorState& errorState) override;
+
+			void update(double deltaTime) override;
 
 			/**
 			 * Called on shutdown of the service. Closes portaudio stream and shuts down portaudio.
@@ -61,14 +63,6 @@ namespace nap
 			 */
 			void enqueueTask(TaskQueue::Task task) { mNodeManager.enqueueTask(task); }
 
-			/**
-			 * This mutex can be used to lock the audio thread in occasional cases.
-			 * Locking the audio thread might cause the audio callback to be late and the output to glitch.
-			 * Don't use in performance critical sitiuations.
-			 * @return Mutex to lock the audio thread.
-			 */
-			std::mutex& getMutex() { return mMutex; }
-
         private:
 			/*
 			 * Checks wether certain atomic types that are used within the library are lockfree and gives a warning if not.
@@ -82,8 +76,7 @@ namespace nap
 			// DeletionQueue with nodes that are no longer used and that can be cleared and destructed safely on the next audio callback.
 			// Clearing is performed on the audio callback to make sure the node can not be destructed while it is being processed.
 			DeletionQueue mDeletionQueue;
-
-			std::mutex mMutex; // Mutex to lock the audio thread
+			DeletionQueue mTrashBin;
 		};
 	}
 }

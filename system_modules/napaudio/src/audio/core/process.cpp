@@ -19,7 +19,7 @@ namespace nap
 	{
 		// --- Process  ---//
 
-		Process::Process(NodeManager& nodeManager) : mNodeManager(&nodeManager)
+		Process::Process(NodeManager& nodeManager) : SafeObject(), mNodeManager(&nodeManager)
 		{
 		}
 
@@ -30,6 +30,11 @@ namespace nap
 
 
 		Process::~Process()
+		{
+		}
+
+
+		void Process::audioCleanup()
 		{
 			// Unregister as root process, if needed
 			auto it = std::find_if(getNodeManager().mRootProcesses.begin(), getNodeManager().mRootProcesses.end(), [&](auto& e){ return e.get() == this; });

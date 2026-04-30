@@ -42,13 +42,17 @@ namespace nap
         void processBlocking();
 
         /**
-         * Executes all tasks currently in the queue
+         * Executes all tasks currently in the queue.
          */
         void process();
 
+        /**
+         * Clear all tasks in the queue without executing them.
+         */
+        void clear();
+
     private:
         moodycamel::BlockingConcurrentQueue<Task> mQueue;
-        std::vector<Task> mDequeuedTasks;
     };
 
 

@@ -45,6 +45,8 @@ namespace nap
 			 */
 			Node(NodeManager& manager);
 
+			void audioCleanup() override;
+
 			/**
 			 * @return all this node's outputs
 			 */
