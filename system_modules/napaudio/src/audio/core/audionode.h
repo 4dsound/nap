@@ -45,6 +45,10 @@ namespace nap
 			 */
 			Node(NodeManager& manager);
 
+			/**
+			 * Inherited from SafeObject
+			 * Disconnects the Node from other Nodes.
+			 */
 			void audioCleanup() override;
 
 			/**

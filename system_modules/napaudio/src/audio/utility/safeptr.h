@@ -32,6 +32,11 @@ namespace nap
 		class SafePtr;
 
 
+		/**
+		 * Base class to objects that have specific cleanup code that needs to be executed on the audio thread before their deletion.
+		 * This of disconnection of audio Nodes for example.
+		 * This can be achieved by implementing the audioCleanup() method and enclosing the object in a SafeOwner.
+		 */
 		class NAPAPI SafeObject
 		{
 			RTTI_ENABLE()
@@ -42,6 +47,9 @@ namespace nap
 			SafeObject(const SafeObject&) = delete;
 			SafeObject& operator=(const SafeObject&) = delete;
 
+			/**
+			 * Implement this with any cleanup code that needs to run on the audio thread before deletion of the object.
+			 */
 			virtual void audioCleanup() { }
 		};
 
@@ -59,6 +67,11 @@ namespace nap
 			{
 			public:
 				virtual ~Data() = default;
+
+				/**
+				 * SafeOwner can contain any type of object. If it contains a SafeObject, this method will return it.
+				 * @return If the SafeOwner contains a SafeObject descendant, this method will return it, otherwise it returns nullptr.
+				 */
 				virtual SafeObject* getSafeObject() const = 0;
 			};
 
@@ -88,8 +101,8 @@ namespace nap
 
 		/**
 		 * The DeletionQueue holds the data that was previously owned by SafeOwner smart-pointers before they went out of scope.
-		 * SafeOwner's destructor disposes it's owned data in the DeletionQueue and the DeletionQueue takes over ownership over this data.
-		 * The DeletionQueue needs to be cleared regularly using the clear() method to free the heap of disposed data. When the DeletionQueue is cleared all SafePtrs that point to an object held by the queue will be cleared as well.
+		 * SafeOwner's destructor disposes it's owned data in the DeletionQueue and the DeletionQueue takes over ownership of this data.
+		 * The DeletionQueue needs to be cleared regularly using the clear() or the try_dequeue() methods to free the heap of disposed data.
 		 * By making use of the DeletionQueue in combination with SafeOwner and SafePtr the programmer can control or restrict the moment where objects are destructed and also choose the thread on which this will happen.
 		 */
 		class NAPAPI DeletionQueue final
@@ -105,7 +118,7 @@ namespace nap
 			~DeletionQueue();
 
 			/**
-			 * This method is used by SafeOwner to dispose it's data when it goes out of scope.
+			 * This method is used by SafeOwner to dispose its data when it goes out of scope.
 			 * The disposed data will be kept by the DeletionQueue and will be destructed and freed on the next call of clear().
 			 */
 			void enqueue(std::unique_ptr<SafeOwnerBase::Data> ownerData)
@@ -113,6 +126,10 @@ namespace nap
 				mQueue.enqueue(std::move(ownerData));
 			}
 
+			/**
+			 * Tries to dequeue an element from the queue.
+			 * @return Abstraction of object contained by a SafeOwner.
+			 */
 			std::unique_ptr<SafeOwnerBase::Data> try_dequeue()
 			{
 				std::unique_ptr<SafeOwnerBase::Data> result = nullptr;
@@ -133,7 +150,7 @@ namespace nap
 
 		/**
 		 * SafeOwner is a special case smart pointer to an object that is used in multiple threads. It serves the purpose of making sure that the object is destructed in a thread safe manner when the SafeOwner goes out of scope.
-		 * It works very much like unique_ptr in such that it takes ownership over the object it points to and takes responsibility for it's destruction.
+		 * It works very much like unique_ptr in such that it takes ownership over the object it points to and takes responsibility for its destruction.
 		 * The difference to unique_ptr is that instead of letting the object destruct itself when the pointer goes out of scope, it throws the object in a DeletionQueue.
 		 * Objects in the DeletionQueue are kept alive until the DeletionQueue is cleared at a moment when there is noone else using the object anymore.
 		 * This is done to prevent the objects to be destroyed while they are possibly being used in another thread at the same time.
@@ -163,6 +180,10 @@ namespace nap
 					*mSharedSafePtr = nullptr;
 				}
 
+				/**
+				 * Inherited from SafeOwnerBase::Data
+				 * @return The data cast to a SafeObject, nullptr if the cast is invalid.
+				 */
 				SafeObject *getSafeObject() const override
 				{
 					return rtti_cast<SafeObject>(mObject.get());

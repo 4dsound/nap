@@ -59,6 +59,7 @@ namespace nap
 
 			virtual ~Process();
 
+			// Inherited from SafeObject
 			void audioCleanup() override;
 
 			/*
