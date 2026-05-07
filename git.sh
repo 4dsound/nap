@@ -16,12 +16,9 @@ git $command # 4dsound_modules
 echo "napaudioadvanced.."
 cd napaudioadvanced # napaudioadvanced
 git $command
-echo "napvban.."
-cd ../napvban
-git $command # napvban
-echo "vban.."
-cd thirdparty/vban
-git $command # vban
+echo "audiobridge.."
+cd thirdparty/audiobridge
+git $command # audiobridge
 cd ../../../..
 echo "4dsound.."
 cd apps/4dsound # 4dsound
