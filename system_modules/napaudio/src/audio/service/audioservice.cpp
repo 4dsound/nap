@@ -32,6 +32,8 @@ namespace nap
 
 		AudioService::~AudioService()
 		{
+			// The AudioService is not being updated anymore, so we need to clear the thrashbin here again.
+			mTrashBin.clear();
 		}
 
 
