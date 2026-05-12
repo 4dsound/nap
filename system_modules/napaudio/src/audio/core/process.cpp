@@ -31,6 +31,12 @@ namespace nap
 
 		Process::~Process()
 		{
+			// Unregister as process in case of a shutdown and audioCleanup() has not been called yet.
+			if (mRegisteredWithNodeManager.load())
+			{
+				getNodeManager().unregisterProcess(*this);
+				mRegisteredWithNodeManager.store(false);
+			}
 		}
 
 
@@ -43,7 +49,10 @@ namespace nap
 
 			// Unregister as process
 			if (mRegisteredWithNodeManager.load())
+			{
 				getNodeManager().unregisterProcess(*this);
+				mRegisteredWithNodeManager.store(false);
+			}
 		}
 
 
