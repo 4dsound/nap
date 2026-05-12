@@ -86,11 +86,11 @@ namespace nap
 			 * @param channelCount: new number of channels
 			 * @param size: new size in samples
 			 */
-			void resize(std::size_t channelCount, std::size_t size)
+			void resize(std::size_t channelCount, std::size_t size, SampleValue value = 0.f)
 			{
 				channels.resize(channelCount);
 				for (auto& channel : channels)
-					channel.resize(size);
+					channel.resize(size, value);
 			}
 			
 			/**
@@ -111,6 +111,28 @@ namespace nap
 			void clear()
 			{
 				channels.clear();
+			}
+
+			/**
+			 * Moves a channel of audio data into a new channel of the MultiSampleBuffer.
+			 * Doesn't allocate or deallocate sample data.
+			 * @param buffer The buffer to move, will be emptied after the call.
+			 */
+			void addChannel(SampleBuffer&& buffer)
+			{
+				channels.emplace_back(std::move(buffer));
+			}
+
+			/**
+			 * Moves the last channel out of the MultiSampleBuffer and returns it.
+			 * Doesn't allocate or deallocate sample data.
+			 * @return The moved last channel.
+			 */
+			SampleBuffer popChannel()
+			{
+				SampleBuffer result = std::move(channels.back());
+				channels.pop_back();
+				return std::move(result);
 			}
 
 		private:
