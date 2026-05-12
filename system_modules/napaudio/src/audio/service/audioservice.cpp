@@ -122,7 +122,7 @@ namespace nap
 		{
 			while (!mStopGarbageCollector.load())
 			{
-				auto result = std::move(mTrashBin.wait_dequeue());
+				auto result = std::move(mTrashBin.wait_dequeue(100000));
 				result = nullptr;
 			}
 		}

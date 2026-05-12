@@ -139,12 +139,13 @@ namespace nap
 
 			/**
 			 * Blocks until an element is dequeued from the queue.
+			 * @param timeOut in usec
 			 * @return Abstraction of object contained by a SafeOwner.
 			 */
-			std::unique_ptr<SafeOwnerBase::Data> wait_dequeue()
+			std::unique_ptr<SafeOwnerBase::Data> wait_dequeue(int timeOut)
 			{
 				std::unique_ptr<SafeOwnerBase::Data> result = nullptr;
-				mQueue.wait_dequeue(result);
+				mQueue.wait_dequeue_timed(result, timeOut);
 				return std::move(result);
 			}
 
