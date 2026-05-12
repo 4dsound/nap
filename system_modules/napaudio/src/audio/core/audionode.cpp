@@ -38,7 +38,7 @@ namespace nap
 		}
 
 		
-		const std::string & Node::getLabel() const
+		const std::string& Node::getLabel() const
 		{
 #if !NDEBUG
 			return mLabel;

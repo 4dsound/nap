@@ -123,9 +123,9 @@ namespace nap
 		}
 
 
-		void NodeManager::enqueueTask(nap::TaskQueue::Task task)
+		void NodeManager::enqueueTask(nap::TaskQueue::Task&& task)
 		{
-			auto result = mTaskQueue.enqueue(task);
+			auto result = mTaskQueue.enqueue(std::move(task));
 			assert(result);
 		}
 
