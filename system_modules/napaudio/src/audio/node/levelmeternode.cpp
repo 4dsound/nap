@@ -43,7 +43,7 @@ namespace nap
 
 		void LevelMeterNode::process()
 		{
-			auto inputBuffer = input.pull();
+			auto inputBuffer = input.pullOptional().get();
 
 			auto& outputBuffer = getOutputBuffer(output);
 			if (inputBuffer == nullptr)

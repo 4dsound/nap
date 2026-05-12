@@ -138,6 +138,52 @@ namespace nap
 		private:
 			std::vector<SampleBuffer> channels;
 		};
+
+
+		/**
+		 * Convenience type that behaves like a SampleBuffer but can also be a nullptr behind the scenes.
+		 */
+		struct OptionalSampleBuffer
+		{
+			/**
+			 * Constructor
+			 * @param bufferPtr The buffer if one is available, nullptr if not.
+			 */
+			OptionalSampleBuffer(SampleBuffer* bufferPtr) { mPtr = bufferPtr; }
+
+			/**
+			 * Set to a buffer or to nullptr.
+			 * @param bufferPtr The buffer if one is available, nullptr if not.
+			 */
+			void set(SampleBuffer* bufferPtr) { mPtr = bufferPtr; }
+
+			/**
+			 * Returns contents of the buffer if one is present, zeroes if not.
+			 * @param index Index in the buffer.
+			 * @return Sample at index, zero if no buffer is available.
+			 */
+			SampleValue operator[](int index)
+			{
+				if (mPtr == nullptr)
+					return 0.f;
+				else
+					return (*mPtr)[index];
+			}
+
+			/**
+			 * @return Size of the buffer if one is present, zero if not.
+			 */
+			int size() const { return mPtr != nullptr ? mPtr->size() : 0; }
+
+			bool operator==(const std::nullptr_t) const { return mPtr == nullptr; }
+			bool operator!=(const std::nullptr_t) const { return mPtr != nullptr; }
+
+			SampleBuffer* get() { return mPtr; }
+			const SampleBuffer* get() const { return mPtr; }
+
+		private:
+			SampleBuffer* mPtr = nullptr;
+		};
 		
 		
 		/**

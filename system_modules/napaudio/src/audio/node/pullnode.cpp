@@ -26,7 +26,7 @@ namespace nap
 		
 		void PullNode::process()
 		{
-			audioInput.pull();
+			audioInput.pullOptional();
 		}
 		
 	}

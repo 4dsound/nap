@@ -38,8 +38,8 @@ namespace nap
 				equalPowerPan<ControllerValue>(mPanning, mLeftGain, mRightGain);
 			}
 			
-			auto& leftInputBuffer = *leftInput.pull();
-			auto& rightInputBuffer = *rightInput.pull();
+			auto leftInputBuffer = leftInput.pullOptional();
+			auto rightInputBuffer = rightInput.pullOptional();
 			auto& leftOutputBuffer = getOutputBuffer(leftOutput);
 			auto& rightOutputBuffer = getOutputBuffer(rightOutput);
 			
