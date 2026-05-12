@@ -37,8 +37,6 @@ namespace nap
 			 */
 			bool init(nap::utility::ErrorState& errorState) override;
 
-			void update(double deltaTime) override;
-
 			/**
 			 * Called on shutdown of the service. Closes portaudio stream and shuts down portaudio.
 			 */
@@ -61,13 +59,17 @@ namespace nap
 			/**
 			 * Enqueue a task to be executed within the process() method for thread safety
 			 */
-			void enqueueTask(TaskQueue::Task task) { mNodeManager.enqueueTask(task); }
+			void enqueueTask(TaskQueue::Task&& task) { mNodeManager.enqueueTask(std::move(task)); }
 
         private:
 			/*
 			 * Checks wether certain atomic types that are used within the library are lockfree and gives a warning if not.
 			 */
 			void checkLockfreeTypes();
+
+			void garbageCollectorLoop();
+			std::atomic<bool> mStopGarbageCollector = { false };
+			std::thread mGarbageCollectorThread;
 
 		private:
 			NodeManager mNodeManager; // The node manager that performs the audio processing.

@@ -32,8 +32,8 @@ namespace nap
 
 		AudioService::~AudioService()
 		{
-			// The AudioService is not being updated anymore, so we need to clear the thrashbin here again.
-			mTrashBin.clear();
+			mStopGarbageCollector.store(true);
+			mGarbageCollectorThread.join();
 		}
 
 
@@ -45,15 +45,12 @@ namespace nap
 			mMpg123Initialized = true;
 #endif
 			checkLockfreeTypes();
+
+			// Start garbage collector
+			mGarbageCollectorThread = std::thread([this](){ garbageCollectorLoop(); });
+
             return true;
 		}
-
-
-		void AudioService::update(double deltaTime)
-		{
-			mTrashBin.clear();
-		}
-
 
 
 		void AudioService::shutdown()
@@ -81,14 +78,14 @@ namespace nap
 
 			// Move objects from the deletion queue to the trash bin.
 			// Execute audioCleanup() method for audio::SafeObject descendants.
-			auto deletedData = mDeletionQueue.try_dequeue();
+			auto deletedData = std::move(mDeletionQueue.try_dequeue());
 			while (deletedData != nullptr)
 			{
 				auto object = deletedData->getSafeObject();
 				if (object != nullptr)
 					object->audioCleanup();
 				mTrashBin.enqueue(std::move(deletedData));
-				deletedData = mDeletionQueue.try_dequeue();
+				deletedData = std::move(mDeletionQueue.try_dequeue());
 			}
 		}
 		
@@ -119,5 +116,16 @@ namespace nap
             if (!enumVar.is_lock_free())
                 Logger::warn("%s is not lockfree on current platform", "atomic enum");
 		}
+
+
+		void AudioService::garbageCollectorLoop()
+		{
+			while (!mStopGarbageCollector.load())
+			{
+				auto result = std::move(mTrashBin.wait_dequeue());
+				result = nullptr;
+			}
+		}
+
 	}
 }
