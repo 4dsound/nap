@@ -13,9 +13,9 @@
 #include <utility/dllexport.h>
 #include <readerwriterqueue.h>
 
-#include "concurrentqueue.h"
-#include "rtti/rtticast.h"
-#include "rtti/typeinfo.h"
+#include <blockingconcurrentqueue.h>
+#include <rtti/rtticast.h>
+#include <rtti/typeinfo.h>
 
 namespace nap
 {
@@ -138,13 +138,24 @@ namespace nap
 			}
 
 			/**
+			 * Blocks until an element is dequeued from the queue.
+			 * @return Abstraction of object contained by a SafeOwner.
+			 */
+			std::unique_ptr<SafeOwnerBase::Data> wait_dequeue()
+			{
+				std::unique_ptr<SafeOwnerBase::Data> result = nullptr;
+				mQueue.wait_dequeue(result);
+				return std::move(result);
+			}
+
+			/**
 			 * Clears the DeletionQueue by destructing the objects it contains.
 			 * It also clears all the SafePtrs that point to objects in the queue.
 			 */
 			void clear();
 
 		private:
-			moodycamel::ConcurrentQueue<std::unique_ptr<SafeOwnerBase::Data>> mQueue; // Lockfree queue that holds SafeOwner::Data objects to be deleted because the enclosing SafeOwner went out of scope.
+			moodycamel::BlockingConcurrentQueue<std::unique_ptr<SafeOwnerBase::Data>, moodycamel::ConcurrentQueueDefaultTraits> mQueue; // Lockfree queue that holds SafeOwner::Data objects to be deleted because the enclosing SafeOwner went out of scope.
 		};
 
 
@@ -500,23 +511,23 @@ namespace nap
 			template<typename OTHER>
 			bool operator==(const OTHER* ptr) const
 			{
-				return ptr ? isValid() && (*mOwnerData)->mObject.get() == ptr : !isValid();
+				return ptr ? isValid() && ((*mOwnerData)->mObject.get() == ptr) : !isValid();
 			}
 
 			template<typename OTHER>
 			bool operator!=(const OTHER* ptr) const
 			{
-				return ptr ? isValid() && (*mOwnerData)->mObject.get() != ptr : !isValid();
+				return ptr ? isValid() && ((*mOwnerData)->mObject.get() != ptr) : !isValid();
 			}
 
 			bool operator==(const std::nullptr_t) const
 			{
-				return !isValid() || (*mOwnerData)->mEnqueuedForDeletion == true;
+				return (isValid() == false) || ((*mOwnerData)->mEnqueuedForDeletion);
 			}
 
 			bool operator!=(const std::nullptr_t) const
 			{
-				return isValid() && (*mOwnerData)->mEnqueuedForDeletion == false;
+				return isValid() && ((*mOwnerData)->mEnqueuedForDeletion == false);
 			}
 
 			T* get() const
