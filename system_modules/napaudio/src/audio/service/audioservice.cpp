@@ -49,7 +49,7 @@ namespace nap
 			// Start garbage collector
 			mGarbageCollectorThread = std::thread([this](){ garbageCollectorLoop(); });
 
-            return true;
+			return true;
 		}
 
 
@@ -125,6 +125,8 @@ namespace nap
 				auto result = std::move(mTrashBin.wait_dequeue(100000));
 				result = nullptr;
 			}
+
+			while (mTrashBin.try_dequeue());
 		}
 
 	}
