@@ -45,8 +45,11 @@ namespace nap
 			// Unregister as root process, if needed
 			auto it = std::find_if(getNodeManager().mRootProcesses.begin(), getNodeManager().mRootProcesses.end(), [&](auto& e){ return e.get() == this; });
 			if (it != getNodeManager().mRootProcesses.end())
-				getNodeManager().mRootProcesses.erase(it);
-
+			{
+				*it = getNodeManager().mRootProcesses.back();
+				getNodeManager().mRootProcesses.pop_back();
+			}
+				
 			// Unregister as process
 			if (mRegisteredWithNodeManager.load())
 			{
@@ -116,7 +119,10 @@ namespace nap
 
 				auto it = std::find_if(mChildren.begin(), mChildren.end(), [&](auto& e){ return e.get() == childPtr.get(); });
 				if (it != mChildren.end())
-					mChildren.erase(it);
+				{
+					*it = mChildren.back();
+					mChildren.pop_back();
+				}
 				sortChildrenByThread();
 			});
 		}
@@ -201,7 +207,8 @@ namespace nap
 			{
 				if ((*it) == nullptr)
 				{
-					it = mChildren.erase(it);
+					*it = mChildren.back();
+					mChildren.pop_back();
 					childRemoved = true;
 				}
 				else
@@ -220,7 +227,6 @@ namespace nap
 					break;
 			}
 		}
-		
 		
 	}
 	

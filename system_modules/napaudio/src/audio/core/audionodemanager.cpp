@@ -190,9 +190,12 @@ namespace nap
 
 		void NodeManager::unregisterProcess(Process& process)
 		{
-			auto it = std::find_if(mProcesses.begin(), mProcesses.end(), [&](auto& el){ return el == &process; });
+			auto it = std::find(mProcesses.begin(), mProcesses.end(), &process);
 			if (it != mProcesses.end())
-				mProcesses.erase(it);
+			{
+				*it = mProcesses.back();
+				mProcesses.pop_back();
+			}
 		}
 
 
@@ -213,9 +216,13 @@ namespace nap
 			{
 				if (rootProcess == nullptr)
 					return;
-				auto it = std::find_if(mRootProcesses.begin(), mRootProcesses.end(), [&](auto &el){ return el.get() == rootProcess.get(); });
+				
+				auto it = std::find(mRootProcesses.begin(), mRootProcesses.end(), rootProcess.get());
 				if (it != mRootProcesses.end())
-					mRootProcesses.erase(it);
+				{
+					*it = mRootProcesses.back();
+					mRootProcesses.pop_back();
+				}
 			});
 		}
 
