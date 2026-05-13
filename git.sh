@@ -14,10 +14,11 @@ echo "modules.."
 cd modules
 git $command # 4dsound_modules
 echo "napaudioadvanced.."
-cd napaudioadvanced # napaudioadvanced
-git $command
+cd napaudioadvanced
+git $command # napaudioadvanced
+cd ..
 echo "audiobridge.."
-cd thirdparty/audiobridge
+cd napaudiobridge/thirdparty/audiobridge
 git $command # audiobridge
 cd ../../../..
 echo "4dsound.."
