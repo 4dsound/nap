@@ -171,10 +171,7 @@ namespace nap
 			 * @param nodeManager the node manager the process runs on
 			 * @param threadPool the threadpool used for parallelization when the ParentProcess is set to parallel mode.
 			 */
-			ParentProcess(NodeManager& nodeManager, ThreadPool& threadPool) : Process(nodeManager), mThreadPool(threadPool)
-			{
-				mChildren.reserve(5000);
-			}
+			ParentProcess(NodeManager& nodeManager, ThreadPool& threadPool);
 
 			/**
 			 * Constructor that takes the parent process of this process as argument in order to use its ThreadPool.

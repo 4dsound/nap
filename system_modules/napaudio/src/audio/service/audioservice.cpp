@@ -7,6 +7,7 @@
 
 // Audio includes
 #include "audioservice.h"
+#include <audio/core/audionode.h>
 
 // Nap includes
 #include <nap/logger.h>
@@ -79,13 +80,18 @@ namespace nap
 			// Move objects from the deletion queue to the trash bin.
 			// Execute audioCleanup() method for audio::SafeObject descendants.
 			auto deletedData = std::move(mDeletionQueue.try_dequeue());
+			int counter = 0;
+			int maxGarbageCount = (framesPerBuffer / mNodeManager.getSampleRate()) * 1000.f * 200;
 			while (deletedData != nullptr)
 			{
 				auto object = deletedData->getSafeObject();
 				if (object != nullptr)
 					object->audioCleanup();
 				mTrashBin.enqueue(std::move(deletedData));
-				deletedData = std::move(mDeletionQueue.try_dequeue());
+				if (counter++ < maxGarbageCount)
+					deletedData = std::move(mDeletionQueue.try_dequeue());
+				else
+					deletedData = nullptr;
 			}
 		}
 		
@@ -123,7 +129,16 @@ namespace nap
 			while (!mStopGarbageCollector.load())
 			{
 				auto result = std::move(mTrashBin.wait_dequeue(100000));
+				if (result != nullptr)
+				{
+					auto node = rtti_cast<Node>(result->getSafeObject());
+					if (node != nullptr)
+						Logger::info("GarbageCollector removing " + node->getLabel());
+					else
+						Logger::info("GarbageCollector removing");
+				}
 				result = nullptr;
+				// std::this_thread::sleep_for(std::chrono::milliseconds(50));
 			}
 
 			while (mTrashBin.try_dequeue());

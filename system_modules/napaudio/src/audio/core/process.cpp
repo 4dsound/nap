@@ -88,8 +88,14 @@ namespace nap
 		
 		
 		// --- ParentProcess --- //
-		
-		
+
+
+		ParentProcess::ParentProcess(NodeManager &nodeManager, ThreadPool &threadPool): Process(nodeManager), mThreadPool(threadPool)
+		{
+			mChildren.reserve(5000);
+		}
+
+
 		void ParentProcess::addChild(Process& child)
 		{
 			auto childPtr = child.getSafe();
