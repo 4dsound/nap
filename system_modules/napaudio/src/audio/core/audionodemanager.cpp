@@ -183,19 +183,14 @@ namespace nap
 				if (oldBufferSize != mInternalBufferSize)
 					process->setBufferSize(mInternalBufferSize);
 				process->mRegisteredWithNodeManager.store(true);
-				mProcesses.emplace_back(process.get());
+				mProcesses.emplace(process.get());
 			});
 		}
 
 
 		void NodeManager::unregisterProcess(Process& process)
 		{
-			auto it = std::find(mProcesses.begin(), mProcesses.end(), &process);
-			if (it != mProcesses.end())
-			{
-				*it = mProcesses.back();
-				mProcesses.pop_back();
-			}
+			mProcesses.erase(&process);
 		}
 
 
@@ -205,7 +200,7 @@ namespace nap
 			{
 				if (rootProcess == nullptr)
 					return;
-				mRootProcesses.emplace_back(rootProcess);
+				mRootProcesses.emplace(rootProcess);
 			});
 		}
 
@@ -216,13 +211,8 @@ namespace nap
 			{
 				if (rootProcess == nullptr)
 					return;
-				
-				auto it = std::find(mRootProcesses.begin(), mRootProcesses.end(), rootProcess.get());
-				if (it != mRootProcesses.end())
-				{
-					*it = mRootProcesses.back();
-					mRootProcesses.pop_back();
-				}
+
+				mRootProcesses.erase(rootProcess);
 			});
 		}
 

@@ -253,8 +253,8 @@ namespace nap
 
 			std::vector<float*> mInputBuffer; //  Pointing to the audio input that this node manager has to process. The format is a non-interleaved array containing a float array for each channel.
 
-			std::vector<Process*> mProcesses; // all the audio processes managed by this node manager
-			std::vector<SafePtr<Process>> mRootProcesses; // the nodes that will be processed directly by the manager on every audio callback
+			std::unordered_set<Process*> mProcesses; // all the audio processes managed by this node manager
+			std::unordered_set<SafePtr<Process>> mRootProcesses; // the nodes that will be processed directly by the manager on every audio callback
 
 			nap::TaskQueue mTaskQueue = { 4096 }; // Queue with lambda functions to be executed before processing the next internal buffer.
 			DeletionQueue& mDeletionQueue; // Deletion queue used to safely create and destruct nodes in a threadsafe manner.
