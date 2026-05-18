@@ -22,6 +22,8 @@ namespace nap
 
 		class NAPAPI AudioServiceConfiguration : public ServiceConfiguration
 		{
+			RTTI_ENABLE(ServiceConfiguration)
+
 		public:
 			AudioServiceConfiguration() = default;
 

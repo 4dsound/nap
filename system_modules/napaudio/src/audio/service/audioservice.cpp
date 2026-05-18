@@ -31,8 +31,7 @@ namespace nap
 {
 	namespace audio
 	{
-		AudioService::AudioService(ServiceConfiguration* configuration) :
-				Service(configuration)
+		AudioService::AudioService(ServiceConfiguration* configuration) : Service(configuration)
 		{
 			auto config = rtti_cast<AudioServiceConfiguration>(configuration);
 			mNodeManager = std::make_unique<NodeManager>(mDeletionQueue, config->mReserveProcesses, config->mReserveRootProcesses);

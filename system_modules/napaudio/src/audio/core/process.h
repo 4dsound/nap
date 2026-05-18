@@ -176,7 +176,7 @@ namespace nap
 			/**
 			 * Constructor that takes the parent process of this process as argument in order to use its ThreadPool.
 			 */
-			ParentProcess(ParentProcess& parent, int reserveChildren);
+			ParentProcess(ParentProcess& parent, int reserveChildren = 0);
 
 			/**
 			 * Add a reference to a child process whose processing will be triggered by this parent process.
