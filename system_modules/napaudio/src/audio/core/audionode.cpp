@@ -15,6 +15,8 @@ namespace nap
 	namespace audio
 	{
 
+		const std::string NoLabel = "NoLabel";
+
 		Node::Node(NodeManager& manager) : Process(manager)
 		{
 		}
@@ -43,7 +45,7 @@ namespace nap
 #if !NDEBUG
 			return mLabel;
 #else
-			return "NoLabel";
+			return NoLabel;
 #endif
 		}
 
