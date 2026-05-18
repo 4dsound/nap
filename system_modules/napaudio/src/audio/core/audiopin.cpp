@@ -146,15 +146,6 @@ namespace nap
 		}
 
 
-		OptionalSampleBuffer InputPin::pullOptional()
-		{
-			if (mInput)
-				return { &mInput->pull() };
-			else
-				return { nullptr };
-		}
-
-
 		void InputPin::connectNow(OutputPin& connection)
 		{
 			// remove old connection

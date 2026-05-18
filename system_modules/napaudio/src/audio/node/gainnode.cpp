@@ -20,9 +20,10 @@ namespace nap
 		void GainNode::process()
 		{
 			auto& outputBuffer = getOutputBuffer(audioOutput);
-			auto inputBuffer = audioInput.pullOptional().get();
+			auto inputBuffer = audioInput.pull();
 			
-			if (inputBuffer == nullptr) {
+			if (inputBuffer == nullptr)
+			{
 				for (auto i = 0; i < outputBuffer.size(); ++i)
 					outputBuffer[i] = 0;
 				return;

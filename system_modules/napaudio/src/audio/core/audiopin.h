@@ -108,8 +108,6 @@ namespace nap
 			 */
 			SampleBuffer* pull();
 
-			OptionalSampleBuffer pullOptional();
-			
 		private:
 			/**
 			 * Connects another node's OutputPin to this input.

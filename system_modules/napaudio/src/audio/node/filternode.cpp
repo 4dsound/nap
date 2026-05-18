@@ -42,7 +42,7 @@ namespace nap
 			if (mIsDirty.check())
 				update();
 
-			auto inputBuffer = audioInput.pullOptional().get();
+			auto inputBuffer = audioInput.pull();
 			auto& outputBuffer = getOutputBuffer(audioOutput);
 			
 			if (inputBuffer != nullptr) {
