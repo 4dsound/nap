@@ -77,9 +77,15 @@ namespace nap
 		// --- ParentProcess --- //
 
 
-		ParentProcess::ParentProcess(NodeManager &nodeManager, ThreadPool &threadPool): Process(nodeManager), mThreadPool(threadPool)
+		ParentProcess::ParentProcess(NodeManager &nodeManager, ThreadPool &threadPool, int reserveChildren): Process(nodeManager), mThreadPool(threadPool)
 		{
-			mChildren.reserve(5000);
+			mChildren.reserve(reserveChildren);
+		}
+
+
+		ParentProcess::ParentProcess(ParentProcess &parent, int reserveChildren): Process(parent), mThreadPool(parent.mThreadPool)
+		{
+			mChildren.reserve(reserveChildren);
 		}
 
 

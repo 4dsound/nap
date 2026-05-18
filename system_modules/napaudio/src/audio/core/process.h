@@ -171,13 +171,12 @@ namespace nap
 			 * @param nodeManager the node manager the process runs on
 			 * @param threadPool the threadpool used for parallelization when the ParentProcess is set to parallel mode.
 			 */
-			ParentProcess(NodeManager& nodeManager, ThreadPool& threadPool);
+			ParentProcess(NodeManager& nodeManager, ThreadPool& threadPool, int reserveChildren = 0);
 
 			/**
 			 * Constructor that takes the parent process of this process as argument in order to use its ThreadPool.
 			 */
-			ParentProcess(ParentProcess& parent) : Process(parent), mThreadPool(parent.mThreadPool)
-			{ }
+			ParentProcess(ParentProcess& parent, int reserveChildren);
 
 			/**
 			 * Add a reference to a child process whose processing will be triggered by this parent process.
@@ -225,7 +224,7 @@ namespace nap
 
 			ThreadPool& mThreadPool;
 			std::vector<SafePtr<Process>> mChildren;
-			std::atomic<Mode> mMode = {Mode::Sequential};
+			std::atomic<Mode> mMode = { Mode::Sequential };
 
 			// The data structure that indicates which children are processed on which thread.
 			struct ThreadData
