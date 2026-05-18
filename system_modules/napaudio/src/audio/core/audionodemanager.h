@@ -40,10 +40,10 @@ namespace nap
 			using OutputMapping = std::vector<std::vector<SampleBuffer*>>;
 
 		public:
-			NodeManager(DeletionQueue& deletionQueue) : mDeletionQueue(deletionQueue)
+			NodeManager(DeletionQueue& deletionQueue, int reserveProcesses = 0, int reserveRootProcesses = 0) : mDeletionQueue(deletionQueue)
 			{
-				mProcesses.reserve(10000);
-				mRootProcesses.reserve(1000);
+				mProcesses.reserve(reserveProcesses);
+				mRootProcesses.reserve(reserveRootProcesses);
 			}
 
 			~NodeManager();
