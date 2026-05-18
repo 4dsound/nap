@@ -33,10 +33,7 @@ namespace nap
 		{
 			// Unregister as process in case of a shutdown and audioCleanup() has not been called yet.
 			if (mRegisteredWithNodeManager.load())
-			{
 				getNodeManager().unregisterProcess(*this);
-				mRegisteredWithNodeManager.store(false);
-			}
 		}
 
 
@@ -45,17 +42,7 @@ namespace nap
 			// Unregister as root process, if needed
 			auto it = std::find_if(getNodeManager().mRootProcesses.begin(), getNodeManager().mRootProcesses.end(), [&](auto& e){ return e.get() == this; });
 			if (it != getNodeManager().mRootProcesses.end())
-			{
-				*it = getNodeManager().mRootProcesses.back();
-				getNodeManager().mRootProcesses.pop_back();
-			}
-				
-			// Unregister as process
-			if (mRegisteredWithNodeManager.load())
-			{
-				getNodeManager().unregisterProcess(*this);
-				mRegisteredWithNodeManager.store(false);
-			}
+				getNodeManager().mRootProcesses.erase(it);
 		}
 
 
