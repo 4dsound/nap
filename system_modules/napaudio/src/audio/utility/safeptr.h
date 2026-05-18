@@ -531,6 +531,18 @@ namespace nap
 				return isValid() && ((*mOwnerData)->mEnqueuedForDeletion == false);
 			}
 
+			template<typename OTHER>
+			bool operator==(const SafePtr<OTHER> ptr) const
+			{
+				return ptr.isValid() ? isValid() && ((*mOwnerData)->mObject.get() == ptr.get()) : !isValid();
+			}
+
+			template<typename OTHER>
+			bool operator!=(const SafePtr<OTHER> ptr) const
+			{
+				return ptr.isValid() ? isValid() && ((*mOwnerData)->mObject.get() != ptr.get()) : !isValid();
+			}
+
 			T* get() const
 			{
 				if (!isValid())
@@ -571,8 +583,21 @@ namespace nap
 			std::shared_ptr<typename SafeOwner<T>::Data*> mOwnerData = nullptr; ///< The data pointed to by this SafePtr, managed by SafeOwner or by the DeletionQueue.
 		};
 
-
 	}
 
 }
+
+// Std lib hash specialization to allow SafePtr<> to be used in std::unordered_set
+template<typename T>
+struct std::hash<nap::audio::SafePtr<T>>
+{
+	size_t operator()(const nap::audio::SafePtr<T>& ptr) const noexcept
+	{
+		// Hash the raw pointer value
+		return hash<T*>()(ptr.get());
+	}
+};
+
+
+
 
