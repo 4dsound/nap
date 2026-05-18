@@ -223,16 +223,16 @@ namespace nap
 			void sortChildrenByThread();
 
 			ThreadPool& mThreadPool;
-			std::vector<SafePtr<Process>> mChildren;
-			std::atomic<Mode> mMode = { Mode::Sequential };
+			std::unordered_set<SafePtr<Process>> mChildren;
+			std::atomic<Mode> mMode = {Mode::Sequential};
 
 			// The data structure that indicates which children are processed on which thread.
 			struct ThreadData
 			{
-				std::vector<SafePtr<Process>> mChildren;
+				std::unordered_set<SafePtr<Process>> mChildren;
 				std::atomic<bool> mFinished = { false };
 			};
-			std::vector<std::unique_ptr<ThreadData>> mThreadData;
+			std::unordered_set<std::unique_ptr<ThreadData>> mThreadData;
 		};
 
 

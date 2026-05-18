@@ -5,7 +5,6 @@
 #include "process.h"
 
 #include <audio/core/audionodemanager.h>
-#include <audio/core/audiopin.h>
 
 RTTI_BEGIN_CLASS_NO_DEFAULT_CONSTRUCTOR(nap::audio::Process)
 RTTI_END_CLASS
@@ -101,7 +100,7 @@ namespace nap
 				// Check for duplicates
 				auto it = std::find_if(mChildren.begin(), mChildren.end(), [&](auto& e){ return e.get() == childPtr.get(); });
 				if (it == mChildren.end())
-					mChildren.emplace_back(childPtr);
+					mChildren.emplace(childPtr);
 				sortChildrenByThread();
 			});
 		}
@@ -116,12 +115,7 @@ namespace nap
 				if (parentPtr == nullptr || childPtr == nullptr)
 					return;
 
-				auto it = std::find_if(mChildren.begin(), mChildren.end(), [&](auto& e){ return e.get() == childPtr.get(); });
-				if (it != mChildren.end())
-				{
-					*it = mChildren.back();
-					mChildren.pop_back();
-				}
+				mChildren.erase(childPtr);
 				sortChildrenByThread();
 			});
 		}
@@ -143,14 +137,16 @@ namespace nap
 			auto parallelCount = std::min<int>(audioThreadCount, mChildren.size());
 			mThreadData.clear();
 			for (auto i = 0; i < parallelCount; ++i)
-				mThreadData.emplace_back(std::make_unique<ThreadData>());
-			int i = 0;
-			for (auto& child : mChildren)
+				mThreadData.emplace(std::make_unique<ThreadData>());
+			auto it_children = mChildren.begin();
+			auto it_threadData = mThreadData.begin();
+			while (it_children != mChildren.end())
 			{
-				mThreadData[i]->mChildren.emplace_back(child);
-				i++;
-				if (i == parallelCount)
-					i = 0;
+				(*it_threadData)->mChildren.emplace(*it_children);
+				it_children++;
+				it_threadData++;
+				if (it_threadData == mThreadData.end())
+					it_threadData = mThreadData.begin();
 			}
 		}
 
@@ -204,11 +200,11 @@ namespace nap
 			auto it = mChildren.begin();
 			while (it != mChildren.end())
 			{
-				if ((*it) == nullptr)
+				if (*it == nullptr)
 				{
-					*it = mChildren.back();
-					mChildren.pop_back();
+					mChildren.erase(it);
 					childRemoved = true;
+					it = mChildren.begin(); // The unordered_set is shuffled after erasing, so we start again.
 				}
 				else
 					it++;
