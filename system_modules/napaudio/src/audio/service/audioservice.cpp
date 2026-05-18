@@ -17,11 +17,6 @@
     #include <mpg123.h>
 #endif
 
-RTTI_BEGIN_CLASS(nap::audio::AudioServiceConfiguration)
-	RTTI_PROPERTY("ReserveProcesses", &nap::audio::AudioServiceConfiguration::mReserveProcesses, nap::rtti::EPropertyMetaData::Default)
-	RTTI_PROPERTY("ReserveRootProcesses", &nap::audio::AudioServiceConfiguration::mReserveRootProcesses, nap::rtti::EPropertyMetaData::Default)
-RTTI_END_CLASS
-
 RTTI_BEGIN_CLASS_NO_DEFAULT_CONSTRUCTOR(nap::audio::AudioService)
 	RTTI_CONSTRUCTOR(nap::ServiceConfiguration*)
 RTTI_END_CLASS
@@ -32,11 +27,8 @@ namespace nap
 	namespace audio
 	{
 		AudioService::AudioService(ServiceConfiguration* configuration) :
-				Service(configuration)
-		{
-			auto config = rtti_cast<AudioServiceConfiguration>(configuration);
-			mNodeManager = std::make_unique<NodeManager>(mDeletionQueue, config->mReserveProcesses, config->mReserveRootProcesses);
-		}
+				Service(configuration), mNodeManager(mDeletionQueue)
+		{ }
 
 
 		AudioService::~AudioService()
@@ -76,14 +68,14 @@ namespace nap
 
 		NodeManager& AudioService::getNodeManager()
 		{
-			return *mNodeManager;
+			return mNodeManager;
 		}
 
 
 		void AudioService::onAudioCallback(float** inputBuffer, float** outputBuffer, unsigned long framesPerBuffer)
 		{
 			// process the node manager
-			mNodeManager->process(inputBuffer, outputBuffer, framesPerBuffer);
+			mNodeManager.process(inputBuffer, outputBuffer, framesPerBuffer);
 
 			// Move objects from the deletion queue to the trash bin.
 			// Execute audioCleanup() method for audio::SafeObject descendants.
