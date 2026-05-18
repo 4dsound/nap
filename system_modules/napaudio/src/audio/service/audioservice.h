@@ -19,13 +19,26 @@ namespace nap
 		// Forward declarations
 		class AudioService;
 
+
+		class NAPAPI AudioServiceConfiguration : public ServiceConfiguration
+		{
+		public:
+			AudioServiceConfiguration() = default;
+
+			int mReserveProcesses = 10000; ///< Property: 'ReserveProcesses' Initial size of the process registry
+			int mReserveRootProcesses = 1000; ///< Property: 'ReserveRootProcesses' Initial size of the root process registry
+
+			rtti::TypeInfo getServiceType() const override { return RTTI_OF(AudioService); }
+		};
+
+
 		/**
 		 * Service that provides audio input and output processing directly for hardware audio devices.
 		 * Provides static methods to poll the current system for available audio devices using portaudio.
 		 */
 		class NAPAPI AudioService final : public Service
 		{
-		RTTI_ENABLE(nap::Service)
+			RTTI_ENABLE(nap::Service)
 
 		public:
 			AudioService(ServiceConfiguration* configuration);
@@ -59,7 +72,7 @@ namespace nap
 			/**
 			 * Enqueue a task to be executed within the process() method for thread safety
 			 */
-			void enqueueTask(TaskQueue::Task&& task) { mNodeManager.enqueueTask(std::move(task)); }
+			void enqueueTask(TaskQueue::Task&& task) { mNodeManager->enqueueTask(std::move(task)); }
 
         private:
 			/*
@@ -72,7 +85,7 @@ namespace nap
 			std::thread mGarbageCollectorThread;
 
 		private:
-			NodeManager mNodeManager; // The node manager that performs the audio processing.
+			std::unique_ptr<NodeManager> mNodeManager = nullptr; // The node manager that performs the audio processing.
 			bool mMpg123Initialized	   = false;	// If mpg123 is initialized
 
 			// DeletionQueue with nodes that are no longer used and that can be cleared and destructed safely on the next audio callback.
