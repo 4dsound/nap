@@ -82,6 +82,7 @@ namespace nap
 			 */
 			void checkLockfreeTypes();
 
+			// The garbage collector thread in a loop emties the trash bin queue and deallocates the objects in it.
 			void garbageCollectorLoop();
 			std::atomic<bool> mStopGarbageCollector = { false };
 			std::thread mGarbageCollectorThread;
@@ -91,8 +92,11 @@ namespace nap
 			bool mMpg123Initialized	   = false;	// If mpg123 is initialized
 
 			// DeletionQueue with nodes that are no longer used and that can be cleared and destructed safely on the next audio callback.
-			// Clearing is performed on the audio callback to make sure the node can not be destructed while it is being processed.
+			// The DeletionQueue is emptied on the audio callback to make sure the node can not be destructed while it is being processed.
 			DeletionQueue mDeletionQueue;
+
+			// Objects from mDeletionQueue that have been disconnected using their audioCleanup() method are disposed of into the thrash bin.
+			// The trashbin is emptied in the garbage collector thread where the objects are destructed and deallocated without slowing down the audio thread.
 			DeletionQueue mTrashBin;
 		};
 	}

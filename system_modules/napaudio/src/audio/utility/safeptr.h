@@ -164,7 +164,7 @@ namespace nap
 		 * SafeOwner is a special case smart pointer to an object that is used in multiple threads. It serves the purpose of making sure that the object is destructed in a thread safe manner when the SafeOwner goes out of scope.
 		 * It works very much like unique_ptr in such that it takes ownership over the object it points to and takes responsibility for its destruction.
 		 * The difference to unique_ptr is that instead of letting the object destruct itself when the pointer goes out of scope, it throws the object in a DeletionQueue.
-		 * Objects in the DeletionQueue are kept alive until the DeletionQueue is cleared at a moment when there is noone else using the object anymore.
+		 * Objects in the DeletionQueue are kept alive until the DeletionQueue is cleared at a safe moment when there is noone else using the object anymore.
 		 * This is done to prevent the objects to be destroyed while they are possibly being used in another thread at the same time.
 		 */
 		template<typename T>
