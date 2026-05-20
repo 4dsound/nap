@@ -172,7 +172,7 @@ namespace nap
 				if (process != nullptr)
 				{
 					process->mSelf = owner.get();
-					registerProcess(owner.get());
+					registerProcess(*process);
 				}
 
 				return owner;
@@ -195,7 +195,7 @@ namespace nap
 				if (process != nullptr)
 				{
 					process->mSelf = owner.get();
-					registerProcess(owner.get());
+					registerProcess(*process);
 				}
 
 				return owner;
@@ -213,10 +213,10 @@ namespace nap
 
 
 		private:
-			// Used by the nodes and audio processes to register themselves on construction
-			void registerProcess(SafePtr<Process> process);
+			// Used to register all nodes and audio processes on construction. Threadsafe.
+			void registerProcess(Process& process);
 
-			// Used by the nodes and audio processes to unregister themselves on destruction
+			// Used by all nodes and audio processes to unregister themselves from their destructor. Threadsafe.
 			void unregisterProcess(Process& process);
 
 		private:
@@ -254,6 +254,8 @@ namespace nap
 			std::vector<float*> mInputBuffer; //  Pointing to the audio input that this node manager has to process. The format is a non-interleaved array containing a float array for each channel.
 
 			std::unordered_set<Process*> mProcesses; // all the audio processes managed by this node manager
+			std::mutex mProcessesMutex; // Mutex to protext mProcesses
+
 			std::unordered_set<SafePtr<Process>> mRootProcesses; // the nodes that will be processed directly by the manager on every audio callback
 
 			nap::TaskQueue mTaskQueue = { 4096 }; // Queue with lambda functions to be executed before processing the next internal buffer.
