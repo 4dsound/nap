@@ -140,7 +140,7 @@ namespace nap
 		SampleBuffer* InputPin::pull()
 		{
 			if (mInput)
-				return mInput->pull();
+				return &mInput->pull();
 			else
 				return nullptr;
 		}
@@ -199,7 +199,7 @@ namespace nap
 
 			result.resize(mInputsCache.size());
 			for (auto i = 0; i < mInputsCache.size(); ++i)
-				result[i] = mInputsCache[i]->pull();
+				result[i] = &mInputsCache[i]->pull();
 		}
 
 
@@ -269,10 +269,10 @@ namespace nap
 		}
 
 
-		SampleBuffer* OutputPin::pull()
+		SampleBuffer& OutputPin::pull()
 		{
 			mNode->update();
-			return &mBuffer;
+			return mBuffer;
 		}
 
 

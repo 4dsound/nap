@@ -13,7 +13,6 @@ namespace nap
     
     TaskQueue::TaskQueue(int maxQueueItems) : mQueue(maxQueueItems)
     {
-        mDequeuedTasks.resize(maxQueueItems);
     }
     
     
@@ -34,7 +33,14 @@ namespace nap
     }
 
 
-	WorkerThread::WorkerThread() : mBlocking(true), mTaskQueue(20)
+    void TaskQueue::clear()
+    {
+		Task task;
+		while (mQueue.try_dequeue(task));
+    }
+
+
+    WorkerThread::WorkerThread() : mBlocking(true), mTaskQueue(20)
 	{
 		mRunning = false;
 	}

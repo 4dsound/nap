@@ -30,25 +30,30 @@ namespace nap
          * Constructor takes maximum number of items that can be in the queue at a time.
          */
         TaskQueue(int maxQueueItems = 20);
-        /**
-         * Add a task to the end of the queue.
-         */
-        bool enqueue(Task task) { return mQueue.enqueue(task); }
 
-        /**
+    	/**
+		 * Add a task to the end of the queue.
+		 */
+    	bool enqueue(Task&& task) { return mQueue.enqueue(std::move(task)); }
+
+    	/**
          * If the queue is empty, this function blocks until tasks are enqueued and executes them.
          * If the queue is not empty all the tasks are executed.
          */
         void processBlocking();
 
         /**
-         * Executes all tasks currently in the queue
+         * Executes all tasks currently in the queue.
          */
         void process();
 
+        /**
+         * Clear all tasks in the queue without executing them.
+         */
+        void clear();
+
     private:
         moodycamel::BlockingConcurrentQueue<Task> mQueue;
-        std::vector<Task> mDequeuedTasks;
     };
 
 
@@ -73,7 +78,7 @@ namespace nap
         /**
          * enqueues a task to be performed on this thread
          */
-        void enqueue(TaskQueue::Task task) { mTaskQueue.enqueue(task); }
+        void enqueue(TaskQueue::Task&& task) { mTaskQueue.enqueue(std::move(task)); }
 
         /**
          * Start the thread and the thread loop.
