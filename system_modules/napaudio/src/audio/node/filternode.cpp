@@ -45,11 +45,10 @@ namespace nap
 			auto inputBuffer = audioInput.pull();
 			auto& outputBuffer = getOutputBuffer(audioOutput);
 			
-			if (inputBuffer) {
+			if (inputBuffer != nullptr) {
 				for (auto i = 0; i < outputBuffer.size(); ++i) {
 					mInput.write((*inputBuffer)[i]);
-					auto temp = a0.getNextValue() * mInput.read(0) + a1.getNextValue() * mInput.read(1) + a2.getNextValue() * mInput.read(2) - b1.getNextValue() * mOutput.read(0) -
-					            b2.getNextValue() * mOutput.read(1);
+					auto temp = a0.getNextValue() * mInput.read(0) + a1.getNextValue() * mInput.read(1) + a2.getNextValue() * mInput.read(2) - b1.getNextValue() * mOutput.read(0) - b2.getNextValue() * mOutput.read(1);
 					
 					mOutput.write(temp);
 					outputBuffer[i] = temp;
@@ -58,8 +57,7 @@ namespace nap
 				// process with 0 input
 				for (auto i = 0; i < outputBuffer.size(); ++i) {
 					mInput.write(0);
-					auto temp = a0.getNextValue() * mInput.read(0) + a1.getNextValue() * mInput.read(1) + a2.getNextValue() * mInput.read(2) - b1.getNextValue() * mOutput.read(0) -
-					            b2.getNextValue() * mOutput.read(1);
+					auto temp = a0.getNextValue() * mInput.read(0) + a1.getNextValue() * mInput.read(1) + a2.getNextValue() * mInput.read(2) - b1.getNextValue() * mOutput.read(0) - b2.getNextValue() * mOutput.read(1);
 					
 					mOutput.write(temp);
 					outputBuffer[i] = temp;
