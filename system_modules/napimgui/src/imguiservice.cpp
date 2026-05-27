@@ -30,7 +30,7 @@ RTTI_BEGIN_CLASS(nap::IMGuiServiceConfiguration)
 	RTTI_PROPERTY("FontSampling",		&nap::IMGuiServiceConfiguration::mFontOversampling, nap::rtti::EPropertyMetaData::Default,	"Horiontal and Vertical GUI oversampling factor")
 	RTTI_PROPERTY("FontSpacing",		&nap::IMGuiServiceConfiguration::mFontSpacing,		nap::rtti::EPropertyMetaData::Default,	"Extra horizontal spacing (in pixels) between glyphs")
 	RTTI_PROPERTY("Colors",				&nap::IMGuiServiceConfiguration::mCustomColors,		nap::rtti::EPropertyMetaData::Default,	"Colors to use when ColorScheme is set to 'Custom'")
-	RTTI_PROPERTY("Style",				&nap::IMGuiServiceConfiguration::mStyle,			nap::rtti::EPropertyMetaData::Default,	"Global GUI styling options")
+	RTTI_PROPERTY("StyleSettings",		&nap::IMGuiServiceConfiguration::mStyleSettings,			nap::rtti::EPropertyMetaData::Default)
 RTTI_END_CLASS
 
 RTTI_BEGIN_CLASS_NO_DEFAULT_CONSTRUCTOR(nap::IMGuiService, "Manages the global GUI state")
@@ -291,6 +291,100 @@ namespace nap
 		}
 		return new_atlas;
 	}
+
+
+	static std::unique_ptr<ImGuiStyle> createStyle4D(const gui::ColorPalette& palette, const gui::StyleSettings& styleSettings)
+	{
+		// Get ImGUI colors
+		ImVec4 IMGUI_NAPBACK(palette.mBackgroundColor, 0.94f);
+		ImVec4 IMGUI_NAPDARK(palette.mDarkColor, 0.66f);
+		ImVec4 IMGUI_NAPMODA(palette.mDarkColor, 0.85f);
+		ImVec4 IMGUI_NAPMENU(palette.mMenuColor, 0.66f);
+		ImVec4 IMGUI_NAPFRO1(palette.mFront1Color, 1.0f);
+		ImVec4 IMGUI_NAPFRO2(palette.mFront2Color, 1.0f);
+		ImVec4 IMGUI_NAPFRO3(palette.mFront3Color, 1.0f);
+		ImVec4 IMGUI_NAPFRO4(palette.mFront4Color, 1.0f);
+		ImVec4 IMGUI_NAPHIG1(palette.mHighlightColor1, 1.0f);
+		ImVec4 IMGUI_NAPHIG2(palette.mHighlightColor2, 1.0f);
+		ImVec4 IMGUI_NAPHIG3(palette.mHighlightColor3, 1.0f);
+
+		// Create style
+		std::unique_ptr<ImGuiStyle> style = std::make_unique<ImGuiStyle>();
+
+		// Apply settings from config
+		style->WindowPadding = ImVec2(10, 10);
+		style->WindowRounding = 0.0f;
+		style->FramePadding = ImVec2(5, 5);
+		style->FrameRounding = 0.0f;
+		style->ItemSpacing = ImVec2(12, 6);
+		style->ItemInnerSpacing = ImVec2(8, 6);
+		style->IndentSpacing = 25.0f;
+		style->ScrollbarSize = 13.0f;
+		style->ScrollbarRounding = 0.0f;
+		style->GrabMinSize = 5.0f;
+		style->GrabRounding = 0.0f;
+		style->WindowBorderSize = 0.0f;
+		style->PopupRounding = 0.0f;
+		style->ChildRounding = 0.0f;
+		style->WindowTitleAlign = { 0.5f, 0.5f };
+		style->PopupBorderSize = 0.0f;
+		style->TabRounding = 0.0f;
+
+		style->Colors[ImGuiCol_Text] = IMGUI_NAPFRO4;
+		style->Colors[ImGuiCol_TextDisabled] = IMGUI_NAPFRO2;
+		style->Colors[ImGuiCol_WindowBg] = IMGUI_NAPBACK;
+		style->Colors[ImGuiCol_ChildBg] = IMGUI_NAPBACK;
+		style->Colors[ImGuiCol_PopupBg] = IMGUI_NAPBACK;
+		style->Colors[ImGuiCol_Border] = IMGUI_NAPDARK;
+		style->Colors[ImGuiCol_BorderShadow] = IMGUI_NAPFRO1;
+		style->Colors[ImGuiCol_FrameBg] = IMGUI_NAPDARK;
+		style->Colors[ImGuiCol_FrameBgHovered] = IMGUI_NAPDARK;
+		style->Colors[ImGuiCol_FrameBgActive] = IMGUI_NAPDARK;
+		style->Colors[ImGuiCol_TitleBg] = IMGUI_NAPMENU;
+		style->Colors[ImGuiCol_TitleBgCollapsed] = IMGUI_NAPMENU;
+		style->Colors[ImGuiCol_TitleBgActive] = IMGUI_NAPFRO2;
+		style->Colors[ImGuiCol_MenuBarBg] = IMGUI_NAPMENU;
+		style->Colors[ImGuiCol_ScrollbarBg] = IMGUI_NAPDARK;
+		style->Colors[ImGuiCol_ScrollbarGrab] = IMGUI_NAPMENU;
+		style->Colors[ImGuiCol_ScrollbarGrabHovered] = IMGUI_NAPFRO3;
+		style->Colors[ImGuiCol_ScrollbarGrabActive] = IMGUI_NAPFRO3;
+		style->Colors[ImGuiCol_CheckMark] = IMGUI_NAPFRO4;
+		style->Colors[ImGuiCol_SliderGrab] = IMGUI_NAPFRO3;
+		style->Colors[ImGuiCol_SliderGrabActive] = IMGUI_NAPFRO4;
+		style->Colors[ImGuiCol_Button] = IMGUI_NAPFRO1;
+		style->Colors[ImGuiCol_ButtonHovered] = IMGUI_NAPHIG1;
+		style->Colors[ImGuiCol_ButtonActive] = IMGUI_NAPFRO3;
+		style->Colors[ImGuiCol_Header] = IMGUI_NAPFRO1;
+		style->Colors[ImGuiCol_HeaderHovered] = IMGUI_NAPHIG1;
+		style->Colors[ImGuiCol_HeaderActive] = IMGUI_NAPHIG1;
+		style->Colors[ImGuiCol_ResizeGrip] = IMGUI_NAPFRO1;
+		style->Colors[ImGuiCol_ResizeGripHovered] = IMGUI_NAPFRO3;
+		style->Colors[ImGuiCol_ResizeGripActive] = IMGUI_NAPFRO4;
+		style->Colors[ImGuiCol_Tab] = IMGUI_NAPFRO1;
+		style->Colors[ImGuiCol_TabHovered] = IMGUI_NAPHIG1;
+		style->Colors[ImGuiCol_TabActive] = IMGUI_NAPHIG1;
+		style->Colors[ImGuiCol_TabUnfocused] = IMGUI_NAPFRO1;
+		style->Colors[ImGuiCol_TabUnfocusedActive] = IMGUI_NAPHIG1;
+		style->Colors[ImGuiCol_PlotLines] = IMGUI_NAPFRO3;
+		style->Colors[ImGuiCol_PlotLinesHovered] = IMGUI_NAPHIG1;
+		style->Colors[ImGuiCol_PlotHistogram] = IMGUI_NAPFRO3;
+		style->Colors[ImGuiCol_PlotHistogramHovered] = IMGUI_NAPHIG1;
+		style->Colors[ImGuiCol_TextSelectedBg] = IMGUI_NAPFRO1;
+		style->Colors[ImGuiCol_ModalWindowDimBg] = IMGUI_NAPMODA;
+		style->Colors[ImGuiCol_Separator] = IMGUI_NAPDARK;
+		style->Colors[ImGuiCol_SeparatorHovered] = IMGUI_NAPFRO4;
+		style->Colors[ImGuiCol_SeparatorActive] = IMGUI_NAPFRO4;
+		style->Colors[ImGuiCol_NavHighlight] = IMGUI_NAPFRO4;
+		style->Colors[ImGuiCol_NavWindowingHighlight] = IMGUI_NAPFRO4;
+		style->Colors[ImGuiCol_NavWindowingDimBg] = IMGUI_NAPMODA;
+		style->Colors[ImGuiCol_DragDropTarget] = IMGUI_NAPHIG1;
+
+		// apply additional specific GUI settings
+		styleSettings.apply(*style);
+
+		return style;
+	}
+
 
 
 	static void setGuiWindow(SDL_Window* window)
@@ -695,7 +789,7 @@ namespace nap
 			// Create style
 			assert(mConfiguration != nullptr);
 			assert(mColorPalette  != nullptr);
-			mStyle = gui::createStyle(*mColorPalette, mConfiguration->mStyle);
+			mStyle = createStyle4D(*mColorPalette, mConfiguration->mStyleSettings);
 
 			// Create context using font & style
 			new_context = createContext(*getConfiguration<IMGuiServiceConfiguration>(), *mFontAtlas, *mStyle, getIniFilePath(window.mID));
