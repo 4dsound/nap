@@ -74,7 +74,7 @@ function(add_import_library target_name implib dll include_dir)
             # install_name_tool -id @rpath/[library filename] [path to library]
             # The line below automates this, however when generating multiple configurations at the same time the processes clash.
             # To avoid this issue it only operates on release configurations, which is the relevant configuration for packaged apps.
-            if (DEFINED CMAKE_BUILD_TYPE)
+            if (DEFINED ${CMAKE_BUILD_TYPE})
                 string(TOLOWER ${CMAKE_BUILD_TYPE} lowercase_build_type)
                 if (${lowercase_build_type} STREQUAL "release")
                     execute_process(COMMAND install_name_tool -id
