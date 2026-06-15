@@ -10,6 +10,7 @@ echo "-e Include the Napkin editor"
 echo "-s MacOS code signature"
 echo "-n MacOS notarization profile"
 echo "-t Perform testing"
+echo "-E Include MacOS Entitlements file"
 # TODO -e Entitlements file!
 
 # Make sure cmake is installed
@@ -56,8 +57,10 @@ zip_output=false
 include_napkin=false
 perform_testing=false
 delete_output=false
+entitlements_file=""
+include_entitlements=false
 
-while getopts 'b:s:n:zetd' OPTION; do
+while getopts 'b:s:n:zetdE' OPTION; do
   case "$OPTION" in
     b)
       build_directory="$OPTARG"
@@ -90,6 +93,10 @@ while getopts 'b:s:n:zetd' OPTION; do
     d)
       delete_output=true
       echo "Output will be deleted"
+      ;;
+    E)
+      entitlements_file="$OPTARG"
+      include_entitlements=true
       ;;
     ?)
       exit 1
@@ -224,14 +231,15 @@ if [ "$(uname)" = "Darwin" ]; then
   # Codesign MacOS app bundle
   if [ $codesign = true ]; then
     echo Codesigning MacOS bundle...
-    # TODO reimplement entitlements file!
+
     # Sign with entitlements file if it was given
-    # if [ "$#" -gt "4" ]; then
-    #     echo Signing with entitlements file: $5
-    #     codesign -s "$3" -f "install/$app_directory" --options runtime --entitlements "$5"
-    # else
-        # codesign -s "$3" -f "install/$app_directory" --options runtime
-    codesign -s "$code_signature" -f "install/$app_directory" --options runtime
+    if [ $include_entitlements = true ]; then
+      echo Signing with entitlements file: $5
+      codesign -s "$3" -f "install/$app_directory" --options runtime --entitlements "$entitlements_file"
+    else
+      codesign -s "$code_signature" -f "install/$app_directory" --options runtime
+    fi
+    
     if ! [ $? -eq 0 ]; then
       exit 2
     fi

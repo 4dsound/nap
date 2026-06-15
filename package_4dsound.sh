@@ -36,7 +36,7 @@ if [ "$(uname)" = "Darwin" ]; then
   fi
 
   # Package and codesign
-  sh package_app.sh 4dsound build "${code_signature}" "${notary_profile}" "${entitlements_file}"
+  sh package_app.sh 4dsound build -s "${code_signature}" -n "${notary_profile}" -E "${entitlements_file}"
 
   cd install
 
