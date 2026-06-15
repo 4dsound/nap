@@ -81,7 +81,6 @@ namespace nap
 		float mFontSpacing = 0.25f;										///< Property: 'FontSpacing' Extra horizontal spacing (in pixels) between glyphs.
 		gui::ColorPalette mCustomColors;								///< Property: 'Colors' Color overrides if scheme is set to custom
 		///<
-//		gui::Style mStyle;												///< Property: 'Style' Configurable style elements
 		gui::StyleSettings mStyleSettings;
 		virtual rtti::TypeInfo getServiceType() const override	{ return RTTI_OF(IMGuiService); }
 	};

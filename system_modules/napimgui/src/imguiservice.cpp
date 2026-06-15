@@ -30,7 +30,7 @@ RTTI_BEGIN_CLASS(nap::IMGuiServiceConfiguration)
 	RTTI_PROPERTY("FontSampling",		&nap::IMGuiServiceConfiguration::mFontOversampling, nap::rtti::EPropertyMetaData::Default,	"Horiontal and Vertical GUI oversampling factor")
 	RTTI_PROPERTY("FontSpacing",		&nap::IMGuiServiceConfiguration::mFontSpacing,		nap::rtti::EPropertyMetaData::Default,	"Extra horizontal spacing (in pixels) between glyphs")
 	RTTI_PROPERTY("Colors",				&nap::IMGuiServiceConfiguration::mCustomColors,		nap::rtti::EPropertyMetaData::Default,	"Colors to use when ColorScheme is set to 'Custom'")
-	RTTI_PROPERTY("StyleSettings",		&nap::IMGuiServiceConfiguration::mStyleSettings,			nap::rtti::EPropertyMetaData::Default)
+	RTTI_PROPERTY("StyleSettings",		&nap::IMGuiServiceConfiguration::mStyleSettings,	nap::rtti::EPropertyMetaData::Default)
 RTTI_END_CLASS
 
 RTTI_BEGIN_CLASS_NO_DEFAULT_CONSTRUCTOR(nap::IMGuiService, "Manages the global GUI state")
@@ -293,7 +293,7 @@ namespace nap
 	}
 
 
-	static std::unique_ptr<ImGuiStyle> createStyle4D(const gui::ColorPalette& palette, const gui::StyleSettings& styleSettings)
+	static std::unique_ptr<ImGuiStyle> createStyle(const gui::ColorPalette& palette, const gui::StyleSettings& styleSettings)
 	{
 		// Get ImGUI colors
 		ImVec4 IMGUI_NAPBACK(palette.mBackgroundColor, 0.94f);
@@ -307,11 +307,11 @@ namespace nap
 		ImVec4 IMGUI_NAPHIG1(palette.mHighlightColor1, 1.0f);
 		ImVec4 IMGUI_NAPHIG2(palette.mHighlightColor2, 1.0f);
 		ImVec4 IMGUI_NAPHIG3(palette.mHighlightColor3, 1.0f);
-
+		
 		// Create style
 		std::unique_ptr<ImGuiStyle> style = std::make_unique<ImGuiStyle>();
 
-		// Apply settings from config
+		// Apply default settings and colors
 		style->WindowPadding = ImVec2(10, 10);
 		style->WindowRounding = 0.0f;
 		style->FramePadding = ImVec2(5, 5);
@@ -379,7 +379,7 @@ namespace nap
 		style->Colors[ImGuiCol_NavWindowingDimBg] = IMGUI_NAPMODA;
 		style->Colors[ImGuiCol_DragDropTarget] = IMGUI_NAPHIG1;
 
-		// apply additional specific GUI settings
+		// apply all additional 4DSOUND-specific GUI settings
 		styleSettings.apply(*style);
 
 		return style;
@@ -789,7 +789,7 @@ namespace nap
 			// Create style
 			assert(mConfiguration != nullptr);
 			assert(mColorPalette  != nullptr);
-			mStyle = createStyle4D(*mColorPalette, mConfiguration->mStyleSettings);
+			mStyle = createStyle(*mColorPalette, mConfiguration->mStyleSettings);
 
 			// Create context using font & style
 			new_context = createContext(*getConfiguration<IMGuiServiceConfiguration>(), *mFontAtlas, *mStyle, getIniFilePath(window.mID));
