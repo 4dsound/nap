@@ -293,7 +293,7 @@ namespace nap
 	}
 
 
-	static std::unique_ptr<ImGuiStyle> createStyle(const gui::ColorPalette& palette, const gui::StyleSettings& styleSettings)
+	static std::unique_ptr<ImGuiStyle> createStyle4D(const gui::ColorPalette& palette, const gui::StyleSettings& styleSettings)
 	{
 		// Get ImGUI colors
 		ImVec4 IMGUI_NAPBACK(palette.mBackgroundColor, 0.94f);
@@ -789,7 +789,7 @@ namespace nap
 			// Create style
 			assert(mConfiguration != nullptr);
 			assert(mColorPalette  != nullptr);
-			mStyle = createStyle(*mColorPalette, mConfiguration->mStyleSettings);
+			mStyle = createStyle4D(*mColorPalette, mConfiguration->mStyleSettings);
 
 			// Create context using font & style
 			new_context = createContext(*getConfiguration<IMGuiServiceConfiguration>(), *mFontAtlas, *mStyle, getIniFilePath(window.mID));
