@@ -8,7 +8,6 @@
 // Local Includes
 #include "imguiicon.h"
 #include "imguistyle.h"
-#include "imguistylesettings.h"
 
 // External includes
 #include <nap/service.h>
@@ -80,7 +79,7 @@ namespace nap
 		glm::ivec2 mFontOversampling = { 5, 3 };						///< Property: 'FontSampling' Horizontal and vertical font oversampling, higher values result in sharper text in exchange for more memory.
 		float mFontSpacing = 0.25f;										///< Property: 'FontSpacing' Extra horizontal spacing (in pixels) between glyphs.
 		gui::ColorPalette mCustomColors;								///< Property: 'Colors' Color overrides if scheme is set to custom
-		gui::StyleSettings mStyleSettings;								///< Property: 'StyleSettings' 4DSOUND-specific fine-grained style settings.
+		gui::Style mStyle;												///< Property: 'Style' Configurable style elements
 		virtual rtti::TypeInfo getServiceType() const override	{ return RTTI_OF(IMGuiService); }
 	};
 
