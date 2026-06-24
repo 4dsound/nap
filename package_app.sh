@@ -11,7 +11,6 @@ echo "-s MacOS code signature"
 echo "-n MacOS notarization profile"
 echo "-t Perform testing"
 echo "-E Include MacOS Entitlements file"
-# TODO -e Entitlements file!
 
 # Make sure cmake is installed
 if ! [ -x "$(command -v cmake)" ]; then
