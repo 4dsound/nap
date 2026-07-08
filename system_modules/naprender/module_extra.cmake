@@ -1,11 +1,11 @@
 include (${NAP_ROOT}/cmake/nap_utilities.cmake)
 
 add_subdirectory(thirdparty/assimp)
-add_subdirectory(thirdparty/SDL2)
+add_subdirectory(thirdparty/sdl)
 add_subdirectory(thirdparty/FreeImage)
 
 target_link_import_library(${PROJECT_NAME} assimp)
-target_link_import_library(${PROJECT_NAME} SDL2)
+target_link_import_library(${PROJECT_NAME} SDL3)
 target_link_import_library(${PROJECT_NAME} FreeImage)
 
 # Find other package dependencies
@@ -61,12 +61,13 @@ add_custom_command(
         COMMAND ${CMAKE_COMMAND} -E copy
         ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/vulkansdk/macos/universal/share/vulkan/icd.d/MoltenVK_icd.json
         ${LIB_DIR}/MoltenVK_icd.json)
-install(FILES ${LIB_DIR}/MoltenVK_icd.json TYPE DATA OPTIONAL)
+install(FILES ${LIB_DIR}/MoltenVK_icd.json DESTINATION ${CMAKE_INSTALL_MODULEINFODIR} OPTIONAL)
+#install(FILES ${LIB_DIR}/MoltenVK_icd.json TYPE DATA OPTIONAL)
 
 # Copy thirdparty licenses
 add_license(assimp ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/assimp/source/LICENSE)
 add_license(FreeImage ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/FreeImage/${NAP_THIRDPARTY_PLATFORM_DIR}/${ARCH}/license-fi.txt)
 add_license(glslang ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/glslang/source/LICENSE.txt)
-add_license(SDL2 ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/SDL2/COPYING.txt)
+add_license(SDL2 ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/sdl/LICENSE.txt)
 add_license(SPIRV-cross ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/SPIRV-cross/source/LICENSE)
 add_license(vulkansdk ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/vulkansdk/LICENSE.txt)
