@@ -89,7 +89,7 @@
 
 // ---- Forward declare thread local ImGUI context
 struct ImGuiContext;
-extern NAPAPI thread_local ImGuiContext* ImGuiTLS;
+extern thread_local ImGuiContext* ImGuiTLS;
 #define GImGui ImGuiTLS
 
 //---- Tip: You can add extra functions within the ImGui:: namespace, here or in your own headers files.
