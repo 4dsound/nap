@@ -154,7 +154,7 @@ namespace nap
 			{ SDLK_F22,						nap::EKeyCode::KEY_F22 },
 			{ SDLK_F23,						nap::EKeyCode::KEY_F23 },
 			{ SDLK_F24,						nap::EKeyCode::KEY_F24 },
-			{ SDLK_EXECUTE,					nap::EKeyCode::KEY_EXECUTE },
+			{ SDLK_EXECUTE,					nap::EKeyCode::KEY_EXEC },
 			{ SDLK_HELP,					nap::EKeyCode::KEY_HELP },
 			{ SDLK_MENU,					nap::EKeyCode::KEY_MENU },
 			{ SDLK_SELECT,					nap::EKeyCode::KEY_SELECT },
