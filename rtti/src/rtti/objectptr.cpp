@@ -10,7 +10,7 @@ namespace nap
 	{
 		ObjectPtrManager& ObjectPtrManager::get()
 		{
-			static thread_local ObjectPtrManager manager;
+			static ObjectPtrManager manager;
 			return manager;
 		}
 	}
