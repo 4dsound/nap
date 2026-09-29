@@ -6,6 +6,9 @@ entitlements_file="apps/4dsound/macos/Entitlements.entitlements" # Entitlements 
 # Delete settings file
 rm apps/4dsound/data/settings.json
 
+# Default settings file
+cp "apps/4dsound/releasesettings.json" "apps/4dsound/data/settings.json"
+
 # Read legacy option
 if [ "$#" -gt "0" ]; then
   if [ "$1" = "-l" ]; then
