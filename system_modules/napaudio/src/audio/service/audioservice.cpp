@@ -40,8 +40,6 @@ namespace nap
 
 		AudioService::~AudioService()
 		{
-			mStopGarbageCollector.store(true);
-			mGarbageCollectorThread.join();
 		}
 
 
@@ -70,6 +68,9 @@ namespace nap
 			if (mMpg123Initialized)
 				mpg123_exit();
 #endif
+
+			mStopGarbageCollector.store(true);
+			mGarbageCollectorThread.join();
 		}
 
 
