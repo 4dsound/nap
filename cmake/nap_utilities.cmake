@@ -8,7 +8,7 @@ function(target_link_import_library target library)
     get_target_property(library_path ${library} IMPORTED_LOCATION)
     get_target_property(library_path_debug ${library} IMPORTED_LOCATION_DEBUG)
     if (DEFINED CMAKE_BUILD_TYPE)
-        if (${CMAKE_BUILD_TYPE} STREQUAL "Debug" AND EXISTS ${library_path_debug})
+        if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug" AND EXISTS ${library_path_debug})
             set(library_path ${library_path_debug})
         endif()
     endif()
@@ -75,8 +75,7 @@ function(add_import_library target_name implib dll include_dir)
             # The line below automates this, however when generating multiple configurations at the same time the processes clash.
             # To avoid this issue it only operates on release configurations, which is the relevant configuration for packaged apps.
             if (DEFINED CMAKE_BUILD_TYPE)
-                string(TOLOWER ${CMAKE_BUILD_TYPE} lowercase_build_type)
-                if (${lowercase_build_type} STREQUAL "release")
+                if ("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
                     execute_process(COMMAND install_name_tool -id
                             @rpath/${library_name}
                             ${dll}
