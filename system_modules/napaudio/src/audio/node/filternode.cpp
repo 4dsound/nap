@@ -4,6 +4,7 @@
 
 #include "filternode.h"
 
+#include <audio/core/audionodemanager.h>
 #include <mathutils.h>
 #include <nap/logger.h>
 
@@ -35,8 +36,19 @@ namespace nap
 {
 	namespace audio
 	{
-		
-		
+
+		FilterNode::FilterNode(NodeManager &nodeManager): Node(nodeManager), mOutput(8), mInput(8)
+		{
+			calcCoeffs();
+			setSmoothing(mSmoothing);
+			a0.reset(a0Dest);
+			a1.reset(a1Dest);
+			a2.reset(a2Dest);
+			b1.reset(b1Dest);
+			b2.reset(b2Dest);
+		}
+
+
 		void FilterNode::process()
 		{
 			if (mIsDirty.check())
@@ -66,11 +78,18 @@ namespace nap
 		}
 
 
-		void FilterNode::prepare(ControllerValue frequency, ControllerValue resonanceBand, ControllerValue gain)
+		void FilterNode::sampleRateChanged(float sampleRate)
 		{
+			setSmoothing(mSmoothing);
+		}
+
+
+		void FilterNode::prepare(EMode mode, ControllerValue frequency, ControllerValue resonance, ControllerValue band, ControllerValue gain)
+		{
+			mMode = mode;
 			mFrequency = frequency;
-			mResonance = pow(10., -(resonanceBand * 0.1));
-			mBand = resonanceBand;
+			mResonance = pow(10., -(resonance * 0.1));
+			mBand = band;
 			mGain = gain;
 			mOutput.clear();
 			mInput.clear();
@@ -80,7 +99,6 @@ namespace nap
             a2.reset(a2Dest);
 			b1.reset(b1Dest);
 			b2.reset(b2Dest);
-
 		}
 
 		
@@ -136,6 +154,18 @@ namespace nap
 			mGain = gain;
 			calcCoeffs();
 			mIsDirty.set();
+		}
+
+
+		void FilterNode::setSmoothing(TimeValue smoothing)
+		{
+			mSmoothing = smoothing;
+			int stepCount = smoothing * getNodeManager().getSamplesPerMillisecond();
+			a0.setStepCount(stepCount);
+			a1.setStepCount(stepCount);
+			a2.setStepCount(stepCount);
+			b1.setStepCount(stepCount);
+			b2.setStepCount(stepCount);
 		}
 
 
