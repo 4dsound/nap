@@ -31,13 +31,7 @@ namespace nap
 			};
 
 		public:
-			FilterNode(NodeManager& nodeManager) : Node(nodeManager), mOutput(8), mInput(8)
-			{
-				update();
-			}
-
-			// Inherited from Node
-			void process() override;
+			FilterNode(NodeManager& nodeManager);
 
 			/**
 			 * The input to be filtered
@@ -52,11 +46,13 @@ namespace nap
 			/**
 			 * Immediately changes the settings of the filter.
 			 * Only call this before the filter starts being processed.
-			 * @param frequency cutoff frequency of the filter in Hz
-			 * @param resonanceBand In case of LowRes or HighRes: Resonance value. 0 means no resonance, 30 means self-oscillation. In case of bandpass: bandwith in herz.
-			 * @param gain the gaining factor of the filter output
+			* @param mode lowpass, highpass, bandpass, lowpass with resonance peak or highpass with resonance peak.
+			 * @param frequency The frequency parameter of the filter in Hz.
+			 * @param resonance Sets the resonance peak of the filter. 0 means no resonance, 30 means self-oscillation.
+			 * @param band Sets the bandwith for bandpass filtering in Hz.
+			 * @param gain Sets the gaining factor of the filter's output.
 			 */
-			void prepare(ControllerValue frequency, ControllerValue resonanceBand, ControllerValue gain);
+			void prepare(EMode mode, ControllerValue frequency, ControllerValue resonance, ControllerValue band, ControllerValue gain);
 
 			/**
 			 * Sets the mode of the filter.
@@ -97,6 +93,12 @@ namespace nap
 			void set(EMode mode, ControllerValue frequency, ControllerValue resonance, ControllerValue band, ControllerValue gain);
 
 			/**
+			 * Sets the smoothing time for the filter coefficients to fade to the next value.
+			 * @param smoothing Time in ms.
+			 */
+			void setSmoothing(TimeValue smoothing);
+
+			/**
 			 * @return the mode of the filter.
 			 */
 			EMode getMode() const { return mMode; }
@@ -122,6 +124,10 @@ namespace nap
 			ControllerValue getGain() const { return mGain; }
 
 		private:
+			// Inherited from Node
+			void process() override;
+			void sampleRateChanged(float sampleRate) override;
+
 			void update();
 			void calcCoeffs();
 
@@ -138,6 +144,7 @@ namespace nap
 			LinearSmoothedValue<ControllerValue> a2 = { 0, 64 };
 			LinearSmoothedValue<ControllerValue> b1 = { 0, 64 };
 			LinearSmoothedValue<ControllerValue> b2 = { 0, 64 };
+			TimeValue mSmoothing = 1.f;
 
 			// Coeffecient destinations before update.
 			ControllerValue a0Dest, a1Dest, a2Dest, b1Dest, b2Dest = 0;
