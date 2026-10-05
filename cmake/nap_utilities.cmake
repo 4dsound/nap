@@ -91,14 +91,19 @@ function(add_import_library target_name implib dll include_dir)
             endif ()
 
         else ()
-            # Set so name or rpath for linux
-            execute_process(COMMAND patchelf --set-soname
-                    ${library_name}
-                    ${dll}
-                    RESULT_VARIABLE EXIT_CODE)
-            if(NOT ${EXIT_CODE} EQUAL 0)
-                message(FATAL_ERROR "Failed to set RPATH on ${library_name} using patchelf. Is patchelf installed?")
-            endif()
+            if (DEFINED CMAKE_BUILD_TYPE)
+                if ("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
+# This is commented out because of a bug in patchelf that corrupts LibTurboActivate.so somehow
+#                    # Set so name or rpath for linux
+#                    execute_process(COMMAND patchelf --set-soname
+#                            ${library_name}
+#                            ${dll}
+#                            RESULT_VARIABLE EXIT_CODE)
+#                    if(NOT ${EXIT_CODE} EQUAL 0)
+#                        message(FATAL_ERROR "Failed to set RPATH on ${library_name} using patchelf. Is patchelf installed?")
+#                    endif()
+                endif ()
+            endif ()
         endif()
     endif()
 endfunction()
