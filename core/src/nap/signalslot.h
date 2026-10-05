@@ -10,6 +10,9 @@
 #include <vector>
 #include <memory>
 #include <iostream>
+// Std Includes
+#include <stdint.h>
+
 
 namespace nap
 {

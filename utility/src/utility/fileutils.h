@@ -11,6 +11,8 @@
 // External Includes
 #include <string>
 #include <vector>
+#include <stdint.h>
+
 
 namespace nap
 {

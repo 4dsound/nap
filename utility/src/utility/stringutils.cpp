@@ -10,6 +10,8 @@
 #include <cctype>
 #include <string.h>
 #include <algorithm>
+#include <stdint.h>
+
 
 namespace nap
 {
