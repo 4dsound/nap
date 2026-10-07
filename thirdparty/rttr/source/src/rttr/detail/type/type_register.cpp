@@ -46,6 +46,7 @@
 #include "rttr/detail/type/type_string_utils.h"
 
 #include <set>
+#include <mutex>
 
 using namespace std;
 
@@ -53,6 +54,12 @@ namespace rttr
 {
 namespace detail
 {
+
+static std::recursive_mutex& get_registration_mutex()
+{
+    static std::recursive_mutex mutex;
+    return mutex;
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -62,18 +69,21 @@ static std::vector<type> convert_param_list(const array_range<parameter_info>& p
 
 void type_register::property(const type& t, unique_ptr<property_wrapper_base> prop)
 {
-   type_register_private::property(t, move(prop));
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
+    type_register_private::property(t, move(prop));
 }
 
 void type_register::register_base_properties(const type& t)
 {
-	type_register_private::register_base_properties(t);
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
+    type_register_private::register_base_properties(t);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
 void type_register::method(const type& t, std::unique_ptr<method_wrapper_base> method)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     type_register_private::method(t, move(method));
 }
 
@@ -81,6 +91,7 @@ void type_register::method(const type& t, std::unique_ptr<method_wrapper_base> m
 
 void type_register::constructor(const type& t, std::unique_ptr<constructor_wrapper_base> ctor)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     type_register_private::constructor(t, move(ctor));
 }
 
@@ -88,6 +99,7 @@ void type_register::constructor(const type& t, std::unique_ptr<constructor_wrapp
 
 void type_register::destructor(const type& t, std::unique_ptr<destructor_wrapper_base> dtor)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     type_register_private::destructor(t, move(dtor));
 }
 
@@ -95,6 +107,7 @@ void type_register::destructor(const type& t, std::unique_ptr<destructor_wrapper
 
 void type_register::enumeration(const type& t, std::unique_ptr<enumeration_wrapper_base> enum_item)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     type_register_private::register_enumeration(t, std::move(enum_item));
 }
 
@@ -102,6 +115,7 @@ void type_register::enumeration(const type& t, std::unique_ptr<enumeration_wrapp
 
 void type_register::custom_name(type& t, string_view custom_name)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     type_register_private::register_custom_name(t, custom_name);
 }
 
@@ -109,6 +123,7 @@ void type_register::custom_name(type& t, string_view custom_name)
 
 void type_register::metadata(const type& t, std::vector< ::rttr::detail::metadata > data)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     type_register_private::register_metadata(t, move(data));
 }
 
@@ -116,13 +131,15 @@ void type_register::metadata(const type& t, std::vector< ::rttr::detail::metadat
 
 void type_register::converter(const type& t, std::unique_ptr<type_converter_base> converter)
 {
-     type_register_private::converter(t, move(converter));
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
+    type_register_private::converter(t, move(converter));
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
 void type_register::comparator(const type& t, type_comparator_base* comparator)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     type_register_private::comparator(t, comparator);
 }
 
@@ -130,6 +147,7 @@ void type_register::comparator(const type& t, type_comparator_base* comparator)
 
 void type_register::equal_comparator(const type& t, type_comparator_base* comparator)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     type_register_private::equal_comparator(t, comparator);
 }
 
@@ -137,6 +155,7 @@ void type_register::equal_comparator(const type& t, type_comparator_base* compar
 
 void type_register::less_than_comparator(const type& t, type_comparator_base* comparator)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     type_register_private::less_than_comparator(t, comparator);
 }
 
@@ -144,6 +163,7 @@ void type_register::less_than_comparator(const type& t, type_comparator_base* co
 
 void type_register::register_base_class(const type& derived_type, const base_class_info& base_info)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     auto& class_data = derived_type.m_type_data->get_class_data();
     auto itr = std::find_if(class_data.m_base_types.begin(), class_data.m_base_types.end(),
     [base_info](const type& t)
@@ -192,6 +212,7 @@ void type_register::register_base_class(const type& derived_type, const base_cla
 
 type type_register::type_reg(type_data& info) RTTR_NOEXCEPT
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     return type_register_private::register_type(info);
 }
 
@@ -664,6 +685,7 @@ static array_range<T> get_items_for_type(const type& t,
 
 property type_register_private::get_type_property(const type& t, string_view name)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     for (const auto& prop : get_items_for_type(t, t.m_type_data->get_class_data().m_properties))
     {
         if (prop.get_name() == name)
@@ -677,6 +699,7 @@ property type_register_private::get_type_property(const type& t, string_view nam
 
 method type_register_private::get_type_method(const type& t, string_view name)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     for (const auto& meth : get_items_for_type(t, t.m_type_data->get_class_data().m_methods))
     {
         if (meth.get_name() == name)
@@ -693,6 +716,7 @@ method type_register_private::get_type_method(const type& t, string_view name)
 method type_register_private::get_type_method(const type& t, string_view name,
                                               const std::vector<type>& type_list)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     for (const auto& meth : get_items_for_type(t, t.m_type_data->get_class_data().m_methods))
     {
         if (meth.get_name() == name &&
@@ -847,6 +871,7 @@ void type_register_private::comparator(const type& t, const type_comparator_base
 
 const type_converter_base* type_register_private::get_converter(const type& source_type, const type& target_type)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     const auto src_id = source_type.get_id();
     const auto target_id = target_type.get_id();
     using vec_value_type = data_container<type_converter_base>;
@@ -870,6 +895,7 @@ const type_converter_base* type_register_private::get_converter(const type& sour
 
 const type_comparator_base* type_register_private::get_comparator(const type& t)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     using vec_value_type = data_container<const type_comparator_base*>;
     const auto id = t.get_id();
     auto& container = get_type_comparator_list();
@@ -885,6 +911,7 @@ const type_comparator_base* type_register_private::get_comparator(const type& t)
 
 const type_comparator_base* type_register_private::get_equal_comparator(const type& t)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     return get_type_comparator_impl(t, get_type_equal_comparator_list());
 }
 
@@ -892,6 +919,7 @@ const type_comparator_base* type_register_private::get_equal_comparator(const ty
 
 const type_comparator_base* type_register_private::get_less_than_comparator(const type& t)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     return get_type_comparator_impl(t, get_type_less_comparator_list());
 }
 
@@ -943,6 +971,7 @@ void type_register_private::register_comparator_impl(const type& t, const type_c
 
 variant type_register_private::get_metadata(const type& t, const variant& key)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     auto meta_vec = get_metadata_list(t);
     return (meta_vec ? get_metadata(key, *meta_vec) : variant());
 }
@@ -966,6 +995,7 @@ variant type_register_private::get_metadata(const variant& key, const std::vecto
 
 enumeration type_register_private::get_enumeration(const type& t)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     if (auto item = get_item_by_type(t, get_enumeration_list()))
         return create_item<enumeration>(item);
     else
