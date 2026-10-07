@@ -187,7 +187,7 @@ namespace nap
 			service->preUpdate(delta_time);
 
 		// Check for file changes
-		mResourceManager->checkForFileChanges();
+		// mResourceManager->checkForFileChanges();
 
 		// Update rest of the services
 		for (auto& service : mServices)
