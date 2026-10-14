@@ -10,16 +10,32 @@ command=$1
 
 echo "nap.."
 git $command # nap
+
 echo "modules.."
 cd modules
 git $command # 4dsound_modules
+
 echo "napaudioadvanced.."
 cd napaudioadvanced
 git $command # napaudioadvanced
+
+echo "napgui.."
+cd napgui
+git $command # napgui
+
+echo "napgizmo.."
+cd napwidget
+git $command # napgizmo
+
+echo "napwidget.."
+cd napwidget
+git $command # napwidget
+
 cd ..
 echo "audiobridge.."
 cd napaudiobridge/thirdparty/audiobridge
 git $command # audiobridge
+
 cd ../../../..
 echo "4dsound.."
 cd apps/4dsound # 4dsound
