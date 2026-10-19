@@ -53,6 +53,9 @@ namespace nap
 			}
 			outputBuffer = *inputBuffer;
 
+			if (mWindowSizeInSamples == 0)
+				return;
+
 			switch (mType)
 			{
 				case EType::PEAK:
