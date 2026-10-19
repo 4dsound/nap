@@ -138,16 +138,19 @@ namespace nap
 			std::atomic<ControllerValue> mGain = {1.f};
 			DirtyFlag mIsDirty;
 
-			// Filter coefficients
-			LinearSmoothedValue<ControllerValue> a0 = { 0, 64 };
-			LinearSmoothedValue<ControllerValue> a1 = { 0, 64 };
-			LinearSmoothedValue<ControllerValue> a2 = { 0, 64 };
+			// Filter coefficients:
+			// b0, b1 and b2 multiply the input signal, a1 and a2 the feedback of the output signal.
+			// The denominator is normalized (leading coefficient 1) and the gain sits in the
+			// numerator taps only, so the filter stays stable for any gain.
+			LinearSmoothedValue<ControllerValue> b0 = { 0, 64 };
 			LinearSmoothedValue<ControllerValue> b1 = { 0, 64 };
 			LinearSmoothedValue<ControllerValue> b2 = { 0, 64 };
+			LinearSmoothedValue<ControllerValue> a1 = { 0, 64 };
+			LinearSmoothedValue<ControllerValue> a2 = { 0, 64 };
 			TimeValue mSmoothing = 1.f;
 
 			// Coeffecient destinations before update.
-			ControllerValue a0Dest, a1Dest, a2Dest, b1Dest, b2Dest = 0;
+			ControllerValue b0Dest, b1Dest, b2Dest, a1Dest, a2Dest = 0;
 
 			Delay mOutput; // Delay line storing the input signal.
 			Delay mInput; // Delay line storing the output signal.
