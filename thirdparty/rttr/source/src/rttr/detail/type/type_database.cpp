@@ -40,6 +40,7 @@
 #include <algorithm>
 #include <cctype>
 #include <cstring>
+#include <mutex>
 
 using namespace std;
 
@@ -47,6 +48,12 @@ namespace rttr
 {
 namespace detail
 {
+
+static std::recursive_mutex& get_registration_mutex()
+{
+    static std::recursive_mutex mutex;
+    return mutex;
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -120,6 +127,7 @@ type_database& type_database::instance()
 
 void type_database::register_property(const type& t, unique_ptr<property_wrapper_base> prop)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     if (!t.is_valid())
         return;
 
@@ -274,6 +282,7 @@ static std::vector<type> convert_param_list(const vector<parameter_info>& param_
 
 void type_database::register_method(const type& t, std::unique_ptr<method_wrapper_base> method)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     if (!t.is_valid())
         return;
 
@@ -587,7 +596,7 @@ RTTR_INLINE void type_database::register_item_type(const type& t, std::unique_pt
 
 void type_database::register_constructor(const type& t, std::unique_ptr<constructor_wrapper_base> ctor)
 {
-    // TO DO you cannot create constructor with the same argument type
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     register_item_type(t, std::move(ctor), m_constructor_list);
 }
 
@@ -663,6 +672,7 @@ std::vector<const constructor_wrapper_base*> type_database::get_constructors(con
 
 void type_database::register_destructor(const type& t, std::unique_ptr<destructor_wrapper_base> dtor)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     register_item_type(t, std::move(dtor), m_destructor_list);
 }
 
@@ -679,6 +689,7 @@ const destructor_wrapper_base* type_database::get_destructor(const type& t) cons
 
 void type_database::register_enumeration(const type& t, std::unique_ptr<enumeration_wrapper_base> enum_item)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     register_item_type(t, std::move(enum_item), m_enumeration_list);
 }
 
@@ -695,6 +706,7 @@ const enumeration_wrapper_base* type_database::get_enumeration(const type& t) co
 
 void type_database::register_custom_name(const type& t, std::string custom_name)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     if (!t.is_valid())
         return;
 
@@ -719,6 +731,7 @@ void type_database::register_custom_name(const type& t, std::string custom_name)
 
 void type_database::register_metadata(const type& t, std::vector<metadata> data)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     if (!t.is_valid() || data.empty())
         return;
 
@@ -779,6 +792,7 @@ std::vector<metadata>* type_database::get_metadata_list(const type& t) const
 
 void type_database::register_converter(const type& t, std::unique_ptr<type_converter_base> converter)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     if (!t.is_valid())
         return;
 
@@ -816,6 +830,7 @@ const type_converter_base* type_database::get_converter(const type& source_type,
 
 void type_database::register_comparator(const type& t, const type_comparator_base* comparator)
 {
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
     if (!t.is_valid())
         return;
 
@@ -1079,7 +1094,7 @@ uint16_t type_database::register_type(const char* name,
 {
     type::init_globals();
 
-    //std::lock_guard<std::mutex> lock(*g_register_type_mutex);
+    std::lock_guard<std::recursive_mutex> lock(get_registration_mutex());
 
     using namespace detail;
     uint16_t id = 0;

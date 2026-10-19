@@ -103,7 +103,7 @@ if (NOT "${config_path}" STREQUAL "")
                 TARGET ${PROJECT_NAME} POST_BUILD
                 COMMAND ${CMAKE_COMMAND} -E copy_if_different
                 ${config_abs_path} ${app_install_data_dir}/${config_filename})
-        install(FILES ${app_install_data_dir}/${config_filename} TYPE BIN OPTIONAL)
+        install(FILES ${app_install_data_dir}/${config_filename} TYPE DATA OPTIONAL)
     endif()
 endif ()
 

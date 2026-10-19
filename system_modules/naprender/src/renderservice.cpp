@@ -1785,10 +1785,10 @@ namespace nap
 		// Store selected video back-end
 		mVideoDriver = fromString(SDL::getCurrentVideoDriver());
 		Logger::info("Video backend: %s", toString(mVideoDriver).c_str());
-		
+
 		// Store config property
 		mSetWindowIcon = config->mSetWindowIcon;
-		
+
 		// Initialize engine
 		return initEngine(errorState);
 	}

@@ -240,7 +240,7 @@ if [ "$(uname)" = "Darwin" ]; then
       echo "Signing without entitlements file..."
       codesign -s "$code_signature" -f "install/$app_directory" --options runtime
     fi
-    
+
     if ! [ $? -eq 0 ]; then
       echo "Codesigning failed"
       exit 2

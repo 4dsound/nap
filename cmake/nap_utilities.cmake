@@ -8,7 +8,7 @@ function(target_link_import_library target library)
     get_target_property(library_path ${library} IMPORTED_LOCATION)
     get_target_property(library_path_debug ${library} IMPORTED_LOCATION_DEBUG)
     if (DEFINED CMAKE_BUILD_TYPE)
-        if (${CMAKE_BUILD_TYPE} STREQUAL "Debug" AND EXISTS ${library_path_debug})
+        if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug" AND EXISTS ${library_path_debug})
             set(library_path ${library_path_debug})
         endif()
     endif()
@@ -43,9 +43,9 @@ endfunction()
 # include_dir: Path to the include directories for the library.
 function(add_import_library target_name implib dll include_dir)
     # Resolve symbolic links
-    get_filename_component(implib ${implib} REALPATH)
-    get_filename_component(dll ${dll} REALPATH)
-    get_filename_component(include_dir ${include_dir} REALPATH)
+    file(REAL_PATH "${implib}" implib)
+    file(REAL_PATH "${dll}" dll)
+    file(REAL_PATH "${include_dir}" include_dir)
 
     if (NOT EXISTS ${dll})
         message(WARNING "Dynamic library for ${target_name} not found for this platform. Tried: ${dll}")
@@ -70,17 +70,21 @@ function(add_import_library target_name implib dll include_dir)
     if (UNIX)
         get_filename_component(library_name ${dll} NAME)
         if (APPLE)
-# The library id needs to be set once on every dylib to @rpath/[library filename]:
-# install_name_tool -id @rpath/[library filename] [path to library]
-# The line below automates this, however when generating multiple configurations at the same time the processes clash.
-# Hence it is advised to instead call install_name_tool manually on every newly added external shared library.
-#            execute_process(COMMAND install_name_tool -id
-#                    @rpath/${library_name}
-#                    ${dll}
-#                    RESULT_VARIABLE EXIT_CODE)
-#            if(NOT ${EXIT_CODE} EQUAL 0)
-#                message(FATAL_ERROR "Failed to set RPATH on ${library_name} using install_name_tool -id.")
-#            endif()
+            # The library id needs to be set once on every dylib to @rpath/[library filename]:
+            # install_name_tool -id @rpath/[library filename] [path to library]
+            # The line below automates this, however when generating multiple configurations at the same time the processes clash.
+            # To avoid this issue it only operates on release configurations, which is the relevant configuration for packaged apps.
+            if (DEFINED CMAKE_BUILD_TYPE)
+                if ("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
+                    execute_process(COMMAND install_name_tool -id
+                            @rpath/${library_name}
+                            ${dll}
+                            RESULT_VARIABLE EXIT_CODE)
+                    if(NOT ${EXIT_CODE} EQUAL 0)
+                        message(FATAL_ERROR "Failed to set RPATH on ${library_name} using install_name_tool -id.")
+                    endif()
+                endif()
+            endif()
 
             if (DEFINED ENV{MACOS_CODE_SIGNATURE})
                 # Codesign the executable with signature in environment variable
@@ -227,7 +231,6 @@ function(codesign_target target)
             set(signature $ENV{MACOS_CODE_SIGNATURE}) # If defined, use environment variable as signature
         endif ()
         # Codesign the target post build
-        message("Codesigning ${target} with signature ${signature}")
         add_custom_command(TARGET ${target} POST_BUILD
                 COMMAND codesign --force -s ${signature} $<TARGET_FILE:${target}>)
     endif ()
@@ -248,7 +251,6 @@ function(codesign path)
             set(signature $ENV{MACOS_CODE_SIGNATURE}) # If defined, use environment variable as signature
         endif ()
         # Codesign the file
-        message("Codesigning ${path} with signature ${signature}")
         execute_process(COMMAND codesign --force -s ${signature} ${path})
     endif ()
 endfunction()
