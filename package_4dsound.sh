@@ -2,6 +2,7 @@
 code_signature="4DSOUND Technologies BV" # MacOS code signature
 notary_profile="NotaryProfile" # Notarization credentials
 entitlements_file="apps/4dsound/macos/Entitlements.entitlements" # Entitlements file
+upload_folder_id="1ZhnHgBQzki1stOrQZRNnF_kbSN3tbBVK" # Google drive build folder ID
 
 # Delete settings file
 rm apps/4dsound/data/settings.json
@@ -20,17 +21,6 @@ fi
 if [ "$(uname)" = "Darwin" ]; then
   # MacOS
 
-  # Check if jq tool is installed
-  if ! [ -x "$(command -v jq)" ]; then
-    echo Jq json parser not found. To install from homebrew run:
-    echo brew install jq
-    exit 0
-  fi
-
-  # Grab the app title and version number
-  title=`jq -r '.Title' apps/4dsound/app.json`
-  version=`jq -r '.Version' apps/4dsound/app.json`
-
   # Check if create-dmg tool is installed
   if ! [ -x "$(command -v create-dmg)" ]; then
     echo create-dmg utility not found. To install from homebrew run:
@@ -41,15 +31,15 @@ if [ "$(uname)" = "Darwin" ]; then
   # Package and codesign
   sh package_app.sh 4dsound -b build -s "${code_signature}" -n "${notary_profile}" -E "${entitlements_file}"
 
+  # Grab the app title and version number
+  title=`jq -r '.Title' apps/4dsound/app.json`
+  version=`jq -r '.Version' apps/4dsound/app.json`
+
   cd install
 
-  app_zip="${title} ${version} MacOS.zip"
   installer_name="${title} ${version} Installer"
   dmg_filename="${title} ${version} Installer.dmg"
   app_bundle="${title}.app"
-
-  # Remove the zip (we will replace it with the dmg)
-  rm "${app_zip}"
 
   # Cleaning previous disk image, if any
   echo Cleaning previous disk image...
@@ -73,13 +63,33 @@ if [ "$(uname)" = "Darwin" ]; then
 
   cd ..
 
+  echo "Uploading ${dmg_filename}..."
+  sh apps/4dsound/upload.sh "install/${dmg_filename}" $upload_folder_id
+
 elif [ "$(uname)" = "Linux" ]; then
   # Linux
-  sh package_app.sh 4dsound build
+  sh package_app.sh 4dsound -b build -z
+
+  # Grab the app title and version number
+  title=`jq -r '.Title' apps/4dsound/app.json`
+  version=`jq -r '.Version' apps/4dsound/app.json`
+
+  app_zip="${title} ${version} Linux.zip"
+  echo "Uploading ${app_zip}..."
+  sh apps/4dsound/upload.sh "install/${app_zip}" $upload_folder_id
 
 else
   # Windows
-  sh package_app.sh 4dsound build
+  sh package_app.sh 4dsound -b build -z
+
+  # Use bundled jq.exe to grab title and version
+  title=`./thirdparty/jq/msvc/x86_64/jq.exe -r '.Title' apps/4dsound/app.json`
+  version=`./thirdparty/jq/msvc/x86_64/jq.exe -r '.Version' apps/4dsound/app.json`
+
+  app_zip="${title} ${version} Win.zip"
+  echo "Uploading ${app_zip}..."
+  sh apps/4dsound/upload.sh "install/${app_zip}" $upload_folder_id
+
 fi
 
 # Remove temporary settings file, if it exists
