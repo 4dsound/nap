@@ -23,10 +23,6 @@ echo "napgui.."
 cd napgui
 git $command # napgui
 
-echo "napgizmo.."
-cd napwidget
-git $command # napgizmo
-
 echo "napwidget.."
 cd napwidget
 git $command # napwidget
